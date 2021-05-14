@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: squid
+  lables:
+    app: squid
+spec:
+  replicas: 1
+  selctor:
+    matchlabels:
+      app: squid
+  template:
+    metadata:
+      labels:
+        app: squid
+    spec:
+      containers:
+      - name: squid
+        image: bloodstalker/squid:apline-5.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              name: k3s-rpi-configmap
+              key: pihole_tz
+        - name: WEBPASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: k3s-rpi-secrets
+              key: pihole-webpassword
+      volumes:
+        - name: squid-config-volume
+          valueFrom:
+            configMapKeyRef:
+              name: k3s-rpi-configmap
+              key: squid_config_vol
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: squid-service
+spec:
+  selector:
+    app: squid
+  type: LoadBalancer
+  ports:
+    - protocol: UDP
+      port: 80
+      targetPort: 80
+      nodePort: 80
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 80

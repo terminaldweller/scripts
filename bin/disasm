@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+
+import argparse
+import code
+import readline
+import signal
+import sys
+from capstone import *
+from capstone.x86 import *
+
+def SigHandler_SIGINT(signum, frame):
+    print()
+    sys.exit(0)
+
+class Argparser(object):
+    def __init__(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--hex", type=str, help="the hex code")
+        parser.add_argument("--sp", type=str, help="separator")
+        parser.add_argument("--dbg", action="store_true", help="debug", default=False)
+        self.args = parser.parse_args()
+
+# write code here
+def premain(argparser):
+    signal.signal(signal.SIGINT, SigHandler_SIGINT)
+    #here
+    code = bytes()
+    if argparser.args.hex:
+        if argparser.args.sp: hex_str = argparser.args.hex.split(argparser.args.sp)
+        else: hex_str = argparser.args.hex.split(" ")
+    code = [int(byte, 16) for byte in hex_str]
+    md = Cs(CS_ARCH_X86, CS_MODE_64)
+    for i in md.disasm(bytes(code), 0x0):
+        print(hex(i.address).ljust(7), i.mnemonic.ljust(7), i.op_str)
+
+def main():
+    argparser = Argparser()
+    if argparser.args.dbg:
+        try:
+            premain(argparser)
+        except:
+            variables = globals().copy()
+            variables.update(locals())
+            shell = code.InteractiveConsole(variables)
+            shell.interact(banner="DEBUG REPL")
+    else:
+        premain(argparser)
+
+if __name__ == "__main__":
+    main()

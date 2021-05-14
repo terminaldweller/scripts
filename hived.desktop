@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=hived
+Exec=/home/bloodstalker/scripts/hived --demon
+Terminal=true
+Type=Application

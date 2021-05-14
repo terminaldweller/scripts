@@ -1,0 +1,5 @@
+[DEFAULT]
+editor = vim
+extension = .md
+extensions = .md, .txt, .text, .markdown, .mdown, .mdwn, .mkdn, .mkd, .rst
+notes_dir = ~/Notes

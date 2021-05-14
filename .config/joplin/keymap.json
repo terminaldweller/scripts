@@ -1,0 +1,4 @@
+[
+  {"keys":["k"],"type":"function","command":"move_up"},
+  {"keys":["j"],"type":"function","command":"move_down"}
+]

@@ -1,0 +1,29 @@
+\set QUIET 1
+
+/* prompts */
+\set PROMPT1 '\x1b[38;5;34m%n\x1b[0m@\x1b[38;5;39m%M\x1b[0m:\x1b[38;5;37m%> \x1b[38;5;69m%`date +%H:%M:%S` \x1b[38;5;4m[%/] \x1b[38;5;31m%x\x1b[38;5;104m%#\x1b[38;5;34m%R\n\x1b[38;5;28m>>>\x1b[0m'
+\set PROMPT2 '\x1b[38;5;39m%M\x1b[0m:\x1b[38;5;37m%> \x1b[38;5;34m%n\x1b[0m@\x1b[38;5;4m%/\x1b[38;5;34m%R \x1b[38;5;104m%# \n\x1b[38;5;28m>>>\x1b[0m'
+\set PROMPT3 '\x1b[38;5;38m>>>\x1b[0m'
+
+\pset null '[null]'
+\set COMP_KEYWORD_CASE upper
+\timing
+\x auto
+\set VERBOSITY verbose
+\set version 'SELECT version();'
+/* history options */
+\set HISTSIZE 2000
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+
+
+\set ON_ERROR_STOP on
+\set ON_ERROR_ROLLBACK off
+
+\set COMP_KEYWORD_CASE upper
+
+\pset unicode_border_linestyle single
+\pset unicode_column_linestyle single
+\pset unicode_header_linestyle double
+
+\unset QUIET

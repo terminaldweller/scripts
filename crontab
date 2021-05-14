@@ -1,0 +1,1 @@
+59 * * * * if [[ $(yy --alive) == hived ]]; then :;else yy --demon &;fi

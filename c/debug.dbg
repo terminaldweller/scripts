@@ -1,0 +1,15 @@
+
+set width 0
+set height 0
+set verbose off
+
+b main
+commands 1
+  print argc
+  print argv[0]
+  continue
+end
+
+file ./main-dbg
+run
+

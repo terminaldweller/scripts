@@ -1,0 +1,14 @@
+{"userArguments":"-O3",
+  "filters":{
+    "binary":false,
+    "commentOnly":true,
+    "demangle":true,
+    "directives":true,
+    "execute":false,
+    "intel":true,
+    "labels":true,
+    "lables":true,
+    "libraryCode":false,
+    "trim":false
+  }
+}

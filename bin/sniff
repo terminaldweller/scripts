@@ -1,0 +1,105 @@
+#!/usr/bin/python3
+
+import argparse
+import code
+import signal
+import sys
+import re
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+
+
+def SigHandler_SIGINT(signum, frame):
+    print()
+    sys.exit(0)
+
+
+def simple_get(url):
+    try:
+        with closing(get(url, stream=True)) as resp:
+            if is_good_response(resp):
+                return resp.content
+            else:
+                return None
+    except RequestException as e:
+        log_error("Error during requests to {0} : {1}".format(url, str(e)))
+        return None
+
+
+def is_good_response(resp):
+    content_type = resp.headers['Content-Type'].lower()
+    return (resp.status_code == 200 and content_type is not None and content_type.find("html") > -1)
+
+
+def log_error(e):
+    print(e)
+
+
+class Argparser(object):
+    def __init__(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--src", type=str, help="url")
+        parser.add_argument("--str", type=str, help="what string to look for")
+        parser.add_argument("--vid", action="store_true",
+                            help="video", default=False)
+        parser.add_argument("--dbg", action="store_true",
+                            help="debug", default=False)
+        parser.add_argument("--url", action="store_true",
+                            help="url", default=False)
+        self.args = parser.parse_args()
+
+
+VID_FMT = ["webm", "mpg", "mp2", "mpeg", "mpe", "mpv", "ogg",
+           "mp4", "m4p", "m4v", "flv", "avi", "wmv", "mkv", "svi"]
+# write code here
+
+
+def premain(argparser):
+    signal.signal(signal.SIGINT, SigHandler_SIGINT)
+    # here
+    raw_ml = simple_get(argparser.args.src)
+    # print("raw html length is " + repr(len(raw_ml)))
+    ml = BeautifulSoup(raw_ml, "lxml")
+    ml_str = repr(ml)
+    tmp = open("/tmp/riecher", "w")
+    tmp.write(ml_str)
+    tmp.close()
+    tmp = open("/tmp/riecher", "r")
+    if argparser.args.src:
+        if argparser.args.vid:
+            for line in tmp:
+                # hit = False
+                for elem in VID_FMT:
+                    if line.find("."+elem) > -1:
+                        print(line)
+                        # hit = True
+    if argparser.args.url:
+        dump_list = []
+        for line in tmp:
+            dummy = re.findall(
+                'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line)
+            dump_list += dummy
+        for elem in dump_list:
+            print(elem)
+
+    tmp.close()
+
+
+def main():
+    argparser = Argparser()
+    if argparser.args.dbg:
+        try:
+            premain(argparser)
+        except:
+            variables = globals().copy()
+            variables.update(locals())
+            shell = code.InteractiveConsole(variables)
+            shell.interact(banner="DEBUG REPL")
+    else:
+        premain(argparser)
+
+
+if __name__ == "__main__":
+    main()

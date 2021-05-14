@@ -1,0 +1,16 @@
+/ignore -channels #go-nuts * JOINS PARTS QUITS NICKS
+sudo ip link set dev eth0 mtu 1420
+netsh int ipv4 show excludedportrange protocol=tcp
+ssh 192.168.1.110 -l u0_a263 -p 8022
+docker export -o fedora-33-rootfs.tar fedora33
+stty sane
+export LIBGL_ALWAYS_INDIRECT=1
+echo 1024 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+export DISPLAY=192.168.1.103:0
+sshfs -o idmap=user vagrant@192.168.1.100:/home/vagrant /home/devi/devi/vagrantfed33
+https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/
+https://blog.packagecloud.io/eng/2017/02/06/monitoring-tuning-linux-networking-stack-sending-data/
+https://www.ctrl.blog/entry/unbound-tls-forwarding.html
+script -q -c "sudo tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? '"
+st -f "DejaVuSansMono-11.3"
+https://wigle.net/

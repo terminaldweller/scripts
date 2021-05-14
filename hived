@@ -1,0 +1,704 @@
+#!/usr/bin/python3
+
+import argparse
+import hashlib
+import hmac
+import json
+import requests
+import os
+import sys
+# import csv
+import socket
+import time
+import threading
+import atexit
+import signal
+# import selectors
+# from tempfile import TemporaryFile
+from abc import ABCMeta, abstractmethod
+from io import TextIOWrapper, BytesIO
+# import subprocess
+from _thread import *
+import threading
+sys.path.insert(0, "/home/bloodstalker/extra/seer/")
+shut_up = sys.stdout
+seriously = sys.stderr
+sys.stdout = TextIOWrapper(BytesIO(), sys.stdout.encoding)
+sys.stderr = TextIOWrapper(BytesIO(), sys.stdout.encoding)
+# from seer import launch_ais
+sys.stdout = shut_up
+sys.stderr = seriously
+
+api_url_base = "https://api.coinmarketcap.com/v1/ticker/"
+assets_file = "/home/bloodstalker/scripts/assets.json"
+api_url_base_shapeshift = "https://shapeshift.io/getcoins"
+test_url = "https://api.coinmarketcap.com/v1/ticker/?start=0&limit=300"
+cryptocompare_price_url = "https://min-api.cryptocompare.com/data/price?"
+
+# argument parser calls sys.exit() on exception, we don't want that.
+
+
+class ArgumentParseError(Exception):
+    pass
+
+
+class ArgumentParserWithoutExit(argparse.ArgumentParser):
+    def error(self, message):
+        raise ArgumentParseError(message)
+
+
+class Argparser(object):
+    def __init__(self):
+        self.parser = ArgumentParserWithoutExit()
+        self.parser.add_argument(
+            "--name", type=str, help="price of the chose crypto")
+        self.parser.add_argument(
+            "--worth", type=str, help="single asset worth")
+        self.parser.add_argument("--xx", type=str, nargs=2, help="convert")
+        self.parser.add_argument("--xxv", type=float, help="xx multiplier")
+        self.parser.add_argument(
+            "--gen", type=str, nargs=2, help="general option")
+        self.parser.add_argument("--cap", type=str, help="market cap")
+        self.parser.add_argument("--rank", type=str, help="market cap rank")
+        self.parser.add_argument(
+            "--total", action="store_true", help="total", default=False)
+        self.parser.add_argument(
+            "--ava", type=str, help="is currency available on changelly")
+        self.parser.add_argument(
+            "--avass", type=str, help="is currency available on shapeshift")
+        self.parser.add_argument("--cglistall", action="store_true",
+                                 help="list all currencies available on changelly", default=False)
+        self.parser.add_argument(
+            "--test", action="store_true", help="test switch", default=False)
+        self.parser.add_argument(
+            "--watchlist", type=str, nargs="+", help="watch list")
+        self.parser.add_argument(
+            "--ss", type=str, nargs="+", help="watchlist on shapeshift")
+        self.parser.add_argument("--dy", type=int, help="lazy")
+        self.parser.add_argument(
+            "--demon", action="store_true", help="daemon mode", default=False)
+        self.parser.add_argument(
+            "--al1", action="store_true", help="alert1", default=False)
+        self.parser.add_argument(
+            "--al2", action="store_true", help="alert2", default=False)
+        self.parser.add_argument(
+            "--al3", action="store_true", help="alert3", default=False)
+        self.parser.add_argument(
+            "--al4", action="store_true", help="alert4", default=False)
+        self.parser.add_argument(
+            "--al5", action="store_true", help="alert5", default=False)
+        self.parser.add_argument(
+            "--dbg", action="store_true", help="debug", default=False)
+        self.parser.add_argument(
+            "--alive", action="store_true", help="is hived up", default=False)
+        self.parser.add_argument(
+            "--tg", action="store_true", help="tg", default=False)
+        self.parser.add_argument(
+            "--mahsaread", action="store_true", help="mark as read", default=False)
+        self.parser.add_argument(
+            "--ai", action="store_true", help="which ai to launch", default=False)
+
+    def parse(self, argv):
+        self.args, self.rest = self.parser.parse_known_args(argv)
+
+
+class Colors:
+    purple = '\033[95m'
+    blue = '\033[94m'
+    green = '\033[92m'
+    yellow = '\033[93m'
+    red = '\033[91m'
+    grey = '\033[1;37m'
+    darkgrey = '\033[1;30m'
+    cyan = '\033[1;36m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+def get_info_w_name(api_url, name):
+    cc_key = json.load(
+        open("/home/bloodstalker/scripts/cryptocompare_key.json"))["key"]
+    #response = requests.get(cryptocompare_price_url + "fsym=" + name + "&" + "tsyms=USD&" + "api_key=" + cc_key)
+    response = requests.get(cryptocompare_price_url +
+                            "fsym=" + name + "&" + "tsyms=USD&")
+    if response.status_code == 200:
+        return json.loads(response.content.decode('utf-8'))
+    else:
+        return None
+
+
+def changelly():
+    API_URL = 'https://api.changelly.com'
+    API_KEY = '1a17d70c8b624a398c3ec1e4dbffbaa5'
+    API_SECRET = json.load(
+        open("/home/bloodstalker/scripts/changelly_api_secret.json"))["key"]
+    message = {
+        'jsonrpc': '2.0',
+        'id': 1,
+        'method': 'getCurrencies',
+        'params': []
+    }
+
+    serialized_data = json.dumps(message)
+    sign = hmac.new(API_SECRET.encode('utf-8'),
+                    serialized_data.encode('utf-8'), hashlib.sha512).hexdigest()
+    headers = {'api-key': API_KEY, 'sign': sign,
+               'Content-type': 'application/json'}
+    response = requests.post(API_URL, headers=headers, data=serialized_data)
+    if response.status_code == 200:
+        return (response.json()['result'])
+    else:
+        return None
+
+
+def vocalize(sound):
+    # for whatever weird reason this causes a hang
+    # subprocess.call([os.path.expanduser("~")+"/scripts/voice.sh", sound])
+    pass
+
+
+def trim(num, dig):
+    from math import log10, floor, ceil
+    power = ceil(log10(num))
+    power = dig - power
+    result = int(num * pow(10, power))
+    count = ceil(log10(result))
+    digits = list(str(result))
+    if power > ceil(log10(num)):
+        for i in range(0, abs(power)-count):
+            digits.insert(0, "0")
+        digits.insert(ceil(log10(num)) if log10(num) > 0 else 0, ".")
+    elif power < 0:
+        for i in range(0, abs(power)):
+            digits.insert(len(digits), "0")
+    else:
+        digits.insert(-abs(power) + count, ".")
+    return("".join(digits))
+
+
+def highpercentdump(number):
+    dic_7d = {}
+    dic_7d_sorted = {}
+    list_7d_key = []
+    list_7d_value = []
+
+    dic_24h = {}
+    dic_24h_sorted = {}
+    list_24h_key = []
+    list_24h_value = []
+
+    dic_1h = {}
+    dic_1h_sorted = {}
+    list_1h_key = []
+    list_1h_value = []
+
+    res = get_info_w_name(test_url, "")
+
+    for i in range(0, 300):
+        price = res[i]["percent_change_7d"]
+        if price == None:
+            price = 0
+        dic_7d[res[i]["name"]] = float(price)
+    for key, value in sorted(dic_7d.items(), key=lambda kv: (kv[1], kv[0])):
+        dic_7d_sorted[key] = value
+    for k, v in dic_7d_sorted.items():
+        list_7d_key.append(k)
+        list_7d_value.append(v)
+
+    for i in range(0, 300):
+        price = res[i]["percent_change_24h"]
+        if price == None:
+            price = 0
+        dic_24h[res[i]["name"]] = float(price)
+    for key, value in sorted(dic_24h.items(), key=lambda kv: (kv[1], kv[0])):
+        dic_24h_sorted[key] = value
+    for k, v in dic_24h_sorted.items():
+        list_24h_key.append(k)
+        list_24h_value.append(v)
+
+    for i in range(0, 300):
+        price = res[i]["percent_change_1h"]
+        if price == None:
+            price = 0
+        dic_1h[res[i]["name"]] = float(price)
+    for key, value in sorted(dic_1h.items(), key=lambda kv: (kv[1], kv[0])):
+        dic_1h_sorted[key] = value
+    for k, v in dic_1h_sorted.items():
+        list_1h_key.append(k)
+        list_1h_value.append(v)
+
+    col_width_1 = max(len(word) for word in list_7d_key) + \
+        max(len(repr(word)) for word in list_7d_value) + 2
+    col_width_2 = max(len(word) for word in list_7d_key) + \
+        max(len(repr(word)) for word in list_7d_value) + 2
+    col_width_3 = max(len(word) for word in list_7d_key) + \
+        max(len(repr(word)) for word in list_7d_value) + 2
+    col_width = max(col_width_1, col_width_2, col_width_3, 40)
+    print(("\t" + Colors.green + Colors.BOLD +
+           "7d:").ljust(col_width + 10), end="")
+    print("24h:".ljust(col_width), end="")
+    print(("1h:" + Colors.ENDC).ljust(col_width))
+    for i in range(300-number, 300):
+        print((Colors.red + Colors.BOLD + repr(300-i) +
+               Colors.ENDC).ljust(21), end="")
+        print((Colors.blue+list_7d_key[i]+Colors.ENDC+":"+Colors.cyan+Colors.BOLD+repr(
+            list_7d_value[i])+Colors.ENDC).ljust(col_width + 24), end="")
+        print((Colors.blue+list_24h_key[i]+Colors.ENDC+":"+Colors.cyan+Colors.BOLD+repr(
+            list_24h_value[i])+Colors.ENDC).ljust(col_width+24), end="")
+        print((Colors.blue+list_1h_key[i]+Colors.ENDC+":"+Colors.cyan +
+               Colors.BOLD+repr(list_1h_value[i])+Colors.ENDC).ljust(col_width))
+    print()
+    for i in range(number, -1, -1):
+        print((Colors.red + Colors.BOLD + repr(300-i) +
+               Colors.ENDC).ljust(21), end="")
+        print((Colors.blue+list_7d_key[i]+Colors.ENDC+":"+Colors.cyan+Colors.BOLD+repr(
+            list_7d_value[i])+Colors.ENDC).ljust(col_width + 24), end="")
+        print((Colors.blue+list_24h_key[i]+Colors.ENDC+":"+Colors.cyan+Colors.BOLD+repr(
+            list_24h_value[i])+Colors.ENDC).ljust(col_width+24), end="")
+        print((Colors.blue+list_1h_key[i]+Colors.ENDC+":"+Colors.cyan +
+               Colors.BOLD+repr(list_1h_value[i])+Colors.ENDC).ljust(col_width))
+
+    one = []
+    one.append("7d:\n\n")
+    for i in range(299, 300-number, -1):
+        one.append(repr(list_7d_key[i]))
+        one.append("\t")
+        one.append(repr(list_7d_value[i]))
+        one.append("\n")
+    for i in range(number, -1, -1):
+        one.append(repr(list_7d_key[i]))
+        one.append("\t")
+        one.append(repr(list_7d_value[i]))
+        one.append("\n")
+
+    one.append("\n\n24h:\n\n")
+    for i in range(299, 300-number, -1):
+        one.append(repr(list_24h_key[i]))
+        one.append("\t")
+        one.append(repr(list_24h_value[i]))
+        one.append("\n")
+    for i in range(number, -1, -1):
+        one.append(repr(list_24h_key[i]))
+        one.append("\t")
+        one.append(repr(list_24h_value[i]))
+        one.append("\n")
+
+    one.append("\n\n1h:\n\n")
+    for i in range(299, 300-number, -1):
+        one.append(repr(list_1h_key[i]))
+        one.append("\t")
+        one.append(repr(list_1h_value[i]))
+        one.append("\n")
+    for i in range(number, -1, -1):
+        one.append(repr(list_1h_key[i]))
+        one.append("\t")
+        one.append(repr(list_1h_value[i]))
+        one.append("\n")
+
+    return one
+
+
+class Void_Spawner(object):
+    __metalclass__ = ABCMeta
+
+    def __init__(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+    @abstractmethod
+    def run(self):
+        pass
+
+
+class V_Spawn_cnn(Void_Spawner):
+    def run(self):
+        launch_ais("cnn_type_1")
+
+
+class V_Spawn_ltsm(Void_Spawner):
+    def run(self):
+        launch_ais("ltsm_type_2")
+
+
+class V_Spawn_marionette(Void_Spawner):
+    def run(self):
+        launch_ais("marionette_type_1")
+
+
+class Demon_Father:
+    __metalclass__ = ABCMeta
+
+    def __init__(self, pidfile):
+        self.pidfile = pidfile
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_address = ('localhost', 10111)
+
+    def demonize(self):
+        try:
+            pid = os.fork()
+            if pid > 0:
+                sys.exit(0)
+        except OSError as err:
+            sys.stderr.write('fork #1 failed: {0}\n'.format(err))
+            sys.exit(1)
+        os.chdir('/')
+        os.setsid()
+        os.umask(0)
+        try:
+            pid = os.fork()
+            if pid > 0:
+                sys.exit(0)
+        except OSError as err:
+            sys.stderr.write('fork #2 failed: {0}\n'.format(err))
+            sys.exit(1)
+        sys.stdout.flush()
+        sys.stderr.flush()
+        si = open(os.devnull, 'r')
+        so = open(os.devnull, 'a+')
+        se = open(os.devnull, 'a+')
+        os.dup2(si.fileno(), sys.stdin.fileno())
+        os.dup2(so.fileno(), sys.stdout.fileno())
+        os.dup2(se.fileno(), sys.stderr.fileno())
+        atexit.register(self.delpid)
+        pid = str(os.getpid())
+        with open(self.pidfile, 'w+') as f:
+            f.write(pid + '\n')
+
+    def delpid(self):
+        self.pidfile.close()
+        os.remove(self.pidfile)
+
+    def start(self):
+        try:
+            with open(self.pidfile, 'r') as pf:
+                pid = int(pf.read().strip())
+        except IOError:
+            pid = None
+        '''
+        if pid:
+            message = "pidfile {0} already exist. " + "Daemon already running?\n"
+            sys.stderr.write(message.format(self.pidfile))
+            sys.exit(1)
+        '''
+        self.demonize()
+        self.run()
+
+    def stop(self):
+        try:
+            with open(self.pidfile, 'r') as pf:
+                pid = int(pf.read().strip())
+        except IOError:
+            pid = None
+        if not pid:
+            message = "pidfile {0} does not exist. " + "Daemon not running?\n"
+            sys.stderr.write(message.format(self.pidfile))
+            return
+        try:
+            while 1:
+                os.kill(pid, signal.SIGTERM)
+                time.sleep(0.1)
+        except OSError as err:
+            e = str(err.args)
+            if e.find("No such process") > 0:
+                if os.path.exists(self.pidfile):
+                    os.remove(self.pidfile)
+            else:
+                print(str(err.args))
+                sys.exit(1)
+
+    def restart(self):
+        self.stop()
+        self.start()
+
+    @abstractmethod
+    def run(self):
+        pass
+
+
+class Demon(Demon_Father):
+    def __init__(self, argparser, pidfile):
+        self.pidfile = pidfile
+        self.connection = []
+        self.client_address = []
+        self.argparser = argparser
+
+    def run(self):
+        premain(self.argparser)
+
+
+def networth():
+    net = float()
+    assets = json.load(open(assets_file))
+    for asset in assets:
+        price = get_info_w_name(api_url_base, asset)["USD"]
+        net += assets[asset] * float(price)
+    return int(net)
+
+
+def alert_1():
+    res1 = get_info_w_name(api_url_base, "doge")["USD"]
+    res2 = get_info_w_name(api_url_base, "eth")["USD"]
+    value = 600000
+    print("%.2f" % (value*float(res1)/float(res2)))
+    if value*float(res1)/float(res2) < 2:
+        vocalize("./mila/alert_1.ogg")
+
+
+def alert_2():
+    res1 = get_info_w_name(api_url_base, "gnt")["USD"]
+    res2 = get_info_w_name(api_url_base, "eth")["USD"]
+    value = 1765
+    print("%.2f" % (value*float(res1)/float(res2)))
+    if value*float(res1)/float(res2) > 2:
+        vocalize("./mila/alert_2.ogg")
+
+
+def alert_3():
+    res1 = get_info_w_name(api_url_base, "ant")["USD"]
+    res2 = get_info_w_name(api_url_base, "eth")["USD"]
+    value = 196
+    print("%.2f" % (value*float(res1)/float(res2)))
+    if value*float(res1)/float(res2) > 2:
+        vocalize("./mila/alert_3.ogg")
+
+
+def alert_4():
+    res1 = get_info_w_name(api_url_base, "sc")["USD"]
+    res2 = get_info_w_name(api_url_base, "eth")["USD"]
+    value = 35695
+    print("%.2f" % (value*float(res1)/float(res2)))
+    if value*float(res1)/float(res2) > 2:
+        vocalize("./mila/alert_4.ogg")
+
+
+def alert_5():
+    res1 = get_info_w_name(api_url_base, "bat")["USD"]
+    res2 = get_info_w_name(api_url_base, "eth")["USD"]
+    value = 4013
+    print("%.2f" % (value*float(res1)/float(res2)))
+    if value*float(res1)/float(res2) > 2:
+        vocalize("./mila/alert_4.ogg")
+
+
+def highpercentdump_bot():
+    return highpercentdump(22)
+
+
+def com_name(name):
+    res = get_info_w_name(api_url_base, name)
+    if res is not None:
+        print(trim(float(res['USD']), 4))
+
+
+def com_cap(name):
+    res = get_info_w_name(api_url_base, name)
+    if res is not None:
+        print(res[0]['market_cap_usd'])
+
+
+def com_rank(name):
+    res = get_info_w_name(api_url_base, name)
+    if res is not None:
+        print(res[0]['rank'])
+
+
+def com_gen(argparser):
+    name = argparser.args.gen[0]
+    cat = argparser.args.gen[1]
+    res = get_info_w_name(api_url_base, name)
+    if res is not None:
+        print(res[0][cat])
+
+
+def com_worth(argparser):
+    net = float()
+    assets = json.load(open(assets_file))
+    for asset in assets:
+        if asset == argparser.args.worth:
+            price = get_info_w_name(api_url_base, asset)["USD"]
+            net = assets[asset] * float(price)
+            print(int(net))
+            break
+
+
+def com_total(argparser):
+    net = float()
+    assets = json.load(open(assets_file))
+    for asset in assets:
+        price = get_info_w_name(api_url_base, asset)["USD"]
+        net += assets[asset] * float(price)
+    print("{:,}".format(int(net)))
+
+
+def com_xx(argparser):
+    value = 1.0
+    name1 = argparser.args.xx[0]
+    name2 = argparser.args.xx[1]
+    res1 = get_info_w_name(api_url_base, name1)["USD"]
+    res2 = get_info_w_name(api_url_base, name2)["USD"]
+    if argparser.args.xxv:
+        value = argparser.args.xxv
+    print(value*float(res1)/float(res2))
+
+
+def com_ava(argparser):
+    currencies = changelly()
+    if currencies is not None:
+        for currency in currencies:
+            if currency == argparser.args.ava:
+                print("YES")
+                return
+    print("NO")
+
+
+def com_avass(argparser):
+    currencies = get_info_w_name(api_url_base_shapeshift, "")
+    for currency in currencies:
+        if currency.lower() == argparser.args.avass:
+            print("YES")
+            return
+    print("NO")
+
+
+def com_cglistall(argparser):
+    currencies = changelly()
+    if currencies is not None:
+        for currency in currencies:
+            print(currency + " ", end="")
+    print()
+
+
+def com_watchlist(argparser):
+    ret = []
+    currencies = changelly()
+    if currencies is not None:
+        for currency in currencies:
+            for item in argparser.args.watchlist:
+                if currency == item:
+                    ret.append(item)
+        for item in ret:
+            print(item.upper() + " ", end="")
+    print()
+
+
+def com_ss(argparser):
+    ret = []
+    result = get_info_w_name(api_url_base_shapeshift, "")
+    if not result:
+        return
+    for currency in result:
+        for item in argparser.args.ss:
+            if currency.lower() == item and result[currency]['status'] == "available":
+                ret.append(item)
+    for item in ret:
+        print(item.upper() + " ", end="")
+    print()
+
+
+def alive():
+    print("hived")
+
+
+def get_socket():
+    # use TCP
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_address = ("", 10111)
+    sock.bind(server_address)
+    return sock
+
+
+def premain(argparser):
+    try:
+        sock = get_socket()
+        sock.listen(15)
+        vocalize("./mila/hiveup.ogg")
+
+        while True:
+            connection, client_address = sock.accept()
+            command = connection.recv(4096)
+            new_argv = command.decode("utf-8").split(" ")
+            print(new_argv)
+            argparser.parse(new_argv)
+            old_stdout = sys.stdout
+            sys.stdout = TextIOWrapper(BytesIO(), sys.stdout.encoding)
+
+            if argparser.args.name:
+                com_name(argparser.args.name)
+            if argparser.args.cap:
+                com_cap(argparser.args.cap)
+            if argparser.args.rank:
+                com_rank(argparser.args.rank)
+            if argparser.args.gen:
+                com_gen(argparser)
+            if argparser.args.worth:
+                com_worth(argparser)
+            if argparser.args.total:
+                com_total(argparser)
+            if argparser.args.xx:
+                com_xx(argparser)
+            if argparser.args.ava:
+                com_ava(argparser)
+            if argparser.args.al1:
+                alert_1()
+            if argparser.args.al2:
+                alert_2()
+            if argparser.args.al3:
+                alert_3()
+            if argparser.args.al4:
+                alert_4()
+            if argparser.args.al5:
+                alert_5()
+            if argparser.args.avass:
+                com_avass(argparser)
+            if argparser.args.cglistall:
+                com_cglistall(argparser)
+            if argparser.args.watchlist:
+                com_watchlist(argparser)
+            if argparser.args.ss:
+                com_ss(argparser)
+            if argparser.args.dy:
+                highpercentdump(argparser.args.dy)
+            if argparser.args.alive:
+                alive()
+
+            sys.stdout.seek(0)
+            mushi_out = sys.stdout.read()
+            sys.stdout.close()
+            connection.sendall(bytes(mushi_out, "utf-8"))
+            sys.stdout = old_stdout
+            print(mushi_out)
+    except Exception as e:
+        vocalize("./mila/hiveexcept.ogg")
+        if hasattr(e, "message"):
+            print(e.messasge)
+        if hasattr(e, "__doc__"):
+            print(e.__doc__)
+    finally:
+        # vocalize("./mila/hivedown.ogg")
+        # sock.shutdown(socket.SHUT_RDWR)
+        # connection.shutdown(socket.SHUT_RDWR)
+        # sock.close()
+        # connection.close()
+        time.sleep(60)
+
+
+def main():
+    argparser = Argparser()
+    sys.argv.pop(0)
+    argparser.parse(sys.argv)
+    if argparser.args.dbg:
+        try:
+            premain(argparser)
+        except:
+            variables = globals().copy()
+            variables.update(locals())
+            shell = code.InteractiveConsole(variables)
+            shell.interact(banner="DEBUG REPL")
+    else:
+        premain(argparser)
+
+
+if __name__ == "__main__":
+    main()

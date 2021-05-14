@@ -1,0 +1,49 @@
+
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.embolden: 1
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.embeddedbitmap: 1
+xterm*dpi: 96
+gnome-terminal*dpi: 96
+*.alpha: 1.0
+*.font: DejaVu Sans Mono for Powerline:pixelsize=11.3:antialias=true:autohint=true;
+xterm*scaleHeight: 1.01
+
+#define base00 #2E3431
+#define base01 #cc0000
+#define base02 #4E9A06
+#define base03 #C4A000
+#define base04 #3465A4
+#define base05 #75507B
+#define base06 #06989A
+#define base07 #D3D7CF
+#define base08 #555753
+#define base09 #EF2929
+#define base0A #8AE234
+#define base0B #FCE94F
+#define base0C #729FCF
+#define base0D #AD7FA8
+#define base0E #34E2E2
+#define base0F #EEEEEC
+
+*.color0:       base00
+*.color1:       base01
+*.color2:       base02
+*.color3:       base03
+*.color4:       base04
+*.color5:       base05
+*.color6:       base06
+*.color7:       base07
+*.color8:       base08
+*.color9:       base09
+*.color10:      base0A
+*.color11:      base0B
+*.color12:      base0C
+*.color13:      base0D
+*.color14:      base0E
+*.color15:      base0F

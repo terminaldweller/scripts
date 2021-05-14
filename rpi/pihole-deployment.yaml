@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  lables:
+    app: pihole
+spec:
+  replicas: 1
+  selctor:
+    matchlabels:
+      app: pihole
+  template:
+    metadata:
+      labels:
+        app: pihole
+    spec:
+      containers:
+      - name: pihole
+        image: pihole/pihole
+        ports:
+        - containerPort: 53
+        - containerPort: 67
+        - containerPort: 80
+        - containerPort: 443
+        env:
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              name: k3s-rpi-configmap
+              key: pihole_tz
+        - name: WEBPASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: k3s-rpi-secrets
+              key: pihole-webpassword
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-service
+spec:
+  selector:
+    app: pihole
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 53
+      targetPort: 53
+      nodePort: 53
+    - protocol: UDP
+      port: 53
+      targetPort: 53
+      nodePort: 53
+    - protocol: UDP
+      port: 67
+      targetPort: 67
+      nodePort: 67
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 80
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      nodePort: 443

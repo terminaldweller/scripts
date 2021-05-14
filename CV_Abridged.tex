@@ -1,0 +1,135 @@
+\documentclass[8pt]{article}
+\usepackage{array, xcolor}
+\usepackage[margin=2cm]{geometry}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage{multicol}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+}
+\definecolor{lightgray}{gray}{0.5}
+\newcolumntype{L}{>{\raggedleft}p{0.5\textwidth}}
+\newcolumntype{R}{p{0.5\textwidth}}
+\newcommand\VRule{\color{lightgray}\vrule width 0.5pt}
+
+\title{\bfseries Farzad Sadeghi}
+\author{farzadsadeghi@protonmail.ch}
+\date{2021/01/08}
+\begin{document}
+\begin{multicols}{2}
+  \maketitle
+  \begin{center}
+    \begin{minipage}[ht]{0.2\textwidth}{\centering}
+      \vspace*{\fill}
+      \centering
+      Tehran, Iran\\
+      +98 9999 9999999
+      \centering
+      \vspace*{\fill}
+    \end{minipage}
+  \end{center}
+
+  \section*{Professional Experience}
+  \bf Erfan Salamat (Tehran, Iran)\\
+  Nov. 2020--Feb. 2021\\
+  4 months\\
+  \normalfont Backened Developer. Developed a GIS and Notification microservice using Golang(go-kit). Containerized the entire required stack for the said microservices using Docker.\\[5pt]
+  \bf Maharan International (Tehran, Iran)\\
+  Feb. 2019--Oct. 2020\\
+  19 months\\
+  \normalfont Requirement manager, designer and developer for ERTMS/ETCS DMI.\\[5pt]
+  \bf Truebit (Remote, 3 time-zones)\\
+  July 2017--Nov. 2017\\
+  5 months\\
+  \normalfont developed Truebit's WASM interpreter and smart contracts. Also managed the CI for the repositories.\\[5pt]
+  \bf Iranian Electronics Industry Engineering Corp (Tehran, Iran)\\
+  Sept. 2016--Nov. 2016\\
+  2 months\\
+  \normalfont The role primarily included devising the coding standard and style for the company.\\[5pt]
+  \bf NEAT (Rome, Italy)\\
+  May 2016--July 2016\\
+  3 months\\
+  \normalfont Wrote an automatic refactoring tool using Clang(Libtooling) in C++. The tool would be the last piece of an automated model-driven development process for safety-critical systems.\\[5pt]
+  \bf Crouse (Tehran, Iran)\\
+  July 2014--March 2016\\
+  21 months\\
+  \normalfont Embedded software developer, Safety-critical applications: Design, implementation and automation. The Software team’s ISO 26262 representative.\\[5pt]
+  \bf Safir Language Academy (Tehran, Iran)\\
+  August 2010--March 2012\\
+  20 months\\
+  \normalfont English Teacher - Later on specifically IELTS teacher.\\[5pt]
+
+  \section*{Skills}
+  \bf Software Design \normalfont Safety-critical software design.\\[5pt]
+  \bf Requirement Analysis \normalfont{} Derived the functional and technical software requirements from the ERTMS/ETCS DMI system requirements for our implementation.\\[5pt]
+  \bf CI \normalfont Appveyor for windows(cygwin-only) and TrvisCI for linux.\\[5pt]
+  \bf UML \normalfont Requirement Modelling.\\[5pt]
+  \bf Tooling \normalfont Static analysis tools using clang libraries.\\[5pt]
+  \bf Automation \normalfont Python and the terminal.\\[5pt]
+  \bf Containerization \normalfont Docker\\[5pt]
+  \bf DB \normalfont Postgresql, MongoDB, Redis\\[5pt]
+
+  \section*{Programming Languages}
+  \bf Languages: \normalfont C, C++, Go\\[5pt]
+  \bf Scripting Languages: \normalfont Python, Lua\\[5pt]
+  \bf Other: \normalfont Bash, AWK, Cmake, Make, Docker\\[5pt]
+
+  \section*{Languages}
+  \bf English: {\normalfont Native-like}\\
+  \bf Persian: {\normalfont Native}\\
+  \bf Azerbaijani: {\normalfont Native}\\
+  \normalfont German: Beginner\\
+
+  \section*{Education}
+  2007--2013 Bachelor's in Electrical Engineering, Iran University of Science and Technology, Tehran, Iran.\\[5pt]
+  \bf Thesis: \normalfont Determining the frequency of an audio signal using phase derivation in real time, design and implementation using an FPGA.
+
+  \section*{Role Breakdown}
+  \bf Backend Developer\\ \normalfont Developed a GIS microservice based on the OSM stack. Containerized an entire geoserver stack (geoserver, tile server, static image server, DB) so that we could rely on our own stack. Developed a notification microservice using golang and Mongodb(with Percona memory engine).
+  \\[5pt]\\
+  \bf ERTMS / ETCS DMI Development\\ \normalfont Split the DMI into two subsystems. Designed and implemented the software for the component on the "kernel" side. Wrote a tool that made the requirements' traceability files by gathering special comments from the C source files. Wrote a tool that determines all the sub-fields of aggregate types used in the function and the functions it calls(required for testing).
+  \\[5pt]\\
+  \bf Embedded Safety-Critical Development\\ \normalfont Wrote the SRS and the SDD for the DSP algorithm, then implemented the DSP algorithm for a safety-critical hard real-time embedded system.
+  \\[5pt]\\
+  \bf Code Generation\\ \begin{itemize}\normalfont
+    \vspace{-\baselineskip}
+  \item Wrote A tool that generates binary file (WASM, ...) parsers in C.
+  \item Wrote another tool that generates the C code necessary to add a C structure to Lua as a Lua table.
+\end{itemize}
+\bf Automation and Tooling\\ \begin{itemize}\normalfont
+  \vspace{-\baselineskip}
+\item Developed a Misra-C:2004 rule checker(open-source project) using Clang's Libtooling.
+\item Developed a source code obfuscation tool(open-source project) using Clang's Libtooling.
+\item Developed an interactive CLI tool aimed at object code manipulation(open-source project) in C++/C with Lua as it's scripting language. The tool also has Python embedded in it for rapid prototyping.
+\item Automated the traceability matrix generation using libclang's Python bindings.
+\item Automated the regression testing for a project I was involved in.
+\item Automated the calculation of the WCET for all implemented functions through the use of of a Python script and an XML description file.
+  \end{itemize}
+  \bf Automatic Refactoring\\ \normalfont Wrote an automatic refactoring tool using Clang's Libtooling for C.\\[5pt]
+  \\
+  \bf Defensive Programming / Safety-Aware Software Design\\ \normalfont Studied/Implemented defensive programming practices, coding style and guidelines. Explored the use of FMEA and FTA for the software domain.\\[5pt]
+  \\
+  \bf AUTOSAR\\ \normalfont Studied AUTOSAR SWC and RTE.\\[5pt]
+  \\
+  \bf ISO 26262\\ \normalfont Studied the software section of the standard. I was also the software's group's representative for the study/review meetings held with the hardware and system teams on ISO 26262.\\[5pt]
+
+  \section*{Links}
+  {\bf \href{https://ir.linkedin.com/in/farzad-sadeghi-08426277}{Linkedin}} My Linkedin page.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller}{Github}} My Github page.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/hived}{Hived}} My personal tiny high-performance server written in Go.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/cgrep}{Cgrep}} Grep for C-family source files.\\[5pt]
+  {\bf \href{https://terminaldweller.github.io/mutator/}{Mutator}} An experimental suite of tools aimed at C-family development written C++,C and Lua.\\[5pt]
+  \href{https://github.com/terminaldweller/faultreiber}{Faultreiber} generates a binary file parser in C using an XML description file.\\[5pt]
+  \href{https://github.com/terminaldweller/luatablegen}{Luatablegen} generates C code that wraps C structures as Lua tables using an XML description file.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/dwasm}{Dwasm}} A WASM dump script written in python.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/delf}{Delf}} An ELF dump script in python.\\[5pt]
+
+  \section*{Referene}
+  {\bf Jason Teutsch} jt@truebit.io\\[5pt]
+  {\bf Francesco Zulliani} francesco.zuliani@neat.it\\[5pt]
+
+\end{multicols}
+\end{document}
+
