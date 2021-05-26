@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-VIM_VERSION=8.2.2536
+VIM_VERSION=8.2.2885
 
 sudo apt remove --purge vim vim-runtime vim-gnome vim-tiny vim-gui-common
 sudo rm -rf /usr/local/share/vim /usr/bin/vim

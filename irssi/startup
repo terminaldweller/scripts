@@ -1,11 +1,11 @@
-/load proxy
-/SET use_proxy ON
-/SET proxy_address 192.168.1.108
-/SET proxy_port 3128
-/SET -clear proxy_string
-/SET proxy_string_after conn %s %d
-/EVAL SET proxy_string CONNECT %s:%d HTTP/1.0\n\n
-/SET -clear proxy_password
+/* /load proxy */
+/* /SET use_proxy ON */
+/* /SET proxy_address 192.168.1.108 */
+/* /SET proxy_port 3128 */
+/* /SET -clear proxy_string */
+/* /SET proxy_string_after conn %s %d */
+/* /EVAL SET proxy_string CONNECT %s:%d HTTP/1.0\n\n */
+/* /SET -clear proxy_password */
 
-/connect irc.freenode.net
-/connect OFTC
+/connect irc.oftc.net
+/connect irc.libera.chat

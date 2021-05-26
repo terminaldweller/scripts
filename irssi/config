@@ -1,118 +1,37 @@
 servers = (
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { address = "irc.esper.net"; chatnet = "EsperNet"; port = "6667"; },
-  { 
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
+  {
+    address = "irc.gitter.im";
+    chatnet = "gitter";
+    port = "6697";
+    password = "";
+    use_tls = "yes";
+    tls_verify = "yes";
+    autoconnect = "yes";
   },
   {
-    address = "irc.gamesurge.net";
-    chatnet = "GameSurge";
+    address = "terminaldweller.com";
+    chatnet = "FRRouting.slack.com";
     port = "6667";
-  },
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  {
-    address = "irc.ircsource.net";
-    chatnet = "IRCSource";
-    port = "6667";
-  },
-  { address = "irc.netfuze.net"; chatnet = "NetFuze"; port = "6667"; },
-  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
-  { 
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
-    port = "6667";
-  },
-  { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
+    password = "";
+    use_tls = "no";
+    tls_verify = "no";
+    autoconnect = "yes";
+  }
 );
 
 chatnets = {
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "20";
-    max_whois = "30";
-  };
-  EFNet = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  EsperNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  Freenode = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  GameSurge = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  IRCnet = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  IRCSource = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  NetFuze = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
+  libera = { type = "IRC"; nick = "terminaldweller"; };
   OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  Rizon = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  SILC = { type = "SILC"; };
-  Undernet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
+  gitter = { type = "IRC"; nick = "terminaldweller"; };
+  "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
+  "FRRRouting.slack.com" = { type = "IRC"; };
+  "FRRouting.slack.com" = { type = "IRC"; };
 };
 
 channels = (
-  { name = "#lobby"; chatnet = "EsperNet"; autojoin = "No"; },
-  { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#gamesurge"; chatnet = "GameSurge"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
-  { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
-  { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
-  { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
-  { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
   { name = "#go-nuts"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#dpdk"; chatnet = "libera"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -404,8 +323,8 @@ settings = {
   core = {
     real_name = "";
     user_name = "devi";
-    nick = "bloodstalker";
-    use_proxy = "yes";
+    nick = "terminaldweller";
+    use_proxy = "no";
     proxy_address = "192.168.1.108";
     proxy_port = "3128";
     proxy_string = "CONNECT %s:%d HTTP/1.0\012\012";
@@ -444,6 +363,6 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ansible" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#dpdk" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#fdio-vpp" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#alacritty" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#osm" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#osm" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#alacritty" ); }
 );

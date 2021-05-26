@@ -76,7 +76,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['go.plugin']
+let g:polyglot_disabled = ['go.plugin','markdown.plugin']
 
 call vundle#begin()
 Plugin 'vim-airline/vim-airline'
@@ -207,7 +207,7 @@ Plugin 'hail2u/vim-css3-syntax'
 call vundle#end()
 filetype plugin indent on
 
-let g:gfm_syntax_enable_always = 0
+let g:gfm_syntax_enable_always = 1
 let g:gfm_syntax_enable_filetypes = ['markdown.gfm']
 autocmd BufRead,BufNew,BufNewFile README.md setlocal ft=markdown.gfm
 

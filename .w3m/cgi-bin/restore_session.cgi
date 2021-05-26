@@ -32,7 +32,7 @@ echo "#!/usr/bin/env sh" > "$RESTORE_SESSSION"
 echo "torsocks w3m -graph \\" >> "$RESTORE_SESSSION"
 # remove dupes without sorting, add -N flag at beginning and append trailing slash to each url
 awk '!x[$0]++' "$HOME/.w3m/RestoreSession.txt" | while read -r line ; do echo "-N '$line' \\" >> "$RESTORE_SESSSION" ; done
-echo "2>/dev/null" >> "$RESTORE_SESSSION"
+# echo "2>/dev/null" >> "$RESTORE_SESSSION"
 chmod +x "$RESTORE_SESSSION"
 
 ## OUTPUT SCRIPT FILE EXAMPLE ~/.w3m/bin/w3mlastsession
