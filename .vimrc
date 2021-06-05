@@ -176,6 +176,8 @@ Plugin 'congma/vim-compiler-checkbashisms'
 Plugin 'hsanson/vim-openapi'
 Plugin 'mattn/emmet-vim'
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'chrisbra/unicode.vim'
+Plugin 'meatballs/vim-xonsh'
 " Plugin 'skammer/vim-css-color'
 " Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'jelera/vim-javascript-syntax'
@@ -628,6 +630,16 @@ let g:tagbar_type_javascript = {
       \ 'E:exports',
       \ 'S:styled components'
       \ ]}
+
+let g:tagbar_type_vimwiki = {
+          \   'ctagstype':'vimwiki'
+          \ , 'kinds':['h:header']
+          \ , 'sro':'&&&'
+          \ , 'kind2scope':{'h':'header'}
+          \ , 'sort':0
+          \ , 'ctagsbin':'/home/devi/scripts/bin/vwtags.py'
+          \ , 'ctagsargs': 'default'
+          \ }
 
 "doxygentoolkit
 autocmd BufNewFile,BufRead,BufEnter *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
@@ -1301,6 +1313,22 @@ if has('cscope')
 
     command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
+
+if has("gui")
+  " set guifont=DejaVu_Sans_Mono_for_Powerline:h10
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=r
+endif
+
+"vimwiki
+let wiki = {}
+let wiki.path = '~/vimwiki/'
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml'}
+let g:vimwiki_list = [wiki]
+let g:vimwiki_global_ext = 0
+" let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16

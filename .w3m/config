@@ -26,9 +26,9 @@ display_image 1
 pseudo_inlines 1
 auto_image 1
 max_load_image 4
-ext_image_viewer 0
+ext_image_viewer 1
 image_scale 100
-imgdisplay /usr/libexec/w3m/w3mimgdisplay
+imgdisplay /usr/bin/img2sixel
 image_map_list 0
 fold_line 0
 show_lnum 1

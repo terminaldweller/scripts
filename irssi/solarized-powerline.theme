@@ -60,7 +60,7 @@ info_eol = "false";
 
 # these characters are automatically replaced with specified color
 # (dark grey by default)
-replaces = { "[]=" = "%_$*%_"; };
+replaces = { "[]=" = "%9$*%9"; };
 
 abstracts = {
   ##
@@ -78,7 +78,7 @@ abstracts = {
   timestamp = "%N%k%z005f87%9$*%9%N%Z005f87%n";
 
   # any kind of text that needs hilighting, default is to bold
-  hilight = "%_$*%_";
+  hilight = "%9$*%9";
 
   # any kind of error message
   error = "%r$*%n";
@@ -207,7 +207,7 @@ abstracts = {
   action_core = "%N%k %n$*";
 
   # generic one that's used by most actions
-  action = "{action_core %_$*%n} ";
+  action = "{action_core %9$*%n} ";
 
   # own action, both private/public
   ownaction = "%N%k {mynick $0}%N%C $1-";
@@ -257,8 +257,8 @@ abstracts = {
 
   # /names list
   names_prefix = "%N%k%n";
-  names_nick = " %G%_$0%_$1-%N  ";
-  names_nick_op = " %k%_$0$_$1-%n  ";
+  names_nick = " %G%9$0%9$1-%N  ";
+  names_nick_op = " %k%9$0$_$1-%n  ";
   names_nick_halfop = " %Y$_$0$_$1-%n  ";
   names_nick_voice = " %C$_$0$_$1-%n  ";
   names_users = "%k%z005f87 $* %Z005f87%0%n";
@@ -266,7 +266,7 @@ abstracts = {
 
   # DCC
   dcc = "%N%k%n %g$*%n";
-  dccfile = "%_$*%_";
+  dccfile = "%9$*%9";
 
   # DCC chat, own msg/action
   dccownmsg = "[%Z005f87$0%G($1-%G)%n] ";
@@ -355,7 +355,7 @@ abstracts = {
   sb_uc_halfops = "%p%%%n$*";
   sb_uc_voices = "%Z005f87+%n$*";
   sb_uc_normal = "%k %n$*";
-  sb_uc_space = "%K·%n";
+  sb_uc_space = "%k·%n";
 
   ### For adv_windowlist.pl script
 

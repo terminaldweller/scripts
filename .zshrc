@@ -126,6 +126,10 @@ alias w3mlastsession="~/.w3m/bin/w3mlastsession"
 alias lsdrc="vim ~/scripts/.config/lsd/config.yaml"
 alias fixlsdrc="cp ~/scripts/.config/lsd/config.yaml ~/.config/lsd/config.yaml"
 alias vagrant="PATH=$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0 vagrant"
+alias cygwin="/mnt/d/home/apps/cygwin/bin/bash.exe -l -i"
+alias farmanager="/mnt/c/Program\ Files/Far\ Manager/Far.exe"
+alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd.exe"
+alias vms="ssh 185.126.202.69 -l ubuntu -p 1022"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

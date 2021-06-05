@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-VIM_VERSION=8.2.2885
+VIM_VERSION=8.2.2932
 
 sudo apt remove --purge vim vim-runtime vim-gnome vim-tiny vim-gui-common
 sudo rm -rf /usr/local/share/vim /usr/bin/vim
@@ -11,7 +11,7 @@ mkdir -p ~/vimsrc && \
   wget https://github.com/vim/vim/archive/v"$VIM_VERSION".tar.gz && \
   tar -xvf v"$VIM_VERSION".tar.gz -C ~/vimsrc
 
-cd vim-"$VIM_VERSION" && ./configure \
+cd ~/vimsrc/vim-"$VIM_VERSION" && ./configure \
   --with-features=huge \
   --enable-multibyte \
   --enable-perlinterp=yes \
@@ -36,6 +36,7 @@ cd vim-"$VIM_VERSION" && ./configure \
 # --enable-pythoninterp=yes \
 # --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
 
-make -j4 && sudo make install
+make -j4 
+sudo make install
 # run :helptags path-to-where-the-docs-are
 sudo vim -c "helptags $VIMRUNRIME"

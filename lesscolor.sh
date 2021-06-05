@@ -2,16 +2,16 @@
 case "$1" in
     *.h|*.c|*.cpp|*.awk|*.groff|*.java|*.js|*.m4|*.php|*.pl|*.pm|*.pod|*.sh|*.lua|*.hpp|*.sh|\
     *.ad[asb]|*.asm|*.inc|*.[ch]|*.[ch]pp|*.[ch]xx|*.cc|*.hh|*.json|makefile|Makefile|*.html|\
-    *.lsp|*.l|*.pas|*.p|*.xml|*.xps|*.xsl|*.axp|*.ppd|*.pov|\
+    *.lsp|*.l|*.pas|*.p|*.xml|*.xps|*.xsl|*.axp|*.ppd|*.pov|*.tex|*.go|\
     *.diff|*.patch|*.py|*.rb|*.sql|*.ebuild|*.eclass)
-        pygmentize -f 256 "$1";;
+        pygmentize -f 256 "$1"|nl -b a;;
     .zshrc|.bash_aliases|.bash_environment)
-        pygmentize -f 256 -l sh "$1"
+        pygmentize -f 256 -l sh "$1"|nl -b a
         ;;
     *)
         grep "#\!/bin/zsh" "$1" > /dev/null
         if [ "$?" -eq "0" ]; then
-            pygmentize -f 256 -l sh "$1"
+            pygmentize -f 256 -l sh "$1"|nl -b a
         else
             exit 1
         fi

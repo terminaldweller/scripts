@@ -14,3 +14,4 @@ https://www.ctrl.blog/entry/unbound-tls-forwarding.html
 script -q -c "sudo tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? '"
 st -f "DejaVuSansMono-11.3"
 https://wigle.net/
+export WSL_INTEROP=/run/WSL/13105_interop

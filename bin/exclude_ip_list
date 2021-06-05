@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+from ipaddress import ip_network
+
+start = '0.0.0.0/0'
+exclude = ['127.0.0.1', '192.168.1.0/24', '185.126.202.69', '87.236.209.206']
+
+result = [ip_network(start)]
+for x in exclude:
+    n = ip_network(x)
+    new = []
+    for y in result:
+        if y.overlaps(n):
+            new.extend(y.address_exclude(n))
+        else:
+            new.append(y)
+    result = new
+
+print(','.join(str(x) for x in sorted(result)))
