@@ -3,16 +3,14 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
-    password = "";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
   },
   {
-    address = "terminaldweller.com";
+    address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
-    password = "";
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
@@ -44,7 +42,6 @@ aliases = {
   C = "CLEAR";
   CALC = "EXEC - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
   CHAT = "DCC CHAT";
-  CUBES = "SCRIPT EXEC Irssi::active_win->print(\"%_bases\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { join '', map { \"%x0\\${_}0\\$_\" } '0'..'9','A'..'F' }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print(\"%_cubes\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { my \\$y = \\$_*6 \\; join '', map { my \\$x = \\$_ \\; map { \"%x\\$x\\$_\\$x\\$_\" } @{['0'..'9','A'..'Z']}[\\$y .. \\$y+5] } 1..6 }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) for 0..5 \\; Irssi::active_win->print(\"%_grays\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { join '', map { \"%x7\\${_}7\\$_\" } 'A'..'X' }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print(\"%_mIRC extended colours\", MSGLEVEL_CLIENTCRAP) \\; my \\$x \\; \\$x .= sprintf \"\00399,%02d%02d\",\\$_,\\$_ for 0..15 \\; Irssi::active_win->print(\\$x, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; for my \\$z (0..6) { my \\$x \\; \\$x .= sprintf \"\00399,%02d%02d\",\\$_,\\$_ for 16+(\\$z*12)..16+(\\$z*12)+11 \\; Irssi::active_win->print(\\$x, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) }";
   DATE = "TIME";
   DEHIGHLIGHT = "DEHILIGHT";
   DESCRIBE = "ACTION";
@@ -206,7 +203,7 @@ statusbar = {
 
     # treated "normally", you could change the time/user name to whatever
     time = "{sb $Z}";
-    user = "%9%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %K$usermode} %Z005fff%0%z005f00{sbaway $A}}%9%N";
+    user = "%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00{sbaway $A}}%N";
 
 
     # treated specially .. window is printed with non-empty windows,
@@ -221,11 +218,9 @@ statusbar = {
 
     # all of these treated specially, they're only displayed when needed
     # Powerline
-    lag = "{sb %r%k%1 ⌚ $0 %r%0%n}";
-    act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %n}";
-    more = "%c%0%n%z00af00 more ⬇ %c%0%n";
-
-
+    lag = "{sb %0%Zff8700%zff8700%k ⌚ $0 %Zff8700%0%N}";
+    act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %N}";
+    more = "%c%0%n%z00af00 more ⬇ %c%0%N";
   };
 
   # there's two type of statusbars. root statusbars are either at the top
@@ -310,6 +305,13 @@ statusbar = {
         topicempty = { };
       };
     };
+    sb_timezones = {
+      items = {
+        barstart = { };
+        timezones = { };
+        barend = { alignment = "right"; };
+      };
+    };
     awl_0 = {
       items = {
         barstart = { priority = "100"; };
@@ -333,23 +335,31 @@ settings = {
   };
   "fe-common/core" = {
     theme = "solarized-powerline";
-    hilight_color = "%R";
+    hilight_color = "%Z875fff";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = {
-    ### For Solarized adv_windowlist.pl script
+    # adv_windowlist.pl
     awl_block = "-20";
     awl_sbar_maxlength = "off";
     awl_hide_empty = "yes";
-    awl_mouse = "yes";
+    awl_mouse = "no";
     awl_viewer = "no";
     awl_maxlines = "0";
     #fancy_abbrev = "head";
 
-    ### For Solarized trackbar.pl script
+    # trackbar.pl
     trackbar_style = "%B";
     title_screen_window = "yes";
     awl_shared_sbar = "OFF";
+    # usercount.pl
+    usercount_show_halfops = "ON";
+    usercount_show_ircops = "ON";
+    usercount_show_zero = "ON";
+    timezones_divider = " %Zeeeeee%Z008080 ";
+    timezones = "GMT:GMT EST:EST UTC:UTC";
+    # hilite_url
+    url_color = "38;5;6";
   };
 };
 keyboard = ( 

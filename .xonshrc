@@ -1,0 +1,13 @@
+
+$XONSH_COLOR_STYLE='paraiso-dark'
+aliases[".."]="cd .."
+aliases["..."]="cd ../.."
+aliases["...."]="cd ../../.."
+aliases["....."]="cd ../../../.."
+aliases["......"]="cd ../../../../.."
+aliases["la"]="ls -A"
+aliases["ll"]="ls -lA"
+aliases["lss"]="ls -sSA"
+aliases["clip.exe"]="/mnt/c/Windows/System32/clip.exe"
+
+$VI_MODE=True

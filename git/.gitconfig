@@ -1,0 +1,6 @@
+[user]
+	email = thabogre@gmail.com
+	name = terminaldweller
+[http]
+	postBuffer = 157286400
+	version = HTTP/2

@@ -171,7 +171,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'dbeniamine/cheat.sh-vim'
 Plugin 'lifepillar/pgsql.vim'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+" Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'congma/vim-compiler-checkbashisms'
 Plugin 'hsanson/vim-openapi'
 Plugin 'mattn/emmet-vim'
@@ -264,7 +264,7 @@ function! s:shortenPath(path)
 endfunction
 
 "airline options
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let s:airline_custom_cwd = s:shortenPath(expand('%:p'))
 try
   let g:airline#extensions#tabline#enabled = 1
@@ -1325,7 +1325,7 @@ endif
 "vimwiki
 let wiki = {}
 let wiki.path = '~/vimwiki/'
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml'}
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml', 'Dockerfile':'Dockerfile'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_global_ext = 0
 " let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]

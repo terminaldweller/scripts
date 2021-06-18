@@ -15,6 +15,10 @@ wget https://scripts.irssi.org/scripts/nm2.pl
 wget https://scripts.irssi.org/scripts/savecmdhist.pl
 wget https://scripts.irssi.org/scripts/sb_position.pl
 wget https://scripts.irssi.org/scripts/trackbar.pl
+wget https://scripts.irssi.org/scripts/scriptassist.pl
+wget https://scripts.irssi.org/scripts/tordetect.pl
+wget https://scripts.irssi.org/scripts/timezones.pl
+wget https://scripts.irssi.org/scripts/usercount.pl
 
 cp ./config ~/.irssi/config
 cp ./solarized-powerline.theme ~/.irssi/solarized-powerline.theme

@@ -128,8 +128,18 @@ alias fixlsdrc="cp ~/scripts/.config/lsd/config.yaml ~/.config/lsd/config.yaml"
 alias vagrant="PATH=$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0 vagrant"
 alias cygwin="/mnt/d/home/apps/cygwin/bin/bash.exe -l -i"
 alias farmanager="/mnt/c/Program\ Files/Far\ Manager/Far.exe"
+alias pwsh="/mnt/c/Program\ Files/PowerShell/7/pwsh.exe"
 alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd.exe"
 alias vms="ssh 185.126.202.69 -l ubuntu -p 1022"
+alias xonshrc="vim ~/scripts/.xonshrc"
+alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
+alias sshphone="ssh 192.168.1.110 -l u0_a263 -p 8022"
+alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
+alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
+alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
+alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychains/proxychains.conf"
+alias zgit="proxychains git"
+alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -194,8 +204,9 @@ alias def="sdcv --color"
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 
-export LESS='-R'
+export LESS='--RAW-CONTROL-CHARS --ignore-case --status-column --LONG-PROMPT --HILITE-UNREAD --tabs=2'
 export LESSOPEN='|~/scripts/lesscolor.sh %s'
+export PYGMENTIZE_STYLE="paraiso-dark"
 # libtrash settings
 # export LD_PRELOAD=/usr/local/lib/libtrash.so.3.5
 # alias trashon=”export TRASH_OFF=NO”
@@ -234,6 +245,7 @@ export PATH=$PATH:/home/devi/powershell
 export PATH=$PATH:/home/devi/protobuf/bin
 export PATH=$PATH:/home/devi/ytfzf
 export PATH=$PATH:/home/devi/gotty
+export PATH=$PATH:/home/devi/.poetry/bin
 
 export EDITOR=vim
 export BROWSER=w3m
