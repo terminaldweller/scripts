@@ -34,6 +34,7 @@ syntax sync minlines=64
 set ttyfast
 set relativenumber
 set wildignorecase
+set shm=a
 " set wildmode=list:longest,full
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildmenu
@@ -113,8 +114,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'szw/vim-maximizer'
 Plugin 'chrisbra/csv.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'elzr/vim-json'
 Plugin 'wellle/context.vim'
 Plugin 'ludovicchabant/vim-gutentags'
@@ -127,7 +126,6 @@ Plugin 'chrisbra/Recover.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'rhysd/git-messenger.vim'
 Plugin 'mhinz/vim-grepper'
-Plugin 'vim-utils/vim-troll-stopper'
 Plugin 'junegunn/limelight.vim'
 Plugin 'valloric/MatchTagAlways'
 Plugin 'junegunn/vim-peekaboo'
@@ -159,7 +157,6 @@ Plugin 'amix/vim-zenroom2'
 Plugin 'raimon49/requirements.txt.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'rhysd/vim-llvm'
-Plugin 'rhysd/vim-gfm-syntax'
 Plugin 'haya14busa/is.vim'
 Plugin 'haya14busa/vim-asterisk'
 Plugin 'haya14busa/incsearch.vim'
@@ -168,16 +165,22 @@ Plugin 'lervag/vimtex'
 Plugin 'vim-utils/vim-man'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'godlygeek/tabular'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'dbeniamine/cheat.sh-vim'
 Plugin 'lifepillar/pgsql.vim'
-" Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'congma/vim-compiler-checkbashisms'
 Plugin 'hsanson/vim-openapi'
 Plugin 'mattn/emmet-vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'meatballs/vim-xonsh'
+Plugin 'junegunn/gv.vim'
+" Plugin 'rhysd/vim-gfm-syntax'
+" Plugin 'vim-utils/vim-troll-stopper'
+" Plugin 'vim-pandoc/vim-pandoc'
+" Plugin 'vim-pandoc/vim-pandoc-syntax'
+" Plugin 'tmux-plugins/vim-tmux-focus-events'
 " Plugin 'skammer/vim-css-color'
 " Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'jelera/vim-javascript-syntax'
@@ -209,9 +212,9 @@ Plugin 'meatballs/vim-xonsh'
 call vundle#end()
 filetype plugin indent on
 
-let g:gfm_syntax_enable_always = 1
-let g:gfm_syntax_enable_filetypes = ['markdown.gfm']
-autocmd BufRead,BufNew,BufNewFile README.md setlocal ft=markdown.gfm
+" vim-markdown
+" let g:vim_markdown_math = 1
+" let g:vim_markdown_strikethrough = 1
 
 "jellybeans
 silent! colo jellybeans
@@ -273,7 +276,7 @@ try
   let g:airline#extensions#tabline#formatter = 'default'
   let g:airline#extensions#ale#enabled = 1
   let g:airline#extensions#branch#enabled = 1
-  let g:airline#extensions#xkblayout#enabled = 1
+  " let g:airline#extensions#xkblayout#enabled = 1
 catch
 endtry
 let g:airline_theme = 'jellybeans'
@@ -290,7 +293,7 @@ function! Airline_Custom()
   \])
 endfunction
 autocmd user AirlineAfterInit call Airline_Custom()
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
+" let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
 let g:airline_exclude_preview = 1
 
 syntax on
@@ -394,8 +397,12 @@ map <F24> <S-Delete>
 map! <F24> <S-Delete>
 
 "cnoremap help vert help
-map <F1> <Plug>(expand_region_shrink)
-map <F2> <Plug>(expand_region_expand)
+" map <F1> <Plug>(expand_region_shrink)
+" map <F2> <Plug>(expand_region_expand)
+nnoremap <F1> :set rl!<CR>
+inoremap <F1> <ESC>:set rl!<CR>i
+nnoremap <F2> :set spell!<CR>
+inoremap <F2> <ESC>:set spell!<CR>i
 nnoremap <F3> :bp<CR>
 nnoremap <F4> :bn<CR>
 inoremap <F3> <ESC>:bp<CR>
@@ -640,6 +647,33 @@ let g:tagbar_type_vimwiki = {
           \ , 'ctagsbin':'/home/devi/scripts/bin/vwtags.py'
           \ , 'ctagsargs': 'default'
           \ }
+
+let g:tagbar_type_markdown = {
+  \ 'ctagstype'	: 'markdown',
+  \ 'kinds'		: [
+    \ 'c:chapter:0:1',
+    \ 's:section:0:1',
+    \ 'S:subsection:0:1',
+    \ 't:subsubsection:0:1',
+    \ 'T:l4subsection:0:1',
+    \ 'u:l5subsection:0:1',
+  \ ],
+  \ 'sro'			: '""',
+  \ 'kind2scope'	: {
+    \ 'c' : 'chapter',
+    \ 's' : 'section',
+    \ 'S' : 'subsection',
+    \ 't' : 'subsubsection',
+    \ 'T' : 'l4subsection',
+  \ },
+  \ 'scope2kind'	: {
+    \ 'chapter' : 'c',
+    \ 'section' : 's',
+    \ 'subsection' : 'S',
+    \ 'subsubsection' : 't',
+    \ 'l4subsection' : 'T',
+  \ },
+\ }
 
 "doxygentoolkit
 autocmd BufNewFile,BufRead,BufEnter *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
@@ -922,7 +956,6 @@ highlight vimBufnrWarn ctermbg=16 ctermfg=202
 iab strign string
 iab pritn print
 iab retrun return
-iab return return
 iab fucntion function
 iab funciton function
 iab tehn then
@@ -1084,9 +1117,6 @@ let g:haskell_enable_typeroles = 1
 let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
 let g:haskell_disable_TH = 0
-
-"vim-markdown
-let g:vim_markdown_strikethrough = 1
 
 "keeps track of the cursor in insert mode, pull it back by one so it appears
 "not to move when exiting insert
@@ -1328,7 +1358,7 @@ let wiki.path = '~/vimwiki/'
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml', 'Dockerfile':'Dockerfile'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_global_ext = 0
-" let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_list = [{'path': '~/devi/devi/work/vimwiki.git/master', 'syntax': 'markdown', 'ext': '.wiki'}]
 
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16

@@ -1,0 +1,6 @@
+host github.com
+  user terminaldweller
+  identityfile ~/.ssh/id_rsa
+host git.zharfpouyan.net
+  user sadeghi_f
+  identityfile ~/.ssh/zharf

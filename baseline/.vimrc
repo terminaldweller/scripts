@@ -18,6 +18,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
+Plugin 'wellle/context.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -94,6 +95,7 @@ map <F13> <S-F10>
 map! <F13> <S-F10>
 nnoremap <F10> :vsp<cr>
 nnoremap <S-F10> :sp<cr>
+nnoremap <F5> :ContextToggle<CR>
 set pastetoggle=<F11>
 nnoremap <leader>cd :cd %:p:h<cr>
 nmap ]c :cn<CR>

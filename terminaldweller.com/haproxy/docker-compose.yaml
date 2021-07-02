@@ -1,0 +1,9 @@
+version: "3.4"
+services:
+  haproxy:
+    image: haproxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+

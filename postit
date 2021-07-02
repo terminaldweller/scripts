@@ -15,3 +15,7 @@ script -q -c "sudo tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? '"
 st -f "DejaVuSansMono-11.3"
 https://wigle.net/
 export WSL_INTEROP=/run/WSL/13105_interop
+/mnt/c/Program\ Files/PowerShell/7/pwsh.exe
+hyperion--16:18:30
+sudo ./irc-slack --port 6667 --host 0.0.0.0 --debug
+ssh -N -D 9999 -o ExitOnForwardFailure=yes -l pi 192.168.1.108

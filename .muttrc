@@ -1,3 +1,4 @@
+# vim: filetype=neomuttrc
 set from = 'thabogre@gmail.com'
 set realname = 'farzad sadeghi'
 set imap_user = 'thabogre@gmail.com'
@@ -35,6 +36,8 @@ set imap_keepalive = 900
 set timeout=30
 folder-hook gmail/important    "color status        J_black         color136        "
 #set imap_list_subscribed=yes
+set dsn_notify="failure,delay"
+set dsn_return="hdrs"
 
 set sidebar_visible = yes
 set mail_check_stats = yes
@@ -131,11 +134,21 @@ color index         brightred       red             "~="                       #
 
 # message headers ------------------------------------------------------
 
-color hdrdefault    brightcolor222  default
+color hdrdefault    default  default
+color header        color69         default        "^ARC-"
+color header        color25         default        "^Received"
+color header        color30         default        "^X-"
+color header        color36         default        "^List-"
+color header        color63         default        "^MIME-"
+color header        color99         default        "^Content-"
+color header        color209        default        "^DKIM"
+color header        color132        default        "^Authentication"
+color header        color131        default        "^User-Agent"
 color header        color27         default        "^(To|Cc|Bcc)"
 color header        color28         default        "^(From)"
 color header        color6          default        "^(Date)"
 color header        color22         default        "^(Subject)"
+unignore *
 
 # body -----------------------------------------------------------------
 
@@ -162,6 +175,11 @@ color body          color39         default        "(Good signature)"
 color body          color235        default        "^gpg: Good signature .*"
 color body          color241        default        "^gpg: "
 color body          color241        color160        "^gpg: BAD signature from.*"
+color body          color30         default         "^# \.*"
+color body          color31         default         "^## \.*"
+color body          color32         default         "^### \.*"
+color body          color33         default         "^#### \.*"
+color body          color29         default         "^(\t| )*(-|\\*) \.*"
 mono  body          bold                            "^gpg: Good signature"
 mono  body          bold                            "^gpg: BAD signature from.*"
 
@@ -251,3 +269,59 @@ auto_view  text/html
 bind index,pager \CP sidebar-prev
 bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
+bind pager j next-line
+bind pager k previous-line
+bind pager l view-attachments
+bind index l display-message
+bind browser l select-entry
+bind index h noop
+bind browser h goto-parent
+bind browser gg top-page
+bind pager g noop
+bind pager gg top
+bind pager G bottom
+bind index g noop
+bind index gg first-entry
+bind browser G bottom-page
+bind index G last-entry
+bind index D delete-message
+bind index U undelete-message
+bind index,pager R group-reply
+bind attach,browser,pager,index \CF next-page
+bind attach,browser,pager,index \CB previous-page
+bind attach,browser,pager,index \Cu half-up
+bind attach,browser,pager,index \Cd half-down
+bind index H top-page
+bind index M middle-page
+bind index L bottom-page
+
+# color   body    brightwhite     default         "^[[:space:]].*"
+color   body    yellow          default         "^(diff).*"
+color   body    white           default         "^[\-\-\-].*"
+color   body    white           default         "^[\+\+\+].*"
+color   body    green           default         "^[\+].*"
+color   body    red             default         "^[\-].*"
+color   body    brightblue      default         "[@@].*"
+color   body    brightwhite     default         "^(\s).*"
+color   body    cyan            default         "^(Signed-off-by).*"
+color   body    cyan            default         "^(Docker-DCO-1.1-Signed-off-by).*"
+color   body    brightwhite     default         "^(Cc)"
+color   body    yellow          default         "^diff \-.*"
+color   body    brightwhite     default         "^index [a-f0-9].*"
+color   body    brightblue      default         "^---$"
+color   body    white           default         "^\-\-\- .*"
+color   body    white           default         "^[\+]{3} .*"
+color   body    green           default         "^[\+][^\+]+.*"
+color   body    red             default         "^\-[^\-]+.*"
+color   body    brightblue      default         "^@@ .*"
+color   body    green           default         "LGTM"
+color   body    brightmagenta   default         "-- Commit Summary --"
+color   body    brightmagenta   default         "-- File Changes --"
+color   body    brightmagenta   default         "-- Patch Links --"
+color   body    green           default         "^Merged #.*"
+color   body    red             default         "^Closed #.*"
+color   body    brightblue      default         "^Reply to this email.*"
+
+# set pager_format=" %n %zc  %T %s%*  %{!%d %b · %H:%M} %?X?  %X ? %P  "
+# set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
+# set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"

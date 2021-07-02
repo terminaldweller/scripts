@@ -16,7 +16,7 @@ autoload -U compinit && compinit -u
 
 alias ls="exa"
 alias la="exa -a"
-alias ll="exa -abghHliSmxGF --git -@"
+alias ll="exa -abghHliSmxF --git -@"
 alias lss="exa -S"
 alias ee="nautilus ."
 alias updaterc="cp ~/scripts/.zshrc ~/.zshrc"
@@ -140,6 +140,7 @@ alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
 alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychains/proxychains.conf"
 alias zgit="proxychains git"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
+alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -242,10 +243,10 @@ export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
 export PATH=$PATH:/home/devi/mongosh
 export PATH=$PATH:/home/devi/powershell
-export PATH=$PATH:/home/devi/protobuf/bin
 export PATH=$PATH:/home/devi/ytfzf
 export PATH=$PATH:/home/devi/gotty
 export PATH=$PATH:/home/devi/.poetry/bin
+export PATH=$PATH:/home/devi/pulumi
 
 export EDITOR=vim
 export BROWSER=w3m
