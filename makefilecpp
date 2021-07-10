@@ -29,7 +29,7 @@ EXCLUSION_LIST='xxxxxx'
 OBJ_LIST:=$(patsubst %.cpp, %.o, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
 OBJ_COV_LIST:=$(patsubst %.cpp, %.ocov, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
 OBJ_DBG_LIST:=$(patsubst %.cpp, %.odbg, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
-ASM_LIST:=$(patsubst %.cpp, %.dis, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
+ASM_LIST:=$(patsubst %.cpp, %.s, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
 WASM_LIST:=$(patsubst %.cpp, %.wasm, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
 WAST_LIST:=$(patsubst %.cpp, %.wast, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
 IR_LIST:=$(patsubst %.cpp, %.ir, $(shell find . -name '*.cpp' | grep -Ev $(EXCLUSION_LIST)))
@@ -154,8 +154,9 @@ tags:$(SRCS)
 		sed -e 's/[\\ ]/\n/g'|sed -e '/^$$/d' -e '/\.o:[ \t]*$$/d'|\
 		ctags -L - --c++-kinds=+p --fields=+iaS --extra=+q)
 
-%.dis: %.o
-	objdump -r -d -M intel -S $< > $@
+%.s: %.cpp
+	$(CXX) -S $< -o $@
+	# objdump -r -d -M intel -S $< > $@
 
 %.ir: %.cpp
 	$(CXX) -emit-llvm -S -o $@ $<
@@ -188,7 +189,7 @@ test: $(TARGET)
 	$(TARGET)
 
 run: $(TARGET)
-	$(TARGET)
+	"./$(TARGET)"
 
 valgrind: $(TARGET)
 	- valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all $(TARGET)

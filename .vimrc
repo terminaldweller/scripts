@@ -136,7 +136,6 @@ Plugin 'rgrinberg/vim-ocaml'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kshenoy/vim-signature'
 Plugin 'Konfekt/vim-scratchpad'
-Plugin 'tmux-plugins/vim-tmux'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'cespare/vim-toml'
@@ -176,13 +175,16 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'meatballs/vim-xonsh'
 Plugin 'junegunn/gv.vim'
+Plugin 'ap/vim-css-color'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'Shirk/vim-gas'
+" Plugin 'tmux-plugins/vim-tmux'
 " Plugin 'rhysd/vim-gfm-syntax'
 " Plugin 'vim-utils/vim-troll-stopper'
 " Plugin 'vim-pandoc/vim-pandoc'
 " Plugin 'vim-pandoc/vim-pandoc-syntax'
 " Plugin 'tmux-plugins/vim-tmux-focus-events'
 " Plugin 'skammer/vim-css-color'
-" Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'szymonmaszke/vimpyter'
 " Plugin 'puremourning/vimspector'
@@ -327,7 +329,7 @@ au BufEnter,FileType c set syntax=cpp.doxygen
 au BufNewFile,BufRead .muttrc set filetype=neomuttrc
 au BufNewFile,BufRead,BufEnter *.toml set filetype=toml
 
-au BufNewFile,BufEnter *.s set ft=nasm
+au BufNewFile,BufEnter,BufRead *.s set ft=gas
 au BufEnter,FileType *.wast set syntax=wast
 au BufEnter,FileType *.wat set syntax=wast
 au BufEnter,FileType *.uml set syntax=plantuml
@@ -483,16 +485,15 @@ nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 " nmap <silent> <M-h> :wincmd h<CR>
 " nmap <silent> <M-l> :wincmd l<CR>
 
-"vim-tmux-navigator
-" let g:tmux_navigator_no_mappings = 1
-" let g:tmux_navigator_disable_when_zoomed = 1
-" let g:tmux_navigator_save_on_switch = 2
-
+" vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_save_on_switch = 2
 " nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-w><C-w> :TmuxNavigatePrevious<cr>
 
 "vim.session options
 let g:session_directory = "~/.vim/session"

@@ -29,7 +29,7 @@ EXCLUSION_LIST='xxxxxx'
 OBJ_LIST:=$(patsubst %.c, %.o, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
 OBJ_COV_LIST:=$(patsubst %.c, %.ocov, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
 OBJ_DBG_LIST:=$(patsubst %.c, %.odbg, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
-ASM_LIST:=$(patsubst %.c, %.dis, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
+ASM_LIST:=$(patsubst %.c, %.s, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
 WASM_LIST:=$(patsubst %.c, %.wasm, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
 WAST_LIST:=$(patsubst %.c, %.wast, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
 IR_LIST:=$(patsubst %.c, %.ir, $(shell find . -name '*.c' | grep -Ev $(EXCLUSION_LIST)))
@@ -149,8 +149,9 @@ tags:$(SRCS)
 		sed -e 's/[\\ ]/\n/g'|sed -e '/^$$/d' -e '/\.o:[ \t]*$$/d'|\
 		ctags -L - --c++-kinds=+p --fields=+iaS --extra=+q)
 
-%.dis: %.o
-	objdump -r -d -M intel -S $< > $@
+%.s: %.c
+	$(CC) -S $< -o $@
+	# objdump -r -d -M intel -S $< > $@
 
 %.ir: %.c
 	$(CC) -emit-llvm -S -o $@ $<
@@ -183,7 +184,7 @@ test: $(TARGET)
 	$(TARGET)
 
 run: $(TARGET)
-	$(TARGET)
+	"./$(TARGET)"
 
 valgrind: $(TARGET)
 	- valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all $(TARGET)
@@ -198,7 +199,7 @@ format:
 	- clang-format -i $(SRCS) $(HDRS)
 
 clean:
-	- rm -f *.o *.dis *.odbg *.ocov *.js *.ir *~ $(TARGET) $(TARGET).so $(TARGET)-static \
+	- rm -f *.o *.s *.odbg *.ocov *.js *.ir *~ $(TARGET) $(TARGET).so $(TARGET)-static \
 	$(TARGET)-dbg $(TARGET).a $(TARGET)-cov *.wasm *.wast $(TARGET).adbg *.ast
 
 deepclean: clean
