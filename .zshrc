@@ -45,8 +45,8 @@ alias isup="ps -aux | grep "
 alias ipfsd="ipfs daemon > /dev/null 2>&1 &; disown"
 alias i3rc="vim ~/scripts/.config/i3/config"
 alias fixi3rc="cp ~/scripts/.config/i3/config ~/.config/i3/config && i3-msg restart"
-alias muttrc="vim ~/scripts/.muttrc"
-alias fixmuttrc="cp ~/scripts/.muttrc ~/.muttrc"
+alias muttrc="vim ~/scripts/.mutt/.muttrc"
+alias fixmuttrc="cp ~/scripts/.mutt/.muttrc ~/.muttrc"
 alias dropcmake="cp ~/scripts/makefilec ./makefile"
 alias dropcppmake="cp ~/scripts/makefilecpp ./makefile"
 alias droppy="cp ~/scripts/python/main.py ./main.py"
@@ -141,6 +141,7 @@ alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychain
 alias zgit="proxychains git"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
+alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

@@ -1,40 +1,26 @@
 # vim: filetype=neomuttrc
-set from = 'thabogre@gmail.com'
-set realname = 'farzad sadeghi'
-set imap_user = 'thabogre@gmail.com'
-source "gpg -d ~/scripts/imap.pass.gpg |"
-#set sidebar_visible = yes
+set imap_keepalive = 900
+set timeout=60
+set move = no
+
+folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
+folder-hook 'account.self' 'source ~/.mutt/account.self'
+
+# default account
+source ~/.mutt/account.gmail
+
+macro index <f2> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.self<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.gmail<enter><change-folder>!<enter>'
 
 # macros
 macro index A "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>” “mark all messages read"
 
-# REMOTE GMAIL FOLDERS
-set folder = 'imaps://imap.gmail.com:993'
-set spoolfile = '+Inbox'
-set postponed = '+Drafts'
-set record = '+Sent'
-set trash = '+Trash'
-
 # gives us all the mailboxes in the sidebar
 set imap_check_subscribed
 
-#LOCAL FOLDERS FOR CACHED HEADERS AND CERTIFICATES
-set header_cache = ~/.mutt/cache/headers
-#set header_cache =\home\bloodstalker\.mutt\cache\headers
-set message_cachedir = ~/.mutt/cache/bodies
-set certificate_file = ~/.mutt/certificates
-
-#SMTP SETTINGS
-set smtp_url = 'smtp://thabogre@smtp.gmail.com:587/'
-
 set editor = "vim"
 
-#SECURING
-set move = no
-set imap_keepalive = 900
-
-set timeout=30
-folder-hook gmail/important    "color status        J_black         color136        "
+# folder-hook gmail/important "color status J_black color136"
 #set imap_list_subscribed=yes
 set dsn_notify="failure,delay"
 set dsn_return="hdrs"
@@ -42,7 +28,6 @@ set dsn_return="hdrs"
 set sidebar_visible = yes
 set mail_check_stats = yes
 set sidebar_divider_char = ' |'
-set sidebar_visible = yes
 set sidebar_width = 40
 set sidebar_short_path = yes
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
@@ -55,15 +40,6 @@ subscribe ^llvm-dev@lists.llvm.org$
 subscribe -group lua lua-l@lists.lua.org
 subscribe -group cygwin cygwin@cygwin.com
 
-# for background in 16 color terminal, valid background colors include:
-# base03, bg, black, any of the non brights
-
-# style notes:
-# when bg=235, that's a highlighted message
-# normal bg=233
-
-# basic colors ---------------------------------------------------------
-# color normal        brightyellow    default
 color error         color196        default                        # message line error text
 color tilde         color81         default                        # vi-like tildes marking blank lines
 color message       color82         default
