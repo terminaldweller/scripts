@@ -5,7 +5,7 @@ ZSH_THEME="devi"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git svn zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo nvm npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant)
+plugins=(git zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo nvm npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang)
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/devi/.local/bin:/home/devi/bin"
 
