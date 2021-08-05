@@ -1,0 +1,70 @@
+# Skin InTheNavy...
+k9s:
+  # General K9s styles
+  body:
+    fgColor: dodgerblue
+    bgColor: '#000000'
+    logoColor: '#0000ff'
+  # ClusterInfoView styles.
+  info:
+    fgColor: lightskyblue
+    sectionColor: steelblue
+  # Help panel styles
+  help:
+    fgColor: white
+    bgColor: default
+    keyColor: cyan
+    numKeyColor: blue
+    sectionColor: gray
+  frame:
+    # Borders styles.
+    border:
+      fgColor: dodgerblue
+      focusColor: aliceblue
+    # MenuView attributes and styles.
+    menu:
+      fgColor: darkblue
+      keyColor: cornflowerblue
+      # Used for favorite namespaces
+      numKeyColor: cadetblue
+    # CrumbView attributes for history navigation.
+    crumbs:
+      fgColor: white
+      bgColor: default
+      activeColor: skyblue
+    # Resource status and update styles
+    status:
+      newColor: '#00ff00'
+      modifyColor: powderblue
+      addColor: lightskyblue
+      errorColor: indianred
+      highlightcolor: royalblue
+      killColor: slategray
+      completedColor: gray
+    # Border title styles.
+    title:
+      fgColor: aqua
+      bgColor: default
+      highlightColor: skyblue
+      counterColor: slateblue
+      filterColor: slategray
+  views:
+    # TableView attributes.
+    table:
+      fgColor: blue
+      bgColor: default
+      cursorColor: aqua
+      # Header row styles.
+      header:
+        fgColor: white
+        bgColor: default
+        sorterColor: orange
+    # YAML info styles.
+    yaml:
+      keyColor: steelblue
+      colonColor: blue
+      valueColor: royalblue
+    # Logs styles.
+    logs:
+      fgColor: white
+      bgColor: default

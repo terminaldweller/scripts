@@ -75,11 +75,11 @@ LD_FLAGS+=$(EXTRA_LD_FLAGS)
 
 .DEFAULT:all
 
-.PHONY:all clean help ASM SO TAGS WASM JS exe IR WAST A ADBG AST cppcheck
+.PHONY:all clean help ASM SO TAGS WASM JS exe IR WAST A ADBG AST cppcheck DOCKER
 
 all:exe
 
-everything:$(TARGET) A ASM SO $(TARGET)-static $(TARGET)-dbg ADBG TAGS $(TARGET)-cov WASM JS IR WAST AST
+everything:$(TARGET) A ASM SO $(TARGET)-static $(TARGET)-dbg ADBG TAGS $(TARGET)-cov WASM JS IR WAST AST DOCKER
 
 depend:.depend
 
@@ -202,6 +202,9 @@ rundbg: $(TARGET)-dbg
 
 format:
 	- clang-format -i $(SRCS) $(HDRS)
+
+DOCKER: Dockerfile
+	docker buld -t proto ./
 
 clean:
 	- rm -f *.o *.dis *.odbg *.ocov *.js *.ir *~ $(TARGET) $(TARGET).so $(TARGET)-static \

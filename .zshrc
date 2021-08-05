@@ -74,11 +74,10 @@ alias w3m="torsocks w3m -graph"
 #alias clang="COLORMAKE_COMMAND=clang colormake"
 alias mv="mv -i"
 alias cp="cp -i"
-alias nuke="rm -rf * .[!.]* ..?*"
+alias nuke="rm -rf * .*"
 alias bruiser="bruiser --history ~/.bruiser/history.lua"
 alias digg="dig && clear"
 alias ogg="ogg123"
-alias jupyterlocal="jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8775"
 alias mupdf="/home/devi/extra/mupdf/build/release/mupdf-x11 -D red -P black -I"
 alias googler="~/extra/googler/googler --colors GKmexy -c us -l en --count 7 --exact "
 alias ddgr="ddgr --colorize always -r us-en -n 15"
@@ -106,7 +105,7 @@ alias psqlrc="vim ~/scripts/.psqlrc"
 alias fixpsqlrc="cp ~/scripts/.psqlrc ~/.psqlrc"
 alias pgclirc="vim ~/scripts/.config/pgcli/config"
 alias fixpgclirc="cp ~/scripts/.config/pgcli/config ~/.config/pgcli/config"
-alias jupyter="~/.local/bin/jupyter-notebook --no-browser"
+alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 alias irssi="irssi -n terminaldweller"
@@ -139,9 +138,16 @@ alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
 alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
 alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychains/proxychains.conf"
 alias zgit="proxychains git"
+alias zssh="proxychains ssh"
+alias zscp="proxychains scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
+alias zharf_sever="zssh 192.168.12.5 -l farzad"
+alias k9sskin="vim ~/scripts/.k9s/skin.yml"
+alias k9sconfig="vim ~/scripts/.k9s/config.yml"
+alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.k9s/skin.yml"
+alias fixk9sconfig="cp ~/scripts/.k9s/config.yml ~/.k9s/config.yml"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -248,6 +254,10 @@ export PATH=$PATH:/home/devi/ytfzf
 export PATH=$PATH:/home/devi/gotty
 export PATH=$PATH:/home/devi/.poetry/bin
 export PATH=$PATH:/home/devi/pulumi
+export PATH=$PATH:/home/devi/dry
+export PATH=$PATH:/home/devi/k9s
+export PATH=$PATH:/home/devi/opam
+export PATH=$PATH:/home/devi/devi/ghorg
 
 export EDITOR=vim
 export BROWSER=w3m
@@ -353,6 +363,10 @@ fd() {
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
 
+function pod2w3m {
+  pod2html $1 | w3m -T text/html
+}
+
 setopt APPEND_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
@@ -436,3 +450,31 @@ _gs() {
   git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
   cut -d: -f1
 }
+
+fshow() {
+  local out shas sha q k
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --multi --no-sort --reverse --query="$q" --tiebreak=index \
+          --print-query --expect=ctrl-d --toggle-sort=\`); do
+    q=$(head -1 <<< "$out")
+    k=$(head -2 <<< "$out" | tail -1)
+    shas=$(sed '1,2d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+    [ -z "$shas" ] && continue
+    if [ "$k" = 'ctrl-d' ]; then
+      git diff --color=always $shas | less -R
+    else
+      for sha in $shas; do
+        git show --color=always $sha | less -R
+      done
+    fi
+  done
+}
+export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\e[0m'           # end mode
+export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\e[0m'           # end underline
+export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline

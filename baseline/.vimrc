@@ -19,6 +19,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
 Plugin 'wellle/context.vim'
+Plugin 'roxma/vim-tmux-clipboard'
 call vundle#end()
 filetype plugin indent on
 

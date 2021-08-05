@@ -167,6 +167,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'godlygeek/tabular'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'dbeniamine/cheat.sh-vim'
+Plugin 'wlemuel/vim-tldr'
 Plugin 'lifepillar/pgsql.vim'
 Plugin 'congma/vim-compiler-checkbashisms'
 Plugin 'hsanson/vim-openapi'
@@ -178,6 +179,8 @@ Plugin 'junegunn/gv.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'Shirk/vim-gas'
+Plugin 'roxma/vim-tmux-clipboard'
+Plugin 'wellle/visual-split.vim'
 " Plugin 'tmux-plugins/vim-tmux'
 " Plugin 'rhysd/vim-gfm-syntax'
 " Plugin 'vim-utils/vim-troll-stopper'
@@ -228,6 +231,9 @@ let g:jellybeans_overrides = {
 \    'Comment': { 'guifg': '339966' },
 \    'background': { "guibg": "000000", "ctermbg":"none"},
 \    'StorageClass': {"guifg": '9966ff' },
+\    'PreCondit': {"guifg": '5f87ff' },
+\    'Tag': {"guifg": '00af5f' },
+\    'Label': {"guifg": '008787' },
 \    'Exception': {"guifg": "99cc00"},
 \    "Ignore": {"guifg": "336699"},
 \    "SpecialComment": {"guifg": "009900"},
@@ -436,6 +442,10 @@ augroup GoLangRun
   autocmd!
   autocmd FileType go nmap <leader>r <Plug>(go-run)
 augroup end
+augroup RustLangRun
+  autocmd!
+  autocmd FileType rust nmap <leader>r :Crun<CR>
+augroup end
 nnoremap <leader>cd :cd %:p:h<cr>
 "terminal vim wont do weird things when you paste things in
 set pastetoggle=<F11>
@@ -574,6 +584,26 @@ let g:WebDevIconsOS = 'unix'
 let g:tagbar_compact = 1
 let g:tagbar_show_linenumbers = 2
 let g:tagbar_width = 50
+let g:tagbar_ctags_bin = "/usr/bin/ctags-universal"
+let g:tagbar_show_tag_linenumbers = 1
+let g:tagbar_show_tag_count = 1
+let g:tagbar_scopestrs = {
+    \    'class': "\uf0e8",
+    \    'const': "\uf8ff",
+    \    'constant': "\uf8ff",
+    \    'enum': "\uf702",
+    \    'field': "\uf30b",
+    \    'func': "\uf794",
+    \    'function': "\uf794",
+    \    'getter': "\ufab6",
+    \    'implementation': "\uf776",
+    \    'interface': "\uf7fe",
+    \    'map': "\ufb44",
+    \    'member': "\uf02b",
+    \    'method': "\uf6a6",
+    \    'setter': "\uf7a9",
+    \    'variable': "\uf71b",
+    \ }
 highlight TagbarSignature ctermfg=DarkBlue
 "solidity ctags - by shuangjj
 let g:tagbar_type_solidity = {
@@ -963,6 +993,7 @@ iab tehn then
 iab coutn count
 iab accoutn account
 iab applciation application
+iab cosnt const
 
 "netrw
 let g:netrw_sort_by = 'date'
@@ -1087,6 +1118,13 @@ augroup END
 augroup YCMDocGo
   autocmd!
   autocmd FileType go let b:ycm_hover = {
+    \ 'command': 'GetDoc',
+    \ 'syntax': &filetype
+    \ }
+augroup END
+augroup YCMDocRust
+  autocmd!
+  autocmd FileType rust let b:ycm_hover = {
     \ 'command': 'GetDoc',
     \ 'syntax': &filetype
     \ }
@@ -1255,6 +1293,10 @@ augroup ALEPY
   autocmd FileType python let b:ale_linters = {'python': ['flake8']}
   autocmd FileType python let b:ale_fixers = {'python': ['autopep8']}
 augroup END
+augroup ALERUBY
+  autocmd!
+  autocmd FileType python let b:ale_fixers = {'ruby': ['rubo']}
+augroup END
 
 "latex
 let g:tex_flavor = 'latex'
@@ -1360,6 +1402,23 @@ let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go'
 let g:vimwiki_list = [wiki]
 let g:vimwiki_global_ext = 0
 " let g:vimwiki_list = [{'path': '~/devi/devi/work/vimwiki.git/master', 'syntax': 'markdown', 'ext': '.wiki'}]
+
+" tldr
+let g:tldr_enabled_categories = ["linux", "common", "windows"]
+function! s:tldrdoc()
+  let l:vword = expand("<cword>")
+  call tldr#run(l:vword)
+endfunction
+command! -complete=shellcmd -nargs=0 TLDRDoc call s:tldrdoc()
+nnoremap <leader>tt :<C-U>TLDRDoc<cr>
+vnoremap <leader>tt :<C-U>TLDRDoc<cr>
+
+" cheat.sh
+let g:CheatSheetDefaultMode = 0
+let g:CheatSheetDefaultSelection="word"
+let g:CheatSheetReaderCmd='vert new'
+let g:CheatPager='less --RAW-CONTROL-CHARS --ignore-case --status-column --LONG-PROMPT --HILITE-UNREAD --tabs=2'
+let g:CheatSheetPagerStyle="native"
 
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16
