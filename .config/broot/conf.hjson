@@ -16,6 +16,7 @@
 #
 ###############################################################
 {
+	syntax_theme: Solarized (dark)
 
 	###############################################################
 	# Default flags
@@ -39,7 +40,7 @@
         # "vim mode"
         #
         #
-        # modal: true
+        modal: true
 
 	###############################################################
 	# Whether to mark the selected line with a triangle
@@ -52,16 +53,16 @@
 	# array. You should keep the name at the end as it has a variable
 	# length.
 	#
-	# cols_order: [
-	# 	mark
-	# 	git
-	# 	size
-	# 	permission
-	# 	date
-	# 	count
-	# 	branch
-	# 	name
-	# ]
+	cols_order: [
+		mark
+		git
+		size
+		permission
+		date
+		count
+		branch
+		name
+	]
 
 	###############################################################
 	# True Colors

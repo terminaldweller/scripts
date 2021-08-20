@@ -1,11 +1,13 @@
+zmodload zsh/zprof
+declare -U path
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/devi/.oh-my-zsh
+export ZSH=/home/devi/.oh-my-zsh
 
 ZSH_THEME="devi"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo nvm npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang)
+plugins=(git zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang zsh-prompt-benchmark)
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/devi/.local/bin:/home/devi/bin"
 
@@ -16,32 +18,32 @@ autoload -U compinit && compinit -u
 
 alias ls="exa"
 alias la="exa -a"
-alias ll="exa -abghHliSmxF --git -@"
-alias lss="exa -S"
+alias ll="exa -abghHliSmxF --color-scale --git -@"
+alias lss="exa -Sls=size"
 alias ee="nautilus ."
 alias updaterc="cp ~/scripts/.zshrc ~/.zshrc"
 alias fixvimrc='cp ~/scripts/.vimrc ~/.vimrc'
 alias fixtmuxrc='cp ~/scripts/.tmux.conf ~/.tmux.conf'
-alias fixtmuxpowerline='cp ~/scripts/default.sh ~/tmux-powerline/themes/default.sh'
+# alias fixtmuxpowerline='cp ~/scripts/default.sh ~/tmux-powerline/themes/default.sh'
 alias fixctagsrc='cp ~/scripts/.ctags ~/.ctags'
-alias fixtvrc='cp ~/scripts/.tvrc ~/.tvrc'
-alias tmuxpowerline='vim ~/scripts/default.sh'
+# alias fixtvrc='cp ~/scripts/.tvrc ~/.tvrc'
+# alias tmuxpowerline='vim ~/scripts/default.sh'
 alias speedtest="curl -o /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip"
 alias zshrc="vim ~/scripts/.zshrc"
 alias vimrc="vim ~/scripts/.vimrc"
 alias tmuxrc="vim ~/scripts/.tmux.conf"
 alias zshtheme="vim ~/scripts/devi.zsh-theme"
 alias quit="exit"
-alias xx="dtrx"
-alias angband="/home/devi/angband-4.1.0/angband-master/src/angband"
-alias startdocker="sudo systemctl start docker"
-alias vv="vim"
-alias mm="cmatrix -s -C blue"
+# alias xx="dtrx"
+# alias angband="/home/devi/angband-4.1.0/angband-master/src/angband"
+# alias startdocker="sudo systemctl start docker"
+# alias vv="vim"
+# alias mm="cmatrix -s -C blue"
 alias contest="ping 4.2.2.4 -c 7; ping google.com -c 7"
-alias solide="vim ~/scripts/makefile"
-alias dropsolide="cp ~/scripts/makefile ./"
-alias genjctags="find . -type f -iregex \".*\.js$\" -not -path \"./node_modules/*\" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags"
-alias isup="ps -aux | grep "
+# alias solide="vim ~/scripts/makefile"
+# alias dropsolide="cp ~/scripts/makefile ./"
+# alias genjctags="find . -type f -iregex \".*\.js$\" -not -path \"./node_modules/*\" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags"
+# alias isup="ps -aux | grep "
 alias ipfsd="ipfs daemon > /dev/null 2>&1 &; disown"
 alias i3rc="vim ~/scripts/.config/i3/config"
 alias fixi3rc="cp ~/scripts/.config/i3/config ~/.config/i3/config && i3-msg restart"
@@ -51,7 +53,7 @@ alias dropcmake="cp ~/scripts/makefilec ./makefile"
 alias dropcppmake="cp ~/scripts/makefilecpp ./makefile"
 alias droppy="cp ~/scripts/python/main.py ./main.py"
 alias diff="colordiff"
-alias yy="~/scripts/hived"
+# alias yy="~/scripts/hived"
 alias newsboaturls="vim ~/scripts/.newsboat/urls"
 alias fixnewsboaturls="cp ~/scripts/.newsboat/urls ~/.newsboat/urls"
 alias newsboatconfig="vim ~/scripts/.newsboat/config"
@@ -62,12 +64,12 @@ alias dropcextra="cp ~/scripts/c/devi_extra.h ./devi_extra.h"
 alias dropcmain="cp ~/scripts/c/main.c ./"
 alias dropcppmain="cp ~/scripts/c/main.cpp ./"
 alias telebot="/home/devi/scripts/telebot.py > /dev/null 2>&1 &"
-alias dw="~/df/df_linux/df"
+# alias dw="~/df/df_linux/df"
 alias clean="clear"
 alias lynx="lynx -lss ~/scripts/lynx.lss -cfg ~/scripts/lynx.cfg -prettysrc"
-alias hplovecraft="lynx http://www.hplovecraft.com/writings/texts/"
-alias casmith="lynx http://www.eldritchdark.com/writings/short-stories/"
-alias tt="transmission-cli -u 1 -w ~/winshare/"
+alias hplovecraft="w3m http://www.hplovecraft.com/writings/texts/"
+alias casmith="w3m http://www.eldritchdark.com/writings/short-stories/"
+# alias tt="transmission-cli -u 1 -w ~/winshare/"
 alias w3m="torsocks w3m -graph"
 #alias make="colormake"
 #alias gcc="COLORMAKE_COMMAND=gcc colormake"
@@ -90,6 +92,8 @@ alias kshrc="vim ~/scripts/.kshrc"
 alias fixkshrc="cp ~/scripts/.kshrc ~/.kshrc"
 alias rangerrc="vim ~/scripts/.config/ranger/rc.conf"
 alias fixrangerrc="cp ~/scripts/.config/ranger/rc.conf ~/.config/ranger/rc.conf"
+alias riflerc="vim ~/scripts/.config/ranger/rifle.conf"
+alias fixriflerc="cp ~/scripts/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf"
 alias zathurarc="vim ~/scripts/zathurarc"
 alias fixzathurarc="cp ~/scripts/zathurarc ~/.config/zathura/"
 alias lynxcfg="cp ~/scripts/lynx.cfg"
@@ -155,45 +159,45 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 
-function lemon {
+lemon() {
   /home/devi/scripts/lemonbar.sh | lemonbar -f "DejaVu Sans Mono for Powerline:size=11" -g "x16"
 }
 
-function docpp {
+docpp() {
   cp ~/scripts/makefilecpp ./makefile
   cp ~/scripts/c/main.cpp ./
   cp ~/scripts/c/header.hpp ./
-  cp ~/scripts/.ycm_extra_config.py ./.ycm_extra_conf.py
-  cp ~/scripts/cfam.vimrc ./.vimrc
-  cp ~/scripts/compiler-explorer/ceconfig.json ./
-  cp ~/scripts/c/debug.dbg ./
+  # cp ~/scripts/.ycm_extra_config.py ./.ycm_extra_conf.py
+  # cp ~/scripts/cfam.vimrc ./.vimrc
+  # cp ~/scripts/compiler-explorer/ceconfig.json ./
+  # cp ~/scripts/c/debug.dbg ./
 }
 
-function docc {
+docc() {
   cp ~/scripts/makefilec ./makefile
   cp ~/scripts/c/main.c ./
-  cp ~/scripts/.ycm_extra_config.py ./.ycm_extra_conf.py
-  cp ~/scripts/cfam.vimrc ./.vimrc
-  cp ~/scripts/compiler-explorer/ceconfig.json ./
-  cp ~/scripts/c/debug.dbg ./
+  # cp ~/scripts/.ycm_extra_config.py ./.ycm_extra_conf.py
+  # cp ~/scripts/cfam.vimrc ./.vimrc
+  # cp ~/scripts/compiler-explorer/ceconfig.json ./
+  # cp ~/scripts/c/debug.dbg ./
 }
 
-function mdvv {
+mdvv() {
   mdv -t 729.8953 "$@"
 }
 
-function gdd {
+gdd() {
   #git --no-pager diff --numstat | gawk \'{print$1$2}\'
   git --no-pager diff --numstat | gawk '{sum1+=$1;sum2+=$2}END{print "additions:"sum1"  ""deletions:"sum2}'
 }
 
-function math {
+math() {
   echo $(($@))
 }
 
-function pid {
-  ps -aux | grep "$1" | grep -v grep | awk '{print$2}'
-}
+# function pid {
+#   ps -aux | grep "$1" | grep -v grep | awk '{print$2}'
+# }
 
 #bicon_on=$(ps -aux | grep bicon | grep -v grep | awk '{print$2}')
 #if [[ -z "${bicon_on// }" ]]; then
@@ -232,14 +236,16 @@ export YTFZF_PREF="22"
 export YTFZF_ENABLE_FZF_DEFAULT_OPTS=1
 export YTFZF_CACHE=~/.cache/ytfzf
 
-function fixrc {
+fixrc() {
   cp ~/scripts/.zshrc ~/.zshrc
-  source ~/.zshrc
+  # source ~/.zshrc
+  exec zsh
 }
 
-function fixtheme {
+fixtheme() {
   cp ~/scripts/devi.zsh-theme ~/.oh-my-zsh/themes/devi.zsh-theme
-  source ~/.zshrc
+  # source ~/.zshrc
+  exec zsh
 }
 
 export PATH=$PATH:/home/devi/.cargo/bin
@@ -262,7 +268,7 @@ export PATH=$PATH:/home/devi/devi/ghorg
 export EDITOR=vim
 export BROWSER=w3m
 
-function dig {
+dig() {
   globalholecounter=0
   if test "$("ls" -A "/home/devi/devi/abbatoir")"; then
     while [ 1 ]; do
@@ -290,9 +296,9 @@ function dig {
   fi
 }
 
-function clearhalf {
+clearhalf() {
   clear
-  size=$(stty size|gawk '{print$1}')
+  local size=$(stty size|gawk '{print$1}')
   size=$(($size/2))
   tput cup $size 0 && tput ed
 }
@@ -301,34 +307,33 @@ alias halfclear="clearhalf"
 alias halfclean="clearhalf"
 alias dighalf="dig && cleanhalf"
 
-function nn {
-  echo $1 >> ~/.devi/notes.txt
-}
+# function nn {
+#   echo $1 >> ~/.devi/notes.txt
+# }
 
-function nnshow {
-  cat ~/.devi/notes.txt
-}
+# function nnshow {
+#   cat ~/.devi/notes.txt
+# }
 
-function nnedit {
-  vim ~/.devi/notes.txt
-}
+# function nnedit {
+#   vim ~/.devi/notes.txt
+# }
 
-function nnpurge {
-  rm ~/.devi/notes.txt
-}
+# function nnpurge {
+#   rm ~/.devi/notes.txt
+# }
 
-function lxx {
-	readable $1 | lynx -stdin
-}
+# function lxx {
+# 	readable $1 | lynx -stdin
+# }
 
 bindkey -v
 set blink-matching-paren on
 export KEYTIMEOUT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 
-#nvm
-export NVM_DIR="/home/devi/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# fnm
+eval "$(fnm env)"
 
 # OPAM configuration
 . /home/devi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -346,11 +351,11 @@ export NVM_DIR="/home/devi/.nvm"
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # jellybeans takes forever to load. iceberg is very fast.
-function vman {
+vman() {
   vim -c "Man $1 $2" -c 'silent only' -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16'
 }
 
-function ddig {
+ddig() {
   if [[ "$2" == "" ]];then
     docker exec -it $(docker ps | grep "\b$1\b" | gawk '{print $1}') bash
   else
@@ -358,12 +363,17 @@ function ddig {
   fi
 }
 
-fd() {
-  preview="git diff $@ --color=always -- {-1}"
-  git diff $@ --name-only | fzf -m --ansi --preview $preview
+timezsh() {
+  local shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
-function pod2w3m {
+# fd() {
+#   preview="git diff $@ --color=always -- {-1}"
+#   git diff $@ --name-only | fzf -m --ansi --preview $preview
+# }
+
+pod2w3m() {
   pod2html $1 | w3m -T text/html
 }
 
@@ -381,12 +391,17 @@ setopt HIST_VERIFY
 setopt SHARE_HISTORY
 setopt AUTO_CD
 setopt AUTO_PUSHD
+setopt NO_BEEP
+setopt INTERACTIVE_COMMENTS
+# no more C-s and C-q
+unsetopt FLOW_CONTROL
+setopt LONG_LIST_JOBS
 
 # eval "$(goenv init -)"
 # export PATH="$GOROOT/bin:$PATH"
 # export PATH="$PATH:$GOPATH/bin"
 
-function fzf_postit() {
+fzf_postit() {
   cat ~/scripts/postit | fzf-tmux -p 70%,70% -- --bind 'enter:execute(tmux set-buffer {})+accept'
 }
 
@@ -394,17 +409,20 @@ function fzf_postit() {
 
 # this should be here before the end
 bindkey ' ' autosuggest-accept
-bindkey -s '' 'fzf_postit'
+# bindkey -s '' 'fzf_postit'
+zle -N fzf_postit
+bindkey '' fzf_postit
 
 is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
 fzf-down() {
-  fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
+  fzf-tmux -p 80%,80% -- --bind ctrl-/:toggle-preview "$@"
 }
 
-_gf() {
+# these i stole from junegunn to try out
+fzf_gf() {
   is_in_git_repo || return
   git -c color.status=always status --short |
   fzf-down -m --ansi --nth 2..,.. \
@@ -412,7 +430,7 @@ _gf() {
   cut -c4- | sed 's/.* -> //'
 }
 
-_gb() {
+fzf_gb() {
   is_in_git_repo || return
   git branch -a --color=always | grep -v '/HEAD\s' | sort |
   fzf-down --ansi --multi --tac --preview-window right:70% \
@@ -421,14 +439,14 @@ _gb() {
   sed 's#^remotes/##'
 }
 
-_gt() {
+fzf_gt() {
   is_in_git_repo || return
   git tag --sort -version:refname |
   fzf-down --multi --preview-window right:70% \
     --preview 'git show --color=always {}'
 }
 
-_gh() {
+fzf_gm() {
   is_in_git_repo || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
   fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
@@ -437,19 +455,39 @@ _gh() {
   grep -o "[a-f0-9]\{7,\}"
 }
 
-_gr() {
+fzf_gr() {
   is_in_git_repo || return
-  git remote -v | awk '{print $1 "\t" $2}' | uniq |
+  git remote -v | gawk '{print $1 "\t" $2}' | uniq |
   fzf-down --tac \
     --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1}' |
   cut -d$'\t' -f1
 }
 
-_gs() {
+fzf_gs() {
   is_in_git_repo || return
   git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
   cut -d: -f1
 }
+
+join-lines() {
+  local item
+  while read item; do
+    echo -n "${(q)item} "
+  done
+}
+
+bind-git-helper() {
+  local c
+  for c in $@; do
+    eval "fzf-g$c-widget() { local result=\$(fzf_g$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
+    eval "zle -N fzf-g$c-widget"
+    eval "bindkey '^g^$c' fzf-g$c-widget"
+  done
+}
+bindkey -r ""
+# bindkey -r "^H"
+bind-git-helper f b t r m s
+unset -f bind-git-helper
 
 fshow() {
   local out shas sha q k
@@ -471,6 +509,7 @@ fshow() {
     fi
   done
 }
+
 export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
 export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
 export LESS_TERMCAP_me=$'\e[0m'           # end mode
@@ -478,3 +517,23 @@ export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
 export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\e[0m'           # end underline
 export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
+# handle the format of the zsh built-in time
+TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
+
+# using Q instead of q in range quits but also cds to where you last where in ranger
+# https://github.com/ranger/ranger/wiki/Integration-with-other-programs#changing-directories
+ranger() {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}

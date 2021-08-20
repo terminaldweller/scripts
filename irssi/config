@@ -1,3 +1,4 @@
+# vim: filetype=perl
 servers = (
   {
     address = "irc.gitter.im";
@@ -14,7 +15,13 @@ servers = (
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
-  }
+  },
+  {
+    address = "irc.libera.chat";
+    chatnet = "libera";
+    autoconnect = "yes";
+  },
+  { address = "irc.oftc.net"; chatnet = "oftc"; autoconnect = "yes"; }
 );
 
 chatnets = {
@@ -22,14 +29,15 @@ chatnets = {
   OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
-  "FRRRouting.slack.com" = { type = "IRC"; };
   "FRRouting.slack.com" = { type = "IRC"; };
 };
 
 channels = (
-  { name = "#go-nuts"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#dpdk"; chatnet = "libera"; autojoin = "yes"; }
+  { name = "#dpdk"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#qemu"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#fdio-vpp"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#openssl"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -319,6 +327,13 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_1 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_1 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
@@ -357,7 +372,7 @@ settings = {
     usercount_show_ircops = "ON";
     usercount_show_zero = "ON";
     timezones_divider = " %Zeeeeee%Z008080 ";
-    timezones = "GMT:GMT EST:EST UTC:UTC";
+    timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
     # hilite_url
     url_color = "38;5;6";
   };
@@ -376,5 +391,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#neomutt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kvm" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssl" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); }
 );

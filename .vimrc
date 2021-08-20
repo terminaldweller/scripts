@@ -6,6 +6,7 @@ set completeopt-=preview
 set completeopt+=popup
 set showmatch
 set list
+set listchars=eol:$,tab:>-
 set hidden
 set tabstop=2
 set conceallevel=1
@@ -35,7 +36,6 @@ set ttyfast
 set relativenumber
 set wildignorecase
 set shm=a
-" set wildmode=list:longest,full
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildmenu
 set confirm
@@ -68,6 +68,7 @@ set smartcase
 set backspace=indent,eol,start
 " set cursorcolumn
 " set exrc
+" set wildmode=list:longest,full
 set viminfo='100,\"500,:50,%,n~/.viminfo
 
 highlight clear Search
@@ -77,7 +78,7 @@ let g:is_posix = 1
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['go.plugin','markdown.plugin']
+let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin']
 
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/bundle')
@@ -88,7 +89,7 @@ Plug 'mhinz/vim-startify'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'kh3phr3n/python-syntax'
 Plug 'VundleVim/Vundle.vim'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree'
 Plug 'sickill/vim-pasta'
 Plug 'adelarsq/vim-matchit'
 Plug 'makerj/vim-pdf'
@@ -171,7 +172,7 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'wlemuel/vim-tldr'
 Plug 'congma/vim-compiler-checkbashisms'
 Plug 'hsanson/vim-openapi'
-Plug 'mattn/emmet-vim', {'for': ['html','css','xml','ejs']}
+Plug 'mattn/emmet-vim', {'for': ['html','css','xml','ejs','markdown']}
 Plug 'hail2u/vim-css3-syntax'
 Plug 'chrisbra/unicode.vim'
 Plug 'meatballs/vim-xonsh'
@@ -181,6 +182,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'Shirk/vim-gas'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'wellle/visual-split.vim'
+Plug 'zchee/vim-goasm'
+Plug 'jvirtanen/vim-hcl'
 " Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
 " Plug 'rhysd/vim-gfm-syntax'
@@ -431,7 +434,8 @@ augroup END
 "reserved for tmux use
 map <F6> <nop>
 "messes up some other bindings
-"nmap Y y$
+nmap Y y$
+vmap Y y$
 nnoremap <S-Delete> :bd<CR>
 nnoremap <leader>c :call clearmatches()<CR>
 inoremap <c-i> <esc>I
@@ -439,6 +443,8 @@ inoremap <c-e> <esc>A
 nnoremap <leader>t :bel term<CR>
 "execute current buffer
 nnoremap <leader>r :!%:p<CR>
+"execute current line in bash
+nnoremap <leader>rl :.w !bash<CR>
 augroup GoLangRun
   autocmd!
   autocmd FileType go nmap <leader>r <Plug>(go-run)
@@ -447,12 +453,18 @@ augroup RustLangRun
   autocmd!
   autocmd FileType rust nmap <leader>r :Crun<CR>
 augroup end
+augroup CFamLangRun
+  autocmd!
+  autocmd FileType c,cpp nmap <leader>r :make run<CR>
+augroup end
 nnoremap <leader>cd :cd %:p:h<cr>
 "terminal vim wont do weird things when you paste things in
 set pastetoggle=<F11>
 nnoremap <leader>a :ALEToggle<CR>
 nnoremap <leader>u :GutentagsUpdate<CR>
 nnoremap <localleader>v :VimtexView<CR>
+nnoremap <leader>nn :bn<CR>
+nnoremap <leader>pp :bp<CR>
 
 nmap [q :col<CR>
 nmap ]q :cnew<CR>
@@ -467,6 +479,7 @@ function! GetBufferList()
   redir END
   return buflist
 endfunction
+autocmd FileType markdown,html inoremap <C-b> <br/>
 
 function! ToggleList(bufname, pfx)
   let buflist = GetBufferList()
@@ -707,6 +720,26 @@ let g:tagbar_type_markdown = {
   \ },
 \ }
 
+let g:tagbar_type_tf = {
+  \ 'ctagstype': 'tf',
+  \ 'kinds': [
+    \ 'r:Resource',
+    \ 'R:Resource',
+    \ 'd:Data',
+    \ 'D:Data',
+    \ 'v:Variable',
+    \ 'V:Variable',
+    \ 'p:Provider',
+    \ 'P:Provider',
+    \ 'm:Module',
+    \ 'M:Module',
+    \ 'o:Output',
+    \ 'O:Output',
+    \ 'f:TFVar',
+    \ 'F:TFVar'
+  \ ]
+\ }
+
 "doxygentoolkit
 autocmd BufNewFile,BufRead,BufEnter *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
 
@@ -753,7 +786,7 @@ nnoremap <silent> <leader>9 :call HighInterestingWord(9)<cr>
 nnoremap <silent> <leader>0 :call HighInterestingWord(0)<cr>
 
 "scratchpad
-let g:scratchpad_path = '.scratchpads'
+let g:scratchpad_path = '/home/devi/.scratchpads'
 nmap <F9> <Plug>(ToggleScratchPad)
 
 let g:tagbar_type_rust = {
@@ -985,6 +1018,7 @@ highlight vimBufnrWarn ctermbg=16 ctermfg=202
 " highlight airline_tabtype ctermbg=15 ctermfg=34
 
 "typos
+iab teh the
 iab strign string
 iab pritn print
 iab retrun return
@@ -1011,6 +1045,8 @@ let g:netrw_sort_direction = 'normal'
 let g:vcm_default_maps = 0
 autocmd FileType c,cpp let b:vcm_tab_complete = "omni"
 autocmd FileType lua let b:vcm_tab_complete = "omni"
+autocmd FileType go let b:vcm_tab_complete = "omni"
+autocmd FileType rust let b:vcm_tab_complete = "omni"
 autocmd FileType python let b:vcm_tab_complete = "omni"
 autocmd FileType javasript let b:vcm_tab_complete = "omni"
 
@@ -1198,6 +1234,7 @@ let g:gutentags_plus_nomap = 1
 "run Vman for the word under the cursor
 map <leader>v <Plug>(Vman)
 autocmd Filetype man setlocal relativenumber
+autocmd Filetype man setlocal number
 
 "context
 let g:context_enabled = 0
@@ -1299,7 +1336,21 @@ augroup ALEPY
 augroup END
 augroup ALERUBY
   autocmd!
-  autocmd FileType python let b:ale_fixers = {'ruby': ['rubo']}
+  autocmd FileType ruby let b:ale_linters = {'ruby': ['rubocop']}
+  autocmd FileType ruby let b:ale_fixers = {'ruby': ['rubocop']}
+  " autocmd FileType ruby let b:ale_fixers = {'ruby': ['rufo']}
+augroup END
+augroup ALEMARKDOWN
+  autocmd!
+  autocmd FileType markdown let b:ale_linters = {'markdown': ['markdownlint']}
+augroup END
+augroup ALEC
+  autocmd!
+  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
+augroup END
+augroup ALECPP
+  autocmd!
+  autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
 augroup END
 
 "latex

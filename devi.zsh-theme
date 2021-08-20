@@ -4,13 +4,19 @@
 # git untracked files modification from Brian Carper:
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
 
-function virtualenv_info {
-  if [[ -a ./bin/activate ]]; then
-    source ./bin/activate > /dev/null
+virtualenv_info() {
+  # if [[ -a ./bin/activate ]]; then
+  #   source ./bin/activate > /dev/null
+  # fi
+  # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`')'
+  if [[ $VIRTUAL_ENV != "" ]];then
+    local result=$(basename $VIRTUAL_ENV)
+    echo " ($result)"
+  else
+    ;
   fi
-  [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`') '
 }
-#add-zsh-hook chpwd virtualenv_info
+# add-zsh-hook chpwd virtualenv_info
 
 PR_GIT_UPDATE=1
 
@@ -35,6 +41,8 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   swampgreen="%F{64}"
   purple4="%F{54}"
   deeppink="%F{109}"
+  someblue="%F{27}"
+  bluesomething="%F{25}"
   limblue="%F{154}"
   skyblue="%F{30}"
   teal="%F{31}"
@@ -47,6 +55,8 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   rust="%F{36}"
   typescript="%F{37}"
   viinsert="%F{33}"
+  veryorange="%F{202}"
+  yablue="%F{32}"
 else
   turquoise="$fg[cyan]"
   orange="$fg[yellow]"
@@ -63,7 +73,7 @@ zstyle ':vcs_info:*' enable git svn
 
 # check-for-changes can be really slow.
 # you should disable it, if you work with large repositories
-#zstyle ':vcs_info:*:prompt:*' check-for-changes true
+zstyle ':vcs_info:*:prompt:*' check-for-changes true
 
 # set formats
 # %b - branchname
@@ -84,8 +94,11 @@ zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
 zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats ""
 
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
 
-function steeef_preexec {
+steeef_preexec() {
   #case "$(history $HISTCMD)" in
   case "$2" in
     *git*)
@@ -98,9 +111,10 @@ function steeef_preexec {
 }
 add-zsh-hook preexec steeef_preexec
 
-function steeef_chpwd {
+steeef_chpwd() {
+  # is_in_git_repo || return
   #this is here so we dont get errors when we are in a bare git dir
-  result=$(git rev-parse --is-bare-repository 2> /dev/null)
+  local result=$(git rev-parse --is-bare-repository 2> /dev/null)
   if [[ $? == 0 ]]; then
     if [[ $result == true ]]; then
       PR_GIT_UPDATE=
@@ -113,12 +127,12 @@ function steeef_chpwd {
 }
 add-zsh-hook chpwd steeef_chpwd
 
-function steeef_precmd {
+steeef_precmd() {
   if [[ -n "$PR_GIT_UPDATE" ]] ; then
     # check for untracked files or updated submodules, since vcs_info doesn't
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
       PR_GIT_UPDATE=1
-      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a%{$hotpink%} ●${PR_RST} "
+      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a%{$hotpink%} ●${PR_RST}"
     else
       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a${PR_RST} "
     fi
@@ -130,132 +144,170 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
-function guess_who {
-  upower -e > /dev/null 2>&1
+# function guess_who {
+#   upower -e > /dev/null 2>&1
 
-  if [ $? -eq 0 ]; then
-    os="lin"
-  else
-    os="win"
-  fi
+#   if [ $? -eq 0 ]; then
+#     os="lin"
+#   else
+#     os="win"
+#   fi
+# }
+# add-zsh-hook precmd guess_who
+
+time_function() {
+  date | gawk '{print $2" "$3" "$4}'
 }
-add-zsh-hook precmd guess_who
+# function time_function {
+#   $guess_who
+#   if [[ "$os" = "win" ]]; then
+#     date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
+#   else
+#     date | gawk '{print $4" "$5}'
+#   fi
+# }
 
-function time_function {
-  $guess_who
-  if [[ "$os" = "win" ]]; then
-    date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
-  else
-    date | gawk '{print $4" "$5}'
-  fi
+node_version() {
+  local version=$(fnm current)
+  echo " <$version>"
 }
 
-function node_version {
-  nvm current
-}
-
-function sudo_query {
+sudo_query() {
   sudo -nv > /dev/null 2>&1
   if [[ $? == 0 ]]; then
     #echo 
     echo " "
   else
-    :
+    ;
   fi
 }
 
-function dir_writeable {
-  if [ -w $(pwd) ]; then :;else echo ;fi
+dir_writeable() {
+  if [ -w $(pwd) ]; then :;else echo " ";fi
 }
 
-function sneaky {
+sneaky() {
   if [[ $! -ne 0 ]]; then
-    echo $!
+    echo " $!"
   fi
 }
 
-function gitadditions {
+bg_job_count() {
+  local count=$(jobs | wc -l)
+  if [[ $count > 0 ]];then
+    echo " $count"
+  else
+    ;
+  fi
+}
+
+gitadditions() {
+  # is_in_git_repo || return
   git rev-parse --git-dir > /dev/null 2>&1
   if [[ $? == 0 ]]; then
-    insertions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum1+=$1}END{print sum1}')
+    local insertions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum1+=$1}END{print sum1}')
     if [[ $insertions == "" ]]; then
-      :
+      ;
     else
       echo " "$insertions:
     fi
   fi
 }
 
-function gitdeletions {
+gitdeletions() {
+  # is_in_git_repo || return
   git rev-parse --git-dir > /dev/null 2>&1
   if [[ $? == 0 ]]; then
-    deletions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum2+=$2}END{print sum2}')
+    local deletions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum2+=$2}END{print sum2}')
     if [[ $deletions == "" ]]; then
-      :
+      ;
     else
-      echo $deletions" "
+      echo $deletions
     fi
   fi
 }
 
-function goversion {
-  VERSION=$("go" version | gawk '{print $3}')
-  echo ${VERSION:2:$((${#VERSION}))}
+goversion() {
+  local version=$("go" version | gawk '{print $3}')
+  echo " <${version:2:$((${#version}))}>"
 }
 
-function rustversion {
-  VERSION=$(rustc --version | gawk '{print $2}')
-  echo $VERSION
+rustversion() {
+  local version=$(rustc --version | gawk '{print $2}')
+  echo " <$version>"
 }
 
-function typescriptversion {
-  VERSION=$(tvm tsc --version | gawk '{print $2}')
-  echo $VERSION
+typescriptversion() {
+  local version=$(tvm tsc --version | gawk '{print $2}')
+  echo " <$version>"
 }
 
-PROMPT=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$limegreen%}%/%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%} %{$teal%}<$(node_version)>%{$reset_color%} %{$gover%}<$(goversion)>%{$reset_color%} %{$rust%}<$(rustversion)>%{$reset_color%} %{$sneakyc%}$(sneaky)%{$reset_color%} %{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%} \n%{$limblue%}--➜%{$reset_color%}'
+PROMPT=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$limegreen%}%/%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}\n%{$limblue%}--➜%{$reset_color%}'
 
-function battery_charge {
-  upower -e > /dev/null 2>&1
+# function battery_charge {
+#   upower -e > /dev/null 2>&1
 
-  if [ $? -eq 0 ]; then
-    batpath=$(upower -e | grep BAT0)
-    batcharge=$(upower -i $batpath | grep percentage | gawk '{print $2}')
-  else
-    batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS=" \n"}{print$3}')
-  fi
+#   if [ $? -eq 0 ]; then
+#     batpath=$(upower -e | grep BAT0)
+#     batcharge=$(upower -i $batpath | grep percentage | gawk '{print $2}')
+#   else
+#     batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS=" \n"}{print$3}')
+#   fi
 
-  batfull=100
-  batgood=66
-  batbad=33
+#   batfull=100
+#   batgood=66
+#   batbad=33
 
-  batcolor=$batgreen
+#   batcolor=$batgreen
 
-  if [[ ($batcharge > $batgood) || ($batcharge == $batgood) || ("$batcharge"=="$batfull") ]]; then
-    batcolor=$batgreen
-  elif [[ ($batcharge < $batgood) && ($batcharge > $batbad) || ($batcharge == $batbad) ]]; then
-    batcolor=$batyellow
-  elif [[ ($batcharge < $batbad) ]]; then
-    batcolor=$batred
-  else
-    batcolor=$purple
-  fi
-}
-add-zsh-hook precmd battery_charge
+#   if [[ ($batcharge > $batgood) || ($batcharge == $batgood) || ("$batcharge"=="$batfull") ]]; then
+#     batcolor=$batgreen
+#   elif [[ ($batcharge < $batgood) && ($batcharge > $batbad) || ($batcharge == $batbad) ]]; then
+#     batcolor=$batyellow
+#   elif [[ ($batcharge < $batbad) ]]; then
+#     batcolor=$batred
+#   else
+#     batcolor=$purple
+#   fi
+# }
+# add-zsh-hook precmd battery_charge
 
-function batcharge_printer {
-  $battery_charge
-  echo  $(if [ $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | gawk 'BEGIN{FS ~ ":"}{print $2}') = "charging" ]; then echo ++;else :;fi)$batcharge
-}
+# function batcharge_printer {
+#   $battery_charge
+#   echo  $(if [ $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | gawk 'BEGIN{FS ~ ":"}{print $2}') = "charging" ]; then echo ++;else :;fi)$batcharge
+# }
 
-function rebuildquery {
+rebuildquery() {
   make -q > /dev/null 2>&1
   if [[ $? == 1 ]]; then
-    echo ::rebuild::
+    echo " ::rebuild::"
   else
-    :
+    ;
   fi
 }
+
+inranger() {
+  local ranger_prompt=$(if [ -n "$RANGER_LEVEL" ];then echo " <ranger>";else echo "";fi)
+  echo $ranger_prompt
+}
+
+timer_preexec() {
+  typeset -g -F SECONDS
+  timer=${timer:-$SECONDS}
+}
+add-zsh-hook preexec timer_preexec
+
+timer_precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    timer_show=$((timer_show*1000))
+    typeset -g -i timer_show_int
+    timer_show_int=$timer_show
+    timer_final="$timer_show_int"mS
+    unset timer
+  fi
+}
+add-zsh-hook precmd timer_precmd
 
 #function vi-replacee {
 #  RPS1="$VIM_PROMPT_REPLACE %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
@@ -270,25 +322,26 @@ function rebuildquery {
 source ~/.oh-my-zsh/plugins/zle-vi-visual/zle_vi_visual.zsh
 
 function zle-line-init zle-keymap-select {
-VIM_PROMPT_INSERT="%{$fg_bold[cyan]%}% [% INS]% %{$reset_color%}"
-VIM_PROMPT_MAIN="%{$fg_bold[blue]%}% [% INSERT]% %{$reset_color%}"
-VIM_PROMPT_REPLACE="%{$fg_bold[black]%}% %{$bg_bold[red]%}% [% REPLACE]% %{$reset_color%}"
-VIM_PROMPT_VISUAL_LINE="%{$fg_bold[red]%}% [% VISUAL-LINE]% %{$reset_color%}"
-VIM_PROMPT_VISUAL_CHAR="%{$fg_bold[red]%}% [% VISUAL]% %{$reset_color%}"
-VIM_PROMPT_CMD="%{$fg_bold[green]%}% [% NORMAL]% %{$reset_color%}"
-if [[ $KEYMAP == vivis ]]; then
-  RPS1="$VIM_PROMPT_VISUAL_CHAR %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-elif [[ $KEYMAP == vivli ]]; then
-  RPS1="$VIM_PROMPT_VISUAL_LINE %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-elif [[ $KEYMAP == vicmd ]];then
-  RPS1="$VIM_PROMPT_CMD %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-elif [[ $KEYMAP == viins ]]; then
-  RPS1="$VIM_PROMPT_INSERT %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-elif [[ $KEYMAP == main ]]; then
-  RPS1="$VIM_PROMPT_MAIN %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-  VI_MODE_R_ENTERED="no"
-fi
-zle reset-prompt
+  RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} %{$lorange%}%?↵%{$reset_color%}%{$veryorange%}$(bg_job_count)%{$reset_color%}%{$bluesomething%}$(inranger)%{$reset_color%}"
+  VIM_PROMPT_INSERT="%{$fg_bold[cyan]%}% [% INS]% %{$reset_color%}"
+  VIM_PROMPT_MAIN="%{$fg_bold[blue]%}% [% INSERT]% %{$reset_color%}"
+  VIM_PROMPT_REPLACE="%{$fg_bold[black]%}% %{$bg_bold[red]%}% [% REPLACE]% %{$reset_color%}"
+  VIM_PROMPT_VISUAL_LINE="%{$fg_bold[red]%}% [% VISUAL-LINE]% %{$reset_color%}"
+  VIM_PROMPT_VISUAL_CHAR="%{$fg_bold[red]%}% [% VISUAL]% %{$reset_color%}"
+  VIM_PROMPT_CMD="%{$fg_bold[green]%}% [% NORMAL]% %{$reset_color%}"
+  if [[ $KEYMAP == vivis ]]; then
+    RPS1="$VIM_PROMPT_VISUAL_CHAR $RIGHT_PROMPT"
+  elif [[ $KEYMAP == vivli ]]; then
+    RPS1="$VIM_PROMPT_VISUAL_LINE $RIGHT_PROMPT"
+  elif [[ $KEYMAP == vicmd ]];then
+    RPS1="$VIM_PROMPT_CMD $RIGHT_PROMPT"
+  elif [[ $KEYMAP == viins ]]; then
+    RPS1="$VIM_PROMPT_INSERT $RIGHT_PROMPT"
+  elif [[ $KEYMAP == main ]]; then
+    RPS1="$VIM_PROMPT_MAIN $RIGHT_PROMPT"
+    VI_MODE_R_ENTERED="no"
+  fi
+  zle reset-prompt
 }
 
 zle -N zle-line-init
@@ -296,4 +349,3 @@ zle -N zle-keymap-select
 #bindkey "^[[3~" delete-char
 #bindkey "^[3;5~" delete-char
 export KEYTIMEOUT=1
-

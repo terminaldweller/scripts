@@ -7,5 +7,5 @@
 /* /EVAL SET proxy_string CONNECT %s:%d HTTP/1.0\n\n */
 /* /SET -clear proxy_password */
 
-/connect irc.oftc.net
-/connect irc.libera.chat
+/* /connect irc.oftc.net */
+/* /connect irc.libera.chat */

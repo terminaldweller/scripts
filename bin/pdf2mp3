@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+# first run this
+# docker run -p 9977:9998 apache/tika:2.0.0
+# export export TIKA_SERVER_ENDPOINT="http://127.0.0.1:9977"
+# finally run the script
+import argparse
+from gtts import gTTS
+from tika import parser
+
+
+class Argparser():
+    def __init__(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            "--pdf",
+            type=str, help="path to the pdf")
+        parser.add_argument("--bool", action="store_true",
+                            help="bool", default=False)
+        self.args = parser.parse_args()
+
+
+def main() -> None:
+    argparser = Argparser()
+    raw = parser.from_file(argparser.args.pdf)
+    print(raw['content'])
+    tts = gTTS(raw['content'])
+    tts.save("out.mp3")
+
+
+if __name__ == "__main__":
+    main()
