@@ -83,5 +83,9 @@ function dig {
   fi
 }
 
+function fd {
+  ls -l $(find -iname "*$1*")
+}
+
 export SHELL="ksh"
 export PATH=$PATH:/home/devi/scripts/bin

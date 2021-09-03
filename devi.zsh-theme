@@ -57,6 +57,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   viinsert="%F{33}"
   veryorange="%F{202}"
   yablue="%F{32}"
+  yagreen="%F{34}"
 else
   turquoise="$fg[cyan]"
   orange="$fg[yellow]"
@@ -158,14 +159,6 @@ add-zsh-hook precmd steeef_precmd
 time_function() {
   date | gawk '{print $2" "$3" "$4}'
 }
-# function time_function {
-#   $guess_who
-#   if [[ "$os" = "win" ]]; then
-#     date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
-#   else
-#     date | gawk '{print $4" "$5}'
-#   fi
-# }
 
 node_version() {
   local version=$(fnm current)
@@ -242,8 +235,32 @@ typescriptversion() {
   echo " <$version>"
 }
 
-PROMPT=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$limegreen%}%/%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}\n%{$limblue%}--➜%{$reset_color%}'
+pwd_shortened() {
+  local cwd=$(pwd)
+  IFS='/' read -rA tmux_path_array <<< "$cwd"
+  typeset -i counter
+  for i in "${tmux_path_array[@]}"
+  do
+    let counter++
+    if [[ $counter == $(($#tmux_path_array)) ]]; then
+      shortened_path+=$i
+    else
+      shortened_path+=${i:0:1}/
+    fi
+  done
+  echo $shortened_path
+}
 
+PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
+PS2=$'\n%{$limblue%}--➜%{$reset_color%}'
+PROMPT="$PS1$PS2"
+
+get_prompt_len() {
+  local zero='%([BSUbfksu]|([FK]|){*})'
+  FOOLENGTH=${#${(S%%)PS1//$~zero/}}
+  # FOOLENGTH=$(($#1 * 3 - ${#${(ml[$#1 * 2])1}}))
+  echo $FOOLENGTH
+}
 # function battery_charge {
 #   upower -e > /dev/null 2>&1
 
@@ -322,7 +339,12 @@ add-zsh-hook precmd timer_precmd
 source ~/.oh-my-zsh/plugins/zle-vi-visual/zle_vi_visual.zsh
 
 function zle-line-init zle-keymap-select {
-  RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} %{$lorange%}%?↵%{$reset_color%}%{$veryorange%}$(bg_job_count)%{$reset_color%}%{$bluesomething%}$(inranger)%{$reset_color%}"
+RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} \
+%{$lorange%}%?↵%{$reset_color%}\
+%{$veryorange%}$(bg_job_count)%{$reset_color%}\
+%{$bluesomething%}$(inranger)%{$reset_color%}"
+# %{$purple4%}$(get_prompt_len)%{$reset_color%}"
+
   VIM_PROMPT_INSERT="%{$fg_bold[cyan]%}% [% INS]% %{$reset_color%}"
   VIM_PROMPT_MAIN="%{$fg_bold[blue]%}% [% INSERT]% %{$reset_color%}"
   VIM_PROMPT_REPLACE="%{$fg_bold[black]%}% %{$bg_bold[red]%}% [% REPLACE]% %{$reset_color%}"

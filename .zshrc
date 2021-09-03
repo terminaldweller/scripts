@@ -16,10 +16,12 @@ source $ZSH/oh-my-zsh.sh
 [[ -s /home/devi/.autojump/etc/profile.d/autojump.sh ]] && source /home/devi/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-alias ls="exa"
-alias la="exa -a"
-alias ll="exa -abghHliSmxF --color-scale --git -@"
-alias lss="exa -Sls=size"
+alias ls="ls --color=auto"
+alias la="ls -a"
+# alias ll="exa -abghHliSmxF --color-scale --git -@"
+alias ll="\ls -lZspihbFA --color=never --full-time --author | colcol | column -t"
+# alias lss="exa -Sls=size"
+alias lss="ls -sASh"
 alias ee="nautilus ."
 alias updaterc="cp ~/scripts/.zshrc ~/.zshrc"
 alias fixvimrc='cp ~/scripts/.vimrc ~/.vimrc'
@@ -76,7 +78,7 @@ alias w3m="torsocks w3m -graph"
 #alias clang="COLORMAKE_COMMAND=clang colormake"
 alias mv="mv -i"
 alias cp="cp -i"
-alias nuke="rm -rf * .*"
+alias nuke="rm -rf .[^.]* *"
 alias bruiser="bruiser --history ~/.bruiser/history.lua"
 alias digg="dig && clear"
 alias ogg="ogg123"
@@ -86,6 +88,7 @@ alias ddgr="ddgr --colorize always -r us-en -n 15"
 alias pirate-get="pirate-get -S ~/magnets/"
 alias vps="ssh 87.236.209.206 -l ubuntu"
 alias vpn="ssh 192.99.102.52 -l rooot -p 1022"
+alias vpn2="ssh 145.239.165.137 -l rooot"
 alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
 alias v="vim"
 alias kshrc="vim ~/scripts/.kshrc"
@@ -195,6 +198,19 @@ math() {
   echo $(($@))
 }
 
+fd() {
+  ls -l $(find -iname "*$1*")
+}
+
+pss() {
+  "ps" $1 | colcol | column -t
+}
+
+pdfsearch() {
+  REGEX=$1
+  shift
+  pdfgrep --warn-empty --unac --color=auto -i -e $REGEX -n -C 1 "$@"
+}
 # function pid {
 #   ps -aux | grep "$1" | grep -v grep | awk '{print$2}'
 # }
@@ -264,6 +280,8 @@ export PATH=$PATH:/home/devi/dry
 export PATH=$PATH:/home/devi/k9s
 export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
+export PATH=$PATH:/home/devi/kubectl
+export PATH=$PATH:/home/devi/solidity
 
 export EDITOR=vim
 export BROWSER=w3m
@@ -396,6 +414,7 @@ setopt INTERACTIVE_COMMENTS
 # no more C-s and C-q
 unsetopt FLOW_CONTROL
 setopt LONG_LIST_JOBS
+setopt +o nomatch
 
 # eval "$(goenv init -)"
 # export PATH="$GOROOT/bin:$PATH"

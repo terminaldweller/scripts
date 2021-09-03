@@ -1,0 +1,36 @@
+#!/usr/bin/gawk -f
+#colorizes a columnar output
+BEGIN {
+  colors[1] = "\x1b[38;5;216m"
+  colors[2] = "\x1b[38;5;192m"
+  colors[3] = "\x1b[38;5;22m"
+  colors[4] = "\x1b[38;5;25m"
+  colors[5] = "\x1b[38;5;98m"
+  colors[6] = "\x1b[38;5;68m"
+  colors[7] = "\x1b[38;5;59m"
+  colors[8] = "\x1b[38;5;36m"
+  colors[9] = "\x1b[38;5;202m"
+  colors[10] = "\x1b[38;5;100m"
+  colors[11] = "\x1b[38;5;105m"
+  colors[12] = "\x1b[38;5;106m"
+  colors[13] = "\x1b[38;5;96m"
+  colors[14] = "\x1b[38;5;31m"
+  colors[15] = "\x1b[38;5;23m"
+  colors[16] = "\x1b[38;5;105m"
+  colors_len=16
+}
+{
+  if (1 == NR){
+    max_col = NF
+  }
+  # printf max_col" "
+  printf NR-1" "
+  for (i = 1; i <= NF; i++){
+    if (i >= colors_len) {
+      printf "",colors[colors_len]$i" "
+    } else {
+      printf colors[i]$i" "
+    }
+  }
+  print "\033[0m"
+}

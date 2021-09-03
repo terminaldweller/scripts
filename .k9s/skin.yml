@@ -1,15 +1,25 @@
-# Skin InTheNavy...
+# adapted from InTheNavy...
 k9s:
-  # General K9s styles
   body:
-    fgColor: dodgerblue
+    fgColor: dodgerblue4
     bgColor: '#000000'
     logoColor: '#0000ff'
-  # ClusterInfoView styles.
+  prompt:
+    fgColor: cadetblue
+    bgColor: black
+    suggestColor: dodgerblue4
   info:
     fgColor: lightskyblue
     sectionColor: steelblue
-  # Help panel styles
+  dialog:
+    fgColor: dodgerblue4
+    bgColor: black
+    buttonFgColor: black
+    buttonBgColor: dodgerblue4
+    buttonFocusFgColor: white
+    buttonFocusBgColor: slateblue3
+    labelFgColor: slateblue3
+    fieldFgColor: dodgerblue4
   help:
     fgColor: white
     bgColor: default
@@ -17,31 +27,26 @@ k9s:
     numKeyColor: blue
     sectionColor: gray
   frame:
-    # Borders styles.
     border:
-      fgColor: dodgerblue
+      fgColor: dodgerblue4
       focusColor: aliceblue
-    # MenuView attributes and styles.
     menu:
       fgColor: darkblue
       keyColor: cornflowerblue
-      # Used for favorite namespaces
       numKeyColor: cadetblue
-    # CrumbView attributes for history navigation.
     crumbs:
       fgColor: white
       bgColor: default
-      activeColor: skyblue
-    # Resource status and update styles
+      activeColor: deepskyblue
     status:
-      newColor: '#00ff00'
+      newColor: darkgreen
       modifyColor: powderblue
       addColor: lightskyblue
-      errorColor: indianred
+      errorColor: darkred
+      pendingColor: mediumpruple
       highlightcolor: royalblue
       killColor: slategray
-      completedColor: gray
-    # Border title styles.
+      completedColor: slateblue3
     title:
       fgColor: aqua
       bgColor: default
@@ -49,22 +54,32 @@ k9s:
       counterColor: slateblue
       filterColor: slategray
   views:
-    # TableView attributes.
     table:
       fgColor: blue
       bgColor: default
       cursorColor: aqua
-      # Header row styles.
       header:
         fgColor: white
         bgColor: default
         sorterColor: orange
-    # YAML info styles.
     yaml:
       keyColor: steelblue
       colonColor: blue
       valueColor: royalblue
-    # Logs styles.
     logs:
       fgColor: white
       bgColor: default
+    xray:
+      fgColor: blue
+      bgColor: black
+      cursorColor: aqua
+      graphicColor: cornflowerblue
+      showIcons: false
+    charts:
+      bgColor: black
+      defaultDialColors:
+        - linegreen
+        - orangered
+      defaultChartColors:
+        - linegreen
+        - orangered

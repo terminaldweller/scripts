@@ -19,3 +19,4 @@ export WSL_INTEROP=/run/WSL/13105_interop
 sudo ./irc-slack --port 6667 --host 0.0.0.0 --debug
 ssh -N -D 9999 -o ExitOnForwardFailure=yes -l pi 192.168.1.108
 fall of hyperion--7:32:30
+proot -r d11rootfs -0

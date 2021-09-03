@@ -3,7 +3,6 @@ let maplocalleader = ","
 set encoding=UTF-8
 set nocompatible
 set completeopt-=preview
-set completeopt+=popup
 set showmatch
 set list
 set listchars=eol:$,tab:>-
@@ -30,7 +29,7 @@ set laststatus=2
 set smartcase
 set more
 set lazyredraw
-set synmaxcol=800
+set synmaxcol=200
 syntax sync minlines=64
 set ttyfast
 set relativenumber
@@ -69,7 +68,10 @@ set backspace=indent,eol,start
 " set cursorcolumn
 " set exrc
 " set wildmode=list:longest,full
-set viminfo='100,\"500,:50,%,n~/.viminfo
+if !has('nvim')
+  set viminfo='100,\"500,:50,%,n~/.viminfo
+  set completeopt+=popup
+endif
 
 highlight clear Search
 let g:is_posix = 1
@@ -184,6 +186,13 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'wellle/visual-split.vim'
 Plug 'zchee/vim-goasm'
 Plug 'jvirtanen/vim-hcl'
+Plug 'AndrewRadev/splitjoin.vim'
+if has('nvim')
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
+Plug 'dansomething/vim-hackernews'
+Plug 'andrewstuart/vim-kubernetes'
+" Plug 'psliwka/vim-smoothie'
 " Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
 " Plug 'rhysd/vim-gfm-syntax'
@@ -1018,6 +1027,7 @@ highlight vimBufnrWarn ctermbg=16 ctermfg=202
 " highlight airline_tabtype ctermbg=15 ctermfg=34
 
 "typos
+iab adn and
 iab teh the
 iab strign string
 iab pritn print
@@ -1057,7 +1067,7 @@ autocmd FileType markdown,text,vimwiki,tex setlocal complete+=k
 
 "fzf
 map <leader>f <Esc><Esc>:Files!<CR>
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -1166,7 +1176,7 @@ augroup YCMDocRust
   autocmd!
   autocmd FileType rust let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
+    \ 'syntax': 'rust'
     \ }
 augroup END
 
@@ -1243,7 +1253,7 @@ let g:context_presenter = 'vim-popup'
 
 augroup AUSpell
   autocmd!
-  autocmd FileType markdown,txt,vimwiki,tex set spell
+  autocmd FileType markdown,txt,vimwiki,tex setlocal spell
 augroup END
 
 nnoremap <leader>b :Make<CR>
