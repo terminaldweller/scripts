@@ -6,4 +6,7 @@ services:
       - "80:80"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-
+    networks:
+      - haproxynet
+networks:
+  - haproxynet
