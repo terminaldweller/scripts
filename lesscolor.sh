@@ -1,4 +1,17 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+get_interp() {
+  shebang=$(head -1 $1)
+  IFS='/' read -ra arr_slash <<< "$shebang"
+  IFS=' ' read -ra arr_space <<< "${arr_slash[-1]}"
+  
+  if [[ ${arr_space[0]} == "env" ]];then
+    echo ${arr_space[1]}
+  else
+    echo ${arr_space[0]}
+  fi
+}
+
 case "$1" in
     *.as|*.mxml|*.bc|*.g|*.gd|*.gi|*.gap|*.nb|*.cdf|*.nbp|*.ma|*.mu|*.at|*.run|\
     *.apl|*.adl|*.adls|*.adlf|*.adlx|*.cadl|*.odin|*.c-objdump|*.s|\
@@ -50,16 +63,9 @@ case "$1" in
     *.lean|*.rts|*.u|*.vcl|*.bpl|*.sil|*.vpr|*.cirru|*.duel|*.jbst|*.qml|\
     *.qbs|*.slim|*.xqy|*.xquery|*.xq|*.xql|*.xqm|*.whiley|*.x10)
         pygmentize -f 256 -O style=$PYGMENTIZE_STYLE "$1"|nl -b a;;
-    .zshrc|.bash_aliases|.bash_environment)
-        pygmentize -f 256 -l sh "$1"|nl -b a
-        ;;
     *)
-        grep "#\!/bin/zsh" "$1" > /dev/null
-        if [ "$?" -eq "0" ]; then
-            pygmentize -f 256 -O style=$PYGMENTIZE_STYLE -l sh "$1"|nl -b a
-        else
-            exit 1
-        fi
+        interp=$(get_interp $1)
+        pygmentize -f 256 -O style=$PYGMENTIZE_STYLE -l $interp "$1"|nl -b a
 esac
 
 exit 0

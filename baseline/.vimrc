@@ -101,6 +101,12 @@ set pastetoggle=<F11>
 nnoremap <leader>cd :cd %:p:h<cr>
 nmap ]c :cn<CR>
 nmap [c :cp<CR>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
 
 function! GetBufferList()
   redir =>buflist

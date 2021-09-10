@@ -21,7 +21,7 @@ daemonize = false;
 -- for the server. Note that you must create the accounts separately
 -- (see https://prosody.im/doc/creating_accounts for info)
 -- Example: admins = { "user1@example.com", "user2@example.net" }
-admins = { }
+admins = {"devi@chat.terminaldweller.com"}
 
 -- Enable use of libevent for better performance under high load
 -- For more information see: https://prosody.im/doc/libevent
@@ -58,7 +58,7 @@ modules_enabled = {
                 "uptime"; -- Report how long server has been running
                 "time"; -- Let others know the time here on this server
                 "ping"; -- Replies to XMPP pings with pongs
-                "register"; -- Allow users to register on this server using a client and change passwords
+                --"register"; -- Allow users to register on this server using a client and change passwords
                 --"mam"; -- Store messages in an archive and allow users to access it
                 --"csi_simple"; -- Simple Mobile optimizations
 
@@ -67,7 +67,7 @@ modules_enabled = {
                 --"admin_telnet"; -- Opens telnet console interface on localhost port 5582
 
         -- HTTP modules
-                --"bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
+                "bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
                 --"websocket"; -- XMPP over WebSockets
                 --"http_files"; -- Serve static files from a directory over HTTP
 
@@ -191,7 +191,12 @@ certificates = "certs"
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
 -- Settings under each VirtualHost entry apply *only* to that host.
 
-VirtualHost "terminaldweller.com"
+VirtualHost "chat.terminaldweller.com"
+        enabled = true
+        ssl = {
+                key = "/etc/letsencrypt/live/chat.terminaldweller.com/privkey.pem";
+                certificate = "/etc/letsencrypt/live/chat.terminaldweller.com/fullchain.pem";
+                }
 
 --VirtualHost "example.com"
 --      certificate = "/path/to/example.crt"
@@ -202,7 +207,8 @@ VirtualHost "terminaldweller.com"
 -- For more information on components, see https://prosody.im/doc/components
 
 ---Set up a MUC (multi-user chat) room server on conference.example.com:
---Component "conference.example.com" "muc"
+Component "conference.chat.terminaldweller.com" "muc"
+        restrict_room_creationi = "admin"
 --- Store MUC messages in an archive and allow users to access it
 --modules_enabled = { "muc_mam" }
 

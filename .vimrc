@@ -5,6 +5,7 @@ set nocompatible
 set completeopt-=preview
 set showmatch
 set list
+set title
 set listchars=eol:$,tab:>-
 set hidden
 set tabstop=2
@@ -474,6 +475,12 @@ nnoremap <leader>u :GutentagsUpdate<CR>
 nnoremap <localleader>v :VimtexView<CR>
 nnoremap <leader>nn :bn<CR>
 nnoremap <leader>pp :bp<CR>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
 
 nmap [q :col<CR>
 nmap ]q :cnew<CR>

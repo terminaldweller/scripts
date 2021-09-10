@@ -1,12 +1,43 @@
-version: "3.4"
+version: "3.4" 
 services:
   haproxy:
     image: haproxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./certs:/usr/local/etc/certs:ro
     networks:
       - haproxynet
+    restart: unless-stopped
+  certbot:
+    image: certbot
+    build:
+      context: ./certbot
+    ports:
+      - "127.0.0.1:9080:80"
+      - "127.0.0.1:9443:443"
+    networks:
+      - haproxynet
+    # restart: unless-stopped
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./webroot:/webroot
+      - ./certs:/certs
+    # command: ["certonly","--test-cert","--webroot","-w","/webroot","-d","chat.terminaldweller.com","--email","thabogre@gmail.com","--non-interactive","--agree-tos"]
+    entrypoint: ["/certbot-entrypoint.sh"]
+    environment:
+      - DOMAIN=chat.terminaldweller.com
+      - EMAIL=thabogre@gmail.com
+  nginx:
+    image: nginx
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - haproxynet
+    restart: unless-stopped
+    volumes:
+      - ./webroot:/usr/share/nginx/html
 networks:
-  - haproxynet
+  haproxynet:

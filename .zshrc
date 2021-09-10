@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit -u
 
 alias ls="ls --color=auto"
-alias la="ls -a"
+alias la="ls -A"
 # alias ll="exa -abghHliSmxF --color-scale --git -@"
 alias ll="\ls -lZspihbFA --color=never --full-time --author | colcol | column -t"
 # alias lss="exa -Sls=size"
@@ -86,7 +86,7 @@ alias mupdf="/home/devi/extra/mupdf/build/release/mupdf-x11 -D red -P black -I"
 alias googler="~/extra/googler/googler --colors GKmexy -c us -l en --count 7 --exact "
 alias ddgr="ddgr --colorize always -r us-en -n 15"
 alias pirate-get="pirate-get -S ~/magnets/"
-alias vps="ssh 87.236.209.206 -l ubuntu"
+alias vps="ssh 87.236.209.206 -l ubuntu -p 1022"
 alias vpn="ssh 192.99.102.52 -l rooot -p 1022"
 alias vpn2="ssh 145.239.165.137 -l rooot"
 alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
@@ -270,7 +270,7 @@ export PATH=$PATH:/home/devi/.fzf/bin
 export PATH=$PATH:/home/devi/.ghcup/bin
 export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
-export PATH=$PATH:/home/devi/mongosh
+export PATH=$PATH:/home/devi/mongosh/bin
 export PATH=$PATH:/home/devi/powershell
 export PATH=$PATH:/home/devi/ytfzf
 export PATH=$PATH:/home/devi/gotty

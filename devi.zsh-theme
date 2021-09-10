@@ -100,7 +100,6 @@ is_in_git_repo() {
 }
 
 steeef_preexec() {
-  #case "$(history $HISTCMD)" in
   case "$2" in
     *git*)
       PR_GIT_UPDATE=1
@@ -113,8 +112,6 @@ steeef_preexec() {
 add-zsh-hook preexec steeef_preexec
 
 steeef_chpwd() {
-  # is_in_git_repo || return
-  #this is here so we dont get errors when we are in a bare git dir
   local result=$(git rev-parse --is-bare-repository 2> /dev/null)
   if [[ $? == 0 ]]; then
     if [[ $result == true ]]; then
@@ -130,7 +127,6 @@ add-zsh-hook chpwd steeef_chpwd
 
 steeef_precmd() {
   if [[ -n "$PR_GIT_UPDATE" ]] ; then
-    # check for untracked files or updated submodules, since vcs_info doesn't
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
       PR_GIT_UPDATE=1
       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a%{$hotpink%} ●${PR_RST}"

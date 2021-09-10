@@ -9,3 +9,5 @@
 
 /* /connect irc.oftc.net */
 /* /connect irc.libera.chat */
+load otr
+load xmpp
