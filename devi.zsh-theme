@@ -247,16 +247,46 @@ pwd_shortened() {
   echo $shortened_path
 }
 
-PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
-PS2=$'\n%{$limblue%}--➜%{$reset_color%}'
-PROMPT="$PS1$PS2"
+rebuildquery() {
+  make -q > /dev/null 2>&1
+  if [[ $? == 1 ]]; then
+    echo " ::rebuild::"
+  else
+    ;
+  fi
+}
 
+
+PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
+PS2=$''
+PS3=$'\n%{$limblue%}--➜%{$reset_color%}'
 get_prompt_len() {
   local zero='%([BSUbfksu]|([FK]|){*})'
-  FOOLENGTH=${#${(S%%)PS1//$~zero/}}
-  # FOOLENGTH=$(($#1 * 3 - ${#${(ml[$#1 * 2])1}}))
+  local FOOLENGTH=${#${(S%%)PS1//$~zero/}}
   echo $FOOLENGTH
 }
+get_prompt_len_2() {
+  local zero='%([BSUbfksu]|([FK]|){*})'
+  local FOOLENGTH=${#${(S%%)PS2//$~zero/}}
+  echo $FOOLENGTH
+}
+
+get_enough_spaces(){
+  ps1_len=$(get_prompt_len)
+  ps2_len=$(get_prompt_len_2)
+  term_len=$(tput cols)
+  diff_len=$(($term_len - $ps1_len - $ps2_len))
+  echo $diff_len
+  for ((i=0;i<$diff_len;i++));do
+    echo -n " "
+    if [[ $i > $(tpul cols) ]];then break;fi
+  done
+}
+# PROMPT="$PS1$(get_enough_spaces)$PS2$PS3"
+PROMPT="$PS1$PS2$PS3"
+
+# PROMPT="$PS1$PS3"
+
 # function battery_charge {
 #   upower -e > /dev/null 2>&1
 
@@ -289,15 +319,6 @@ get_prompt_len() {
 #   $battery_charge
 #   echo  $(if [ $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | gawk 'BEGIN{FS ~ ":"}{print $2}') = "charging" ]; then echo ++;else :;fi)$batcharge
 # }
-
-rebuildquery() {
-  make -q > /dev/null 2>&1
-  if [[ $? == 1 ]]; then
-    echo " ::rebuild::"
-  else
-    ;
-  fi
-}
 
 inranger() {
   local ranger_prompt=$(if [ -n "$RANGER_LEVEL" ];then echo " <ranger>";else echo "";fi)

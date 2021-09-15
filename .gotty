@@ -186,7 +186,7 @@ preferences {
   //     True if we should use bold weight font for text with the bold/bright attribute.
   //     False to use the normal weight font.
   //     Null to autodetect.
-  enable_bold = false
+  enable_bold = true
 
   // [bool] True if we should use bright colors (8-15 on a 16 color palette) for any text with the bold attribute.
   //        False otherwise.
@@ -211,7 +211,7 @@ preferences {
   // font_size = 15
 
   // [string] CSS font-smoothing property.
-  // font_smoothing = "antialiased"
+  font_smoothing = "antialiased"
 
   // [string] The foreground color for text with no other color attributes.
   // foreground_color = "rgb(240, 240, 240)"
@@ -288,7 +288,7 @@ preferences {
   // scroll_on_output = false
 
   // [bool] The vertical scrollbar mode.
-  scrollbar_visible = true
+  // scrollbar_visible = true
 
   // [int] The multiplier for the pixel delta in mousewheel event caused by the scroll wheel. Alters how fast the page scrolls.
   // scroll_wheel_move_multiplier = 1

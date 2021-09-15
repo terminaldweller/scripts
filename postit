@@ -20,3 +20,6 @@ sudo ./irc-slack --port 6667 --host 0.0.0.0 --debug
 ssh -N -D 9999 -o ExitOnForwardFailure=yes -l pi 192.168.1.108
 fall of hyperion--7:32:30
 proot -r d11rootfs -0
+gotty tmux new-session -t 0
+docker run -p 6667:6667 ezkrg/bitlbee-libpurple
+openssl s_client -connect chat.terminaldweller.com:5222 -starttls xmpp

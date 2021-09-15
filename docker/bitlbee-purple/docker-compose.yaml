@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  bitlbee:
+    # image: ezkrg/bitlbee-libpurple
+    image: luzifer/bitlbee
+    networks:
+      - bitlbeenet
+    ports:
+      - "127.0.0.1:6667:6667"
+    restart: unless-stopped
+    volumes:
+      - ./conf:/var/lib/bitlbee
+networks:
+  bitlbeenet:

@@ -155,6 +155,8 @@ alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.k9s/skin.yml"
 alias fixk9sconfig="cp ~/scripts/.k9s/config.yml ~/.k9s/config.yml"
+alias gottyrc="vim ~/scripts/.gotty"
+alias fixgottyrc="cp ~/scripts/.gotty ~/.gotty"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

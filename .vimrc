@@ -81,7 +81,7 @@ let g:is_posix = 1
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin']
+let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin']
 
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/bundle')
@@ -193,6 +193,7 @@ if has('nvim')
 endif
 Plug 'dansomething/vim-hackernews'
 Plug 'andrewstuart/vim-kubernetes'
+Plug 'Joorem/vim-haproxy'
 " Plug 'psliwka/vim-smoothie'
 " Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
@@ -477,10 +478,10 @@ nnoremap <leader>nn :bn<CR>
 nnoremap <leader>pp :bp<CR>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-nnoremap k gk
-nnoremap gk k
-nnoremap j gj
-nnoremap gj j
+" nnoremap k gk
+" nnoremap gk k
+" nnoremap j gj
+" nnoremap gj j
 
 nmap [q :col<CR>
 nmap ]q :cnew<CR>
