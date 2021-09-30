@@ -1,5 +1,5 @@
 #!/bin/sh
-# run with su -i;e.g. su -i && gen_wg_config.sh
+# before running this switch to sudo i.e., sudo -i or su -
 set -x
 set -e
 

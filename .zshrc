@@ -16,6 +16,9 @@ source $ZSH/oh-my-zsh.sh
 [[ -s /home/devi/.autojump/etc/profile.d/autojump.sh ]] && source /home/devi/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
+# create LS_COLORS
+eval `dircolors ~/.dir_colors`
+
 alias ls="ls --color=auto"
 alias la="ls -A"
 # alias ll="exa -abghHliSmxF --color-scale --git -@"
@@ -150,13 +153,15 @@ alias zscp="proxychains scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
-alias zharf_sever="zssh 192.168.12.5 -l farzad"
+alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.k9s/skin.yml"
 alias fixk9sconfig="cp ~/scripts/.k9s/config.yml ~/.k9s/config.yml"
 alias gottyrc="vim ~/scripts/.gotty"
 alias fixgottyrc="cp ~/scripts/.gotty ~/.gotty"
+alias dircolorsrc="vim ~/scripts/.dir_colors"
+alias fixdircolorsrc="cp ~/scripts/.dir_colors ~/.dir_colors"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -227,6 +232,7 @@ STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
 export DISPLAY="192.168.1.103:0"
 export LIBGL_ALWAYS_INDIRECT=1
+export PULSE_SERVER=tcp:192.168.1.103
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export WWW_HOME="duckduckgo.com"
 alias def="sdcv --color"

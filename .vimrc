@@ -189,11 +189,12 @@ Plug 'zchee/vim-goasm'
 Plug 'jvirtanen/vim-hcl'
 Plug 'AndrewRadev/splitjoin.vim'
 if has('nvim')
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
 endif
 Plug 'dansomething/vim-hackernews'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'Joorem/vim-haproxy'
+Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 " Plug 'psliwka/vim-smoothie'
 " Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
@@ -207,7 +208,6 @@ Plug 'Joorem/vim-haproxy'
 " Plug 'szymonmaszke/vimpyter'
 " Plug 'puremourning/vimspector'
 " Plug 'kana/vim-submode'
-" Plug 'jaxbot/semantic-highlight.vim'
 " Plug 'tpope/vim-capslock'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'

@@ -8,7 +8,9 @@ services:
     ports:
       - "127.0.0.1:6667:6667"
     restart: unless-stopped
-    volumes:
-      - ./conf:/var/lib/bitlbee
+    # this is causing permission issues
+    # user: "bitlbee:bitlbee"
+    # volumes:
+    #   - ./conf:/var/lib/bitlbee
 networks:
   bitlbeenet:

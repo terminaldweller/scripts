@@ -1,16 +1,29 @@
-version: "3.4" 
+version: "3.4"
 services:
   haproxy:
     image: haproxy
     ports:
       - "80:80"
       - "443:443"
+      - "5222:5222"
+      - "5280:5280"
+      - "5443:5443"
+      - "143:143"
+      - "993:993"
+      - "110:110"
+      - "995:995"
+      - "25:25"
+      - "465:465"
+      - "587:587"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - ./certs:/usr/local/etc/certs:ro
     networks:
-      - haproxynet
+      - proxynet
+      - certnet
     restart: unless-stopped
+    cap_drop:
+      - ALL
   certbot:
     image: certbot
     build:
@@ -19,7 +32,7 @@ services:
       - "127.0.0.1:9080:80"
       - "127.0.0.1:9443:443"
     networks:
-      - haproxynet
+      - certnet
     # restart: unless-stopped
     volumes:
       - ./letsencrypt:/etc/letsencrypt
@@ -29,15 +42,26 @@ services:
     entrypoint: ["/certbot-entrypoint.sh"]
     environment:
       - DOMAIN=chat.terminaldweller.com
-      - EMAIL=thabogre@gmail.com
+      - EMAIL=devi@mail.terminaldweller.com
   nginx:
     image: nginx
     ports:
       - "127.0.0.1:8080:80"
     networks:
-      - haproxynet
+      - certnet
     restart: unless-stopped
     volumes:
       - ./webroot:/usr/share/nginx/html
+  udpproxy:
+    image: nginx
+    ports:
+      - "127.0.0.1:3478:3478/udp"
+      - "127.0.0.1:5349:5349/udp"
+    networks:
+      - proxynet
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
 networks:
-  haproxynet:
+  proxynet:
+  certnet:

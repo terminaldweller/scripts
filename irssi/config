@@ -21,14 +21,14 @@ servers = (
     chatnet = "libera";
     autoconnect = "yes";
   },
-  { address = "irc.oftc.net"; chatnet = "oftc"; autoconnect = "yes"; }
+  { address = "irc.oftc.net"; chatnet = "oftc"; autoconnect = "yes"; },
+  { address = "localhost"; port = "6667"; chatnet = "bitlbee"; autoconnect = "yes"; }
 );
 
 chatnets = {
   libera = { type = "IRC"; nick = "terminaldweller"; };
   OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
-  "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
 };
 
@@ -338,12 +338,12 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "";
+    real_name = "john doe";
     user_name = "devi";
     nick = "terminaldweller";
     use_proxy = "no";
-    proxy_address = "192.168.1.108";
-    proxy_port = "3128";
+    proxy_address = "127.0.0.1";
+    proxy_port = "9050";
     proxy_string = "CONNECT %s:%d HTTP/1.0\012\012";
     proxy_string_after = "conn %s %d";
     proxy_password = "";
@@ -382,6 +382,7 @@ keyboard = (
 );
 ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#docker" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#node.js" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ansible" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#dpdk" ); },

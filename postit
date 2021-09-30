@@ -23,3 +23,5 @@ proot -r d11rootfs -0
 gotty tmux new-session -t 0
 docker run -p 6667:6667 ezkrg/bitlbee-libpurple
 openssl s_client -connect chat.terminaldweller.com:5222 -starttls xmpp
+vagrant package --base deb10-luks
+make MENUCONFIG_COLOR=blackbg menuconfig

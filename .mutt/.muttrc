@@ -2,12 +2,15 @@
 set imap_keepalive = 900
 set timeout=60
 set move = no
+set ssl_starttls=yes
+set ssl_force_tls=yes
 
 folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
 folder-hook 'account.self' 'source ~/.mutt/account.self'
 
 # default account
-source ~/.mutt/account.gmail
+source ~/.mutt/account.self
+# source ~/.mutt/account.gmail
 
 macro index <f2> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.self<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.gmail<enter><change-folder>!<enter>'
