@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:4.4.10
+        ports:
+          - containerPort: 27017
+          - containerPort: 27018
+          - containerPort: 27019
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: mongodb-root-username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: mongodb-root-password
+        volumeMounts:
+          - mountPath: /data/db
+            name: mongo-data
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: "6617"
+      port: 27117
+      targetPort: 27017
+      nodePort: 30017
+    - protocol: TCP
+      name: "6618"
+      port: 27118
+      targetPort: 27018
+      nodePort: 30018
+    - protocol: TCP
+      name: "6619"
+      port: 27119
+      targetPort: 27019
+      nodePort: 30019

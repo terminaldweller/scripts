@@ -58,6 +58,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   veryorange="%F{202}"
   yablue="%F{32}"
   yagreen="%F{34}"
+  babyblue="%F{39}"
 else
   turquoise="$fg[cyan]"
   orange="$fg[yellow]"
@@ -161,6 +162,11 @@ node_version() {
   echo " <$version>"
 }
 
+ruby_version() {
+  local version=$(rbenv version | gawk '{print $1}')
+  echo " <$version>"
+}
+
 sudo_query() {
   sudo -nv > /dev/null 2>&1
   if [[ $? == 0 ]]; then
@@ -257,7 +263,7 @@ rebuildquery() {
 }
 
 
-PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
+PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
 PS2=$''
 PS3=$'\n%{$limblue%}--➜%{$reset_color%}'
 get_prompt_len() {

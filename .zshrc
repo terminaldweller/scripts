@@ -5,9 +5,9 @@ export ZSH=/home/devi/.oh-my-zsh
 
 ZSH_THEME="devi"
 
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 
-plugins=(git zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang zsh-prompt-benchmark)
+plugins=(git evalcache zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang zsh-prompt-benchmark)
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/devi/.local/bin:/home/devi/bin"
 
@@ -18,7 +18,9 @@ autoload -U compinit && compinit -u
 
 # create LS_COLORS
 eval `dircolors ~/.dir_colors`
+# _evalcache dircolors ~/.dir_colors
 
+alias vv="vim"
 alias ls="ls --color=auto"
 alias la="ls -A"
 # alias ll="exa -abghHliSmxF --color-scale --git -@"
@@ -206,7 +208,7 @@ math() {
 }
 
 fd() {
-  ls -l $(find -iname "*$1*")
+  ls -l | find -iname "*$1*"
 }
 
 pss() {
@@ -240,7 +242,7 @@ alias def="sdcv --color"
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 
-export LESS='--RAW-CONTROL-CHARS --ignore-case --status-column --LONG-PROMPT --HILITE-UNREAD --tabs=2'
+export LESS='--RAW-CONTROL-CHARS --ignore-case --hilite-search --status-column --LONG-PROMPT --HILITE-UNREAD --tabs=2 '
 export LESSOPEN='|~/scripts/lesscolor.sh %s'
 export PYGMENTIZE_STYLE="paraiso-dark"
 # libtrash settings
@@ -290,6 +292,11 @@ export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
 export PATH=$PATH:/home/devi/kubectl
 export PATH=$PATH:/home/devi/solidity
+export PATH=$PATH:/home/devi/devi/emsdk.git/main
+export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
+export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
+export PATH=$PATH:/home/devi/google-java-format
+export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
 
 export EDITOR=vim
 export BROWSER=w3m
@@ -359,7 +366,8 @@ export KEYTIMEOUT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 
 # fnm
-eval "$(fnm env)"
+# eval "$(fnm env)"
+_evalcache fnm env
 
 # OPAM configuration
 . /home/devi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -564,3 +572,6 @@ ranger() {
     fi
     command rm -f -- "$tempfile" 2>/dev/null
 }
+
+# eval "$(rbenv init -)"
+_evalcache rbenv init -

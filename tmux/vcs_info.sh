@@ -61,7 +61,8 @@ function repo_info {
   git rev-parse --git-dir > /dev/null 2>&1
   if [[ $? == 0 ]]; then
     insertions=$(git --no-pager diff --numstat | awk '{sum1+=$1}END{print sum1}')
-    echo  
+    # echo  
+    echo  
   else
     :
   fi
@@ -74,4 +75,8 @@ deletions_info="#[fg=colour255 bg=colour1]"$(gitdeletions)
 additions__info="#[fg=colour255 bg=colour22]"$(gitadditions)
 
 # echo "#[fg=colour255 bg=colour29]$shortened_path #[fg=colour29 bg=colour26]$SEPARATOR_RIGHT_BOLD#[fg=colour255 bg=colour26]$tmux_session_info #[fg=colour26 bg=colour39]$SEPARATOR_RIGHT_BOLD $branch_info #[fg=colour39 bg=colour22]$SEPARATOR_RIGHT_BOLD $additions__info #[fg=colour22 bg=colour1]$SEPARATOR_RIGHT_BOLD $deletions_info #[fg=colour1 bg=colour244]$SEPARATOR_RIGHT_BOLD $untracked_info #[fg=colour244 bg=colour16]$SEPARATOR_RIGHT_BOLD"
-echo "#[fg=colour255 bg=colour26]$tmux_session_info #[fg=colour26 bg=colour39]$SEPARATOR_RIGHT_BOLD $branch_info #[fg=colour39 bg=colour22]$SEPARATOR_RIGHT_BOLD $additions__info #[fg=colour22 bg=colour1]$SEPARATOR_RIGHT_BOLD $deletions_info #[fg=colour1 bg=colour244]$SEPARATOR_RIGHT_BOLD $untracked_info #[fg=colour244 bg=colour16]$SEPARATOR_RIGHT_BOLD"
+echo "#[fg=colour255 bg=colour26]$tmux_session_info #[fg=colour26 bg=colour39]$SEPARATOR_RIGHT_BOLD \
+$branch_info #[fg=colour39 bg=colour22]$SEPARATOR_RIGHT_BOLD \
+$additions__info #[fg=colour22 bg=colour1]$SEPARATOR_RIGHT_BOLD \
+$deletions_info #[fg=colour1 bg=colour244]$SEPARATOR_RIGHT_BOLD \
+$untracked_info #[fg=colour244 bg=colour16]$SEPARATOR_RIGHT_BOLD"

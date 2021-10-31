@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pihole
-  lables:
+  labels:
     app: pihole
 spec:
   replicas: 1
-  selctor:
-    matchlabels:
+  selcetor:
+    matchLabels:
       app: pihole
   template:
     metadata:

@@ -1,0 +1,58 @@
+%rec: manga
+%mandatory: Name URL
+%type: Location enum loaned home unknown
+%doc: 
+
+Name: daidark
+URL: https://manganelo.com/manga/sg919827
+
+Name: dokumushi
+URL: https://manganelo.com/manga/doku_mushi
+
+Name: onna
+URL: https://manganelo.com/manga/ookii_onnanoko_wa_daisuki_desu_ka
+
+Name: satanofani
+URL: https://manganelo.com/manga/satanofani
+
+Name: ningyou
+URL: https://manganelo.com/manga/ningyou_no_kuni
+
+Name: deadtube
+URL: https://manganelo.com/manga/dead_tube
+
+Name: jagaan
+URL: https://manganelo.com/manga/eupo237211575286777
+
+Name: kaifuku_jutsushi
+URL: https://manganelo.com/manga/kaifuku_jutsushi_no_yarinaoshi
+
+Name: berserk
+URL: https://manganelo.com/manga/ilsi12001567132882
+
+Name: chainsawman
+URL: https://manganelo.com/manga/ix917953
+
+Name: hantsu
+URL: https://manganelo.com/manga/hantsu_x_trash
+
+Name: kengan
+URL: https://manganelo.com/manga/cd918233
+
+Name: fiarytail100
+URL: https://manganelo.com/manga/uv917720
+
+Name: kumo
+URL: https://manganelo.com/manga/kumo_desu_ga_nani_ka
+
+Name: mpdpsycho
+URL: https://manganelo.com/manga/mpd_psycho
+
+Name: gigantis
+URL: https://manganato.com/manga-mv989778
+
+Name: suzuki_peeping
+URL: https://manganato.com/manga-le989039
+
+Name: ingoshima
+URL: https://manganelo.com/manga/sz919450

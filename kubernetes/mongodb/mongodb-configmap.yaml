@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-configmap
+data:
+  mongodb_db__anime_name: anime
+  mongodb_db_manga_name: manga

@@ -3,6 +3,8 @@ let maplocalleader = ","
 set encoding=UTF-8
 set nocompatible
 set completeopt-=preview
+set completeopt+=menuone
+set completeopt+=noselect
 set showmatch
 set list
 set title
@@ -81,7 +83,7 @@ let g:is_posix = 1
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin']
+let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin', 'python.plugin', 'python-compiler.plugin', 'python-indent.plugin', 'c.plugin', 'cpp.plugin']
 
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/bundle')
@@ -90,7 +92,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
 Plug 'mhinz/vim-startify'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'kh3phr3n/python-syntax'
 Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sickill/vim-pasta'
@@ -106,7 +107,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'neomutt/neomutt.vim'
 Plug 'sngn/vim-i3blocks-syntax'
 Plug 'rhysd/vim-wasm'
-Plug 'nathanaelkane/vim-indent-guides'
+" makes scrolling slow and doesnt work with vista popups
+" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tomlion/vim-solidity'
 Plug 'dense-analysis/ale'
 Plug 'ekalinin/Dockerfile.vim'
@@ -150,7 +152,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'chiel92/vim-autoformat'
 Plug 'vim-scripts/ZoomWin'
 Plug 'wakatime/vim-wakatime'
-Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/DoxyGen-Syntax'
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -195,6 +196,16 @@ Plug 'dansomething/vim-hackernews'
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'Joorem/vim-haproxy'
 Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
+Plug 'liuchengxu/vista.vim'
+Plug 'uiiaoo/java-syntax.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'kh3phr3n/python-syntax'
+Plug 'zaid/vim-rec'
+" Plug 'kana/vim-operator-user'
+" Plug 'haya14busa/vim-operator-flashy'
+" Plug 'terryma/vim-expand-region'
+" Plug 'romainl/vim-devdocs'
+" Plug 'rhysd/devdocs.vim'
 " Plug 'psliwka/vim-smoothie'
 " Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
@@ -216,7 +227,6 @@ Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 " Plug 'tpope/vim-speeddating'
 " Plug 'powerman/vim-plugin-AnsiEsc'
 " Plug 'xolox/vim-misc'
-" Plug 'liuchengxu/vista.vim'
 " Plug 'metakirby5/codi.vim'
 " Plug 'vim-scripts/tagexplorer.vim'
 " Plug 'MattesGroeger/vim-bookmarks'
@@ -229,6 +239,7 @@ Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 " Plug 'maxbrunsfeld/vim-yankstack'
 " Plug 'gcmt/wildfire.vim'
 " Plug 'luochen1990/rainbow'
+" Plug 'voldikss/vim-floaterm'
 call plug#end()
 filetype plugin indent on
 
@@ -268,6 +279,7 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 let g:cpp_posix_standard = 1
+hi link cAnsiFunction Exception
 
 hi Normal ctermbg=None
 
@@ -341,31 +353,47 @@ imap <PageUp> <Nop>
 imap <PageDown> <Nop>
 "end of n00b stuff
 
-au BufRead,BufNewFile .i3blocks.conf set filetype=i3blocks
-au BufRead,BufNewFile *.zsh-theme set filetype=zsh
-au BufEnter,FileType cpp set syntax=cpp.doxygen
-au BufEnter,FileType c set syntax=cpp.doxygen
-"sets filetype for muttrc to neomuttrc not muttrc since i'm too lazy
-"to be bothered to change the name of my rc that i pass to neomutt
-au BufNewFile,BufRead .muttrc set filetype=neomuttrc
-au BufNewFile,BufRead,BufEnter *.toml set filetype=toml
+au BufEnter .i3blocks.conf setlocal filetype=i3blocks
+au BufEnter *.zsh-theme setlocal filetype=zsh
+au BufEnter .muttrc setlocal filetype=neomuttrc
+au BufEnter *.toml setlocal filetype=toml
+au BufEnter *.s setlocal filetype=gas
 
-au BufNewFile,BufEnter,BufRead *.s set ft=gas
-au BufEnter,FileType *.wast set syntax=wast
-au BufEnter,FileType *.wat set syntax=wast
-au BufEnter,FileType *.uml set syntax=plantuml
+au FileType cpp setlocal syntax=cpp.doxygen
+au FileType c setlocal syntax=cpp.doxygen
+au FileType *.wast setlocal syntax=wast
+au FileType *.wat setlocal syntax=wast
+au FileType *.uml setlocal syntax=plantuml
 
 "python configs
 "PEP-8
-au BufNewFile,BufEnter *.py set tabstop=4
-au BufNewFile,BufEnter *.py set softtabstop=4
-au BufNewFile,BufEnter *.py set shiftwidth=4
+au FileType *.py setlocal tabstop=4
+au FileType *.py setlocal softtabstop=4
+au FileType *.py setlocal shiftwidth=4
 " au BufNewFile,BufEnter *.py set textwidth=79
-au BufNewFile,BufEnter *.py set expandtab
-au BufNewFile,BufEnter *.py set autoindent
-au BufNewFile,BufEnter *.py set fileformat=unix
+au FileType *.py setlocal expandtab
+au FileType *.py setlocal autoindent
+au FileType *.py setlocal fileformat=unix
 
+"python syntax highlighting
+"let g:python_slow_sync = 0
 let python_highlight_all = 1
+hi link pythonBuiltin Define
+hi link pythonInclude PreCondit
+hi link pythonClassParameters Constant
+hi link pythonFunctionParameters Constant
+hi link pythonExtraOperator Keyword
+hi link pythonDoctest Tag
+hi link pythonRawString Tag
+hi link pythonTripleQuotes SpecialComment
+
+nmap <leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 "mapping fast keycodes
 "the key codes are for my build of st
@@ -437,7 +465,7 @@ nnoremap <F12> :UndotreeToggle<CR>
 nnoremap <F10> :vsp<cr>
 nnoremap <S-F10> :sp<cr>
 nnoremap <F5> :ContextToggle<CR>
-map <F8> :TagbarToggle<CR>
+map <F8> :Vista!!<CR>
 augroup LatexAU
   autocmd!
   autocmd filetype tex map <F8> :VimtexTocToggle<CR>
@@ -482,6 +510,8 @@ cnoremap <C-e> <End>
 " nnoremap gk k
 " nnoremap j gj
 " nnoremap gj j
+nmap <leader>m :make<CR>
+nmap <leader>sh :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
 nmap [q :col<CR>
 nmap ]q :cnew<CR>
@@ -758,7 +788,9 @@ let g:tagbar_type_tf = {
 \ }
 
 "doxygentoolkit
-autocmd BufNewFile,BufRead,BufEnter *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
+autocmd FileType *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
+" let g:doxygen_enhanced_color = 1
+let g:syntax_extra_java="doxygen"
 
 "open-pdf conf
 let g:pdf_convert_on_edit = 1
@@ -1061,12 +1093,12 @@ let g:netrw_sort_direction = 'normal'
 
 "vimcompletesme
 let g:vcm_default_maps = 0
-autocmd FileType c,cpp let b:vcm_tab_complete = "omni"
-autocmd FileType lua let b:vcm_tab_complete = "omni"
-autocmd FileType go let b:vcm_tab_complete = "omni"
-autocmd FileType rust let b:vcm_tab_complete = "omni"
-autocmd FileType python let b:vcm_tab_complete = "omni"
-autocmd FileType javasript let b:vcm_tab_complete = "omni"
+autocmd FileType c,cpp let b:vcm_tab_complete = 'omni'
+autocmd FileType lua let b:vcm_tab_complete = 'omni'
+autocmd FileType go let b:vcm_tab_complete = 'omni'
+autocmd FileType rust let b:vcm_tab_complete = 'omni'
+autocmd FileType python let b:vcm_tab_complete = 'omni'
+autocmd FileType javasript let b:vcm_tab_complete = 'omni'
 
 "sets the dictionary for autocompletion with <C-n> and <C-p> for the
 "filetypes
@@ -1142,15 +1174,18 @@ nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>ji :YcmCompleter GoToInclude<CR>
 nnoremap <leader>jj :YcmCompleter GoTo<CR>
 nnoremap <leader>jt :YcmCompleter GoToType<CR>
+nmap <leader>jw <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>jd <Plug>(YCMFindSymbolInDocument)
 nnoremap <leader>gt :YcmCompleter GetType<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <leader>gc :YcmCompleter GoToDocumentOutline<CR>
 nnoremap <leader>rr :YcmCompleter RefactorRename<space>
 nmap <leader>D <plug>(YCMHover)
-nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
-nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+" nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+" nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_auto_hover = "CursorHold"
 
 augroup YCMDocCFam
   autocmd!
@@ -1342,21 +1377,26 @@ let g:ale_disable_lsp = 1
 let g:ale_change_sign_column_color = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+highlight AleWarning ctermbg=25
+highlight AleWarningSign ctermbg=25
 augroup ALEJS
   autocmd!
   autocmd FileType javascript let b:ale_linters = {'javascript': ['eslint']}
   autocmd FileType javascript let b:ale_fixers = {'javascript': ['prettier']}
 augroup END
+let g:ale_python_black_options = "--line-length 79"
 augroup ALEPY
   autocmd!
   autocmd FileType python let b:ale_linters = {'python': ['flake8']}
-  autocmd FileType python let b:ale_fixers = {'python': ['autopep8']}
+  autocmd FileType python let b:ale_fixers = {'python': ['black']}
 augroup END
 augroup ALERUBY
   autocmd!
   autocmd FileType ruby let b:ale_linters = {'ruby': ['rubocop']}
   autocmd FileType ruby let b:ale_fixers = {'ruby': ['rubocop']}
-  " autocmd FileType ruby let b:ale_fixers = {'ruby': ['rufo']}
 augroup END
 augroup ALEMARKDOWN
   autocmd!
@@ -1365,10 +1405,23 @@ augroup END
 augroup ALEC
   autocmd!
   autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
+  autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
 augroup END
 augroup ALECPP
   autocmd!
   autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
+  autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
+augroup END
+augroup ALEHTML
+  autocmd!
+  autocmd FileType html let b:ale_linters = {'html': ['htmlhint']}
+  autocmd FileType html let b:ale_fixers = {'html': ['prettier']}
+augroup END
+" let g:ale_java_google_java_format_options="-i"
+augroup ALEJAVA
+  autocmd!
+  autocmd FileType java let b:ale_linters = {'java': ['checkstyle']}
+  autocmd FileType java let b:ale_fixers = {'java': ['google_java_format']}
 augroup END
 
 "latex
@@ -1381,7 +1434,7 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_tab_guides = 0
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'man', 'vimwiki', 'go']
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'man', 'vimwiki', 'go', 'markdown', 'vista', 'floaterm', 'popup']
 let g:indent_guides_default_mapping = 0
 
 "ctrlspace
@@ -1394,7 +1447,7 @@ hi CtrlSpaceSearch ctermfg=25 ctermbg=NONE
 hi CtrlSpaceStatusLine ctermfg=99 ctermbg=NONE cterm=bold
 
 "vim-go
-let g:go_auto_sameids = 1
+let g:go_auto_sameids = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
@@ -1493,7 +1546,23 @@ let g:CheatSheetReaderCmd='vert new'
 let g:CheatPager='less --RAW-CONTROL-CHARS --ignore-case --status-column --LONG-PROMPT --HILITE-UNREAD --tabs=2'
 let g:CheatSheetPagerStyle="native"
 
+" vista
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista#renderer#enable_icon = 1
+let g:vista_sidebar_width = 50
+let g:vista_echo_cursor_strategy = "both"
+let g:vista_executive_for = {
+    \ 'vimwiki': 'markdown',
+    \ 'pandoc': 'markdown',
+    \ 'markdown': 'toc',
+    \ }
+let g:vista_stay_on_open = 0
+" let g:vista_no_mappings = 1
+
+let g:recutils_no_maps = 1
+
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16
 hi Pmenu ctermbg=233
 hi SignColumn ctermbg=16
+hi Exception ctermbg=None ctermfg=61

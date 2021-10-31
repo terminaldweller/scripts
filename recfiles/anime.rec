@@ -1,0 +1,28 @@
+%rec: anime
+%mandatory: Name URL
+%type: Location enum loaned home unknown
+%doc: 
+
+Name: platinum end
+URL: https://kissanime.lol/Anime/platinum-end.wo0od/
+
+Name: mushoku tensei
+URL: https://kissanime.lol/Anime/mushoku-tensei-jobless-reincarnation-cour-2.wo07d/
+
+Name: assassin
+URL: https://kissanime.lol/Anime/the-worlds-finest-assassin-gets-reincarnated-in-another-world-as-an-aristocrat.woi8c/
+
+Name: banished from heroes party
+URL: https://kissanime.lol/Anime/banished-from-the-heros-party-i-decided-to-live-a-quiet-life-in-the-countryside.wwfdb/
+
+Name: deep insanity
+URL: https://kissanime.lol/Anime/deep-insanity-the-lost-child.wooa6/
+
+Name: vampire cosmonaut
+URL: https://kissanime.lol/Anime/irina-the-vampire-cosmonaut.wowwo/
+
+Name: mieruko-chain
+URL: https://kissanime.lol/Anime/mieruko-chan.wowwu/
+
+Name: 86
+URL: https://kissanime.lol/Anime/86-eighty-six-season-2.woowu/

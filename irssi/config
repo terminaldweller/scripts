@@ -4,6 +4,7 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
+    password = "9e184da16a69ba773e71914c48060965c1e9f290";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -12,6 +13,7 @@ servers = (
     address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
+    password = "xoxc-162493688432-2090314984309-2093779171413-ca37c32503d3e6f878a29b26434da3e337ca27f23e9245babb9f64aba72c0391|d=gBhFnyIGQ4C8WJaElyR1Xm9va0QP81%2FfSgdg8qXdwG9%2F8UwLC6lDZX0Fok0s4dPPwesLmtX9a%2BhgmopNNqWBx4nPQBEA4jZhX7cWkJYS1xUy2bMXLeMrZ7O3Q7ZeXxw1G%2Bw4WwflypWLftsnb6kP6kW5gZ5DbnyjKK40PONs2cmgr1opX%2FTsxKkK;";
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
@@ -22,14 +24,21 @@ servers = (
     autoconnect = "yes";
   },
   { address = "irc.oftc.net"; chatnet = "oftc"; autoconnect = "yes"; },
-  { address = "localhost"; port = "6667"; chatnet = "bitlbee"; autoconnect = "yes"; }
+  {
+    address = "localhost";
+    port = "6667";
+    chatnet = "bitlbee";
+    autoconnect = "yes";
+  }
 );
 
 chatnets = {
   libera = { type = "IRC"; nick = "terminaldweller"; };
   OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
+  "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
+  bitlbee = { type = "IRC"; };
 };
 
 channels = (
@@ -37,6 +46,8 @@ channels = (
   { name = "#qemu"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#fdio-vpp"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#openssl"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
 
@@ -255,11 +266,13 @@ statusbar = {
         user = { };
         window = { };
         window_empty = { };
+        mh_sbsplitmode = { };
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
         otr = { };
         usercount = { };
+        rotator = { };
       };
     };
 
@@ -320,6 +333,7 @@ statusbar = {
         barend = { alignment = "right"; };
       };
     };
+    dccstat = { items = { dccstat = { }; }; disabled = "yes"; };
     awl_0 = {
       items = {
         barstart = { priority = "100"; };
@@ -375,6 +389,12 @@ settings = {
     timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
     # hilite_url
     url_color = "38;5;6";
+    # rotator
+    rotator_chars = ". o 0 O";
+    rotator_speed = "1000";
+    rotator_bounce = "yes";
+    dccstat_hide_sbar_when_inactive = "yes";
+    dccstat_cycle_through_transfers = "yes";
   };
 };
 keyboard = ( 
@@ -391,8 +411,11 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#go-nuts" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#neomutt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kvm" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssl" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian-next" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); }
 );

@@ -2,6 +2,8 @@ set encoding=UTF-8
 let mapleader = " "
 set nocompatible
 set completeopt-=preview
+set completeopt+=menuone
+set completeopt+=noselect
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -20,6 +22,7 @@ Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
 Plugin 'wellle/context.vim'
 Plugin 'roxma/vim-tmux-clipboard'
+Plugin 'lifepillar/vim-mucomplete'
 call vundle#end()
 filetype plugin indent on
 
@@ -31,7 +34,7 @@ let g:jellybeans_overrides = {
 \    'Todo': { 'guifg': '000000', 'guibg': '00cc00',
 \              'ctermfg': 'Black', 'ctermbg': 'Blue',
 \              'attr': 'bold' },
-\    'Comment': { 'guifg': '339966' },
+\    'Comment': { 'guibg': '339966', 'guifg': '000000' },
 \    'background': { "guibg": "000000", "ctermbg":"none"},
 \    'StorageClass': {"guifg": '9966ff' },
 \    'Exception': {"guifg": "99cc00"},
@@ -101,12 +104,15 @@ set pastetoggle=<F11>
 nnoremap <leader>cd :cd %:p:h<cr>
 nmap ]c :cn<CR>
 nmap [c :cp<CR>
+nnoremap <leader>nn :bn<CR>
+nnoremap <leader>pp :bp<CR>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-nnoremap k gk
-nnoremap gk k
-nnoremap j gj
-nnoremap gj j
+" nnoremap k gk
+" nnoremap gk k
+" nnoremap j gj
+" nnoremap gj j
+nmap <leader>m :make<CR>
 
 function! GetBufferList()
   redir =>buflist
@@ -308,6 +314,9 @@ if has('cscope')
 
     command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
+
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 1
 
 if has("gui")
   set guifont=DejaVu_Sans_Mono_for_Powerline:h10
