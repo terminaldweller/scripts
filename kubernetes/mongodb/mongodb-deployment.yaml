@@ -17,6 +17,38 @@ spec:
       containers:
       - name: mongodb
         image: mongo:4.4.10
+        livenessProbe:
+          exec:
+            command:
+              - mongo
+              - --disableImplicitSessions
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        readinessProbe:
+          exec:
+            command:
+              - mongo
+              - --disableImplicitSessions
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        command:
+          - mongod
+          - --config
+          - /etc/mongod.conf/mongod.conf
+          - --noauth
+          - --dbpath
+          - /data/db
+          - --bind_ip_all
         ports:
           - containerPort: 27017
           - containerPort: 27018
@@ -33,12 +65,18 @@ spec:
                 name: mongodb-secrets
                 key: mongodb-root-password
         volumeMounts:
-          - mountPath: /data/db
-            name: mongo-data
+          - name: mongo-data
+            mountPath: /data/db
+          - name: mongo-conf
+            mountPath: /etc/mongod.conf
+            readOnly: true
       volumes:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: mongo-data
+        - name: mongo-conf
+          configMap:
+            name: mongodb-config-file
 ---
 apiVersion: v1
 kind: Service

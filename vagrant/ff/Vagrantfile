@@ -1,0 +1,55 @@
+# vi: set ft=ruby :
+# frozen_string_literal: true
+
+MOUNT_POINT = '/home/vagrant/ff'
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+CPU_COUNT = 4
+MEMORY = 6144
+
+Vagrant.require_version '>= 2.2.6'
+Vagrant.configure('2') do |config|
+  config.vm.box = 'generic/debian10'
+  config.vm.box_version = '3.4.2'
+  config.vm.box_check_update = false
+  config.vm.synced_folder './', MOUNT_POINT, type: 'nfs'
+  config.vm.hostname = 'pam-farzad'
+  config.vm.boot_timeout = 30
+  config.vm.graceful_halt_timeout = 30
+  # confit.vm.network "private_network", ip: "192.168.33.10"
+
+  # CFLAGS="-I/opt/vagrant/embedded/include/ruby-3.0.0/ruby" vagrant plugin install vagrant-libvirt
+  config.vagrant.plugins = [{ 'vagrant-libvirt' => { 'version' => '^0.6.2' } }]
+
+  config.vm.provider 'virtualbox' do |vb|
+    vb.cpus = CPU_COUNT
+    vb.gui = false
+    vb.memory = MEMORY.to_s
+  end
+  config.vm.provider 'libvirt' do |libvirt|
+    libvirt.default_prefix = 'farzad-deb10-pam-'
+    libvirt.driver = 'kvm'
+    libvirt.nested = true
+    libvirt.machine_type = 'pc-q35-3.1'
+    libvirt.qemuargs value: '-object'
+    libvirt.qemuargs value: 'rng-random,id=rng0,filename=/dev/urandom'
+    libvirt.qemuargs value: '-device'
+    libvirt.qemuargs value: 'virtio-rng-pci,rng=rng0,bus=pcie.0'
+    libvirt.qemuargs value: '-nographic'
+    libvirt.qemuargs value: '-nodefaults'
+    libvirt.qemuargs value: '-no-user-config'
+    libvirt.sound_type = nil
+    libvirt.cpus = CPU_COUNT
+    libvirt.memory = MEMORY
+    libvirt.random model: 'random'
+    libvirt.autostart = true
+    libvirt.features = %w[acpi apic]
+    libvirt.disk_driver cache: 'writeback', io: nil, copy_on_read: 'on', discard: nil, detect_zeroes: nil
+  end
+
+  config.vm.provision 'provision', type: 'shell', name: 'provision', privileged: false, reboot: false, inline: <<-SHELL
+    set -ex
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install -y vim tmux python3 python3-pip curl
+    pip3 install ranger-fm
+  SHELL
+end
