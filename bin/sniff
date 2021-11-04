@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import argparse
-import code
 import signal
 import sys
 import re
@@ -29,10 +28,12 @@ def simple_get(url):
 
 
 def is_good_response(resp):
-    content_type = resp.headers['Content-Type'].lower()
-    return (resp.status_code == 200 and
-            content_type is not None and
-            content_type.find("html") > -1)
+    content_type = resp.headers["Content-Type"].lower()
+    return (
+        resp.status_code == 200
+        and content_type is not None
+        and content_type.find("html") > -1
+    )
 
 
 def log_error(e):
@@ -44,17 +45,35 @@ class Argparser(object):
         parser = argparse.ArgumentParser()
         parser.add_argument("--src", type=str, help="url")
         parser.add_argument("--str", type=str, help="what string to look for")
-        parser.add_argument("--vid", action="store_true",
-                            help="video", default=False)
-        parser.add_argument("--dbg", action="store_true",
-                            help="debug", default=False)
-        parser.add_argument("--url", action="store_true",
-                            help="url", default=False)
+        parser.add_argument(
+            "--vid", action="store_true", help="video", default=False
+        )
+        parser.add_argument(
+            "--dbg", action="store_true", help="debug", default=False
+        )
+        parser.add_argument(
+            "--url", action="store_true", help="url", default=False
+        )
         self.args = parser.parse_args()
 
 
-VID_FMT = ["webm", "mpg", "mp2", "mpeg", "mpe", "mpv", "ogg",
-           "mp4", "m4p", "m4v", "flv", "avi", "wmv", "mkv", "svi"]
+VID_FMT = [
+    "webm",
+    "mpg",
+    "mp2",
+    "mpeg",
+    "mpe",
+    "mpv",
+    "ogg",
+    "mp4",
+    "m4p",
+    "m4v",
+    "flv",
+    "avi",
+    "wmv",
+    "mkv",
+    "svi",
+]
 # write code here
 
 
@@ -74,14 +93,17 @@ def premain(argparser):
             for line in tmp:
                 # hit = False
                 for elem in VID_FMT:
-                    if line.find("."+elem) > -1:
+                    if line.find("." + elem) > -1:
                         print(line)
                         # hit = True
     if argparser.args.url:
         dump_list = []
         for line in tmp:
             dummy = re.findall(
-                'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line)
+                "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|"
+                r"(?:%[0-9a-fA-F][0-9a-fA-F]))+",
+                line,
+            )
             dump_list += dummy
         for elem in dump_list:
             print(elem)
@@ -94,11 +116,8 @@ def main():
     if argparser.args.dbg:
         try:
             premain(argparser)
-        except:
-            variables = globals().copy()
-            variables.update(locals())
-            shell = code.InteractiveConsole(variables)
-            shell.interact(banner="DEBUG REPL")
+        except Exception as e:
+            print(e)
     else:
         premain(argparser)
 

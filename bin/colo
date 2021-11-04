@@ -10,8 +10,8 @@ from html.parser import HTMLParser
 
 
 # BASH_STR = 'printf "\x1b[38;5;XXXmcolourXXX YYY \x1b[0m\t";'
-BASH_STR = '\x1b[38;5;XXXmcolourXXX YYY \x1b[0m\t'
-BASH_ANSI_STR = '\\x1b[38;5;XXXm'
+BASH_STR = "\x1b[38;5;XXXmcolourXXX YYY \x1b[0m\t"
+BASH_ANSI_STR = "\\x1b[38;5;XXXm"
 COLO_LIST = []
 LJUST_CONST = 4
 
@@ -24,20 +24,27 @@ def SigHandler_SIGINT(signum, frame):
 class Argparser(object):
     def __init__(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument("--ansi", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--hsi", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--rgb", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--number", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--name", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--hex", action="store_true",
-                            help="bool", default=False)
-        parser.add_argument("--dbg", action="store_true",
-                            help="debug", default=False)
+        parser.add_argument(
+            "--ansi", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--hsi", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--rgb", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--number", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--name", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--hex", action="store_true", help="bool", default=False
+        )
+        parser.add_argument(
+            "--dbg", action="store_true", help="debug", default=False
+        )
         self.args = parser.parse_args()
 
 
@@ -53,64 +60,84 @@ def premain(argparser):
     signal.signal(signal.SIGINT, SigHandler_SIGINT)
     # here
     PRINT_LIST = str()
-    with open(os.path.dirname(sys.argv[0])+"/index.html", "r") as colo:
+    with open(os.path.dirname(sys.argv[0]) + "/index.html", "r") as colo:
         lines = colo.readlines()
         for line in lines:
             parser = ColoParser()
             parser.feed(line)
-    NUMBER_COLO_LIST = [COLO_LIST[j]
-                        for j in range(0, len(COLO_LIST)) if ((j+1) % 5) == 1]
+    NUMBER_COLO_LIST = [
+        COLO_LIST[j] for j in range(0, len(COLO_LIST)) if ((j + 1) % 5) == 1
+    ]
 
     if argparser.args.hsi:
-        HSL_COLO_LIST = [COLO_LIST[j]
-                         for j in range(0, len(COLO_LIST)) if ((j+1) % 5) == 0]
+        HSL_COLO_LIST = [
+            COLO_LIST[j]
+            for j in range(0, len(COLO_LIST))
+            if ((j + 1) % 5) == 0
+        ]
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 6 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", HSL_COLO_LIST[i])
+                "YYY", HSL_COLO_LIST[i]
+            )
     elif argparser.args.rgb:
-        RGB_COLO_LIST = [COLO_LIST[j]
-                         for j in range(0, len(COLO_LIST)) if ((j+1) % 5) == 4]
+        RGB_COLO_LIST = [
+            COLO_LIST[j]
+            for j in range(0, len(COLO_LIST))
+            if ((j + 1) % 5) == 4
+        ]
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 6 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", RGB_COLO_LIST[i])
+                "YYY", RGB_COLO_LIST[i]
+            )
     elif argparser.args.number:
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 12 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NUMBER_COLO_LIST[i])
+                "YYY", NUMBER_COLO_LIST[i]
+            )
     elif argparser.args.name:
-        NAME_COLO_LIST = [COLO_LIST[j]
-                          for j in range(0, len(COLO_LIST)) if ((j+1) % 5) == 2]
+        NAME_COLO_LIST = [
+            COLO_LIST[j]
+            for j in range(0, len(COLO_LIST))
+            if ((j + 1) % 5) == 2
+        ]
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 6 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NAME_COLO_LIST[i])
+                "YYY", NAME_COLO_LIST[i]
+            )
     elif argparser.args.hex:
-        HEX_COLO_LIST = [COLO_LIST[j]
-                         for j in range(0, len(COLO_LIST)) if ((j+1) % 5) == 3]
+        HEX_COLO_LIST = [
+            COLO_LIST[j]
+            for j in range(0, len(COLO_LIST))
+            if ((j + 1) % 5) == 3
+        ]
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 8 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", HEX_COLO_LIST[i])
+                "YYY", HEX_COLO_LIST[i]
+            )
     elif argparser.args.ansi:
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 6 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", BASH_ANSI_STR.replace("XXX", NUMBER_COLO_LIST[i]))
+                "YYY", BASH_ANSI_STR.replace("XXX", NUMBER_COLO_LIST[i])
+            )
     else:
         for i in range(0, len(NUMBER_COLO_LIST)):
             if i % 12 == 0 and i != 0:
                 PRINT_LIST += "\n"
             PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NUMBER_COLO_LIST[i])
+                "YYY", NUMBER_COLO_LIST[i]
+            )
     print(PRINT_LIST)
 
 

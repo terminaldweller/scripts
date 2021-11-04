@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
 import argparse
-import code
-import readline
 import signal
 import sys
 from capstone import *
@@ -19,11 +17,10 @@ class Argparser(object):
         parser = argparse.ArgumentParser()
         parser.add_argument("--hex", type=str, help="the hex code")
         parser.add_argument("--sp", type=str, help="separator")
-        parser.add_argument("--dbg", action="store_true",
-                            help="debug", default=False)
+        parser.add_argument(
+            "--dbg", action="store_true", help="debug", default=False
+        )
         self.args = parser.parse_args()
-
-# write code here
 
 
 def premain(argparser):
@@ -46,11 +43,8 @@ def main():
     if argparser.args.dbg:
         try:
             premain(argparser)
-        except:
-            variables = globals().copy()
-            variables.update(locals())
-            shell = code.InteractiveConsole(variables)
-            shell.interact(banner="DEBUG REPL")
+        except Exception as e:
+            print(e)
     else:
         premain(argparser)
 

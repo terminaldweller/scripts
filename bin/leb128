@@ -1,7 +1,6 @@
 #!/bin/python3
 
 import argparse
-import code
 import signal
 import sys
 
@@ -22,25 +21,25 @@ def LEB128UnsignedDecode(bytelist):
     result = 0
     shift = 0
     for byte in bytelist:
-        result |= (byte & 0x7f) << shift
+        result |= (byte & 0x7F) << shift
         if (byte & 0x80) == 0:
             break
         shift += 7
-    return(result)
+    return result
 
 
 def LEB128SignedDecode(bytelist):
     result = 0
     shift = 0
     for byte in bytelist:
-        result |= (byte & 0x7f) << shift
+        result |= (byte & 0x7F) << shift
         last_byte = byte
         shift += 7
         if (byte & 0x80) == 0:
             break
     if last_byte & 0x40:
-        result |= - (1 << shift)
-    return(result)
+        result |= -(1 << shift)
+    return result
 
 
 def LEB128UnsignedEncode(int_val):
@@ -50,23 +49,25 @@ def LEB128UnsignedEncode(int_val):
         return bytes([0])
     byte_array = bytearray()
     while int_val:
-        byte = int_val & 0x7f
+        byte = int_val & 0x7F
         byte_array.append(byte | 0x80)
         int_val >>= 7
     byte_array[-1] ^= 0x80
-    return(byte_array)
+    return byte_array
 
 
 def LEB128SignedEncode(int_val):
     byte_array = bytearray()
     while True:
-        byte = int_val & 0x7f
+        byte = int_val & 0x7F
         byte_array.append(byte | 0x80)
         int_val >>= 7
-        if (int_val == 0 and byte & 0x40 == 0) or (int_val == -1 and byte & 0x40):
+        if (int_val == 0 and byte & 0x40 == 0) or (
+            int_val == -1 and byte & 0x40
+        ):
             byte_array[-1] ^= 0x80
             break
-    return(byte_array)
+    return byte_array
 
 
 class Argparser(object):
@@ -75,10 +76,17 @@ class Argparser(object):
         parser.add_argument("--se", type=int, help="leb128 signed encode")
         parser.add_argument("--ue", type=int, help="leb128 unsigned encode")
         parser.add_argument(
-            "--sd", type=devibytes, help="leb128 signed decode. pass a string like ef1289.")
+            "--sd",
+            type=devibytes,
+            help="leb128 signed decode. pass a string like ef1289.",
+        )
         parser.add_argument(
-            "--ud", type=devibytes, help="leb128 unsigned decode. pass a string like ef1290")
+            "--ud",
+            type=devibytes,
+            help="leb128 unsigned decode. pass a string like ef1290",
+        )
         self.args = parser.parse_args()
+
 
 # write code here
 
@@ -106,11 +114,8 @@ def premain():
 def main():
     try:
         premain()
-    except:
-        variables = globals().copy()
-        variables.update(locals())
-        shell = code.InteractiveConsole(variables)
-        shell.interact(banner="LEB128 DEBUG REPL")
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
