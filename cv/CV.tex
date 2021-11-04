@@ -1,0 +1,173 @@
+\documentclass[10pt]{article}
+\usepackage{array, xcolor}
+\usepackage[margin=3cm]{geometry}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+}
+\definecolor{lightgray}{gray}{0.8}
+\newcolumntype{L}{>{\raggedleft}p{0.2\textwidth}}
+\newcolumntype{R}{p{0.8\textwidth}}
+\newcommand\VRule{\color{lightgray}\vrule width 0.5pt}
+
+\title{\bfseries\Huge Farzad Sadeghi}
+\author{farzadsadeghi@protonmail.ch}
+\date{2020/03/31}
+\begin{document}
+\maketitle
+\begin{center}
+  \begin{minipage}[ht]{0.2\textwidth}{\centering}
+  \vspace*{\fill}
+  \centering
+  Tehran, Iran\\
+  +99 9999 9999999
+  \centering
+  \vspace*{\fill}
+  \end{minipage}
+\end{center}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Professional Experience}
+\begin{longtable}{L!{\VRule}R}
+  {\bf Feb. 2019--Now}\\16 months&{\bf Maharan International (Tehran, Iran)}\\
+  &Requirement manager, designer and developer and tooling.\\[5pt]
+  & \\
+  & \\
+  {\bf July 2017--Nov. 2017}\\5 months&{\bf Truebit (Remote, 3 time-zones)}\\
+  &Developed Truebit's WASM interpreter, smart contracts and CI. Also researched distributed storage networks for Truebit’s needs which included IPFS and Ethereum's swarm.\\[5pt]
+  & \\
+  & \\
+  {\bf Sept. 2016--Nov. 2016}\\2 months&{\bf Iranian Electronics Industry Engineering Corp (Tehran, Iran)}\\
+  & The role primarily included devising the coding standard and style for the company plus some general consultancy on embedded software development.\\[5pt]
+  & \\
+  & \\
+  {\bf May 2016--July 2016}\\3 months&{\bf NEAT (Rome, Italy)}\\
+ &Wrote an automatic refactoring tool using Clang(Libtooling) in C++. The tool would be the last piece of an automated model-driven development process for safety-critical systems.\\[5pt]
+  & \\
+  & \\
+ {\bf July 2014--March 2016}\\21 months&{\bf Crouse (Tehran, Iran)}\\
+  & Embedded software developer, Safety-critical applications: Implementation of the DSP algorithm, testing, automation and tooling. The Software team’s ISO 26262 representative. Helped develop the work-flow for the team by adopting and adapting Code Reviews, FMEA and FTA for software and tooling alongside some best practices and defensive C programming guidelines. Studied AUTOSAR's SWC and RTE specifications.\\[5pt]
+  & \\
+  & \\
+  {\bf August 2010--March 2012}\\20 months&{\bf Safir Language Academy (Tehran, Iran)}\\
+  & English Teacher - Later on specifically IELTS teacher.\\[5pt]
+\end{longtable}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Role Breakdown}
+\begin{longtable}{L!{\VRule}R}
+  {\bf ERTMS / ETCS DMI Development}& Derived software requirements from the system requirements, effectively splitting them into two components. Designed and implemented the software for the component on the kernel side. Wrote a tool that made the requirements' traceability files by gathering special comments from the C source files. Wrote a tool that determines all the sub-fields of aggregate types used in the function and the functions it calls(required for testing).
+  \\[5pt]&\\
+  {\bf Embedded Safety-Critical Development}& Wrote the SRS and the SDD for the DSP algorithm, then implemented the DSP algorithm for a safety-critical hard real-time embedded system.
+  \\[5pt]&\\
+  {\bf Code Generation}& \begin{itemize}
+    \vspace{-\baselineskip}
+    \item Wrote A tool that generates binary file (WASM, ...) parsers in C.
+    \item Wrote another tool that generates the C code necessary to add a C structure to Lua as a Lua table.
+    \end{itemize}
+  \\[5pt]
+  {\bf Automation and Tooling}& \begin{itemize}
+    \vspace{-\baselineskip}
+    \item Developed a Misra-C:2004 rule checker(open-source project) using Clang's Libtooling.
+    \item Developed a source code obfuscation tool(open-source project) using Clang's Libtooling.
+    \item Developed an interactive CLI tool aimed at object code manipulation(open-source project) in C++/C with Lua as it's scripting language. The tool also has Python embedded in it for rapid prototyping.
+    \item Automated the traceability matrix generation using libclang's Python bindings.
+    \item Automated the regression testing for a project I was involved in.
+    \item Automated the calculation of the WCET for all implemented functions through the use of of a Python script and an XML description file.
+    \end{itemize}
+  \\[5pt]
+  {\bf Automatic Refactoring}& Wrote an automatic refactoring tool using Clang's Libtooling for C.\\[5pt]
+  & \\
+  {\bf Defensive Programming / Safety-Aware Software Design}& Studied/Implemented defensive programming practices, coding style and guidelines. Explored the use of FMEA and FTA for the software domain.\\[5pt]
+  & \\
+  {\bf AUTOSAR}& Studied AUTOSAR SWC and RTE.\\[5pt]
+  & \\
+  {\bf ISO 26262}& Studied the software section of the standard. I was also the software's group's representative for the study/review meetings held with the hardware and system teams on ISO 26262.\\[5pt]
+\end{longtable}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Programming Languages}
+\begin{tabular}{L!{\VRule}R}
+  {\bf Languages}&C, C++\\[5pt]
+  & \\
+  {\bf Scripting Languages}&Python, Lua\\[5pt]
+  & \\
+  {\bf Other}&Bash, AWK, Make\\[5pt]
+\end{tabular}
+
+\vspace{5mm}
+\hrule
+
+\section*{Skills}
+\begin{tabular}{L!{\VRule}R}
+  {\bf Software Design}& Safety-aware software design.\\[5pt]
+  & \\
+  {\bf Requirement Analysis}& Derived the functional and technical software requirements from the ERTMS/ETCS DMI system requirements for our implementation.\\[5pt]
+  & \\
+  {\bf CI}& Appveyor for windows(cygwin-only) and TrvisCI for linux.\\[5pt]
+  & \\
+  {\bf UML}& Requirement Modelling.\\[5pt]
+  {\bf Clang}& Libtooling and libclang.\\[5pt]
+\end{tabular}
+
+\vspace{5mm}
+\hrule
+
+\section*{Languages}
+\begin{tabular}{L!{\VRule}R}
+  {\bf English}&{\bf Native-like}\\
+  {\bf Persian}&{\bf Native}\\
+  {\bf Azerbaijani}&{\bf Native}\\
+  German&Intermediate\\
+\end{tabular}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Education}
+\begin{tabular}{L!{\VRule}R}
+  2007--2013& Bachelor's in Electrical Engineering, Iran University of Science and Technology, Tehran, Iran.\\[5pt]
+  &{\bf Thesis}: Determining the frequency of an audio signal using phase derivation in real time, design and implementation using an FPGA.
+\end{tabular}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Links}
+\begin{tabular}{L!{\VRule}R}
+  {\bf \href{https://ir.linkedin.com/in/farzad-sadeghi-08426277}{Linkedin}}& My Linkedin page.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller}{Github}}& My Github page.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/cgrep}{Cgrep}}& Grep for C-family source files.\\[5pt]
+  {\bf \href{https://terminaldweller.github.io/mutator/}{Mutator}}& An experimental suite of tools aimed at C-family development.\\[5pt]
+  {\bf Faultreiber}&\href{https://github.com/terminaldweller/faultreiber}{Faultreiber} generates a binary file parser in C using an XML description file.\\[5pt]
+  {\bf Luatablegen}&\href{https://github.com/terminaldweller/luatablegen}{Luatablegen} generates C code that wraps C structures as Lua tables using an XML description file.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/dwasm}{Dwasm}}& A WASM dump script written in python.\\[5pt]
+  {\bf \href{https://github.com/terminaldweller/delf}{Delf}}& An ELF dump script in python.\\[5pt]
+\end{tabular}
+
+\vspace{5mm}
+\hrule
+\vspace{5mm}
+
+\section*{Referene}
+\begin{longtable}{L!{\VRule}R}
+  {\bf Jason Teutsch}& jt@truebit.io\\[5pt]
+  {\bf Francesco Zulliani}& francesco.zuliani@neat.it\\[5pt]
+\end{longtable}
+
+\end{document}
+
