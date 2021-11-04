@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import subprocess
+
+
+class Color:
+    bold = "\033[1m"
+    faint = "\033[2m"
+    italic = "\033[3m"
+    underline = "\033[4m"
+    blink = "\033[5m"
+    negative = "\033[7m"
+    crossed = "\033[9m"
+    reset = "\033[0m"
+    one = "\x1b[38;5;216m"
+    two = "\x1b[38;5;192m"
+    three = "\x1b[38;5;22m"
+    four = "\x1b[38;5;25m"
+    five = "\x1b[38;5;98m"
+    six = "\x1b[38;5;68m"
+    seven = "\x1b[38;5;59m"
+    eight = "\x1b[38;5;36m"
+    nine = "\x1b[38;5;202m"
+    ten = "\x1b[38;5;100m"
+    eleven = "\x1b[38;5;105m"
+    twelve = "\x1b[38;5;106m"
+    thirteen = "\x1b[38;5;96m"
+    fourteen = "\x1b[38;5;31m"
+    fifteen = "\x1b[38;5;23m"
+    sixteen = "\x1b[38;5;105m"
+
+
+def call_from_shell_list(command_list):
+    if sys.version_info < (3, 7):
+        return subprocess.run(command_list, stdout=subprocess.PIPE)
+    else:
+        return subprocess.run(command_list, capture_output=True)
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("you want to run something right?\nright?")
+        sys.exit(1)
+
+    args = sys.argv[1:]
+    args.insert(0, "strace")
+    result = call_from_shell_list(args)
+    lines = result.stderr.decode("utf-8").split("\n")
+    end_line = lines[-2]
+    lines = lines[:-2]
+    for line in lines:
+        syscall = line[0 : line.find("(")]
+        sysargs = line[line.find("(") + 1 : line.find(")")].split()
+        exitvalue = line[line.find(")") + 1 :]
+        print(Color.one + syscall, end=" ")
+        print(Color.two, end=" ")
+        for arg in sysargs:
+            if arg.find("|") > 0:
+                print(Color.five, arg, end=" ")
+            else:
+                print(arg, end=" ")
+        print(Color.three + exitvalue + Color.reset)
+    print(Color.reset + Color.bold + Color.nine + end_line + Color.reset)
+
+
+if __name__ == "__main__":
+    main()
