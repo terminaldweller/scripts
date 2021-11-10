@@ -34,7 +34,7 @@ Vagrant.configure('2') do |config|
   config.vm.box_version = '3.4.2'
   config.vm.box_check_update = false
   config.vm.synced_folder './source', DEMO_MOUNT_POINT, type: 'nfs'
-  config.vm.hostname = 'dpdk-farzad'
+  config.vm.hostname = 'pfsense'
 
   config.vm.boot_timeout = 30
   config.vm.graceful_halt_timeout = 30

@@ -25,3 +25,5 @@ docker run -p 6667:6667 ezkrg/bitlbee-libpurple
 openssl s_client -connect chat.terminaldweller.com:5222 -starttls xmpp
 vagrant package --base deb10-luks
 make MENUCONFIG_COLOR=blackbg menuconfig
+sudo /home/devi/devi/openssh/openssh-8.8p1/sshd -D -f /home/devi/devi/openssh/openssh-8.8p1/sshd_config -d -p 2222 -4
+set schedule-multiple 1

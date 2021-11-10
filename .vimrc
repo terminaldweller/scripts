@@ -496,6 +496,15 @@ augroup CFamLangRun
   autocmd!
   autocmd FileType c,cpp nmap <leader>r :make run<CR>
 augroup end
+"FIXME
+augroup JavaRun
+  autocmd!
+  autocmd FileType java nmap <leader>r :!gradle run<CR>
+augroup end
+augroup VimRun
+  autocmd!
+  autocmd FileType vim nmap <leader>r :so %<CR>
+augroup end
 nnoremap <leader>cd :cd %:p:h<cr>
 "terminal vim wont do weird things when you paste things in
 set pastetoggle=<F11>
@@ -1404,8 +1413,8 @@ augroup ALEMARKDOWN
 augroup END
 augroup ALEC
   autocmd!
-  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
-  autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
+  " autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
+  " autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
 augroup END
 augroup ALECPP
   autocmd!
@@ -1558,7 +1567,9 @@ let g:vista_executive_for = {
     \ }
 let g:vista_stay_on_open = 0
 " let g:vista_no_mappings = 1
+autocmd FileType vista,vista_kind nnoremap <buffer> <silent> :<c-u>call vista#finder#fzf#Run()<CR>
 
+" recutils
 let g:recutils_no_maps = 1
 
 "this should be here at the end so nothing else could override it

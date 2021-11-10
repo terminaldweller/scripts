@@ -56,6 +56,7 @@ def main():
         exitvalue = line[line.find(")") + 1 :]
         print(Color.one + syscall, end=" ")
         print(Color.two, end=" ")
+        sysargs = list(filter(None, sysargs))
         for arg in sysargs:
             if arg.find("|") > 0:
                 print(Color.five, arg, end=" ")

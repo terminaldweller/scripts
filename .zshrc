@@ -21,12 +21,14 @@ eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
 alias vv="vim"
-alias ls="ls --color=auto"
-alias la="ls -A"
-# alias ll="exa -abghHliSmxF --color-scale --git -@"
-alias ll="\ls -lZspihbFA --color=never --full-time --author | colcol | column -t"
-# alias lss="exa -Sls=size"
-alias lss="ls -sASh"
+alias ls="exa"
+# alias ls="ls --color=auto"
+alias la="exa -a"
+# alias la="ls -A"
+alias ll="exa -abghHliSmxF --color-scale --git -@"
+# alias ll="\ls -lZspihbFA --color=never --full-time --author | colcol | column -t"
+alias lss="exa -Sls=size"
+# alias lss="ls -sASh"
 alias ee="nautilus ."
 alias updaterc="cp ~/scripts/.zshrc ~/.zshrc"
 alias fixvimrc='cp ~/scripts/.vimrc ~/.vimrc'
@@ -164,6 +166,10 @@ alias gottyrc="vim ~/scripts/.gotty"
 alias fixgottyrc="cp ~/scripts/.gotty ~/.gotty"
 alias dircolorsrc="vim ~/scripts/.dir_colors"
 alias fixdircolorsrc="cp ~/scripts/.dir_colors ~/.dir_colors"
+alias inputrc="vim ~/scripts/.inputrc"
+alias fixinputrc="cp ~/scripts/.inputrc ~/.inputrc"
+alias gdbinit="vim ~/scripts/.gdbinit"
+alias fixgdbinit="cp ~/scripts/.gdbinit ~/.gdbinit"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -297,6 +303,10 @@ export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
 export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
 export PATH=$PATH:/home/devi/google-java-format
 export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
+
+ks() {
+  kubectl "$@" -n kube-system
+}
 
 export EDITOR=vim
 export BROWSER=w3m

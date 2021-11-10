@@ -46,6 +46,8 @@ channels = (
   { name = "#openssl"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#openssh"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#gdb"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
 
@@ -415,5 +417,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian-next" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssh" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); }
 );
