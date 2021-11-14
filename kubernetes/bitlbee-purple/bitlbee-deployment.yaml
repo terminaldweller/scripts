@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitlbee-libpurple
+  labels:
+    app: bitlbee-libpurple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitlbee-libpurple
+  template:
+    metadata:
+      labels:
+        app: bitlbee-libpurple
+    spec:
+      containers:
+      - name: bitlbee-libpurple
+        image: ezkrg/bitlbee-libpurple:debian-20210922235056
+        ports:
+          - containerPort: 6667
+        # volumeMounts:
+        #   - name: bitlbee-libpurple-conf
+        #     mountPath: /var/lib/bitlbee
+        #     readOnly: true
+      # volumes:
+        # - name: bitlbee-conf
+        #   configMap:
+        #     name: bitlbee-config-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitlebee-libpurple-service
+spec:
+  selector:
+    app: bitlbee-libpurple
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: "6667"
+      port: 6667
+      targetPort: 6667
+      nodePort: 30667
