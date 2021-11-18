@@ -23,13 +23,8 @@ spec:
         - name: TZ
           valueFrom:
             configMapKeyRef:
-              name: k3s-rpi-configmap
+              name: squid-configmap
               key: pihole_tz
-        - name: WEBPASSWORD
-          valueFrom: 
-            secretKeyRef:
-              name: k3s-rpi-secrets
-              key: pihole-webpassword
       volumes:
         - name: squid-config-volume
           valueFrom:

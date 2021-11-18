@@ -6,7 +6,7 @@ metadata:
     app: pihole
 spec:
   replicas: 1
-  selcetor:
+  selector:
     matchLabels:
       app: pihole
   template:
@@ -26,12 +26,12 @@ spec:
         - name: TZ
           valueFrom:
             configMapKeyRef:
-              name: k3s-rpi-configmap
+              name: pihole-configmap
               key: pihole_tz
         - name: WEBPASSWORD
-          valueFrom: 
+          valueFrom:
             secretKeyRef:
-              name: k3s-rpi-secrets
+              name: pihole-secret
               key: pihole-webpassword
 ---
 apiVersion: v1
@@ -41,25 +41,30 @@ metadata:
 spec:
   selector:
     app: pihole
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
-      port: 53
+      port: 2053
       targetPort: 53
-      nodePort: 53
+      nodePort: 30153
+      name: "pihole-tcp-53"
     - protocol: UDP
-      port: 53
+      port: 2053
       targetPort: 53
-      nodePort: 53
+      nodePort: 30153
+      name: "pihole-udp-53"
     - protocol: UDP
-      port: 67
+      port: 2067
       targetPort: 67
-      nodePort: 67
+      nodePort: 30167
+      name: "pihole-udp-67"
     - protocol: TCP
-      port: 80
+      port: 2080
       targetPort: 80
-      nodePort: 80
+      nodePort: 30180
+      name: "pihole-tcp-80"
     - protocol: TCP
-      port: 443
+      port: 20443
       targetPort: 443
-      nodePort: 443
+      nodePort: 30443
+      name: "pihole-tcp-443"
