@@ -1,5 +1,60 @@
-source ~/gef/gef.py
-# source /home/devi/.local/lib/python3.8/site-packages/voltron/entry.py
+# gef
+source /home/devi/gef/gef.py
+gef config context.libc_args 1
+gef config context.enable 0
+gef config context.nb_lines_threads 4
+gef config context.use_capstone 1
+
+# voltron
+source /usr/local/lib/python3.8/dist-packages/voltron/entry.py
+
+# load custom scripts
+python
+import glob
+python_dir = "/home/devi/scripts/gdb/auto-load"
+py_files = glob.glob(f"{python_dir}/*.py")
+for py_file in py_files:
+  gdb.execute(f'source {py_file}')
+end
+
+# configs
 set listsize 20
 set follow-fork-mode child
 set detach-on-fork on
+# set backtrace-past-main on
+# set backtrace-past-entry on
+set target-async on
+set print pretty on
+set confirm off
+set verbose off
+set history save on
+set history size 10000
+set history filename ~/.gdb_history
+set output-radix 0x10
+set input-radix 0x10
+set height 0
+set width 0
+
+# prompt
+set prompt >>>
+
+# styles
+set style tui-border background green
+
+define hook-stop
+  list
+  backtrace
+end
+
+# load gdbundle
+# python
+# import os,subprocess,sys
+# paths = subprocess.check_output('python -c "import os,sys;print(os.linesep.join(sys.path))"')
+# sys.path.extend(paths)
+# import gdbundle
+# gdbundle.init()
+# end
+
+define btall
+  thread apply all backtrace
+end
