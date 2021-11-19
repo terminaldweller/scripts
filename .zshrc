@@ -170,6 +170,8 @@ alias inputrc="vim ~/scripts/.inputrc"
 alias fixinputrc="cp ~/scripts/.inputrc ~/.inputrc"
 alias gdbinit="vim ~/scripts/.gdbinit"
 alias fixgdbinit="cp ~/scripts/.gdbinit ~/.gdbinit"
+alias d="docker"
+alias dc="docker-compose"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

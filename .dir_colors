@@ -211,3 +211,6 @@ EXEC 01;32
 # yaml
 .yaml 00;38;5;134
 .yml 00;38;5;134
+# docker
+*Dockerfile 00;38;5;24
+*docker-compose.yaml 00;38;5;24

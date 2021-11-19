@@ -27,3 +27,7 @@ vagrant package --base deb10-luks
 make MENUCONFIG_COLOR=blackbg menuconfig
 sudo /home/devi/devi/openssh/openssh-8.8p1/sshd -D -f /home/devi/devi/openssh/openssh-8.8p1/sshd_config -d -p 2222 -4
 set schedule-multiple 1
+/etc/freeradius/3.0/mods-config/files
+add 0 ****@chat.terminaldweller.com moon
+account add jabber ****@chat.terminaldweller.com ****** chat.terminaldweller.com
+sudo mount -t cifs -o user=pi3,vers=2.0,domain=MSHOME //192.168.1.200/disk1 /home/pi/kstore

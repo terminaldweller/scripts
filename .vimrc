@@ -817,7 +817,7 @@ hi def InterestingWord5 ctermfg=16 ctermbg=211
 hi def InterestingWord6 ctermfg=16 ctermbg=195
 hi def InterestingWord7 ctermfg=16 ctermbg=99
 hi def InterestingWord8 ctermfg=16 ctermbg=35
-hi def InterestingWord9 ctermfg=16 ctermbg=57
+hi def InterestingWord9 ctermfg=16 ctermbg=209
 hi def InterestingWord0 ctermfg=16 ctermbg=39
 
 "Steve Losh's highlight function
@@ -1418,8 +1418,8 @@ augroup ALEC
 augroup END
 augroup ALECPP
   autocmd!
-  autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
-  autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
+  " autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
+  " autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
 augroup END
 augroup ALEHTML
   autocmd!
