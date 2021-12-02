@@ -11,14 +11,14 @@ source /usr/local/lib/python3.8/dist-packages/voltron/entry.py
 # load custom scripts
 python
 import glob
-python_dir = "/home/devi/scripts/gdb/auto-load"
+python_dir = "/home/devi/scripts/gdb"
 py_files = glob.glob(f"{python_dir}/*.py")
 for py_file in py_files:
   gdb.execute(f'source {py_file}')
 end
 
 # configs
-set listsize 20
+set listsize 13
 set follow-fork-mode child
 set detach-on-fork on
 # set backtrace-past-main on
@@ -57,4 +57,19 @@ end
 
 define btall
   thread apply all backtrace
+end
+
+# custom signals
+handle SIGUSR1 nopass
+handle SIGUSR2 nopass
+handle SIGUSR3 nopass
+handle SIGUSR4 nopass
+handle SIGUSR5 nopass
+
+# kill all inferiors before exit
+python
+  import subprocess
+  inferiors = gdb.inferiors()
+  for inferior in inferiors:
+    subprocess.run(["kill","-9",repr(intferior.pid)])
 end

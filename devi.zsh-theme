@@ -86,7 +86,7 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 # %R - repository path
 # %S - path in the repository
 PR_RST="%{${reset_color}%}"
-FMT_BRANCH=" on %{$turquoise%}%s-➜%r-➜%b%u%c%a${PR_RST} "
+FMT_BRANCH=" on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
 FMT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
 FMT_UNSTAGED="%{$orange%} ●"
 FMT_STAGED="%{$limegreen%} ●"
@@ -131,9 +131,9 @@ steeef_precmd() {
   if [[ -n "$PR_GIT_UPDATE" ]] ; then
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
       PR_GIT_UPDATE=1
-      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a%{$hotpink%} ●${PR_RST}"
+      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a%{$hotpink%} ●${PR_RST}"
     else
-      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s-➜%r-➜%b%u%c%a${PR_RST} "
+      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
     fi
     zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
 

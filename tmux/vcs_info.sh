@@ -69,7 +69,7 @@ function repo_info {
 }
 
 tmux_session_info=" #S:#I.#P"
-branch_info="#[fg=colour16]$(repo_info)#[fg=colour255 bg=colour39]"$(git_branch_info)
+branch_info="#[fg=colour16]$(repo_info)#[fg=colour0 bg=colour39]"$(git_branch_info)
 untracked_info="#[fg=colour255 bg=colour244]"$(git_untracked_info)
 deletions_info="#[fg=colour255 bg=colour1]"$(gitdeletions)
 additions__info="#[fg=colour255 bg=colour22]"$(gitadditions)
