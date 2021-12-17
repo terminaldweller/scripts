@@ -125,7 +125,6 @@ alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 alias irssi="irssi -n terminaldweller"
 alias joplinkeymap="vim ~/scripts/.config/joplin/keymap.json"
 alias fixjoplinkeymap="cp ~/scripts/.config/joplin/keymap.json ~/.config/joplin/keymap.json"
-alias mpv="/mnt/c/ProgramData/chocolatey/lib/mpv.install/tools/mpv.exe"
 alias postitrc="vim ~/scripts/postit"
 alias rainbowrc="vim ~/scripts/.rainbow_config.json"
 alias fixrainbowrc="cp ~/scripts/.rainbow_config.json ~/.rainbow_config.json"
@@ -151,17 +150,17 @@ alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
 alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
 alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
 alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychains/proxychains.conf"
-alias zgit="proxychains git"
-alias zssh="proxychains ssh"
-alias zscp="proxychains scp"
+alias zgit="proxychains4 git"
+alias zssh="proxychains4 ssh"
+alias zscp="proxychains4 scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
-alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.k9s/skin.yml"
-alias fixk9sconfig="cp ~/scripts/.k9s/config.yml ~/.k9s/config.yml"
+alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
+alias fixk9sconfig="cp ~/scripts/.k9s/config.yml ~/.config/k9s/config.yml"
 alias gottyrc="vim ~/scripts/.gotty"
 alias fixgottyrc="cp ~/scripts/.gotty ~/.gotty"
 alias dircolorsrc="vim ~/scripts/.dir_colors"
@@ -172,6 +171,9 @@ alias gdbinit="vim ~/scripts/.gdbinit"
 alias fixgdbinit="cp ~/scripts/.gdbinit ~/.gdbinit"
 alias d="docker"
 alias dc="docker-compose"
+alias xbps-file="xbps-query -Ro"
+alias zh_freebsd="zssh dev@192.168.90.15"
+alias zh_linux="zssh dev@192.168.90.17"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -237,10 +239,10 @@ pdfsearch() {
 #  /usr/bin/bicon.bin
 #fi
 
+export SOCKS_PROXY="socks5://127.0.0.1:9050"
 REPORTTIME=4
 STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
-export DISPLAY="192.168.1.103:0"
 export LIBGL_ALWAYS_INDIRECT=1
 export PULSE_SERVER=tcp:192.168.1.103
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
@@ -285,7 +287,7 @@ fixtheme() {
 export PATH=$PATH:/home/devi/.cargo/bin
 export PATH=$PATH:/home/devi/scripts/bin
 export PATH=$PATH:/home/devi/.fzf/bin
-export PATH=$PATH:/home/devi/.ghcup/bin
+# export PATH=$PATH:/home/devi/.ghcup/bin
 export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
 export PATH=$PATH:/home/devi/mongosh/bin
@@ -295,6 +297,8 @@ export PATH=$PATH:/home/devi/gotty
 export PATH=$PATH:/home/devi/.poetry/bin
 export PATH=$PATH:/home/devi/pulumi
 export PATH=$PATH:/home/devi/dry
+export PATH=$PATH:/home/devi/.fnm
+export PATH=$PATH:/home/devi/.rbenv/bin
 export PATH=$PATH:/home/devi/k9s
 export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
@@ -378,8 +382,8 @@ export KEYTIMEOUT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 
 # fnm
-# eval "$(fnm env)"
-_evalcache fnm env
+eval "$(fnm env)"
+# _evalcache fnm env
 
 # OPAM configuration
 . /home/devi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -587,3 +591,4 @@ ranger() {
 
 # eval "$(rbenv init -)"
 _evalcache rbenv init -
+[ -f "/home/devi/.ghcup/env" ] && source "/home/devi/.ghcup/env" # ghcup-env

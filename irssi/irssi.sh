@@ -17,12 +17,12 @@ wget https://scripts.irssi.org/scripts/sb_position.pl
 wget https://scripts.irssi.org/scripts/trackbar.pl
 wget https://scripts.irssi.org/scripts/scriptassist.pl
 wget https://scripts.irssi.org/scripts/tordetect.pl
-wget https://scripts.irssi.org/scripts/timezones.pl
 wget https://scripts.irssi.org/scripts/usercount.pl
 # wget https://scripts.irssi.org/scripts/bitlbee_typing_notice.pl
 # wget https://scripts.irssi.org/scripts/uberprompt.pl
 wget https://scripts.irssi.org/scripts/bitlbee_tab_completion.pl
 
+cd ~/scripts/irssi
 cp ./config ~/.irssi/config
 cp ./solarized-powerline.theme ~/.irssi/solarized-powerline.theme
 cp ./startup ~/.irssi/startup

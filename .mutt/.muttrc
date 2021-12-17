@@ -42,6 +42,9 @@ subscribe ^cfe-dev@lists.llvm.org$
 subscribe ^llvm-dev@lists.llvm.org$
 subscribe -group lua lua-l@lists.lua.org
 subscribe -group cygwin cygwin@cygwin.com
+subscribe ^dev-request@dpdk.org$
+subscribe ^freeradius-users-request@lists.freeradius.org$
+subscribe ^odp-request@lists.opendataplane.org$
 
 color error         color196        default                        # message line error text
 color tilde         color81         default                        # vi-like tildes marking blank lines

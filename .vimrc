@@ -255,7 +255,7 @@ let g:jellybeans_overrides = {
 \    'Todo': { 'guifg': '000000', 'guibg': '00cc00',
 \              'ctermfg': 'Black', 'ctermbg': 'Blue',
 \              'attr': 'bold' },
-\    'Comment': { 'guifg': '339966' },
+\    'Comment': { 'guibg': '339966', 'guifg': '000000' },
 \    'background': { "guibg": "000000", "ctermbg":"none"},
 \    'StorageClass': {"guifg": '9966ff' },
 \    'PreCondit': {"guifg": '5f87ff' },
@@ -303,7 +303,7 @@ function! s:shortenPath(path)
 endfunction
 
 "airline options
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let s:airline_custom_cwd = s:shortenPath(expand('%:p'))
 try
   let g:airline#extensions#tabline#enabled = 1
@@ -1028,7 +1028,7 @@ function! s:compiler_explorer()
   set syntax=nasm
   1
 endfunction
-command! -complete=shellcmd -nargs=0 CompilerExplorer call s:compiler_explorer()
+" command! -complete=shellcmd -nargs=0 CompilerExplorer call s:compiler_explorer()
 vmap <S-F9> :<C-U>CompilerExplorer<cr>
 
 "view the python docs for the word under cursor in a split window
@@ -1041,7 +1041,7 @@ function! s:pythondoc()
   set syntax=man
   1
 endfunction
-command! -complete=shellcmd -nargs=0 PythonDoc call s:pythondoc()
+" command! -complete=shellcmd -nargs=0 PythonDoc call s:pythondoc()
 nnoremap <leader>h :<C-U>PythonDoc<cr>
 vnoremap <leader>h :<C-U>PythonDoc<cr>
 
@@ -1089,6 +1089,7 @@ iab coutn count
 iab accoutn account
 iab applciation application
 iab cosnt const
+iab ehco echo
 
 "netrw
 let g:netrw_sort_by = 'date'
@@ -1545,7 +1546,7 @@ function! s:tldrdoc()
   let l:vword = expand("<cword>")
   call tldr#run(l:vword)
 endfunction
-command! -complete=shellcmd -nargs=0 TLDRDoc call s:tldrdoc()
+" command! -complete=shellcmd -nargs=0 TLDRDoc call s:tldrdoc()
 nnoremap <leader>tt :<C-U>TLDRDoc<cr>
 vnoremap <leader>tt :<C-U>TLDRDoc<cr>
 
