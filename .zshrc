@@ -244,7 +244,7 @@ REPORTTIME=4
 STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
 export LIBGL_ALWAYS_INDIRECT=1
-export PULSE_SERVER=tcp:192.168.1.103
+#export PULSE_SERVER=tcp:192.168.1.103
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export WWW_HOME="duckduckgo.com"
 alias def="sdcv --color"

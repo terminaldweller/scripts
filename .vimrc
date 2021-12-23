@@ -312,7 +312,7 @@ try
   let g:airline#extensions#tabline#formatter = 'default'
   let g:airline#extensions#ale#enabled = 1
   let g:airline#extensions#branch#enabled = 1
-  " let g:airline#extensions#xkblayout#enabled = 1
+  let g:airline#extensions#xkblayout#enabled = 1
 catch
 endtry
 let g:airline_theme = 'jellybeans'
@@ -329,7 +329,7 @@ function! Airline_Custom()
   \])
 endfunction
 autocmd user AirlineAfterInit call Airline_Custom()
-" let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
+let g:XkbSwitchLib = '/usr/lib/libxkbswitch.so'
 let g:airline_exclude_preview = 1
 
 syntax on
@@ -1299,6 +1299,7 @@ let g:gutentags_plus_nomap = 1
 map <leader>v <Plug>(Vman)
 autocmd Filetype man setlocal relativenumber
 autocmd Filetype man setlocal number
+" let g:vim_man_cmd = '/usr/bin/man'
 
 "context
 let g:context_enabled = 0
@@ -1534,7 +1535,7 @@ endif
 
 "vimwiki
 let wiki = {}
-let wiki.path = '~/vimwiki/'
+let wiki.path = '~/wikis/'
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml', 'Dockerfile':'Dockerfile'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_global_ext = 0
