@@ -172,7 +172,7 @@ abstracts = {
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
   # %5 = magenta
-  pubmsgmenick = "%5%k%Z0087ff{msgnick $0$1-}%N%m %n";
+  pubmsgmenick = "%5%k%Z0087ff{msgnick $0$1-}%N%m %n";
   menick = "%Zeeeeee$*";
 
   # public highlighted message in channel
@@ -403,7 +403,7 @@ formats = {
     line_start_irssi = "%k%z5f5fd7IRSSI%N%Z5f5fd7 %N";
     new_topic = "%k%z00d700TOPIC %8 {ichannelhilight $1} by {inick $0}%8  $2";
     nick_changed = "%k%z00d700RENAME %Z00d700%0 {nick $0} %Zff8700 {nick $1} %N%8%n%k%N";
-    part = "%k%z00d700PART %8 {ichannelhilight $2}%N %0%Z005f87 %N{inick $0}%0 %k%Zeeeeee {reason $3}";
+    part = "%K%Z00d700%k%z00d700PART %8 {ichannelhilight $2}%N %0%Z005f87 %N{inick $0}%0 %k%Zeeeeee {reason $3}";
     quit = "%0%Z005f00%k%z005f00QUIT %N {inick $0}%0 %Zeeeeee %N%n%k%N {reason $2}";
     your_nick_changed = "%k%z00d700RENAME %Z00d700%0 {mynick $0} %Zff8700 {mynick $1} %N%8%n%k%N";
     own_msg = "{ownmsgnick $nickalign$2 {ownnick $nickcolor$0$nicktrunc}}$1";

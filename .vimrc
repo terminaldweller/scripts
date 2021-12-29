@@ -255,7 +255,7 @@ let g:jellybeans_overrides = {
 \    'Todo': { 'guifg': '000000', 'guibg': '00cc00',
 \              'ctermfg': 'Black', 'ctermbg': 'Blue',
 \              'attr': 'bold' },
-\    'Comment': { 'guibg': '339966', 'guifg': '000000' },
+\    'Comment': { 'guibg': '339966', 'guifg': '000000'},
 \    'background': { "guibg": "000000", "ctermbg":"none"},
 \    'StorageClass': {"guifg": '9966ff' },
 \    'PreCondit': {"guifg": '5f87ff' },

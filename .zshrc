@@ -155,6 +155,8 @@ alias zssh="proxychains4 ssh"
 alias zscp="proxychains4 scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
+alias socks5vpn1="ssh -N -D 9999 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
+alias socks5vpn2="ssh -N -D 9996 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
@@ -260,6 +262,10 @@ export PYGMENTIZE_STYLE="paraiso-dark"
 # alias trashon=”export TRASH_OFF=NO”
 # alias trashoff=”export TRASH_OFF=YES”
 
+# TZ=Asia/Tehran
+# export TZ
+# export GPG_TTY=$(tty)
+
 export BAT_THEME="Solarized (light)"
 
 export FZF_TMUX_OPTS="-p 70%,70%"
@@ -290,9 +296,9 @@ export PATH=$PATH:/home/devi/.fzf/bin
 # export PATH=$PATH:/home/devi/.ghcup/bin
 export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
-export PATH=$PATH:/home/devi/mongosh/bin
+export PATH=$PATH:/home/devi/mongosh/mongosh-1.1.7-linux-x64/bin
 export PATH=$PATH:/home/devi/powershell
-export PATH=$PATH:/home/devi/ytfzf
+export PATH=$PATH:/home/devi/ytfzf.git/rewrite
 export PATH=$PATH:/home/devi/gotty
 export PATH=$PATH:/home/devi/.poetry/bin
 export PATH=$PATH:/home/devi/pulumi
@@ -304,11 +310,14 @@ export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
 export PATH=$PATH:/home/devi/kubectl
 export PATH=$PATH:/home/devi/solidity
-export PATH=$PATH:/home/devi/devi/emsdk.git/main
-export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
-export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
+# export PATH=$PATH:/home/devi/devi/emsdk.git/main
+# export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
+# export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
 export PATH=$PATH:/home/devi/google-java-format
 export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/node/14.15.5_64bit/bin
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/upstream/emscripten
 
 ks() {
   kubectl "$@" -n kube-system
@@ -592,3 +601,6 @@ ranger() {
 # eval "$(rbenv init -)"
 _evalcache rbenv init -
 [ -f "/home/devi/.ghcup/env" ] && source "/home/devi/.ghcup/env" # ghcup-env
+
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh

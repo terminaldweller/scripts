@@ -21,6 +21,7 @@ end
 set listsize 13
 set follow-fork-mode child
 set detach-on-fork on
+set breakpoint pending on
 # set backtrace-past-main on
 # set backtrace-past-entry on
 set target-async on
