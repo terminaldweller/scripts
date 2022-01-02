@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searx
+  labels:
+    app: searx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searx
+  template:
+    metadata:
+      labels:
+        app: searx
+    spec:
+      containers:
+      - name: searx
+        image: searx/searx:1.0.0-297-f2f72575
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: searx-configmap
+              key: searx-base-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-service
+spec:
+  selector:
+    app: pihole
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30501
+      name: "searx-tcp-8080"
+    - protocol: UDP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30501
+      name: "searx-udp-8080"
