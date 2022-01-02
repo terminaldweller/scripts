@@ -16,32 +16,32 @@ spec:
     spec:
       containers:
       - name: searx
-        image: searx/searx:1.0.0-297-f2f72575
+        image: avpnusr/searx:07-11-2021
         ports:
         - containerPort: 8080
         env:
         - name: BASE_URL
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: searx-configmap
               key: searx-base-url
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pihole-service
+  name: searx-service
 spec:
   selector:
-    app: pihole
-  type: NodePort
+    app: searx
+  type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
+      port: 27080
       targetPort: 8080
       nodePort: 30501
       name: "searx-tcp-8080"
-    - protocol: UDP
-      port: 8080
-      targetPort: 8080
-      nodePort: 30501
-      name: "searx-udp-8080"
+    # - protocol: UDP
+    #   port: 8080
+    #   targetPort: 8080
+    #   nodePort: 30501
+    #   name: "searx-udp-8080"

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: searx-configmap
 data:
-  searx-base-url: http://searx.lan:8080
+  searx-base-url: http://searx.lan
