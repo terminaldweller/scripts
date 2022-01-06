@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  labels:
+    app: vaultwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      containers:
+      - name: vaultwarden
+        image: vaultwarden/server:1.23.1
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: vaultwarden-data
+            mountPath: /data/
+      volumes:
+        - name: vaultwarden-data
+          persistentVolumeClaim:
+            claimName: vaultwarden-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vaultwarden-service
+spec:
+  selector:
+    app: vaultwarden
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: "vaultwarden-80"
+      port: 27080
+      targetPort: 80
+      nodePort: 31180
