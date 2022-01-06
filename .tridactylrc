@@ -1,0 +1,6 @@
+sanitize tridactyllocal tridactylsync
+guiset_quiet hoverlink right
+autocmd DocStart mail.google.com mode ignore
+
+bind tp tabmove -1
+bind tn tabmove +1

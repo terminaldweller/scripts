@@ -7,7 +7,7 @@ ZSH_THEME="devi"
 
 COMPLETION_WAITING_DOTS="false"
 
-plugins=(git evalcache zsh-syntax-highlighting autojump virtualenv virtualenvwrapper cargo npm docker rustup zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang zsh-prompt-benchmark)
+plugins=(git evalcache zsh-syntax-highlighting autojump virtualenv virtualenvwrapper rust npm docker zsh-autosuggestions zsh-kubectl-prompt kubectl docker-compose vagrant golang zsh-prompt-benchmark)
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/devi/.local/bin:/home/devi/bin"
 
@@ -175,8 +175,12 @@ alias d="docker"
 alias dc="docker-compose"
 alias zh_freebsd="zssh dev@192.168.90.15"
 alias zh_linux="zssh dev@192.168.90.17"
+alias zh_router_root="zssh root@192.168.90.71"
+alias zh_router_admin="zssh admin@192.168.90.71"
 alias youtube-dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube-dl"
 alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv"
+alias tridactylrc="vim ~/scripts/.tridactylrc"
+alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

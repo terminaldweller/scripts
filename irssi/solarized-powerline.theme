@@ -172,7 +172,7 @@ abstracts = {
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
   # %5 = magenta
-  pubmsgmenick = "%5%k%Z0087ff{msgnick $0$1-}%N%m %n";
+  pubmsgmenick = "%K%m%5%k%Z0087ff{msgnick $0$1-}%N%m %n";
   menick = "%Zeeeeee$*";
 
   # public highlighted message in channel
