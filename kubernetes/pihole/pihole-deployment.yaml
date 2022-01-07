@@ -23,16 +23,24 @@ spec:
         - containerPort: 80
         - containerPort: 443
         env:
-        - name: TZ
-          valueFrom:
-            configMapKeyRef:
-              name: pihole-configmap
-              key: pihole_tz
-        - name: WEBPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pihole-secret
-              key: pihole-webpassword
+          - name: TZ
+            valueFrom:
+              configMapKeyRef:
+                name: pihole-configmap
+                key: pihole_tz
+          - name: WEBPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pihole-secret
+                key: pihole-webpassword
+        volumeMounts:
+          - name: local-dns
+            mountPath: /etc/dnsmasq.d/10-customdns.conf
+            readOnly: true
+      volumes:
+        - name: local-dns
+          configMap:
+            name: local-dns-file
 ---
 apiVersion: v1
 kind: Service

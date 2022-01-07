@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: squid-configmap
-data:
-  pihole_tz: iran/tehran
-  squid_config_vol: /etc/squid/

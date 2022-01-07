@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: squid
-  lables:
+  labels:
     app: squid
 spec:
   replicas: 1
-  selctor:
-    matchlabels:
+  selector:
+    matchLabels:
       app: squid
   template:
     metadata:
@@ -16,21 +16,17 @@ spec:
     spec:
       containers:
       - name: squid
-        image: bloodstalker/squid:apline-5.0
+        image: b4tman/squid:5.2
         ports:
-        - containerPort: 80
-        env:
-        - name: TZ
-          valueFrom:
-            configMapKeyRef:
-              name: squid-configmap
-              key: pihole_tz
+          - containerPort: 80
+        volumeMounts:
+          - name: squid-conf
+            mountPath: /etc/squid/squid.conf
+            readOnly: true
       volumes:
-        - name: squid-config-volume
-          valueFrom:
-            configMapKeyRef:
-              name: k3s-rpi-configmap
-              key: squid_config_vol
+        - name: squid-conf
+          configMap:
+            name: squid-config-file
 ---
 apiVersion: v1
 kind: Service
@@ -39,13 +35,15 @@ metadata:
 spec:
   selector:
     app: squid
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: UDP
       port: 80
       targetPort: 80
-      nodePort: 80
+      nodePort: 30880
+      name: "squid-udp-80"
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 80
+      nodePort: 30880
+      name: "squid-tcp-80"
