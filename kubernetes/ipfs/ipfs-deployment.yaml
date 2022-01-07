@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ipfs
-        image: ipfs/go-ipfs:v0.11.0
+        image: linuxserver/ipfs:2.13.0
         ports:
         - containerPort: 4001
         - containerPort: 5001
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pihole-service
+  name: ipfs-service
 spec:
   selector:
-    app: pihole
+    app: ipfs
   type: NodePort
   ports:
     - protocol: TCP
@@ -45,9 +45,9 @@ spec:
       port: 5001
       targetPort: 5001
       nodePort: 30402
-      name: "pihole-tcp-80"
+      name: "ipfs-tcp-80"
     - protocol: TCP
       port: 8080
       targetPort: 8080
       nodePort: 30403
-      name: "pihole-tcp-443"
+      name: "ipfs-tcp-443"
