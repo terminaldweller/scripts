@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: unbound
-  lables:
+  labels:
     app: unbound
 spec:
   replicas: 1
-  selctor:
-    matchlabels:
+  selector:
+    matchLabels:
       app: unbound
   template:
     metadata:
@@ -27,9 +27,15 @@ metadata:
 spec:
   selector:
     app: unbound
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: UDP
       port: 53
+      name: "unbound-udp-53"
       targetPort: 53
-      nodePort: 53
+      nodePort: 30853
+    - protocol: TCP
+      port: 53
+      name: "unbound-tcp-53"
+      targetPort: 53
+      nodePort: 30853

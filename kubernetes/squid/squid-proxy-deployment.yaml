@@ -16,13 +16,14 @@ spec:
     spec:
       containers:
       - name: squid
-        image: b4tman/squid:5.2
+        image: ubuntu/squid:4.10-20.04_beta
         ports:
           - containerPort: 80
         volumeMounts:
           - name: squid-conf
             mountPath: /etc/squid/squid.conf
             readOnly: true
+            subPath: squid.conf
       volumes:
         - name: squid-conf
           configMap:
