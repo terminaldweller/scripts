@@ -24,14 +24,14 @@ k9s:
     fgColor: white
     bgColor: default
     keyColor: cyan
-    numKeyColor: blue
+    numKeyColor: dodgerblue4
     sectionColor: gray
   frame:
     border:
       fgColor: dodgerblue4
       focusColor: aliceblue
     menu:
-      fgColor: darkblue
+      fgColor: dodgerblue4
       keyColor: cornflowerblue
       numKeyColor: cadetblue
     crumbs:

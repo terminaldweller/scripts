@@ -181,6 +181,7 @@ alias youtube-dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube
 alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
+alias man="man -O width=210"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

@@ -1300,7 +1300,7 @@ let g:gutentags_plus_nomap = 1
 map <leader>v <Plug>(Vman)
 autocmd Filetype man setlocal relativenumber
 autocmd Filetype man setlocal number
-" let g:vim_man_cmd = '/usr/bin/man'
+let g:vim_man_cmd = 'man -O width=200'
 
 "context
 let g:context_enabled = 0

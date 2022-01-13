@@ -12,11 +12,17 @@ DATE="#[fg=colour255 bg=colour31]"$(echo $RESULT | gawk '{print $2}')
 TIME="#[fg=colour255 bg=colour31]"$(echo $RESULT | gawk '{print $3}')
 UTC_TIME_RESULT=$(date -u +"%H:%M")
 UTC_TIME="#[fg=colour255 bg=colour25]"$(echo GMT: $UTC_TIME_RESULT)
-# JDATE="#[fg=colour255 bg=colour29]"$(jdate | gawk '{print $2" "$3}')
 JDATE="#[fg=colour255 bg=colour29]"$(jdate | gawk '{print $2" "$3}')
-OPENWEATHERMAP_TOKEN=$(cat /home/devi/scripts/tmux/openweathermap.json|jq -r ".token")
+# OPENWEATHERMAP_TOKEN=$(cat /home/devi/scripts/tmux/openweathermap.json|jq -r ".token")
 # WEATHER_INFO=$(sleep 120 && torsocks curl "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=$OPENWEATHERMAP_TOKEN&units=metric"|jq ".main.temp")
 WEATHER_INFO=$(curl 'wttr.in/tehran?T&format=%t/%f')
 WEATHER="#[fg=colour255 bg=colour32]"$(echo $WEATHER_INFO)
+CPU_TEMP=$(sensors | grep temp1 | head -n 1 | awk '{print $2}')
+CPU_SECTION="#[fg=colour36 bg=colour16]$SEPARATOR_LEFT_BOLD#[fg=colour16 bg=colour36]$CPU_TEMP"
 
-echo "#[fg=colour32 bg=colour16]$SEPARATOR_LEFT_BOLD$WEATHER#[fg=colour29 bg=colour32]$SEPARATOR_LEFT_BOLD$JDATE #[fg=colour31 bg=colour29]$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour25 bg=colour31]$SEPARATOR_LEFT_BOLD$UTC_TIME "
+# echo "$CPU_SECTION#[fg=colour32 bg=colour36]$SEPARATOR_LEFT_BOLD$WEATHER#[fg=colour29 bg=colour32]$SEPARATOR_LEFT_BOLD$JDATE #[fg=colour31 bg=colour29]$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour25 bg=colour31]$SEPARATOR_LEFT_BOLD$UTC_TIME "
+echo "$CPU_SECTION#[fg=colour32 bg=colour36]\
+$SEPARATOR_LEFT_BOLD$WEATHER#[fg=colour29 bg=colour32]\
+$SEPARATOR_LEFT_BOLD$JDATE #[fg=colour31 bg=colour29]\
+$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour25 bg=colour31]\
+$SEPARATOR_LEFT_BOLD$UTC_TIME "
