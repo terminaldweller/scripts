@@ -20,10 +20,18 @@ servers = (
     address = "irc.libera.chat";
     chatnet = "libera";
     autoconnect = "yes";
+    use_tls = "yes";
+    tls_verify = "yes";
   },
-  { address = "irc.oftc.net"; chatnet = "oftc"; autoconnect = "yes"; },
+  { address = "irc.oftc.net";
+    chatnet = "OFTC";
+    autoconnect = "yes";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "yes";
+  },
   {
-    address = "localhost";
+    address = "192.168.1.109";
     port = "6667";
     chatnet = "bitlbee";
     autoconnect = "yes";
@@ -41,13 +49,16 @@ chatnets = {
 
 channels = (
   { name = "#dpdk"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#qemu"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#fdio-vpp"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#openssl"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openssh"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#gdb"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#voidlinux"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#freebsd"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
 
@@ -397,7 +408,7 @@ settings = {
     dccstat_cycle_through_transfers = "yes";
   };
 };
-keyboard = ( 
+keyboard = (
   { key = "meta-[M"; id = "command"; data = "mouse_xterm"; }
 );
 ignores = (
@@ -416,6 +427,9 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#freebsd" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian-next" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssh" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },

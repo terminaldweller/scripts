@@ -114,18 +114,18 @@ keymap Q COMMAND "EXTERN 'echo %s > ~/.w3m/RestoreSession.txt' ; NEXT_TAB ; EXTE
 
 # external stuff
 keymap SPC-r COMMAND "SHELL 'readable $W3M_URL -p html-title,html-content > /tmp/readable.html'; LOAD /tmp/readable.html"
-keymap xt COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; GOTO /usr/local/libexec/w3m/cgi-bin/goto_tmux_clipboard.cgi"
-keymap XT COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; TAB_GOTO /usr/local/libexec/w3m/cgi-bin/goto_tmux_clipboard.cgi"
-# keymap xs COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/local/libexec/w3m/cgi-bin/goto_clipboard.cgi"
-keymap xs COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/local/libexec/w3m/cgi-bin/goto_clipboard_primary.cgi"
-keymap XS COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/local/libexec/w3m/cgi-bin/goto_clipboard_primary.cgi"
+keymap xt COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
+keymap XT COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_tmux_clipboard.cgi"
+# keymap xs COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
+keymap xs COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi"
+keymap XS COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/lib/w3m/cgi-bin/goto_clipboard_primary.cgi"
 # keymap XS COMMAND "SHELL /home/bloodstalker/scripts/bin/fzf_surfraw ; TAB_GOTO /home/bloodstalker/scripts/bin/goto_clipboard.cgi"
 # keymap xs COMMAND "SHELL /home/bloodstalker/scripts/bin/fzf_surfraw"
-keymap go COMMAND "SHELL /usr/local/libexec/w3m/cgi-bin/goto_clipboard.cgi"
+keymap go COMMAND "SHELL /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
 # keymap XS COMMAND "SHELL /home/bloodstalker/scripts/bin/fzf_surfraw; TAB_GOTO /home/bloodstalker/scripts/bin/goto_clipboard.cgi"
 #
 keymap d COMMAND "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
-keymap u TAB_GOTO /usr/local/libexec/w3m/cgi-bin/restore_tab.cgi
+keymap u TAB_GOTO /usr/lib/w3m/cgi-bin/restore_tab.cgi
 
 keymap SPC-m CURSOR_MIDDLE
 keymap SPC-l CURSOR_BOTTOM

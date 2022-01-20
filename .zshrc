@@ -182,6 +182,9 @@ alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
 alias man="man -O width=210"
+alias getmangas="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --manga"
+alias getanimes="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --anime"
+alias gdb="gdb -q"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

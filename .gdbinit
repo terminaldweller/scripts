@@ -1,12 +1,14 @@
 # gef
-source /home/devi/gef/gef.py
-gef config context.libc_args 1
-gef config context.enable 0
-gef config context.nb_lines_threads 4
-gef config context.use_capstone 1
+#source /home/devi/gef/gef.py
+# gef config context.libc_args 1
+# gef config context.enable 0
+# gef config context.nb_lines_threads 4
+# gef config context.use_capstone 1
 
 # voltron
-source /usr/local/lib/python3.8/dist-packages/voltron/entry.py
+#source /usr/local/lib/python3.8/dist-packages/voltron/entry.py
+
+add-auto-load-safe-path /home/devi/scripts/.gdbinit
 
 # load custom scripts
 python
@@ -20,15 +22,19 @@ end
 # configs
 set listsize 13
 set follow-fork-mode child
+set pagination off
 set detach-on-fork on
 set breakpoint pending on
+set disassembly-flavor intel
+# set exec-direction reverse
 # set backtrace-past-main on
 # set backtrace-past-entry on
-set target-async on
+set mi-async on
 set print pretty on
 set confirm off
 set verbose off
 set history save on
+set history expansion on
 set history size 10000
 set history filename ~/.gdb_history
 set output-radix 0x10
@@ -37,7 +43,7 @@ set height 0
 set width 0
 
 # prompt
-set prompt >>>
+set prompt \033[34m\033[1mGDB >>>\033[0m 
 
 # styles
 set style tui-border background green
@@ -61,16 +67,20 @@ define btall
 end
 
 # custom signals
-handle SIGUSR1 nopass
-handle SIGUSR2 nopass
-handle SIGUSR3 nopass
-handle SIGUSR4 nopass
-handle SIGUSR5 nopass
+# handle SIGUSR1 nopass
+# handle SIGUSR2 nopass
+# handle SIGUSR3 nopass
+# handle SIGUSR4 nopass
+# handle SIGUSR5 nopass
 
 # kill all inferiors before exit
-python
-  import subprocess
-  inferiors = gdb.inferiors()
-  for inferior in inferiors:
-    subprocess.run(["kill","-9",repr(intferior.pid)])
-end
+# define hook-quit
+# python
+# import subprocess
+# inferiors = gdb.inferiors()
+# for inferior in inferiors:
+#   subprocess.run(["kill","-9",repr(intferior.pid)])
+# end
+# end
+
+#record

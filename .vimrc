@@ -1417,13 +1417,13 @@ augroup ALEMARKDOWN
 augroup END
 augroup ALEC
   autocmd!
-  " autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
-  " autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
+  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
+  autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
 augroup END
 augroup ALECPP
   autocmd!
-  " autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
-  " autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
+  autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
+  autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
 augroup END
 augroup ALEHTML
   autocmd!
