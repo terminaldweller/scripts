@@ -1,0 +1,36 @@
+[general]
+ui = ttyui
+accounts = gmail.com,terminaldweller.com
+
+[Account gmail.com]
+localrepository = gmail.com-local
+remoterepository = gmail.com-remote
+
+[Repository gmail.com-local]
+type = Maildir
+localfolders = ~/Mail/gmail.com
+restoreatime = no
+
+[Repository gmail.com-remote]
+type = IMAP
+remoteuser = thabogre@gmail.com
+remotepass = 
+remotehost = gmail.com
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Accounts terminaldweller.com]
+localrepository = terminaldweller.com-local
+remoterepository = terminaldweller.com-remote
+
+[Repository terminaldweller.com-local]
+type = Maildir
+localfolders = ~/Mail/terminaldweller.com
+restoreatime = no
+
+[Repository terminaldweller.com-remote]
+type = IMAP
+remoteuser = devi@terminaldweller.com
+remotepass = 
+remotehost = mail.terminaldweller.com
+remoteport = 993

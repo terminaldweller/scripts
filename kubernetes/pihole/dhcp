@@ -1,0 +1,61 @@
+config 'dnsmasq'
+  #option 'domainneeded' '1'
+  option 'boguspriv' '1'
+  option 'localise_queries' '1'
+  option 'rebind_protection' '1'
+  option 'rebind_localhost' '1'
+  option 'expandhosts' '1'
+  option 'authoritative' '1'
+  option 'readethers' '1'
+  option 'leasefile' '/tmp/dhcp.leases'
+  option 'resolvfile' '/tmp/resolv.conf.auto'
+  option 'enable_tftp' '1'
+  #option 'domain' 'domain.net'
+  #option 'local' '/domain.net/'
+
+config 'dhcp' 'lan'
+  option 'interface' 'enp3s0f1'
+  option 'start' '100'
+  option `limit` `150`
+  option 'leasetime' 'infinite'
+
+config 'dhcp' 'lan'
+  option 'interface' 'wlp2s0'
+  option 'start' '100'
+  option `limit` `150`
+  option 'leasetime' 'infinite'
+
+config 'host'
+  option 'name' 'voidbox'
+  option 'mac' '08:62:66:B8:7C:B6'
+  option 'ip' '192.168.1.103'
+
+config 'host'
+  option 'name' 'pi3'
+  option 'mac' 'B8:27:EB:89:6C:2A'
+  option 'ip' '192.168.1.108'
+
+config 'host'
+  option 'name' 'pi4'
+  option 'mac' 'DC:A6:32:C1:34:C0'
+  option 'ip' '192.168.1.109'
+
+config 'host'
+  option 'name' 'deviphone'
+  option 'mac' '22:45:1E:41:AA:D0'
+  option 'ip' '192.168.1.110'
+
+config 'host'
+  option 'name' 'switch1'
+  option 'mac' 'AC:84:C6:02:CF:90'
+  option 'ip' '192.168.1.106'
+
+config 'host'
+  option 'name' 'pizero'
+  option 'mac' 'B8:27:EB:8F:BF:72'
+  option 'ip' '192.168.1.115'
+
+config 'host'
+  option 'name' 'pi2'
+  option 'mac' 'B8:27:EB:70:49:C4'
+  option 'ip' '192.168.1.105'

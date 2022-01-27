@@ -43,7 +43,8 @@ set height 0
 set width 0
 
 # prompt
-set prompt \033[34m\033[1mGDB >>>\033[0m 
+# set prompt \033[34m\033[1mGDB >>>\033[0m 
+set prompt GDB >>> 
 
 # styles
 set style tui-border background green

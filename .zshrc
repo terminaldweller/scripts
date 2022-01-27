@@ -185,6 +185,8 @@ alias man="man -O width=210"
 alias getmangas="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --manga"
 alias getanimes="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --anime"
 alias gdb="gdb -q"
+alias bashrc="vim ~/scripts/.bashrc"
+alias fixbashrc="cp ~/scripts/.bashrc ~/"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -610,6 +612,8 @@ ranger() {
 # eval "$(rbenv init -)"
 _evalcache rbenv init -
 [ -f "/home/devi/.ghcup/env" ] && source "/home/devi/.ghcup/env" # ghcup-env
+
+eval "$(luarocks-5.3 path)"
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh

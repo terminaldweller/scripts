@@ -1,0 +1,39 @@
+#!/usr/bin/env lua5.3
+
+-- needs xsel, clipnotify
+-- needs luaposix, luarocks-5.3 install --local luaposix
+-- cat .clip_history | dmenu -l 10 | xsel -ib
+-- FIXME-all entries are copied with an extra new line
+local clipd = {}
+local string = require("string")
+local signal = require("posix.signal")
+
+signal.signal(signal.SIGINT, function(signum) os.exit(128 + signum) end)
+
+local function loop()
+    local clip_hist_size = 100
+    local clip_hist = "/home/devi/.clip_history"
+
+    local matched = false
+    while true do
+        local wait_for_event = io.popen("clipnotify")
+
+        local handle = io.popen("xsel -ob")
+        local last_clip_entry = handle:read("*a")
+        local hist_file = io.open(clip_hist, "a+")
+
+        for line in hist_file:lines() do
+            if (string.sub(line, 0, string.len(line)) == last_clip_entry) then
+                matched = true
+            end
+        end
+        if matched ~= true then hist_file:write(last_clip_entry .. "\n") end
+        matched = false
+        hist_file:close()
+        wait_for_event:close()
+        handle:close()
+    end
+end
+
+loop()
+return clipd

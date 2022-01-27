@@ -34,3 +34,4 @@ sudo mount -t cifs -o user=pi3,vers=2.0,domain=MSHOME //192.168.1.200/disk1 /hom
 xrandr --output eDP1 --mode 1920x1080 --right-of HDMI2
 fc-list : family style
 https://smallpdf.com/jpg-to-pdf
+cat /home/devi/.clip_history | dmenu -l 10 | xsel -ib

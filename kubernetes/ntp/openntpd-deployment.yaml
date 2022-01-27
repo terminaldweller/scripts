@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openntpd
+  labels:
+    app: openntpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openntpd
+  template:
+    metadata:
+      labels:
+        app: openntpd
+    spec:
+      containers:
+      - name: openntpd
+        image: linuxkit/openntpd:v0.8
+        command:
+          - ntpd
+          - -d
+          - -p
+          - /var/run/ntpd.pid
+          - -f
+          - /etc/ntpd/ntpd.conf
+        ports:
+        - containerPort: 123
+        volumeMounts:
+          - name: ntp-conf
+            mountPath: /etc/ntpd/ntpd.conf
+            subPath: ntpd.conf
+            readOnly: true
+      volumes:
+        - name: ntp-conf
+          configMap:
+            name: ntp-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openntpd-service
+spec:
+  selector:
+    app: openntpd
+  type: NodePort
+  ports:
+    - protocol: UDP
+      port: 30123
+      targetPort: 123
+      nodePort: 30123
+      name: "openntpd-udp-123"
+    - protocol: TCP
+      port: 30123
+      targetPort: 123
+      nodePort: 30123
+      name: "openntpd-tcp-123"

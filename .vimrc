@@ -203,13 +203,14 @@ Plug 'kh3phr3n/python-syntax'
 Plug 'zaid/vim-rec'
 Plug 'calincru/flex-bison-syntax'
 Plug 'tridactyl/vim-tridactyl'
+Plug 'hrother/offlineimaprc.vim'
+Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'kana/vim-operator-user'
 " Plug 'haya14busa/vim-operator-flashy'
 " Plug 'terryma/vim-expand-region'
 " Plug 'romainl/vim-devdocs'
 " Plug 'rhysd/devdocs.vim'
 " Plug 'psliwka/vim-smoothie'
-" Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 " Plug 'tmux-plugins/vim-tmux'
 " Plug 'rhysd/vim-gfm-syntax'
 " Plug 'vim-utils/vim-troll-stopper'
@@ -256,7 +257,7 @@ let g:jellybeans_overrides = {
 \    'Todo': { 'guifg': '000000', 'guibg': '00cc00',
 \              'ctermfg': 'Black', 'ctermbg': 'Blue',
 \              'attr': 'bold' },
-\    'Comment': { 'guibg': '339966', 'guifg': '000000'},
+\    'Comment': { 'guifg': '339966', 'attr': 'bold'},
 \    'background': { "guibg": "000000", "ctermbg":"none"},
 \    'StorageClass': {"guifg": '9966ff' },
 \    'PreCondit': {"guifg": '5f87ff' },
@@ -1435,6 +1436,11 @@ augroup ALEJAVA
   autocmd!
   autocmd FileType java let b:ale_linters = {'java': ['checkstyle']}
   autocmd FileType java let b:ale_fixers = {'java': ['google_java_format']}
+augroup END
+augroup ALELUA
+  autocmd!
+  autocmd FileType lua let b:ale_linters = {'lua': ['luacheck']}
+  autocmd FileType lua let b:ale_fixers = {'lua': ['lua-format']}
 augroup END
 
 "latex
