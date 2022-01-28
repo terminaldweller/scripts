@@ -1,10 +1,12 @@
 [general]
 ui = ttyui
 accounts = gmail.com,terminaldweller.com
+socktimeout = 90
 
 [Account gmail.com]
 localrepository = gmail.com-local
 remoterepository = gmail.com-remote
+synclabels = yes
 
 [Repository gmail.com-local]
 type = Maildir
@@ -14,12 +16,12 @@ restoreatime = no
 [Repository gmail.com-remote]
 type = IMAP
 remoteuser = thabogre@gmail.com
-remotepass = 
-remotehost = gmail.com
+#remotepass = 
+remotehost = imap.gmail.com
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Accounts terminaldweller.com]
+[Account terminaldweller.com]
 localrepository = terminaldweller.com-local
 remoterepository = terminaldweller.com-remote
 
@@ -31,6 +33,8 @@ restoreatime = no
 [Repository terminaldweller.com-remote]
 type = IMAP
 remoteuser = devi@terminaldweller.com
-remotepass = 
+#remotepass = 
 remotehost = mail.terminaldweller.com
 remoteport = 993
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

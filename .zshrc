@@ -187,6 +187,8 @@ alias getanimes="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --a
 alias gdb="gdb -q"
 alias bashrc="vim ~/scripts/.bashrc"
 alias fixbashrc="cp ~/scripts/.bashrc ~/"
+alias offlineimaprc="vim ~/scripts/.offlineimaprc"
+alias fixofflineimaprc="cp ~/scripts/.offlineimaprc ~/"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
