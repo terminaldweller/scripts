@@ -22,6 +22,7 @@ end
 # configs
 set listsize 13
 set follow-fork-mode child
+set follow-exec-mode new
 set pagination off
 set detach-on-fork on
 set breakpoint pending on

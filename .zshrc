@@ -189,6 +189,8 @@ alias bashrc="vim ~/scripts/.bashrc"
 alias fixbashrc="cp ~/scripts/.bashrc ~/"
 alias offlineimaprc="vim ~/scripts/.offlineimaprc"
 alias fixofflineimaprc="cp ~/scripts/.offlineimaprc ~/"
+alias screenrc="vim ~/scripts/.screenrc"
+alias fixscreenrc="cp ~/scripts/.screenrc ~/"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
