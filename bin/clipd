@@ -3,13 +3,32 @@
 -- needs xsel, clipnotify
 -- needs luaposix, luarocks-5.3 install --local luaposix
 -- cat .clip_history | dmenu -l 10 | xsel -ib
--- FIXME-all entries are copied with an extra new line
-local clipd = {}
+local function default_luarocks_modules()
+    local luarocks_handle = io.popen("luarocks-5.3 path --bin")
+    local path_b = false
+    local cpath_b = false
+    for line in luarocks_handle:lines() do
+        local path = string.match(line, "LUA_PATH%s*=%s*('.+')")
+        local cpath = string.match(line, "LUA_CPATH%s*=%s*('.+')")
+        if path ~= nil then
+            package.path = package.path .. ";" .. string.sub(path, 2, -2)
+        end
+        if cpath ~= nil then
+            package.cpath = package.cpath .. ";" .. string.sub(cpath, 2, -2)
+        end
+    end
+
+    if path_b then os.exit(1) end
+    if cpath_b then os.exit(1) end
+end
+default_luarocks_modules()
+
 local string = require("string")
-local signal = require("posix.signal")
+-- local signal = require("posix.signal")
 
-signal.signal(signal.SIGINT, function(signum) os.exit(128 + signum) end)
+-- signal.signal(signal.SIGINT, function(signum) os.exit(128 + signum) end)
 
+-- FIXME-clip history size is not being used
 local function loop()
     local clip_hist_size = 100
     local clip_hist = "/home/devi/.clip_history"
@@ -36,4 +55,3 @@ local function loop()
 end
 
 loop()
-return clipd

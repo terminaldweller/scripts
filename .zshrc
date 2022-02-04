@@ -137,7 +137,6 @@ alias fixirssistartup="cp ~/scripts/irssi/startup ~/.irssi/startup"
 alias w3mlastsession="~/.w3m/bin/w3mlastsession"
 alias lsdrc="vim ~/scripts/.config/lsd/config.yaml"
 alias fixlsdrc="cp ~/scripts/.config/lsd/config.yaml ~/.config/lsd/config.yaml"
-alias vagrant="PATH=$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0 vagrant"
 alias cygwin="/mnt/d/home/apps/cygwin/bin/bash.exe -l -i"
 alias farmanager="/mnt/c/Program\ Files/Far\ Manager/Far.exe"
 alias pwsh="/mnt/c/Program\ Files/PowerShell/7/pwsh.exe"
@@ -221,6 +220,14 @@ docc() {
   # cp ~/scripts/c/debug.dbg ./
 }
 
+dockernuke() {
+	docker stop `docker ps -qa`
+	docker rm `docker ps -qa`
+	docker rmi -f `docker images -qa `
+	docker volume rm $(docker volume ls -qf)
+	docker network rm `docker network ls -q`
+}
+
 mdvv() {
   mdv -t 729.8953 "$@"
 }
@@ -262,7 +269,6 @@ STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
 export LIBGL_ALWAYS_INDIRECT=1
 #export PULSE_SERVER=tcp:192.168.1.103
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export WWW_HOME="duckduckgo.com"
 alias def="sdcv --color"
 #goenv
@@ -282,6 +288,8 @@ export PYGMENTIZE_STYLE="paraiso-dark"
 # export GPG_TTY=$(tty)
 
 export BAT_THEME="Solarized (light)"
+
+export SVDIR=~/service
 
 export FZF_TMUX_OPTS="-p 70%,70%"
 export FZF_DEFAULT_OPTS="--color fg:7,bg:0,hl:31,fg+:24,bg+:0,hl+:63,info:34,prompt:27,spinner:24,pointer:24,marker:22"
@@ -325,6 +333,7 @@ export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
 export PATH=$PATH:/home/devi/kubectl
 export PATH=$PATH:/home/devi/solidity
+export PATH=$PATH:/home/devi/vagrant
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
