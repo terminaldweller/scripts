@@ -1,7 +1,8 @@
 #!/usr/bin/env lua5.3
 
 -- needs xsel, clipnotify
--- needs luaposix, luarocks-5.3 install --local luaposix
+-- luarocks-5.3 install --local luaposix
+-- luarocks-5.3 install --local argparse
 -- cat .clip_history | dmenu -l 10 | xsel -ib
 local function default_luarocks_modules()
     local luarocks_handle = io.popen("luarocks-5.3 path --bin")
@@ -25,54 +26,70 @@ default_luarocks_modules()
 
 local string = require("string")
 local signal = require("posix.signal")
+local argparse = require("argparse")
 
 signal.signal(signal.SIGINT, function(signum) os.exit(128 + signum) end)
 
 local function sleep(n) os.execute("sleep " .. tonumber(n)) end
+local function file_exists(path)
+    local f = io.popen(path, "r")
+    return f ~= nil and io.close(f)
+end
+local function trim(s) return s:gsub("^%s+", ""):gsub("%s+$", "") end
+
+local clip_hist_size = 200
+local clip_hist = "/home/devi/.clip_history"
+
+local parser = argparse("", "")
+parser:option("-s --hist_size", "history file size", 200)
+parser:option("-f --hist_file", "history file location",
+              "/home/devi/.clip_history")
 
 local function loop()
-    local clip_hist_size = 100
-    local clip_hist = "/home/devi/.clip_history"
+    local clips_table = {}
+    local hist_current_count = 0
 
-    local matched = false
+    local hist_file = io.open(clip_hist, "r")
+    for line in hist_file:lines() do
+        if line ~= "\n" and line ~= "" and line ~= "\r\n" and line ~= " " then
+            clips_table[line] = true
+            hist_current_count = hist_current_count + 1
+        end
+    end
+    hist_file:close()
+
     while true do
         local wait_for_event = io.popen("clipnotify")
-
         local handle = io.popen("xsel -ob")
         local last_clip_entry = handle:read("*a")
-        local hist_file = io.open(clip_hist, "r")
-        local hist_current_count = 0
-        local clips_table = {}
 
-        for line in hist_file:lines() do
-            hist_current_count = hist_current_count + 1
-            if (string.sub(line, 0, string.len(line)) == last_clip_entry) then
-                matched = true
-            end
-            if line ~= "\n" and line ~= "" and line ~= "\r\n" and line ~= " " then
-                table.insert(clips_table, line)
-            end
+        if last_clip_entry[-1] == "\n" then
+            clips_table[string.sub(last_clip_entry, 0,
+                                   string.len(last_clip_entry))] = true
+        else
+            clips_table[last_clip_entry] = true;
         end
-        hist_file:close()
-        hist_file = io.open(clip_hist, "w")
-        if matched ~= true then
-            if last_clip_entry[-1] == "\n" then
-                table.insert(clips_table, string.sub(last_clip_entry, 0,
-                                                     string.len(last_clip_entry)))
-            else
-                table.insert(clips_table, last_clip_entry)
-            end
-        end
+        hist_current_count = hist_current_count + 1
+
         if hist_current_count >= clip_hist_size then
             table.remove(clips_table, 1)
+            hist_current_count = hist_current_count - 1
         end
-        for _, v in ipairs(clips_table) do hist_file:write(v .. "\n") end
-        matched = false
+
+        hist_file = io.open(clip_hist, "w")
+        for k, _ in pairs(clips_table) do
+            if clips_table[k] then hist_file:write(trim(k) .. "\n") end
+        end
         hist_file:close()
+
         wait_for_event:close()
         handle:close()
         sleep(.2)
     end
 end
 
+-- if file_exists(clip_hist) ~= true then
+--     local dummy_handle = io.popen(clip_hist, "a")
+--     if dummy_handle ~= nil then dummy_handle:close() end
+-- end
 loop()
