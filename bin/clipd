@@ -31,29 +31,24 @@ local argparse = require("argparse")
 signal.signal(signal.SIGINT, function(signum) os.exit(128 + signum) end)
 
 local function sleep(n) os.execute("sleep " .. tonumber(n)) end
-local function file_exists(path)
-    local f = io.popen(path, "r")
-    return f ~= nil and io.close(f)
-end
 local function trim(s) return s:gsub("^%s+", ""):gsub("%s+$", "") end
 
-local clip_hist_size = 200
-local clip_hist = "/home/devi/.clip_history"
-
-local parser = argparse("", "")
+local parser = argparse()
 parser:option("-s --hist_size", "history file size", 200)
 parser:option("-f --hist_file", "history file location",
               "/home/devi/.clip_history")
 
-local function loop()
+local function loop(clip_hist, clip_hist_size)
     local clips_table = {}
     local hist_current_count = 0
 
     local hist_file = io.open(clip_hist, "r")
-    for line in hist_file:lines() do
-        if line ~= "\n" and line ~= "" and line ~= "\r\n" and line ~= " " then
-            clips_table[line] = true
-            hist_current_count = hist_current_count + 1
+    if hist_file ~= nil then
+        for line in hist_file:lines() do
+            if line ~= "\n" and line ~= "" and line ~= "\r\n" and line ~= " " then
+                clips_table[line] = true
+                hist_current_count = hist_current_count + 1
+            end
         end
     end
     hist_file:close()
@@ -71,7 +66,7 @@ local function loop()
         end
         hist_current_count = hist_current_count + 1
 
-        if hist_current_count >= clip_hist_size then
+        if hist_current_count >= tonumber(clip_hist_size) then
             table.remove(clips_table, 1)
             hist_current_count = hist_current_count - 1
         end
@@ -88,8 +83,5 @@ local function loop()
     end
 end
 
--- if file_exists(clip_hist) ~= true then
---     local dummy_handle = io.popen(clip_hist, "a")
---     if dummy_handle ~= nil then dummy_handle:close() end
--- end
-loop()
+local args = parser:parse()
+loop(args["hist_file"], args["hist_size"])
