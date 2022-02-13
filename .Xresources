@@ -11,7 +11,7 @@ Xft.embeddedbitmap: 1
 xterm*dpi: 96
 gnome-terminal*dpi: 96
 *.alpha: 1.0
-*.font: DejaVu Sans Mono for Powerline:pixelsize=11.3:antialias=true:autohint=true;
+*.font: DejaVuSansMono Nerd Font Mono:pixelsize=11.3:antialias=true:autohint=true;
 xterm*scaleHeight: 1.01
 
 #define base00 #2E3431
@@ -47,3 +47,11 @@ xterm*scaleHeight: 1.01
 *.color13:      base0D
 *.color14:      base0E
 *.color15:      base0F
+
+/* xterm*faceName: DejaVu Sans Mono Book */
+xterm*faceSize: 11
+xterm*savelines: 10000
+xterm*rightScrollBar: false
+xterm*ScrollBar: false
+xterm*background: black
+xterm*foreground: lightgray

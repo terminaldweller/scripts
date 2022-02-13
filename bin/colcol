@@ -23,7 +23,6 @@ BEGIN {
   if (1 == NR){
     max_col = NF
   }
-  # printf max_col" "
   printf NR-1" "
   for (i = 1; i <= NF; i++){
     if (i >= colors_len) {

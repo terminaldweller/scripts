@@ -182,7 +182,7 @@ hi def InterestingWord5 ctermfg=16 ctermbg=211 guifg=#000000 guibg=#ff87af
 hi def InterestingWord6 ctermfg=16 ctermbg=195 guifg=#000000 guibg=#d7ffff
 hi def InterestingWord7 ctermfg=16 ctermbg=99 guifg=#000000 guibg=#875fff
 hi def InterestingWord8 ctermfg=16 ctermbg=35 guifg=#000000 guibg=#00af5f
-hi def InterestingWord9 ctermfg=16 ctermbg=57 guifg=#000000 guibg=#5f00ff
+hi def InterestingWord9 ctermfg=16 ctermbg=209 guifg=#000000 guibg=#ff875f
 hi def InterestingWord0 ctermfg=16 ctermbg=39 guifg=#000000 guibg=#00afff
 
 " Steve Losh's highlight function

@@ -140,7 +140,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rhubarb'
 Plug 'rgrinberg/vim-ocaml'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'kshenoy/vim-signature'
 Plug 'Konfekt/vim-scratchpad'
 Plug 'rust-lang/rust.vim'
@@ -205,7 +204,9 @@ Plug 'calincru/flex-bison-syntax'
 Plug 'tridactyl/vim-tridactyl'
 Plug 'hrother/offlineimaprc.vim'
 Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
+Plug 'HiPhish/info.vim'
 " Plug 'kana/vim-operator-user'
+" Plug 'terryma/vim-multiple-cursors'
 " Plug 'haya14busa/vim-operator-flashy'
 " Plug 'terryma/vim-expand-region'
 " Plug 'romainl/vim-devdocs'
@@ -1030,7 +1031,7 @@ function! s:compiler_explorer()
   set syntax=nasm
   1
 endfunction
-" command! -complete=shellcmd -nargs=0 CompilerExplorer call s:compiler_explorer()
+command! CompilerExplorer call s:compiler_explorer()
 vmap <S-F9> :<C-U>CompilerExplorer<cr>
 
 "view the python docs for the word under cursor in a split window
@@ -1043,7 +1044,7 @@ function! s:pythondoc()
   set syntax=man
   1
 endfunction
-" command! -complete=shellcmd -nargs=0 PythonDoc call s:pythondoc()
+command! PythonDoc call s:pythondoc()
 nnoremap <leader>h :<C-U>PythonDoc<cr>
 vnoremap <leader>h :<C-U>PythonDoc<cr>
 
@@ -1442,6 +1443,11 @@ augroup ALELUA
   autocmd FileType lua let b:ale_linters = {'lua': ['luacheck']}
   autocmd FileType lua let b:ale_fixers = {'lua': ['lua-format']}
 augroup END
+let g:ale_sh_shfmt_options = "-l -w"
+augroup ALESH
+  autocmd!
+  autocmd FileType sh let b:ale_fixers = {'sh': ['shfmt']}
+augroup END
 
 "latex
 let g:tex_flavor = 'latex'
@@ -1581,6 +1587,28 @@ autocmd FileType vista,vista_kind nnoremap <buffer> <silent> :<c-u>call vista#fi
 
 " recutils
 let g:recutils_no_maps = 1
+
+" info
+augroup VIMINFO
+  autocmd!
+  autocmd FileType info set number
+  autocmd FileType info nmap <buffer> gu <Plug>(InfoUp)
+  autocmd FileType info nmap <buffer> gn <Plug>(InfoNext)
+  autocmd FileType info nmap <buffer> gp <Plug>(InfoPrev)
+  autocmd FileType info nmap <buffer> gm <Plug>(InfoMenu)
+  autocmd FileType info nmap <buffer> gf <Plug>(InfoFollow)
+augroup END
+function! s:infovim()
+  let l:vword = expand("<cword>")
+  execute 'vert Info' l:vword
+endfunction
+command! InfoVimF1 call s:infovim()
+nnoremap <leader>i :<C-U>InfoVimF1<cr>
+vnoremap <leader>i :<C-U>InfoVimF1<cr>
+function! s:vvman(one, two)
+  execute 'Vman' a:one a:two
+endfunction
+let g:Infofallback = function("s:vvman")
 
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16

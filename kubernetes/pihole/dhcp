@@ -59,3 +59,13 @@ config 'host'
   option 'name' 'pi2'
   option 'mac' 'B8:27:EB:70:49:C4'
   option 'ip' '192.168.1.105'
+
+config 'host'
+  option 'name' 'voidbox2'
+  option 'mac' 'B0:A7:B9:58:53:45'
+  option 'ip' '192.168.1.117'
+
+config 'host'
+  option 'name' 'rpiz2'
+  option 'mac' 'E4:5F:01:4B:FF:DC'
+  option 'ip' '192.168.1.116'

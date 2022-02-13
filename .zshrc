@@ -190,6 +190,8 @@ alias offlineimaprc="vim ~/scripts/.offlineimaprc"
 alias fixofflineimaprc="cp ~/scripts/.offlineimaprc ~/"
 alias screenrc="vim ~/scripts/.screenrc"
 alias fixscreenrc="cp ~/scripts/.screenrc ~/"
+alias xresources="vim ~/scripts/.Xresources"
+alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xresources"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
@@ -221,11 +223,11 @@ docc() {
 }
 
 dockernuke() {
-	docker stop `docker ps -qa`
-	docker rm `docker ps -qa`
-	docker rmi -f `docker images -qa `
-	docker volume rm $(docker volume ls -qf)
-	docker network rm `docker network ls -q`
+  docker stop `docker ps -qa`
+  docker rm `docker ps -qa`
+  docker rmi -f `docker images -qa `
+  docker volume rm $(docker volume ls -qf)
+  docker network rm `docker network ls -q`
 }
 
 mdvv() {
@@ -435,7 +437,11 @@ eval "$(fnm env)"
 
 # jellybeans takes forever to load. iceberg is very fast.
 vman() {
-  vim -c "Man $1 $2" -c 'silent only' -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16'
+  vim -R -M -c 'silent only' -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16' -c "Man $1 $2" +only
+}
+
+vinfo() {
+  vim -R -M -c 'silent only' -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16' -c "Info $1 $2" +only
 }
 
 ddig() {
@@ -503,6 +509,10 @@ is_in_git_repo() {
 
 fzf-down() {
   fzf-tmux -p 80%,80% -- --bind ctrl-/:toggle-preview "$@"
+}
+
+dff(){
+  df -h "$@" | colcol | column -t
 }
 
 # these i stole from junegunn to try out
