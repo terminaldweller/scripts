@@ -192,6 +192,8 @@ alias screenrc="vim ~/scripts/.screenrc"
 alias fixscreenrc="cp ~/scripts/.screenrc ~/"
 alias xresources="vim ~/scripts/.Xresources"
 alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xresources"
+alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
+alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"

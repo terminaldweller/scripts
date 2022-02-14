@@ -14,4 +14,5 @@ set trash = '+Trash'
 set header_cache = ~/.mutt/self/cache/headers
 set message_cachedir = ~/.mutt/self/cache/bodies
 set certificate_file = ~/.mutt/self/certificates
-mailboxes "+INBOX" "+Drafts" "+Sent" "+Trash"
+# mailboxes "+INBOX" "+Drafts" "+Sent" "+Trash"
+mailboxes "+INBOX"

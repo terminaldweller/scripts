@@ -1,4 +1,7 @@
 # vim: filetype=neomuttrc
+set mailcap_path= $HOME/.mutt/mailcap
+set allow_ansi
+set smart_wrap
 set imap_keepalive = 900
 set timeout=60
 set move = no
@@ -7,13 +10,15 @@ set ssl_force_tls=yes
 
 folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
 folder-hook 'account.self' 'source ~/.mutt/account.self'
+folder-hook 'account.zharf' 'source ~/.mutt/account.zharf'
 
 # default account
 source ~/.mutt/account.self
 # source ~/.mutt/account.gmail
 
-macro index <f2> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.self<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.gmail<enter><change-folder>!<enter>'
+macro index,pager <f2> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.self<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.gmail<enter><change-folder>!<enter>'
+macro index,pager <f4> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.zharf<enter><change-folder>!<enter>'
 
 # macros
 macro index A "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>” “mark all messages read"
@@ -170,6 +175,8 @@ color body          brightcolor39   default        "([a-z][a-z0-9+-]*://(((([a-z
 # and a heavy handed email regex
 color body          brightcolor39   default        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
 
+set display_filter="perl -0777pe 's/___{10,}[^_]*microsoft teams meeting.*to join the meeting<([^>]*).*(___{10,})/\\n────────────────────────────────────────────────────────────────────────\\n\\nTeams Meeting ~~\\n\\nMeeting URL:\\n$1\\n\\n────────────────────────────────────────────────────────────────────────/is'| sed 's/^\\(To\\|CC\\): \\([^<]*[^>]\\)$/\\1\:<\\2>/g' | perl -0777pe 's/(((?!.*CC:)To:|CC:).+?(?=>\\n)>)/$1!REMOVE_ME!\\n!END!/gs' | sed '/^To:/{;:l N;/!END!/b; s/\\(\\n\\|  *\\|\\t\\t*\\)/ /g; bl}' | sed '/^To:/,/>$/ s/\\([^>]*>,\\?\\)/\\1\\n/g' | sed -e 's/^ \\(CC:\\)\\(.*$\\)/\\1\\n\\2/' -e 's/^\\(To:\\)\\(.*$\\)/\\1 --------------------------------------------------------------------\\n\\2/' -e 's/^!END!$/------------------------------------------------------------------------/' -e '/!REMOVE_ME!/d' -e '/\\[-- Type: text.* --\\]/d' -e '/\\[-- Autoview.* --\\]/d' -e '/\\[-- Type.* --\\]/d' -e '/\\[-- .*unsupported.* --\\]/d' -e '/\\[-- Attachment #[0-9] --\\]/d' -e 's/Attachment #[0-9]: //g' -e '/./,/^$/!d' -e 's/\\([A-Z]*\\), *\\([A-Za-z]*\\)\\(\"\\)\\?/\\2 \\L\\u\\1\\E\\3/g'"
+
 # simplified regex for URL & email
 #color body		magenta		default	"(ftp|https?|gopher|news|telnet|finger)://[^ \"\t\r\n]+"
 #color body		magenta		default	"[-a-z_0-9.]+@[-a-z_0-9.]+"
@@ -243,7 +250,6 @@ color status default default '\(threads/last-date-received\)'
 color status red default '\[([^]]+)\]' 1
 color status brightwhite default 'NeoMutt: ([^ ]+)' 1
 
-set mailcap_path = ~/.mutt/mailcap
 auto_view  text/html
 
 #set pager_index_lines=10
@@ -303,7 +309,3 @@ color   body    brightmagenta   default         "-- Patch Links --"
 color   body    green           default         "^Merged #.*"
 color   body    red             default         "^Closed #.*"
 color   body    brightblue      default         "^Reply to this email.*"
-
-# set pager_format=" %n %zc  %T %s%*  %{!%d %b · %H:%M} %?X?  %X ? %P  "
-# set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
-# set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
