@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CHROOT_DIR=/home/devi/rootfs/voidmusl
+CHROOT_DIR=/home/devi/chroots/voidmusl
 sudo mount -t proc proc $CHROOT_DIR/proc/
 sudo mount -t sysfs sys $CHROOT_DIR/sys/
 # sudo mount -o bind /tmp $CHROOT_DIR/tmp/
