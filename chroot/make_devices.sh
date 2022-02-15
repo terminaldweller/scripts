@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ ! "$EUID" = 0 ];then
+  echo "this scripts must be run as root"
+  exit 1;
+fi
+
 make_devices() {
   env mknod -m 0666 $1/dev/tty c 5 0
   chown root:tty $1/dev/tty
