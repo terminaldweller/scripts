@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! "$EUID" = 0 ];then
+if [ ! "$(id -u)" = 0 ];then
   echo "this scripts must be run as root"
   exit 1;
 fi
