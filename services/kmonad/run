@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec 1>&2
+exec kmonad /home/devi/scripts/keymap.kbd || exit 1
