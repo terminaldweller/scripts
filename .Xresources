@@ -1,9 +1,9 @@
 
-Xft.autohint: 0
+Xft.autohint: 1
 Xft.antialias: 1
 Xft.hinting: 1
 Xft.hintstyle: hintslight
-Xft.embolden: 1
+Xft.embolden: 0
 Xft.dpi: 96
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
@@ -14,7 +14,7 @@ gnome-terminal*dpi: 96
 *.font: DejaVuSansMono Nerd Font Mono:pixelsize=11.3:antialias=true:autohint=true;
 xterm*scaleHeight: 1.01
 
-#define base00 #2E3431
+#define base00 #000000
 #define base01 #cc0000
 #define base02 #4E9A06
 #define base03 #C4A000
@@ -22,11 +22,11 @@ xterm*scaleHeight: 1.01
 #define base05 #75507B
 #define base06 #06989A
 #define base07 #D3D7CF
-#define base08 #555753
+#define base08 #000000
 #define base09 #EF2929
 #define base0A #8AE234
 #define base0B #FCE94F
-#define base0C #729FCF
+#define base0C #5c5cff
 #define base0D #AD7FA8
 #define base0E #34E2E2
 #define base0F #EEEEEC

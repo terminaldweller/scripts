@@ -205,6 +205,7 @@ Plug 'tridactyl/vim-tridactyl'
 Plug 'hrother/offlineimaprc.vim'
 Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 Plug 'HiPhish/info.vim'
+Plug 'kmonad/kmonad-vim'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'haya14busa/vim-operator-flashy'

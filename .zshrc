@@ -194,12 +194,13 @@ alias xresources="vim ~/scripts/.Xresources"
 alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xresources"
 alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
+alias pulsemixer="pulsemixer --color 1"
 
 #autosuggest
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 lemon() {
   /home/devi/scripts/lemonbar.sh | lemonbar -f "DejaVu Sans Mono for Powerline:size=11" -g "x16"
@@ -639,6 +640,13 @@ _evalcache rbenv init -
 [ -f "/home/devi/.ghcup/env" ] && source "/home/devi/.ghcup/env" # ghcup-env
 
 eval "$(luarocks-5.3 path)"
+
+# fucks up the path. thanks cpan.
+# PATH="/home/devi/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="/home/devi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="/home/devi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"/home/devi/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=/home/devi/perl5"; export PERL_MM_OPT;
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
