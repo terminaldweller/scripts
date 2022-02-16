@@ -2,7 +2,6 @@
 # _*_ coding=utf-8 _*_
 
 import argparse
-import code
 import signal
 import sys
 from html.parser import HTMLParser
@@ -313,7 +312,8 @@ class ColoParser(HTMLParser):
             COLO_LIST.append(data)
 
 
-def premain(argparser):
+def main():
+    argparser = Argparser()
     signal.signal(signal.SIGINT, SigHandler_SIGINT)
     PRINT_LIST = str()
     lines = COLORS.split("\n")
@@ -394,24 +394,6 @@ def premain(argparser):
                 "YYY", NUMBER_COLO_LIST[i]
             )
     print(PRINT_LIST)
-
-
-def main():
-    argparser = Argparser()
-    if argparser.args.dbg:
-        try:
-            premain(argparser)
-        except Exception as e:
-            if hasattr(e, "__doc__"):
-                print(e.__doc__)
-            if hasattr(e, "message"):
-                print(e.message)
-            variables = globals().copy()
-            variables.update(locals())
-            shell = code.InteractiveConsole(variables)
-            shell.interact(banner="DEBUG REPL")
-    else:
-        premain(argparser)
 
 
 if __name__ == "__main__":
