@@ -153,9 +153,9 @@ alias zgit="proxychains4 git"
 alias zssh="proxychains4 ssh"
 alias zscp="proxychains4 scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
-alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
-alias socks5vpn1="ssh -N -D 9999 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
-alias socks5vpn2="ssh -N -D 9996 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
+alias socks5ir="ssh -N -D 9997 -o ClientAliveInterval=0 ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
+alias socks5vpn1="ssh -N -D 9999 -o ClientAliveInterval=0 ExitOnForwardFailure=yes -l rooot 145.239.165.137"
+alias socks5vpn2="ssh -N -D 9996 -o ClientAliveInterval=0 ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
@@ -444,7 +444,7 @@ vman() {
 }
 
 vinfo() {
-  vim -R -M -c 'silent only' -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16' -c "Info $1 $2" +only
+  vim -R -M -c 'colo iceberg' -c 'highlight Normal ctermbg=None' -c 'highlight lineNr ctermbg=16' -c 'hi EndOfBuffer ctermbg=16' -c "Info $1 $2" +only
 }
 
 ddig() {
