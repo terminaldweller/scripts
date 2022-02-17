@@ -1,0 +1,4 @@
+{
+	"data-root":"/home/devi/storage/ssd1/docker",
+	"storage-driver":"overlay2"
+}
