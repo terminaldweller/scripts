@@ -1,0 +1,15 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+      context: .
+    networks:
+      - cargonet
+    ports:
+      - "7777:8080"
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx.conf:ro
+      - /home/ubuntu/cargo:/cargo
+networks:
+  cargonet:
