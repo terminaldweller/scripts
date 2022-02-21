@@ -61,6 +61,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   babyblue="%F{39}"
   somegreen="%F{22}"
   randomblue="%F{26}"
+  yaorange="%F{67}"
 else
   turquoise="$fg[cyan]"
   orange="$fg[yellow]"
@@ -266,15 +267,18 @@ rebuildquery() {
 
 zstyle ':zsh-kubectl-prompt:' separator ':'
 getkubernetesinfo() {
-  local SUB_PROMPT="%{$somegreen%}<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>%{$reset_color%}"
+  local SUB_PROMPT="%{$somegreen%}<<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>>%{$reset_color%}"
   if [[ "$ZSH_KUBECTL_USER" =~ "admin" ]];then
     SUB_PROMPT="%{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}"
   fi
   echo $SUB_PROMPT
 }
 
-# PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} %{$someblue%}<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>%{$reset_color%}%{$batred%}$(dir_writeable)%{$reset_color%}'
-PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%M%{$reset_color%} in %{$yagreen%}$(pwd_shortened)%{$reset_color%} at %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} $(getkubernetesinfo)%{$batred%}$(dir_writeable)%{$reset_color%}'
+getterminal() {
+  if [ ! $TTY = "" ]; then echo $TTY;else echo $STY;fi
+}
+
+PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} $(getkubernetesinfo)%{$batred%}$(dir_writeable)%{$reset_color%}'
 PS2=$''
 PS3=$'\n%{$randomblue%}--➜%{$reset_color%}'
 get_prompt_len() {
@@ -375,6 +379,7 @@ source ~/.oh-my-zsh/plugins/zle-vi-visual/zle_vi_visual.zsh
 function zle-line-init zle-keymap-select {
 RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} \
 %{$lorange%}%?↵%{$reset_color%}\
+%{$yaorange%} L$SHLVL%{$reset_color%}\
 %{$veryorange%}$(bg_job_count)%{$reset_color%}\
 %{$bluesomething%}$(inranger)%{$reset_color%}"
 # %{$purple4%}$(get_prompt_len)%{$reset_color%}"

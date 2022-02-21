@@ -35,3 +35,4 @@ xrandr --output eDP1 --mode 1920x1080 --right-of HDMI2
 fc-list : family style
 https://smallpdf.com/jpg-to-pdf
 cat /home/devi/.clip_history | dmenu -l 10 | xsel -ib
+git worktree add -b hotfix ~/code/hotfix trunk

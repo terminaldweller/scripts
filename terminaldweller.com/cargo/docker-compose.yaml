@@ -12,5 +12,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /home/ubuntu/cargo:/cargo
+    cap_drop:
+      - ALL
 networks:
   cargonet:

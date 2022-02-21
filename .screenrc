@@ -4,3 +4,4 @@ escape ^Bb
 defscrollback 1000
 vbell off
 term screen-256color
+altscreen on

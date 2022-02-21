@@ -89,4 +89,4 @@ function fd {
 
 export SHELL="ksh"
 export PATH=$PATH:/home/devi/scripts/bin
-export PATH=$PATH:/home/devi/google-java-format
+export PATH=$PATH:/home/devi/bin
