@@ -178,13 +178,13 @@ alias zh_freebsd="zssh dev@192.168.90.15"
 alias zh_linux="zssh dev@192.168.90.17"
 alias zh_router_root="zssh root@192.168.90.71"
 alias zh_router_admin="zssh admin@192.168.90.71"
-alias youtube-dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube-dl"
+alias youtube_dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube-dl"
 alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
 alias man="man -O width=210"
-alias getmangas="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --manga"
-alias getanimes="proxychains4 -q -f ~/proxies/ca/proxychains.conf kaminokumo --anime"
+alias getmangas="proxychains4 -q -f ~/proxies/ice/proxychains.conf kaminokumo --manga"
+alias getanimes="proxychains4 -q -f ~/proxies/ice/proxychains.conf kaminokumo --anime"
 alias gdb="gdb -q"
 alias bashrc="vim ~/scripts/.bashrc"
 alias fixbashrc="cp ~/scripts/.bashrc ~/"
@@ -197,6 +197,7 @@ alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xr
 alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 alias pulsemixer="pulsemixer --color 1"
+alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -307,6 +308,19 @@ export YTFZF_LOOP=0
 export YTFZF_PREF="22"
 export YTFZF_ENABLE_FZF_DEFAULT_OPTS=1
 export YTFZF_CACHE=~/.cache/ytfzf
+
+backup_home(){
+  # wget https://raw.githubusercontent.com/rubo77/rsync-homedir-excludes/master/rsync-homedir-excludes.txt -O /var/tmp/ignorelist
+  rsync -rlptgoDAXHv \
+    --info=PROGRESS2,MOUNT2 \
+    --exclude-from=/var/tmp/ignorelist \
+    --exclude="Downloads" \
+    --exclude="storage" \
+    --exclude="sambashare" \
+    /home/devi/ \
+    /home/devi/storage/backup/devi/ \
+    "$@"
+}
 
 fixrc() {
   cp ~/scripts/.zshrc ~/.zshrc
@@ -652,3 +666,5 @@ eval "$(luarocks-5.3 path)"
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+
+[[ -s "/home/devi/.gvm/scripts/gvm" ]] && source "/home/devi/.gvm/scripts/gvm"

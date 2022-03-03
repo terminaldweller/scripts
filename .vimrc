@@ -804,7 +804,8 @@ let g:tagbar_type_tf = {
 "doxygentoolkit
 autocmd FileType *.sol let g:DoxygenToolkit_briefTag_pre="@dev  "
 " let g:doxygen_enhanced_color = 1
-let g:syntax_extra_java="doxygen"
+let g:syntax_extra_java='doxygen'
+let g:syntax_extra_solidity='doxygen'
 
 "open-pdf conf
 let g:pdf_convert_on_edit = 1
@@ -1237,6 +1238,13 @@ augroup YCMDocRust
     \ 'syntax': 'rust'
     \ }
 augroup END
+augroup YCMDocJava
+  autocmd!
+  autocmd FileType java let b:ycm_hover = {
+    \ 'command': 'GetDoc',
+    \ 'syntax': 'java'
+    \ }
+augroup END
 
 let g:ycm_language_server = [
       \ {'name': 'vim',
@@ -1500,7 +1508,10 @@ inoremap <silent><leader>z <C-o>:MaximizerToggle!<CR>
 
 "pgsql
 let g:sql_type_default = 'pgsql'
-let b:sql_type_override='pgsql' | set ft=sql
+augroup PGSQL
+  autocmd!
+  autocmd FileType sql let b:sql_type_override='pgsql' | set ft=sql
+augroup END
 let g:pgsql_pl = ['python']
 
 " uses " register to keep last cursor position in buffers
