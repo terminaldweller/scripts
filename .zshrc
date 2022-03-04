@@ -20,6 +20,7 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
+alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
 # alias ls="ls --color=auto"
@@ -509,6 +510,7 @@ setopt +o nomatch
 # eval "$(goenv init -)"
 # export PATH="$GOROOT/bin:$PATH"
 # export PATH="$PATH:$GOPATH/bin"
+export GOPROXY=https://goproxy.io
 
 fzf_postit() {
   cat ~/scripts/postit | fzf-tmux -p 70%,70% -- --bind 'enter:execute(tmux set-buffer {})+accept'
