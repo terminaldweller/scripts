@@ -39,7 +39,7 @@ export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\e[0m'           # end underline
 export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
 
-alias la="la -A"
+alias la="ls -A"
 alias ll="ls -la"
 alias lss="ls -sSa"
 alias ..="cd .."

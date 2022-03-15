@@ -20,6 +20,7 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
+alias w3m="torsocks /home/devi/w3m/w3m -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -80,7 +81,6 @@ alias lynx="lynx -lss ~/scripts/lynx.lss -cfg ~/scripts/lynx.cfg -prettysrc"
 alias hplovecraft="w3m http://www.hplovecraft.com/writings/texts/"
 alias casmith="w3m http://www.eldritchdark.com/writings/short-stories/"
 # alias tt="transmission-cli -u 1 -w ~/winshare/"
-alias w3m="torsocks w3m -graph"
 #alias make="colormake"
 #alias gcc="COLORMAKE_COMMAND=gcc colormake"
 #alias clang="COLORMAKE_COMMAND=clang colormake"
@@ -146,7 +146,7 @@ alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd
 alias vms="ssh 185.126.202.69 -l ubuntu -p 1022"
 alias xonshrc="vim ~/scripts/.xonshrc"
 alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
-alias sshphone="ssh 192.168.1.110 -l u0_a601 -p 8022"
+alias deviphone="ssh 192.168.1.110 -l u0_a601 -p 8022"
 alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
 alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
 alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
@@ -199,6 +199,8 @@ alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 alias pulsemixer="pulsemixer --color 1"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
+alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
+alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
