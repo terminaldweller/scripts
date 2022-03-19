@@ -1,0 +1,8 @@
+#!/bin/sh
+
+STATUS=$(cmus-remote -Q | grep status | awk '{print $2}')
+if [ "$STATUS" = paused ];then 
+  cmus-remote -p
+elif [ $STATUS = playing ];then 
+  cmus-remote -u
+fi

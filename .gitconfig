@@ -1,6 +1,113 @@
+# This is Git's per-user configuration file.
 [user]
+# Please adapt and uncomment the following lines:
+	name = terminaldweller
 	email = thabogre@gmail.com
+
+# https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git
+[color "decorate"]
+	HEAD = bold blink italic 196
+	branch = 214
+	tag = bold 222
+
 [alias]
-	conflicts = !git ls-files -u | cut -f 2 | sort -u
-	pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-	pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	tree = "forest --pretty=format:\"%C(red)%h %C(magenta)(%ar) %C(blue)%an %C(reset)%s\" --style=15 --reverse"
+	lg = lg1
+	lg1 = lg1-specific --all
+	lg2 = lg2-specific --all
+	lg3 = lg3-specific --all
+
+	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3-specific = log --simplify-by-decoration --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+
+		# delimiter used as column seperator
+	delim = |
+		# example thompson1
+	lg4     = log --all --graph         --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+		# modified thompson1 example
+	lg5 = log --all --graph --color --abbrev-commit --decorate --format=format:'^%C(bold blue)%<(7,trunc)%h%C(reset)^%C(bold green)%<(21,trunc)%ar%C(reset)^%C(white)%<(40,trunc)%s%C(reset)^%C(dim white)%<(25,trunc)%an%C(reset)^%C(auto)%d%C(reset)'
+		# set a column for the graph
+	thompson1-new-col = 1
+
+	tably = !bash -c '"                                                                                                                 \
+		declare -A col_length;                                                                                                 \
+		delim=$(git config alias.delim);                                                                                       \
+		git_log_cmd=$(git config alias.$1);                                                                                    \
+		git_tre_col=${2:-$(git config alias.$1-col)};                                                                          \
+		\
+		i=0;                                                                                                                   \
+		n=0;                                                                                                                   \
+		while IFS= read -r line; do                                                                                            \
+		((n++));                                                                                                             \
+		while read -d\"$delim\" -r col_info;do                                                                               \
+		((i++));                                                                                                           \
+		[[ -z \"$col_info\" ]] && col_length[\"$n:$i\"]=${col_length[\"${last[$i]:-1}:$i\"]} && ((i--)) && continue;       \
+		[[ $i -gt ${i_max:-0} ]] && i_max=$i;                                                                              \
+		col_length[\"$n:$i\"]=$(grep -Eo \"\\([0-9]*,[lm]*trunc\\)\" <<< \"$col_info\" | grep -Eo \"[0-9]*\" | head -n 1); \
+		[[ -n \"${col_length[\"$n:$i\"]}\" ]] && last[$i]=$n;                                                              \
+		chars_extra=$(grep -Eo \"\\trunc\\).*\" <<< \"$col_info\");                                                        \
+		chars_extra=${chars_extra#trunc)};                                                                                 \
+		chars_begin=${chars_extra%%\\%*};                                                                                  \
+		chars_extra=${chars_extra#*\\%};                                                                                   \
+		case \" ad aD ae aE ai aI al aL an aN ar as at b B cd cD ce cE ci cI cl cL cn cN cr                                \
+		cs ct d D e f G? gd gD ge gE GF GG GK gn gN GP gs GS GT h H N p P s S t T \" in                            \
+		*\" ${chars_extra:0:2} \"*)                                                                                       \
+		chars_extra=${chars_extra:2};                                                                                   \
+		chars_after=${chars_extra%%\\%*};                                                                               \
+		;;                                                                                                              \
+		*\" ${chars_extra:0:1} \"*)                                                                                       \
+		chars_extra=${chars_extra:1};                                                                                   \
+		chars_after=${chars_extra%%\\%*};                                                                               \
+		;;                                                                                                              \
+		*)                                                                                                                \
+		echo \"No Placeholder found. Probably no tablelike output.\";                                                   \
+		continue;                                                                                                       \
+		;;                                                                                                              \
+		esac ;                                                                                                             \
+		if [[ -n \"$chars_begin$chars_after\" ]];then                                                                      \
+		len_extra=$(echo \"$chars_begin$chars_after\" | wc -m);                                                          \
+		col_length["$n:$i"]=$((${col_length["$n:$i"]}+$len_extra-1));                                                    \
+		fi;                                                                                                                \
+		\
+		done <<< \"${line#*=format:}$delim\";                                                                                \
+		i=1;                                                                                                                 \
+		done <<< \"$(echo -e \"${git_log_cmd//\\%n/\\\\n}\")\";                                                                \
+		\
+		while IFS= read -r graph;do                                                                                            \
+		chars_count=$(sed -nl1000 \"l\" <<< \"$graph\" | grep -Eo \"\\\\\\\\\\\\\\\\|\\||\\/|\\ |\\*|_\" | wc -l);           \
+		[[ ${chars_count:-0} -gt ${col_length["1:1"]:-0} ]] && col_length["1:1"]=$chars_count;                               \
+		done < <([[ -n \"$(grep -F graph <<< \"$git_log_cmd\")\" ]] && git log --all --graph --pretty=format:\" \" && echo);   \
+		\
+		l=0;                                                                                                                   \
+		while IFS= read -r line;do                                                                                             \
+		c=0;                                                                                                                 \
+		((l++));                                                                                                             \
+		[[ $l -gt $n ]] && l=1;                                                                                              \
+		while IFS= read -d\"$delim\" -r col_content;do                                                                       \
+		((c++));                                                                                                           \
+		if [[ $c -eq 1 ]];then                                                                                             \
+		[[ -n \"$(grep -F \"*\" <<< \"$col_content\")\" ]] || l=2;                                                       \
+		chars=$(sed -nl1000 \"l\" <<< \"$col_content\" | grep -Eo \"\\\\\\\\\\\\\\\\|\\||\\/|\\ |\\*|_\" | wc -l);       \
+		whitespaces=$((${col_length["1:1"]}-$chars));                                                                    \
+		whitespaces=$(seq -s\" \" $whitespaces|tr -d \"[:digit:]\");                                                     \
+		col_content[1]=\"${col_content[1]}$col_content$whitespaces\n\";                                                  \
+		else                                                                                                               \
+		col_content[$c]=\"${col_content[$c]}$(printf \"%-${col_length[\"$l:$c\"]}s\" \"${col_content:-\"\"}\")\n\";      \
+		fi;                                                                                                                \
+		done <<< \"$line$delim\";                                                                                            \
+		for ((k=$c+1;k<=$i_max;k++));do                                                                                      \
+		empty_content=\"$(printf \"%-${col_length[\"$l:$k\"]:-${col_length[\"${last[$k]:-1}:$k\"]:-0}}s\" \"\")\";         \
+		col_content[$k]=\"${col_content[$k]}$empty_content\n\";                                                            \
+		done;                                                                                                                \
+		done < <(git $1 && echo);                                                                                              \
+		\
+		while read col_num;do                                                                                                  \
+		if [[ -z \"$cont_all\" ]];then                                                                                       \
+		cont_all=${col_content[$col_num]};                                                                                 \
+		else                                                                                                                 \
+		cont_all=$(paste -d\" \" <(echo -e \"$cont_all\") <(echo -e \"${col_content[$col_num]}\"));                        \
+		fi;                                                                                                                  \
+		done <<< $(seq 2 1 ${git_tre_col:-1};seq 1;seq $((${git_tre_col:-1}+1)) 1 $i_max);                                     \
+		echo -e \"$cont_all\";                                                                                                 \
+		"' "git-tably"

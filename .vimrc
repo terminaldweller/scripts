@@ -1622,6 +1622,9 @@ function! s:vvman(one, two)
 endfunction
 let g:Infofallback = function("s:vvman")
 
+" fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16
 hi Pmenu ctermbg=233

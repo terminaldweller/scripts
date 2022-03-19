@@ -366,9 +366,10 @@ export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/node/14.15.5_64bit/bin
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/upstream/emscripten
+export PATH=$PATH:/home/devi/devi/git-scripts.git/master
 
 ks() {
-  kubectl "$@" -n kube-system
+  kubectl -n kube-system "$@"
 }
 
 export EDITOR=vim
