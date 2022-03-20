@@ -36,3 +36,4 @@ fc-list : family style
 https://smallpdf.com/jpg-to-pdf
 cat /home/devi/.clip_history | dmenu -l 10 | xsel -ib
 git worktree add -b hotfix ~/code/hotfix trunk
+sudo mount -t cifs -o user=pi4,vers=2.0,domain=MSHOME //192.168.1.200/disk1 /home/devi/sambashare

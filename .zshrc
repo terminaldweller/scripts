@@ -24,6 +24,7 @@ alias w3m="torsocks /home/devi/w3m/w3m -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
+alias l="ls"
 # alias ls="ls --color=auto"
 alias la="exa -a"
 # alias la="ls -A"
@@ -155,10 +156,10 @@ alias zgit="proxychains4 git"
 alias zssh="proxychains4 ssh"
 alias zscp="proxychains4 scp"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
-alias socks5ir="ssh -N -D 9997 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
-alias socks5vpn1="ssh -N -D 9999 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
-alias socks5vpn2="ssh -N -D 9996 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
-alias socks5vpn3="ssh -N -D 9995 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
+alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
+alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
+alias socks5vpn3="autossh -M 0 -N -D 9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
@@ -317,7 +318,6 @@ backup_home(){
   rsync -rlptgoDAXHv \
     --info=PROGRESS2,MOUNT2 \
     --exclude-from=/var/tmp/ignorelist \
-    --exclude="Downloads" \
     --exclude="storage" \
     --exclude="sambashare" \
     /home/devi/ \
