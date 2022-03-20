@@ -4,6 +4,7 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
+    password = ;
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -12,6 +13,7 @@ servers = (
     address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
+    password = ;";
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
@@ -23,7 +25,8 @@ servers = (
     use_tls = "yes";
     tls_verify = "yes";
   },
-  { address = "irc.oftc.net";
+  {
+    address = "irc.oftc.net";
     chatnet = "OFTC";
     autoconnect = "yes";
     port = "6697";
@@ -39,7 +42,13 @@ servers = (
 );
 
 chatnets = {
-  libera = { type = "IRC"; nick = "terminaldweller"; };
+  libera = {
+    type = "IRC";
+    nick = "terminaldweller";
+    sasl_mechanism = "PLAIN";
+    sasl_username = "terminaldweller";
+    sasl_password = ;
+  };
   OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
@@ -57,8 +66,10 @@ channels = (
   { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openssh"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#gdb"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#openbsd"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#irssi"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
 
@@ -359,6 +370,13 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_2 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_2 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
@@ -408,7 +426,7 @@ settings = {
     dccstat_cycle_through_transfers = "yes";
   };
 };
-keyboard = (
+keyboard = ( 
   { key = "meta-[M"; id = "command"; data = "mouse_xterm"; }
 );
 ignores = (
@@ -427,11 +445,16 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openbsd" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#freebsd" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian-next" ); },
+  { 
+    level = "JOINS PARTS QUITS NICKS";
+    channels = ( "#debian-next" );
+  },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssh" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irssi" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); }
 );
