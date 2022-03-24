@@ -15,14 +15,15 @@ UTC_TIME="#[fg=colour255 bg=colour25]"$(echo GMT: $UTC_TIME_RESULT)
 JDATE="#[fg=colour255 bg=colour29]"$(jdate | gawk '{print $2" "$3}')
 # OPENWEATHERMAP_TOKEN=$(cat /home/devi/scripts/tmux/openweathermap.json|jq -r ".token")
 # WEATHER_INFO=$(sleep 120 && torsocks curl "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=$OPENWEATHERMAP_TOKEN&units=metric"|jq ".main.temp")
-WEATHER_INFO=$(curl 'wttr.in/tehran?T&format=%t/%f')
+WEATHER_INFO=$(curl 'wttr.in/tehran?T&format=%f')
 WEATHER="#[fg=colour255 bg=colour32]"$(echo $WEATHER_INFO)
 CPU_TEMP=$(sensors | grep temp1 | head -n 1 | awk '{print $2}')
 CPU_SECTION="#[fg=colour36 bg=colour16]$SEPARATOR_LEFT_BOLD#[fg=colour16 bg=colour36]$CPU_TEMP"
+BATTERY=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | awk '{print $2}')
 
-# echo "$CPU_SECTION#[fg=colour32 bg=colour36]$SEPARATOR_LEFT_BOLD$WEATHER#[fg=colour29 bg=colour32]$SEPARATOR_LEFT_BOLD$JDATE #[fg=colour31 bg=colour29]$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour25 bg=colour31]$SEPARATOR_LEFT_BOLD$UTC_TIME "
 echo "$CPU_SECTION#[fg=colour32 bg=colour36]\
 $SEPARATOR_LEFT_BOLD$WEATHER#[fg=colour29 bg=colour32]\
 $SEPARATOR_LEFT_BOLD$JDATE #[fg=colour31 bg=colour29]\
-$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour25 bg=colour31]\
+$SEPARATOR_LEFT_BOLD$DAY $SEPARATOR_LEFT_THIN $DATE $SEPARATOR_LEFT_THIN $TIME #[fg=colour214 bg=colour31]\
+$SEPARATOR_LEFT_BOLD#[fg=colour0 bg=colour214]$BATTERY #[fg=colour25 bg=colour214]\
 $SEPARATOR_LEFT_BOLD$UTC_TIME "

@@ -53,3 +53,31 @@ copy_pam_mod_deps() {
     copy_to_stash $MOD_ABS "$DEP_LIST" $2 $3
   done
 }
+
+dig() {
+  globalholecounter=0
+  if test "$("ls" -A "/home/devi/devi/abbatoir")"; then
+    while [ 1 ]; do
+      if [ -d "/home/devi/devi/abbatoir/hole$globalholecounter" ]; then
+        # if its not empty
+        if test "$("ls" -A "/home/devi/devi/abbatoir/hole$globalholecounter")"; then
+          :
+        # if its empty
+        else
+          cd /home/devi/devi/abbatoir/hole$globalholecounter
+          break
+        fi
+      else
+        mkdir /home/devi/devi/abbatoir/hole$globalholecounter
+        cd /home/devi/devi/abbatoir/hole$globalholecounter
+        echo $globalholecounter
+        break
+      fi
+      $((globalholecounter=globalholecounter+1))
+    done
+  else
+    mkdir /home/devi/devi/abbatoir
+    mkdir /home/devi/devi/abbatoir/hole$globalholecounter
+    cd /home/devi/devi/abbatoir/hole$globalholecounter
+  fi
+}

@@ -160,6 +160,7 @@ alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliv
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
 alias socks5vpn3="autossh -M 0 -N -D 9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
