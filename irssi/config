@@ -4,7 +4,7 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
-    password = ;
+    password = "";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -13,7 +13,7 @@ servers = (
     address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
-    password = ;";
+    password = "";
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
@@ -28,10 +28,11 @@ servers = (
   {
     address = "irc.oftc.net";
     chatnet = "OFTC";
-    autoconnect = "yes";
     port = "6697";
     use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "yes";
+    autoconnect = "yes";
   },
   {
     address = "192.168.1.109";
@@ -47,9 +48,15 @@ chatnets = {
     nick = "terminaldweller";
     sasl_mechanism = "PLAIN";
     sasl_username = "terminaldweller";
-    sasl_password = ;
+    sasl_password = "";
   };
-  OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
+  OFTC = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
+    nick = "terminaldweller";
+  };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
@@ -64,11 +71,13 @@ channels = (
   { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#tor"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openssh"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#gdb"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#openbsd"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#linux"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "libera"; autojoin = "yes"; },
   { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
 );
@@ -456,5 +465,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssh" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irssi" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); }
 );
