@@ -4,6 +4,7 @@
 import sys
 import subprocess
 
+# from man syscalls
 syscall_set = set(
     [
         "_llseek",

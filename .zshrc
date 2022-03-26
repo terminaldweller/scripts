@@ -20,7 +20,7 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
-alias w3m="torsocks /home/devi/w3m/w3m -graph"
+alias w3m="torsocks /home/devi/w3m/w3m -o auto_image=FALSE -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -200,9 +200,12 @@ alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xr
 alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 alias pulsemixer="pulsemixer --color 1"
+alias vagrant="https_proxy=http://[::1]:8118 vagrant --color --timestamp"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
+alias ip="ip --color=auto"
+alias zathura="tabbed -c zathura -e"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -629,6 +632,7 @@ fshow() {
   done
 }
 
+export COLORTERM=truecolor
 export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
 export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
 export LESS_TERMCAP_me=$'\e[0m'           # end mode
@@ -674,3 +678,4 @@ source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
 [[ -s "/home/devi/.gvm/scripts/gvm" ]] && source "/home/devi/.gvm/scripts/gvm"
+# [[ -s "/usr/share/grc/grc.zsh" ]] && source /usr/share/grc/grc.zsh

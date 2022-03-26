@@ -32,7 +32,7 @@ set laststatus=2
 set smartcase
 set more
 set lazyredraw
-set synmaxcol=200
+set synmaxcol=333
 syntax sync minlines=64
 set ttyfast
 set relativenumber
