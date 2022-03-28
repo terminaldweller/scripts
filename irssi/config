@@ -1,4 +1,6 @@
 # vim: filetype=perl
+# https://libera.chat/guides/certfp
+# https://www.oftc.net/NickServ/CertFP/
 servers = (
   {
     address = "irc.gitter.im";
@@ -19,13 +21,6 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.libera.chat";
-    chatnet = "libera";
-    autoconnect = "yes";
-    use_tls = "yes";
-    tls_verify = "yes";
-  },
-  {
     address = "irc.oftc.net";
     chatnet = "OFTC";
     port = "6697";
@@ -39,17 +34,19 @@ servers = (
     port = "6667";
     chatnet = "bitlbee";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.libera.chat";
+    chatnet = "LiberaChat";
+    port = "6697";
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "yes";
+    autoconnect = "yes";
   }
 );
 
 chatnets = {
-  libera = {
-    type = "IRC";
-    nick = "terminaldweller";
-    sasl_mechanism = "PLAIN";
-    sasl_username = "terminaldweller";
-    sasl_password = "";
-  };
   OFTC = {
     type = "IRC";
     max_kicks = "1";
@@ -61,25 +58,26 @@ chatnets = {
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
   bitlbee = { type = "IRC"; };
+  LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
 };
 
 channels = (
-  { name = "#dpdk"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#fdio-vpp"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#openssl"; chatnet = "libera"; autojoin = "yes"; },
+  { name = "#dpdk"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#fdio-vpp"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#openssl"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#tor"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#openssh"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#gdb"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#openbsd"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#voidlinux"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#freebsd"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#linux"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "libera"; autojoin = "yes"; },
-  { name = "#kvm"; chatnet = "libera"; autojoin = "yes"; }
+  { name = "#openssh"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#gdb"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#openbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#voidlinux"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#linux"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#irssi"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#kvm"; chatnet = "LiberaChat"; autojoin = "yes"; }
 );
 
 aliases = {
