@@ -4,9 +4,9 @@ SHELL?=bash
 CXX=clang++
 CXX?=clang++
 ifdef OS
-CXX_FLAGS=-std=c++17
+CXX_FLAGS=-std=c++20
 else
-CXX_FLAGS=-std=c++17 -fpic
+CXX_FLAGS=-std=c++20 -fpic
 endif
 CXX_EXTRA?=
 CTAGS_I_PATH?=./

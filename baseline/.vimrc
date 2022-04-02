@@ -29,7 +29,6 @@ filetype plugin indent on
 " jellybeans
 colo jellybeans
 set background=dark
-let g:gruvbox_italics = 1
 let g:jellybeans_overrides = {
 \    'Todo': { 'guifg': '000000', 'guibg': '00cc00',
 \              'ctermfg': 'Black', 'ctermbg': 'Blue',
