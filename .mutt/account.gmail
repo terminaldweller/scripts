@@ -4,7 +4,7 @@ unmailboxes *
 set from = 'thabogre@gmail.com'
 set imap_user = 'thabogre@gmail.com'
 source "gpg -d ~/scripts/mail.gmail.pass.gpg |"
-set smtp_url = 'smtp://thabogre@smtp.gmail.com:587/'
+set smtp_url = 'smtp://thabogre@smtp.gmail.com:587'
 set realname = 'farzad sadeghi'
 set folder = 'imaps://imap.gmail.com:993'
 set spoolfile = '+Inbox'

@@ -5,6 +5,7 @@ set smart_wrap
 set imap_keepalive = 900
 set timeout=60
 set move = no
+# need cyrus-sasl-module to work
 set ssl_starttls=yes
 set ssl_force_tls=yes
 

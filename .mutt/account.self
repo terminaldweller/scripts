@@ -4,7 +4,7 @@ unmailboxes *
 set from = 'devi@terminaldweller.com'
 set imap_user = 'devi@terminaldweller.com'
 source "gpg -d ~/scripts/mail.self.pass.gpg |"
-set smtp_url = 'smtp://mail.terminaldweller.com:587/'
+set smtp_url = 'smtp://devi@terminaldweller.com@mail.terminaldweller.com:587'
 set realname = 'farzad sadeghi'
 set folder = 'imaps://mail.terminaldweller.com:993'
 set spoolfile = '+INBOX'
