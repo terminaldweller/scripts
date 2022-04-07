@@ -252,6 +252,13 @@ filetype plugin indent on
 " let g:vim_markdown_math = 1
 " let g:vim_markdown_strikethrough = 1
 
+" enable 24-bit color
+if exists('+termguicolors')
+  " set Vim-specific sequences for RGB colors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " set termguicolors
+endif
 "jellybeans
 silent! colo jellybeans
 set background=dark
@@ -1057,7 +1064,7 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_root_markers = ['.root']
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!node_modules"'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -1452,9 +1459,11 @@ augroup ALELUA
   autocmd FileType lua let b:ale_linters = {'lua': ['luacheck']}
   autocmd FileType lua let b:ale_fixers = {'lua': ['lua-format']}
 augroup END
-let g:ale_sh_shfmt_options = "-l -w"
+let b:ale_sh_shfmt_options = "-l -w"
+let b:ale_sh_shellcheck_options = '-x'
 augroup ALESH
   autocmd!
+  autocmd FileType sh let b:ale_linters = {'sh': ['shellcheck']}
   autocmd FileType sh let b:ale_fixers = {'sh': ['shfmt']}
 augroup END
 
