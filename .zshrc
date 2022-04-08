@@ -20,7 +20,7 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
-alias w3m="torsocks /home/devi/w3m/w3m -o auto_image=FALSE -graph"
+alias w3m="torsocks w3m -o auto_image=FALSE -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -156,6 +156,7 @@ alias fixproxychainsrc="cp ~/scripts/.proxychains/proxychains.conf ~/.proxychain
 alias zgit="proxychains4 git"
 alias zssh="proxychains4 ssh"
 alias zscp="proxychains4 scp"
+alias ztelnet="proxychains4 telnet"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
@@ -202,7 +203,8 @@ alias fixxresources="cp ~/scripts/.Xresources ~/.Xresources && xrdb -merge ~/.Xr
 alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 alias pulsemixer="pulsemixer --color 1"
-alias vagrant="https_proxy=http://[::1]:8118 vagrant --color --timestamp"
+# alias vagrant="https_proxy=http://[::1]:8118 vagrant --color --timestamp"
+alias vagrant="https_proxy=socks5://[::1]:9993 vagrant --color --timestamp"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
@@ -210,6 +212,8 @@ alias ip="ip --color=auto"
 alias zathura="tabbed -c zathura -e"
 alias ytfzf="proxychains4 -q -f ~/proxies/ice/proxychains.conf ytfzf"
 alias newsboat="proxychains4 -q -f ~/proxies/ice/proxychains.conf newsboat"
+alias dud="du -hcD --max-depth=1 | sort -hr | colcol | column -t"
+alias bbox="busybox"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -283,7 +287,7 @@ pdfsearch() {
 #  /usr/bin/bicon.bin
 #fi
 
-export SOCKS_PROXY="socks5://127.0.0.1:9050"
+# export SOCKS_PROXY="socks5://127.0.0.1:9050"
 REPORTTIME=4
 STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
