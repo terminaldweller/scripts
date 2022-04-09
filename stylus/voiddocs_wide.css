@@ -1,8 +1,8 @@
 @-moz-document domain("docs.voidlinux.org") {
-
-search-wrapper, #page-wrapper main {
-  width: 100%;
-  max-width: 90%;
-  margin: 0 auto;
-}
+  search-wrapper,
+  #page-wrapper main {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
 }

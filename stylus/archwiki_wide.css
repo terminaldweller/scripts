@@ -1,59 +1,58 @@
-@-moz-document url-prefix("https://wiki.archlinux.org") {
-
-.mw-body {
+@-moz-document url-prefix("https://wiki.archlinux.org")
+{
+  .mw-body {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 90%;
     max-width: 100%;
-}
+  }
 
-.mw-content-container {
+  .mw-content-container {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-}
+  }
 
-.mw-parser-output {
+  .mw-parser-output {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-}
+  }
 
-.vector-body {
+  .vector-body {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-}
+  }
 
-#mw-content-text {
+  #mw-content-text {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-}
+  }
 
-#content {
+  #content {
     margin: 10px;
     border: 10px;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-}
+  }
 
-div {
+  div {
     margin: 0px;
     border: 0px;
     padding: 0px;
     width: 90%;
     max-width: 100%;
-}
-
+  }
 }

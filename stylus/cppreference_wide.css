@@ -1,0 +1,28 @@
+@-moz-document domain("cppreference.com") {
+  body {
+    width: 95%;
+    max-width: 95%;
+    font-size: 19px;
+    padding: 1%;
+    border: thick;
+    margin: 1%;
+  }
+
+  head {
+    width: 100%;
+    max-width: 100%;
+    font-size: 19px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+  }
+
+  div#content {
+    width: 99%;
+    max-width: 99%;
+    margin-right: 1%;
+    margin-left: 1%;
+    padding: 1%;
+    border: none;
+  }
+}
