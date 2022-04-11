@@ -20,6 +20,8 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
+alias gd="git diff --color-words"
+
 alias w3m="torsocks w3m -o auto_image=FALSE -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
@@ -214,6 +216,8 @@ alias ytfzf="proxychains4 -q -f ~/proxies/ice/proxychains.conf ytfzf"
 alias newsboat="proxychains4 -q -f ~/proxies/ice/proxychains.conf newsboat"
 alias dud="du -hcD --max-depth=1 | sort -hr | colcol | column -t"
 alias bbox="busybox"
+alias gitconfigrc="vim ~/scripts/.gitconfig"
+alias fixgitconfigrc="cp ~/scripts/.gitconfig ~/.gitconfig"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"

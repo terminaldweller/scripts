@@ -16,7 +16,7 @@ servers = (
     chatnet = "FRRouting.slack.com";
     port = "6667";
     password = "";
-    use_tls = "no";
+    use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
   },
@@ -43,6 +43,33 @@ servers = (
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "yes";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.rizon.net";
+    chatnet = "Rizon";
+    port = "6697";
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "ssl.ircnet.io";
+    chatnet = "IRCNet";
+    port = "6697";
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "185.112.147.110";
+    chatnet = "Undernet-ZNC";
+    port = "1025";
+    password = "";
+    use_tls = "yes";
+    tls_verify = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -59,6 +86,9 @@ chatnets = {
   "FRRouting.slack.com" = { type = "IRC"; };
   bitlbee = { type = "IRC"; };
   LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
+  Rizon = { type = "IRC"; };
+  IRCNet = { type = "IRC"; };
+  "Undernet-ZNC" = { type = "IRC"; };
 };
 
 channels = (
@@ -467,3 +497,4 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); }
 );
+logs = { };

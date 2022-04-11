@@ -418,7 +418,7 @@ formats = {
     msg_private_query = "{privmsgnick $nickalign$nickcolor$0$nicktrunc}$2";
   };
   "fe-common/irc" = {
-    away = "%k%z00d700AWAY %N%k%N";
+    away = "%k%z00d700AWAY %Z00d700%0%N";
     banlist = "%p%z00d700BANS %z00d700 $[-3]0 %8 {ichannelhilight $1} %N%8%n%k%N {ban $2}";
     banlist_long = "%p%z00d700BANS %z00d700 $[-3]0 %8 {ichannelhilight $1} {comment by {inick $3}%0%k, $4 secs ago} %N%8%n%k%N {ban $2}";
     chanmode_change = "%k%z008700MODE %N%Z008700%N {channelhilight $0} %Zeeeeee%n {mode $1}%n by {nick $2}";
@@ -445,7 +445,7 @@ formats = {
     server_chanmode_change = "%k%z8787ff SERVERMODE %k%8 {channelhilight $0} {mode $1} by {nick $2}";
     topic = "%k%z00d700TOPIC %Z00d700%0%N {channel $0}%N  $1";
     topic_info = "%k%z00d700TOPIC %Z00d700%0%N {nick $0}%N {nickhost $2}  $1";
-    unaway = "%k%z00d700AWAY %N%k%N END";
+    unaway = "%k%z00d700AWAY %Z00d700%0%N END";
     usermode_change = "%z008700%ZeeeeeeMODE %N%Z008700%N {mode $0}%N for %0{mynick $1}%N";
     who = "%z00d700%kWHO %z005f87%k {inick $[!9]1} %Z005f87 %k$0 %0%g Status: $[!3]2  $[-2]3 hops %N%k%N {nickhost $4@$5} {comment $6}";
     whois = "%z00d700%kWHOIS %Z00d700%0%n {nick $0} {nickhost $1@$2}%:{whois ircname $3}";

@@ -16,21 +16,22 @@
 	lg1 = lg1-specific --all
 	lg2 = lg2-specific --all
 	lg3 = lg3-specific --all
+	lg10 = forest 
 
 	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-	lg3-specific = log --simplify-by-decoration --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	lg3-specific = log --simplify-by-decoration --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n'' %C(white)%s%C(reset)%n'' %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
 		# delimiter used as column seperator
-	delim = |
+	delim = ^
 		# example thompson1
-	lg4     = log --all --graph         --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	lg4 = log --all --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 		# modified thompson1 example
 	lg5 = log --all --graph --color --abbrev-commit --decorate --format=format:'^%C(bold blue)%<(7,trunc)%h%C(reset)^%C(bold green)%<(21,trunc)%ar%C(reset)^%C(white)%<(40,trunc)%s%C(reset)^%C(dim white)%<(25,trunc)%an%C(reset)^%C(auto)%d%C(reset)'
 		# set a column for the graph
 	thompson1-new-col = 1
 
-	tably = !bash -c '"                                                                                                                 \
+	tably = !bash -c '"                                                                                                      \
 		declare -A col_length;                                                                                                 \
 		delim=$(git config alias.delim);                                                                                       \
 		git_log_cmd=$(git config alias.$1);                                                                                    \
@@ -111,3 +112,12 @@
 		done <<< $(seq 2 1 ${git_tre_col:-1};seq 1;seq $((${git_tre_col:-1}+1)) 1 $i_max);                                     \
 		echo -e \"$cont_all\";                                                                                                 \
 		"' "git-tably"
+
+[color "diff"]
+    meta = blue
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[interactive]
+	diffFilter = diff-highlight

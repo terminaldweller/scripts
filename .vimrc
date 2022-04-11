@@ -1062,9 +1062,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_root_markers = ['.root']
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!node_modules"'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!node_modules,!*.swp,!*.swo"'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -1459,12 +1460,17 @@ augroup ALELUA
   autocmd FileType lua let b:ale_linters = {'lua': ['luacheck']}
   autocmd FileType lua let b:ale_fixers = {'lua': ['lua-format']}
 augroup END
-let b:ale_sh_shfmt_options = "-l -w"
+" let b:ale_sh_shfmt_options = '-w -p -i=2 -bn -ci -sr -kp'
+let b:ale_sh_shfmt_options = "-w -"
 let b:ale_sh_shellcheck_options = '-x'
 augroup ALESH
   autocmd!
   autocmd FileType sh let b:ale_linters = {'sh': ['shellcheck']}
   autocmd FileType sh let b:ale_fixers = {'sh': ['shfmt']}
+augroup END
+augroup ALECSS
+  autocmd!
+  autocmd FileType css let b:ale_fixers = {'css': ['prettier']}
 augroup END
 
 "latex
