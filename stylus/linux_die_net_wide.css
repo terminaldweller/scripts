@@ -1,0 +1,6 @@
+@-moz-document domain("linux.die.net") {
+  body div#bg {
+    width: 100%;
+    max-width: 100%;
+  }
+}
