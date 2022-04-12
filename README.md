@@ -1,5 +1,2 @@
 
-# fedora
-
-My config files and some random lazy scripts.<br/>
-
+Configs and some random lazy scripts.<br/>
