@@ -14,21 +14,35 @@ set expandtab
 set smarttab
 set autoindent
 set wildignorecase
-set secure
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set noerrorbells
 set novisualbell
+set dictionary+=/usr/share/dict/words
 set backspace=indent,eol,start
 set pastetoggle=<F11>
+nnoremap <F7> :Vexplore<CR>
 nnoremap <leader>nn :bn<CR>
 nnoremap <leader>pp :bp<CR>
 map <C-e> :q<cr>
 nnoremap <F10> :vsp<cr>
 nnoremap <S-F10> :sp<cr>
 map <leader>w :w<CR>
+nmap Y y$
+vmap Y y$
+nnoremap <S-Delete> :bd<CR>
+nnoremap <leader>c :call clearmatches()<CR>
+inoremap <c-i> <esc>I
+inoremap <c-e> <esc>A
+nnoremap <leader>t :bel term<CR>
+nnoremap <leader>r :!%:p<CR>
+nnoremap <leader>rl :.w !bash<CR>
+set pastetoggle=<F11>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+nmap <leader>m :make<CR>
 
 set laststatus=2
 function! InsertStatuslineColor(mode)
@@ -71,3 +85,67 @@ hi def InterestingWord7 ctermfg=16 ctermbg=99 guifg=#000000 guibg=#875fff
 hi def InterestingWord8 ctermfg=16 ctermbg=35 guifg=#000000 guibg=#00af5f
 hi def InterestingWord9 ctermfg=16 ctermbg=57 guifg=#000000 guibg=#5f00ff
 hi def InterestingWord0 ctermfg=16 ctermbg=39 guifg=#000000 guibg=#00afff
+"
+"typos
+iab adn and
+iab teh the
+iab strign string
+iab pritn print
+iab retrun return
+iab fucntion function
+iab funciton function
+iab tehn then
+iab coutn count
+iab accoutn account
+iab applciation application
+iab cosnt const
+iab ehco echo
+
+"netrw
+let g:netrw_sort_by = 'date'
+let g:netrw_sort_direction = 'reverse'
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 1
+let g:netrw_winsize = 15
+let g:netrw_fastbrowse = 1
+let g:netrw_sort_by = 'name'
+let g:netrw_sort_direction = 'normal'
+
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+let g:camelchar = "A-Z0-9.,;:{([`'\"_"
+nnoremap <silent><C-h> :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>
+nnoremap <silent><C-l> :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>
+inoremap <silent><C-h> <C-o>:call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>
+inoremap <silent><C-l> <C-o>:call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>
+vnoremap <silent><C-h> :<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>v`>o
+vnoremap <silent><C-l> <Esc>`>:<C-U>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>v`<o
+
+if bufwinnr(1)
+  nnoremap <right> <c-w>>
+  nnoremap <left> <c-w><
+  nnoremap <up> <c-w>-
+  nnoremap <down> <c-w>+
+endif
+
+"copy and paste between different Vim instances
+nmap _Y :!echo ""> ~/.vi_tmp<CR><CR>:w! ~/.vi_tmp<CR>
+vmap _Y :w! ~/.vi_tmp<CR>
+nmap _P :r ~/.vi_tmp<CR>
+
+if has("gui")
+  " set guifont=DejaVu_Sans_Mono_for_Powerline:h10
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=r
+endif
+set secure
