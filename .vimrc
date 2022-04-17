@@ -1065,7 +1065,7 @@ let g:ctrlp_root_markers = ['.root']
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!node_modules,!*.swp,!*.swo"'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!node_modules"'
   let g:ctrlp_use_caching = 0
 endif
 

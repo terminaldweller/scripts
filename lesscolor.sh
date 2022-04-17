@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 get_interp() {
-  shebang=$(head -1 $1)
+  shebang=$(head -1 "$1")
   IFS='/' read -ra arr_slash <<< "$shebang"
   IFS=' ' read -ra arr_space <<< "${arr_slash[-1]}"
-  
+
   if [[ ${arr_space[0]} == "env" ]];then
-    echo ${arr_space[1]}
+    echo "${arr_space[1]}"
   else
-    echo ${arr_space[0]}
+    echo "${arr_space[0]}"
   fi
 }
 
@@ -62,10 +62,11 @@ case "$1" in
     *.feature|*.tap|*.awk|*.vim|*.pot|*.po|*.weechatlog|*.todotxt|*.thy|\
     *.lean|*.rts|*.u|*.vcl|*.bpl|*.sil|*.vpr|*.cirru|*.duel|*.jbst|*.qml|\
     *.qbs|*.slim|*.xqy|*.xquery|*.xq|*.xql|*.xqm|*.whiley|*.x10)
-        pygmentize -f 256 -O style=$PYGMENTIZE_STYLE "$1"|nl -b a;;
+        pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$1" | nl -b a;;
     *)
-        interp=$(get_interp $1)
-        pygmentize -f 256 -O style=$PYGMENTIZE_STYLE -l $interp "$1"|nl -b a
+        # interp=$(get_interp "$1")
+        # pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -l "$interp" "$1" | nl -b a
+        pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -g "$1" | nl -b a
 esac
 
 exit 0

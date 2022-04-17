@@ -218,6 +218,8 @@ alias dud="du -hcD --max-depth=1 | sort -hr | colcol | column -t"
 alias bbox="busybox"
 alias gitconfigrc="vim ~/scripts/.gitconfig"
 alias fixgitconfigrc="cp ~/scripts/.gitconfig ~/.gitconfig"
+alias nviminit="vim ~/scripts/init.vim"
+alias fixnviminit="cp ~/scripts/init.vim ~/.config/nvim/init.vim"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -379,9 +381,9 @@ export PATH=$PATH:/home/devi/vagrant
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
 export PATH=$PATH:/home/devi/google-java-format
 export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/node/14.15.5_64bit/bin
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.0/upstream/emscripten
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/node/14.18.2_64bit/bin
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/upstream/emscripten
 export PATH=$PATH:/home/devi/devi/git-scripts.git/master
 
 ks() {

@@ -88,7 +88,7 @@ abstracts = {
   channel = "%Z00af00$*%n";
 
   # nick is printed
-  nick = "%Zeeeeee{nickcolor $*}";
+  nick = "%z005f87%Zeeeeee{nickcolor $*}";
   mynick = "%Zeeeeee{nickcolor $*}";
   inick = "%Zeeeeee{nickcolor $*}";
   # Inverted
@@ -322,7 +322,7 @@ abstracts = {
   topicsbstart = "{sbstart $*}";
   topicsbend = "{sbend $*}";
 
-  prompt = "%k%z005f87$c $* %N%Z005f87%n ";
+  prompt = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%n ";
 
   # This controls each part of a statusbar, including the outer brackets of adv_windowlist
   sb = "$*";
@@ -447,9 +447,9 @@ formats = {
     topic_info = "%k%z00d700TOPIC %Z00d700%0%N {nick $0}%N {nickhost $2}  $1";
     unaway = "%k%z00d700AWAY %Z00d700%0%N END";
     usermode_change = "%z008700%ZeeeeeeMODE %N%Z008700%N {mode $0}%N for %0{mynick $1}%N";
-    who = "%z00d700%kWHO %z005f87%k {inick $[!9]1} %Z005f87 %k$0 %0%g Status: $[!3]2  $[-2]3 hops %N%k%N {nickhost $4@$5} {comment $6}";
-    whois = "%z00d700%kWHOIS %Z00d700%0%n {nick $0} {nickhost $1@$2}%:{whois ircname $3}";
-    whowas = "%z00d700%kWHOWAS %Z00d700%0%n {nick $0} {nickhost $1@$2}%:{whois was $3}";
+    who = "%z00d700%kWHO %Z00d700%z005f87 %z005f87%k{inick $[!9]1} %Z005f87%2 %k$0 %0%g Status: $[!3]2  $[-2]3 hops %N%g%N {nickhost $4@$5} {comment $6}";
+    whois = "%z00d700%kWHOIS %Z00d700%z005f87 {nick $0} %Z005f87%0 {nickhost $1@$2}%:{whois ircname $3}";
+    whowas = "%z00d700%kWHOWAS %Z00d700%0%n {nick $0} {nickhost $1@$2}%:{whois was $3}";
     own_action = "$nickalign{ownaction $0$nicktrunc}$1";
     action_private = "$nickalign{pvtaction $0$nicktrunc}$2";
     action_private_query = "$nickalign{pvtaction_query $0$nicktrunc}$2";

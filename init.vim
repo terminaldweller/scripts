@@ -1,4 +1,3 @@
-
 let mapleader = " "
 call plug#begin('~/AppData/Local/nvim/plugged')
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }

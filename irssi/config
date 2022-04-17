@@ -70,6 +70,22 @@ servers = (
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
+  },
+  {
+    address = "efnet.port80.se";
+    chatnet = "EFnet";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.dal.net";
+    chatnet = "DALnet";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "yes";
+    autoconnect = "yes";
   }
 );
 
@@ -89,6 +105,8 @@ chatnets = {
   Rizon = { type = "IRC"; };
   IRCNet = { type = "IRC"; };
   "Undernet-ZNC" = { type = "IRC"; };
+  EFnet = { type = "IRC"; };
+  DALnet = { type = "IRC"; };
 };
 
 channels = (
@@ -283,7 +301,6 @@ statusbar = {
     time = "{sb $Z}";
     user = "%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00{sbaway $A}}%N";
 
-
     # treated specially .. window is printed with non-empty windows,
     # window_empty is printed with empty windows
     window = " %Z00af00{sb $tag/{channel $itemname} %C {sbmode $M}} %C%n ";
@@ -299,6 +316,10 @@ statusbar = {
     lag = "{sb %0%Zff8700%zff8700%k ⌚ $0 %Zff8700%0%N}";
     act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %N}";
     more = "%c%0%n%z00af00 more ⬇ %c%0%N";
+
+    # vim_mode
+    vim_mode_1 = "%z005f5f%Zffffff%z005f5f%k%9 $vim_cmd_mode%N";
+    vim_windows_1 = "%Z005f5f%0%z005f5f%k%9 $vim_wins%z005f5f";
   };
 
   # there's two type of statusbars. root statusbars are either at the top
@@ -322,16 +343,20 @@ statusbar = {
       # list of items in statusbar in the display order
       items = {
         barstart = { priority = "100"; };
+
         user = { };
         window = { };
         window_empty = { };
         mh_sbsplitmode = { };
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
-        barend = { priority = "100"; alignment = "right"; };
-        otr = { };
+        otr = { priority = "100"; alignment = "right"; };
         usercount = { };
-        rotator = { };
+        rotator = { alignment = "right"; };
+        vim_windows_1 = { alignment = "right"; };
+        vim_mode_1 = { priority = "100"; alignment = "right"; };
+
+        barend = { priority = "100"; alignment = "right"; };
       };
     };
 
@@ -455,6 +480,7 @@ settings = {
     timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
     # hilite_url
     url_color = "38;5;6";
+    hilite_url = "38;5;6";
     # rotator
     rotator_chars = ". o 0 O";
     rotator_speed = "1000";
