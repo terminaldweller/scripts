@@ -178,22 +178,22 @@ $(TARGET).adbg: $(OBJ_DBG_LIST)
 	ar rcs $(TARGET).adbg $(OBJ_DBG_LIST)
 
 runcov: $(TARGET)-cov
-	$(TARGET)-cov
+	"./$(TARGET)-cov"
 
 test: $(TARGET)
-	$(TARGET)
+	"./$(TARGET)"
 
 run: $(TARGET)
 	"./$(TARGET)"
 
 valgrind: $(TARGET)
-	- valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all $(TARGET)
+	- valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all "./$(TARGET)"
 
 cppcheck:
 	cppcheck $(SRCS)
 
 rundbg: $(TARGET)-dbg
-	gdb --batch --command=./debug.dbg --args $(TARGET)-dbg
+	gdb --batch --command=./debug.dbg --args "./$(TARGET)-dbg"
 
 format:
 	- clang-format -i $(SRCS) $(HDRS)

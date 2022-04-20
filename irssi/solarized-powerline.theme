@@ -135,7 +135,7 @@ abstracts = {
   # ban/ban exception/invite list mask is printed
   # %R = brightred (Solarized: orange)
   # %n = return
-  ban = "%zff5f00$*%n";
+  ban = "%zff5f00$*%0%Zff5f00%n";
 
 
   ##
@@ -419,8 +419,8 @@ formats = {
   };
   "fe-common/irc" = {
     away = "%k%z00d700AWAY %Z00d700%0%N";
-    banlist = "%p%z00d700BANS %z00d700 $[-3]0 %8 {ichannelhilight $1} %N%8%n%k%N {ban $2}";
-    banlist_long = "%p%z00d700BANS %z00d700 $[-3]0 %8 {ichannelhilight $1} {comment by {inick $3}%0%k, $4 secs ago} %N%8%n%k%N {ban $2}";
+    banlist = "%k%z005f00BANS %z005f00 $[-3]0 %8 %z005f00{ichannelhilight $1} %k%N {ban $2}";
+    banlist_long = "%k%z005f00BANS %z005f00 $[-3]0 %8 %z005f00{ichannelhilight $1} {comment by {inick $3}%0%k,%Z005f00 $4 secs ago} %N {ban $2}";
     chanmode_change = "%k%z008700MODE %N%Z008700%N {channelhilight $0} %Zeeeeee%n {mode $1}%n by {nick $2}";
     channel_created = "%k%N Channel {channelhilight $0} created $1";
     channel_mode = "%k%N mode/{channelhilight $0} {mode $1}";
@@ -431,8 +431,8 @@ formats = {
     ctcp_requested = "%k%z005f87%8%8 CTCP {hilight $2} from {mynick $4} %n%Z005f87%N by {hilight $0} {comment $1} %y%N $3";
     default_event = "%N%k %N%n$1";
     default_event_server = "%k%z00d700$0 %N%k %N%n$1";
-    ebanlist = "%p%z00d700BANS %k exception %8 {ichannelhilight $0} %N%8%n%k%N {ban $1}";
-    ebanlist_long = "%p%z00d700BANS %k exception %8 {ichannelhilight $0} {comment by {inick $2}%0%k, $3 secs ago} %N%8%n%k%N {ban $1}";
+    ebanlist = "%k%z005f00BANS %k exception %8 %z005f00{ichannelhilight $0} %N {ban $1}";
+    ebanlist_long = "%k%z005f00BANS %k exception %8 {ichannelhilight $0} %z005f00{comment by {inick $2}%0%k, $3 secs ago} %N {ban $1}";
     end_of_who = "%z00d700%kWHO %Z00d700%0%N END";
     end_of_whois = "%z00d700%kWHOIS %Z00d700%0%N END";
     end_of_whowas = "%z00d700%kWHOWAS %Z00d700%0%N END";
