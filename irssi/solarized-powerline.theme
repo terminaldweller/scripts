@@ -143,7 +143,7 @@ abstracts = {
   ##
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%z005f87%Zeeeeee $0%Zeeeeee{nick $1-} %Zeeeeee";
+  msgnick = "%z005f87%Zeeeeee $0%Zeeeeee{nick $1-} %Z005f5f";
 
   # message from you is printed. "msgownnick" specifies the styling of the
   # nick ($0 part in msgnick) and "ownmsgnick" specifies the styling of the
@@ -163,21 +163,21 @@ abstracts = {
 
   # $0 = nick mode, $1 = nick
   # %3 = yellow
-  ownmsgnick = "%z5f5fff%k{%z5f5fff $0$1-}%N%0%Z5f5fff %Zeeeeee";
-  ownnick = "%Zeeeeee$*";
+  ownmsgnick = "%z5f5fff%k{%z5f5fff $0$1-}%N%0%Z5f5fff %Z005f5f";
+  ownnick = "%Zeeeeee$* %Z005f5f";
 
   # public message in channel, $0 = nick mode, $1 = nick
-  pubmsgnick = "%z005f87%k%Zeeeeee{%Zeeeeee%z005f87msgnick $0$1-}%N%Z005f87 %n";
-  pubnick = "%Zeeeeee$*";
+  pubmsgnick = "%z005f87%k%Zeeeeee{%Zeeeeee%z005f87msgnick $0$1-}%N%Z005f87 %Z005f5f";
+  pubnick = "%Zeeeeee$* %Z005f5f";
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
   # %5 = magenta
-  pubmsgmenick = "%K%m%5%k%Z0087ff{msgnick $0$1-}%N%m %n";
-  menick = "%Zeeeeee$*";
+  pubmsgmenick = "%K%m%5%k%Z0087ff{msgnick $0$1-}%N%m %Z005f5f";
+  menick = "%Zeeeeee$* %Z005f5f";
 
   # public highlighted message in channel
   # $0 = highlight color, $1 = nick mode, $2 = nick
-  pubmsghinick = " %z005f87%k%z005f87{%Zeeeeee%z005f87msgnick $1 %Zeeeeee$2-}%N%Z005f87 %n";
+  pubmsghinick = " %z005f87%k%z005f87{%Zeeeeee%z005f87msgnick $1 %Zeeeeee$2-}%N%Z005f87 %Z005f5f";
 
   # channel name is printed with message
   # This is printed whenever the channel name is printed for disambiguation, e.g.
