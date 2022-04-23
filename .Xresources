@@ -11,7 +11,7 @@ Xft.embeddedbitmap: 1
 xterm*dpi: 96
 gnome-terminal*dpi: 96
 *.alpha: 1.0
-*.font: DejaVuSansMono Nerd Font Mono:pixelsize=11.3:antialias=true:autohint=true;
+*.font: DejaVuSansMono Nerd Font Mono:pixelsize=14;antialias=true;autohint=true
 xterm*scaleHeight: 1.01
 
 #define base00 #000000

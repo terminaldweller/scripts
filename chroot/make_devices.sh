@@ -21,4 +21,5 @@ make_devices() {
 }
 make_devices /home/devi/chroots/voidmusl
 make_devices /home/devi/chroots/voidglibc
+make_devices /home/devi/chroots/ubuntu2204
 # debootstrap stable /home/devi/chroots/debian11 http://deb.debian.org/debian

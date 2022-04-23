@@ -211,7 +211,7 @@ alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
 alias ip="ip --color=auto"
-alias zathura="tabbed -c zathura -e"
+alias zathura="tabbed -c -r 2 zathura -e id"
 alias ytfzf="proxychains4 -q -f ~/proxies/ice/proxychains.conf ytfzf"
 alias newsboat="proxychains4 -q -f ~/proxies/ice/proxychains.conf newsboat"
 alias dud="du -hcD --max-depth=1 | sort -hr | colcol | column -t"
@@ -220,6 +220,7 @@ alias gitconfigrc="vim ~/scripts/.gitconfig"
 alias fixgitconfigrc="cp ~/scripts/.gitconfig ~/.gitconfig"
 alias nviminit="vim ~/scripts/init.vim"
 alias fixnviminit="cp ~/scripts/init.vim ~/.config/nvim/init.vim"
+alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
