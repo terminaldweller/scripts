@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# sudo debootstrap jammy ./ubuntu2204 http://archive.ubuntu.com/ubuntu jammy
 CHROOT_DIR=/home/devi/chroots/ubuntu2204
 sudo mount -t proc proc $CHROOT_DIR/proc/
 sudo mount -t sysfs sys $CHROOT_DIR/sys/

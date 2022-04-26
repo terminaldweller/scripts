@@ -2,23 +2,23 @@
 
 source common.sh
 SEPARATOR_RIGHT_BOLD=""
-SEPARATOR_RIGHT_THIN=""
+# SEPARATOR_RIGHT_THIN=""
 
-MIN_MAJOR_VERSION="2"
-MIN_MINOR_VERSION="1"
-TMUX_VERSION="$(tmux -V)"
+# MIN_MAJOR_VERSION="2"
+# MIN_MINOR_VERSION="1"
+# TMUX_VERSION="$(tmux -V)"
 
 get_tmux_cwd() {
   tmux display -p -F "#{pane_current_path}"
 }
 tmux_path=$(get_tmux_cwd)
-cd $tmux_path
+cd "$tmux_path"
 IFS='/' read -ra tmux_path_array <<< "$tmux_path"
 pos=$(( ${#tmux_path_array[*]} - 1 ))
 last=${tmux_path_array[$pos]}
 for i in "${tmux_path_array[@]}"
 do
-  if [[ $i == $last ]]; then
+  if [[ $i == "$last" ]]; then
     shortened_path+=$i
   else
     shortened_path+=${i:0:1}/

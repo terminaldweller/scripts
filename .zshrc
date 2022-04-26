@@ -273,7 +273,7 @@ math() {
 }
 
 fd() {
-  ls -l | find -iname "*$1*"
+  ls $(find -iname "*$1*")
 }
 
 pss() {
