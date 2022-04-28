@@ -122,6 +122,9 @@ channels = (
   { name = "#gdb"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#openbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#security"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#busybox"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "LiberaChat"; autojoin = "yes"; },
@@ -305,8 +308,8 @@ statusbar = {
     # window_empty is printed with empty windows
     window = " %Z00af00{sb $tag/{channel $itemname} %C {sbmode $M}} %C%n ";
     window_empty = "{sb {sbservertag $tag}}";
-    prompt = "{prompt $[.15]itemname}";
-    prompt_empty = "{prompt $winname}";
+    prompt = "please%z005f87{%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87}%n";
+    prompt_empty = "you%z005f87%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%n";
 
     topic = " $topic";
     topic_empty = " Irssi v$J - http://www.irssi.org";
@@ -315,7 +318,7 @@ statusbar = {
     # Powerline
     lag = "{sb %0%Zff8700%zff8700%k ⌚ $0 %Zff8700%0%N}";
     act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %N}";
-    more = "%c%0%n%z00af00 more ⬇ %c%0%N";
+    more = "%c%0%n%6 more ⬇ %c%0%N";
 
     # vim_mode
     vim_mode_1 = "%z005f5f%Zffffff%z005f5f%k%9 $vim_cmd_mode%N";
@@ -379,21 +382,6 @@ statusbar = {
 
     # we treat input line as yet another statusbar :) It's possible to
     # add other items before or after the input line item.
-    prompt = {
-
-      type = "root";
-      placement = "bottom";
-      # we want to be at the bottom always
-      position = "100";
-      visible = "always";
-
-      items = {
-        prompt = { priority = "-1"; };
-        prompt_empty = { priority = "-1"; };
-        # treated specially, this is the real input line.
-        input = { priority = "10"; };
-      };
-    };
 
     # topicbar
     topic = {
@@ -418,6 +406,13 @@ statusbar = {
       };
     };
     dccstat = { items = { dccstat = { }; }; disabled = "yes"; };
+    prompt = {
+      items = {
+        uberprompt = { priority = "-1"; };
+        input = { priority = "10"; };
+      };
+      position = "100";
+    };
     awl_0 = {
       items = {
         barstart = { priority = "100"; };
@@ -476,6 +471,7 @@ settings = {
     usercount_show_halfops = "ON";
     usercount_show_ircops = "ON";
     usercount_show_zero = "ON";
+    # timezones
     timezones_divider = " %Zeeeeee%Z008080 ";
     timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
     # hilite_url
@@ -487,6 +483,9 @@ settings = {
     rotator_bounce = "yes";
     dccstat_hide_sbar_when_inactive = "yes";
     dccstat_cycle_through_transfers = "yes";
+    # uberprmpt
+    uberprompt_format = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
+    uberprompt_format_empty = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
   };
 };
 keyboard = ( 
@@ -521,6 +520,9 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#shadow" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#security" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#busybox" ); }
 );
-logs = { };
+Mogs = { };
