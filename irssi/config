@@ -92,10 +92,11 @@ servers = (
 chatnets = {
   OFTC = {
     type = "IRC";
+    nick = "terminaldweller";
+    autosendcmd = "/^msg nickserv set cloak on;wait 2000";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
-    nick = "terminaldweller";
   };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
@@ -405,7 +406,7 @@ statusbar = {
         barend = { alignment = "right"; };
       };
     };
-    dccstat = { items = { dccstat = { }; }; disabled = "yes"; };
+    dccstat = { items = { dccstat = { }; }; disabled = "no"; };
     prompt = {
       items = {
         uberprompt = { priority = "-1"; };
@@ -431,6 +432,13 @@ statusbar = {
       items = {
         barstart = { priority = "100"; };
         awl_2 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_3 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_3 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
@@ -475,17 +483,23 @@ settings = {
     timezones_divider = " %Zeeeeee%Z008080 ";
     timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
     # hilite_url
-    url_color = "38;5;6";
-    hilite_url = "38;5;6";
+    url_color = "32";
+    hilite_url = "32";
     # rotator
-    rotator_chars = ". o 0 O";
+    rotator_chars = "%Z005f5f%z005f5f%k..%N  %Z005f5f%z005f5f%koo%N  %Z005f5f%z005f5f%k00%N  %Z005f5f%z005f5f%kOO%N  %Z005f5f%z005f5f%k00%N  %Z005f5f%z005f5f%koo%N";
     rotator_speed = "1000";
     rotator_bounce = "yes";
-    dccstat_hide_sbar_when_inactive = "yes";
+    rotator_seperator = " ";
+    # dccstats
+    dccstat_hide_sbar_when_inactive = "no";
     dccstat_cycle_through_transfers = "yes";
     # uberprmpt
     uberprompt_format = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
     uberprompt_format_empty = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
+    # irssi_logger
+    il_dbname = "irc";
+    il_dbuser = "postgres";
+    il_dbpass = "devi";
   };
 };
 keyboard = ( 
