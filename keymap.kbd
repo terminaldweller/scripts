@@ -17,7 +17,8 @@
 )
 -------------------------------------------------------------------------- |#
 (defcfg
-  input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-event-kbd")
+  ;; input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-event-kbd")
+  input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-if01-event-kbd")
   output (uinput-sink "KMonad output")
 
   cmp-seq lalt

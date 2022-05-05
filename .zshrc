@@ -168,6 +168,7 @@ alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAl
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3022 2a07:e01:3:204::1"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
 alias zharf_server="zssh 192.168.12.5 -l farzad"
+alias zharf_server2="zssh 192.168.90.7 -l root"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -221,6 +222,7 @@ alias fixgitconfigrc="cp ~/scripts/.gitconfig ~/.gitconfig"
 alias nviminit="vim ~/scripts/init.vim"
 alias fixnviminit="cp ~/scripts/init.vim ~/.config/nvim/init.vim"
 alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
+alias socat="socat -d -d"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -506,6 +508,10 @@ timezsh() {
 
 pod2w3m() {
   pod2html $1 | w3m -T text/html
+}
+
+get_irssi_logs() {
+  psql -h 192.168.1.109 -p 30432 -U postgres postgres -c '\c irc' -c 'select * from public.logs;'
 }
 
 setopt APPEND_HISTORY
