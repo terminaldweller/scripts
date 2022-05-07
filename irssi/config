@@ -93,7 +93,7 @@ chatnets = {
   OFTC = {
     type = "IRC";
     nick = "terminaldweller";
-    autosendcmd = "/^msg nickserv set cloak on;wait 2000";
+    autosendcmd = "/^msg nickserv set cloak on;wait 3000";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -101,13 +101,25 @@ chatnets = {
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
-  bitlbee = { type = "IRC"; };
+  bitlbee = {
+    autosendcmd = "^identify gorgoroth;wait 3000";
+    type = "IRC"; 
+  };
   LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
-  Rizon = { type = "IRC"; };
+  Rizon = {
+    type = "IRC"; 
+    autosendcmd = "/^mode terminaldweller +px;wait 3000";
+  };
   IRCNet = { type = "IRC"; };
-  "Undernet-ZNC" = { type = "IRC"; };
+  "Undernet-ZNC" = { 
+    type = "IRC"; 
+    autosendcmd = "/^mode terminaldwel +ix;msg *status traffic;wait 3000";
+  };
   EFnet = { type = "IRC"; };
-  DALnet = { type = "IRC"; };
+  DALnet = { 
+    type = "IRC"; 
+    autosendcmd = "/^mode terminaldweller +HCi;wait 3000";
+  };
 };
 
 channels = (
@@ -124,6 +136,9 @@ channels = (
   { name = "#openbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#security"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#crypto"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#tmux"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#busybox"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
@@ -459,6 +474,8 @@ settings = {
   "fe-common/core" = {
     theme = "solarized-powerline";
     hilight_color = "%Z875fff";
+    emphasis_italics = "yes";
+    emphasis_replace = "yes";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = {
@@ -500,6 +517,11 @@ settings = {
     il_dbname = "irc";
     il_dbuser = "postgres";
     il_dbpass = "devi";
+    # nm2
+    neat_shrink = "yes";
+    neat_staircase_shrink = "yes";
+    neat_custom_modes = "no";
+    neat_dynamic = "yes";
   };
 };
 keyboard = ( 
@@ -519,6 +541,8 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssl" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tmux" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vim" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openbsd" ); },
