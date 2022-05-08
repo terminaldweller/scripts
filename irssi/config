@@ -103,21 +103,21 @@ chatnets = {
   "FRRouting.slack.com" = { type = "IRC"; };
   bitlbee = {
     autosendcmd = "^identify gorgoroth;wait 3000";
-    type = "IRC"; 
+    type = "IRC";
   };
   LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
   Rizon = {
-    type = "IRC"; 
+    type = "IRC";
     autosendcmd = "/^mode terminaldweller +px;wait 3000";
   };
   IRCNet = { type = "IRC"; };
-  "Undernet-ZNC" = { 
-    type = "IRC"; 
+  "Undernet-ZNC" = {
+    type = "IRC";
     autosendcmd = "/^mode terminaldwel +ix;msg *status traffic;wait 3000";
   };
   EFnet = { type = "IRC"; };
-  DALnet = { 
-    type = "IRC"; 
+  DALnet = {
+    type = "IRC";
     autosendcmd = "/^mode terminaldweller +HCi;wait 3000";
   };
 };
@@ -139,6 +139,7 @@ channels = (
   { name = "#crypto"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#tmux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#neomutt"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#busybox"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
@@ -522,10 +523,35 @@ settings = {
     neat_staircase_shrink = "yes";
     neat_custom_modes = "no";
     neat_dynamic = "yes";
+    # vim_mode
+    start_cmd = "yes";
+    vim_mode_start_cmd = "yes";
+    vim_mode_max_undo_lines = "100";
   };
 };
-keyboard = ( 
-  { key = "meta-[M"; id = "command"; data = "mouse_xterm"; }
+keyboard = (
+  { key = "meta-[M"; id = "command"; data = "mouse_xterm"; },
+  { key = "meta-p"; id = "change_window"; data = "20"; },
+  { key = "meta-a"; id = "change_window"; data = "21"; },
+  { key = "meta-s"; id = "change_window"; data = "22"; },
+  { key = "meta-d"; id = "change_window"; data = "23"; },
+  { key = "meta-f"; id = "change_window"; data = "24"; },
+  { key = "meta-g"; id = "change_window"; data = "25"; },
+  { key = "meta-h"; id = "change_window"; data = "26"; },
+  { key = "meta-j"; id = "change_window"; data = "27"; },
+  { key = "meta-k"; id = "change_window"; data = "28"; },
+  { key = "meta-l"; id = "change_window"; data = "29"; },
+  { key = "meta-;"; id = "change_window"; data = "30"; },
+  { key = "meta-z"; id = "change_window"; data = "31"; },
+  { key = "meta-x"; id = "change_window"; data = "32"; },
+  { key = "meta-c"; id = "change_window"; data = "33"; },
+  { key = "meta-v"; id = "change_window"; data = "34"; },
+  { key = "meta-b"; id = "change_window"; data = "35"; },
+  { key = "meta-n"; id = "change_window"; data = "36"; },
+  { key = "meta-m"; id = "change_window"; data = "37"; },
+  { key = "meta-,"; id = "change_window"; data = "38"; },
+  { key = "meta-."; id = "change_window"; data = "39"; },
+  { key = "meta-/"; id = "change_window"; data = "40"; }
 );
 ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#docker" ); },
