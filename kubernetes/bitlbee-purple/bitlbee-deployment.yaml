@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: bitlbee-libpurple
-        image: ezkrg/bitlbee-libpurple:debian-20210922235056
+        image: ezkrg/bitlbee-libpurple:alpine3.12-20220408145536
         ports:
           - containerPort: 6667
         # volumeMounts:

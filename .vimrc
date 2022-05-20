@@ -1268,8 +1268,14 @@ let g:ycm_language_server = [
 
 let g:qs_highlight_on_keys = ["f", "F", "t", "T"]
 
+" git-messenger
 let g:git_messenger_always_into_popup=v:true
 nmap <silent><Leader>gg :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
+function! s:setup_git_messenger_popup() abort
+    nmap <buffer><C-o> o
+    nmap <buffer><C-i> O
+endfunction
+autocmd FileType gitmessengerpopup call <SID>setup_git_messenger_popup()
 
 "vim-haskell
 let g:haskell_enable_quantification = 1

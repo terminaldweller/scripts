@@ -191,9 +191,10 @@ sneaky() {
 }
 
 bg_job_count() {
-  local count=$(jobs | wc -l)
-  if [[ $count > 0 ]];then
-    echo " $count"
+  # job_count=$("jobs" | wc -l)
+  local job_count=$(echo $jobstates | awk 'END{print NF}')
+  if [[ $job_count > 0 ]];then
+    echo " $job_count"
   else
     ;
   fi

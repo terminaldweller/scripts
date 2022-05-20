@@ -109,26 +109,33 @@ color index         brightcolor222  default        "~T~F"          # tagged, fla
 color index         brightcolor222  default        "~T~N"          # tagged, new messages
 color index         brightcolor222  default        "~T~U"          # tagged, unread messages
 
-color index         red             default         "~D(!~p|~p)"               # deleted
+color index         color167             default         "~D(!~p|~p)"               # deleted
 color index         color111        default         "~F"                         # flagged
-color index         brightred       default         "~="                         # duplicate messages
+color index         color167       default         "~="                         # duplicate messages
 color index         color22         default         "~A!~N!~T!~p!~Q!~F!~D!~P"  # the rest
 color index         brightgreen     default         "~A~N!~T!~p!~Q!~F!~D"      # the rest, new
-color index         black           red             "~D"                        # deleted messages
+color index         black           color167             "~D"                        # deleted messages
 color index         yellow          default         "~(~N)"                    # messages in threads with some unread
 color index         green           default         "~S"                       # superseded messages
 color index         yellow          default         "~T"                       # tagged messages
-color index         brightred       red             "~="                       # duplicated messages
+color index         color167       default             "~="                       # duplicated messages
 
 # message headers ------------------------------------------------------
 
-color hdrdefault    default  default
+# gives us all the cool email headers
+unignore *
+# color the line containing the match, not just the match
+set header_color_partial=no
+color hdrdefault    default         default
 color header        color69         default        "^ARC-"
 color header        color25         default        "^Received"
 color header        color30         default        "^X-"
+color header        color131        default        "^Message-ID"
+color header        color66         default        "^Return-Path"
+color header        color167        default        "^Reply-To"
 color header        color36         default        "^List-"
 color header        color63         default        "^MIME-"
-color header        color99         default        "^Content-"
+color header        color99         default        "^Content.*"
 color header        color209        default        "^DKIM"
 color header        color132        default        "^Authentication"
 color header        color131        default        "^User-Agent"
@@ -136,7 +143,6 @@ color header        color27         default        "^(To|Cc|Bcc)"
 color header        color28         default        "^(From)"
 color header        color6          default        "^(Date)"
 color header        color22         default        "^(Subject)"
-unignore *
 
 # body -----------------------------------------------------------------
 
@@ -158,6 +164,16 @@ color normal        color244        default
 
 ## pgp
 
+color body          color131        default        "^(Message-ID|Message-Id).*"
+color body          color132        default        "^Authentication-.*"
+color body          color25         default        "^Received:.*"
+color body          color25         default        "^Received-.*"
+color body          color209        default        "^DKIM-.*"
+color body          color69         default        "^ARC-.*"
+color body          color36         default        "^List-.*"
+color body          color63         default        "^(MIME|Mime)-.*"
+color body          color99         default        "^Content-.*"
+color body          color30         default        "^X-.*"
 color body          color160        default        "(BAD signature)"
 color body          color39         default        "(Good signature)"
 color body          color235        default        "^gpg: Good signature .*"
@@ -228,7 +244,7 @@ color index_tags color27 default
 color prompt blue cyan
 
 color sidebar_divider brightcolor39 default
-color sidebar_flagged red default
+color sidebar_flagged color167 default
 color sidebar_highlight color28 default
 color sidebar_indicator cyan default
 color sidebar_new color24 default
@@ -237,18 +253,18 @@ color sidebar_spoolfile color38 default
 color sidebar_unread  color99 default
 
 color progress white blue
-color index_flags default red '~F'
+color index_flags default color30 '~F'
 # vi: ft=muttrc ts=4 sw=4 sts=4 et
-set status_format='-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
-Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
-set index_format='%4C %D %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
+set status_format='-%r-%D %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
+Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---%v'
+set index_format='%4C %D %Z %{%b %d} %H %-15.15L (%?l?%4l&%4c?) %s | To:%L'
 set sort=threads
 set sort_aux=last-date-received
 color status color39 default
-color status brightred white '(New|Del|Flag):[0-9]+'
-color status brightred default '\([^)]+/[^)]+\)'
+color status color25 white '(New|Del|Flag):[0-9]+'
+color status color25 default '\([^)]+/[^)]+\)'
 color status default default '\(threads/last-date-received\)'
-color status red default '\[([^]]+)\]' 1
+color status color30 default '\[([^]]+)\]' 1
 color status brightwhite default 'NeoMutt: ([^ ]+)' 1
 
 auto_view  text/html
@@ -290,7 +306,7 @@ color   body    red           default         "^[\-\-\-].*"
 color   body    green           default         "^[\+\+\+].*"
 color   body    green           default         "^[\+].*"
 color   body    red             default         "^[\-].*"
-color   body    blue      default         "[@@].*"
+color   body    blue      default         "^[@@].*"
 # color   body    brightwhite     default         "^(\s).*"
 # color   body    cyan            default         "^(Signed-off-by).*"
 # color   body    cyan            default         "^(Docker-DCO-1.1-Signed-off-by).*"

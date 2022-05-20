@@ -35,6 +35,5 @@ type = IMAP
 remoteuser = devi@terminaldweller.com
 #remotepass = 
 remotehost = mail.terminaldweller.com
-remoteport = 993
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
