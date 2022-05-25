@@ -40,3 +40,4 @@ sudo mount -t cifs -o user=pi4,vers=2.0,domain=MSHOME //192.168.1.200/disk1 /hom
 account add telegram +XXXXXXXXXXX
 account add skypeweb thabogre@gmail.com XXXXXXXX
 git reset --hard HEAD~2
+tcpdump -ennqti enp0s0f0 \( arp or icmp \)

@@ -208,6 +208,7 @@ Plug 'HiPhish/info.vim'
 Plug 'kmonad/kmonad-vim'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
+" Plug 'Konfekt/vim-office'
 " Plug 'haya14busa/vim-operator-flashy'
 " Plug 'terryma/vim-expand-region'
 " Plug 'romainl/vim-devdocs'
@@ -858,6 +859,7 @@ nnoremap <silent> <leader>0 :call HighInterestingWord(0)<cr>
 
 "scratchpad
 let g:scratchpad_path = '/home/devi/.scratchpads'
+let g:scratchpad_ftype = ''
 nmap <F9> <Plug>(ToggleScratchPad)
 
 let g:tagbar_type_rust = {
