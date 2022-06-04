@@ -41,3 +41,4 @@ account add telegram +XXXXXXXXXXX
 account add skypeweb thabogre@gmail.com XXXXXXXX
 git reset --hard HEAD~2
 tcpdump -ennqti enp0s0f0 \( arp or icmp \)
+zssh root@192.168.90.7 'tcpdump -ni enp3s0f0 -U -s0 -w - ' | wireshark -k -i -

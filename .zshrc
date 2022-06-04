@@ -20,6 +20,7 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
+unalias dr
 alias gd="git diff --color-words"
 
 alias w3m="torsocks w3m -o auto_image=FALSE -graph"
@@ -323,6 +324,8 @@ export PYGMENTIZE_STYLE="paraiso-dark"
 # export TZ
 # export GPG_TTY=$(tty)
 
+export VAGRANT_HOME="/home/devi/storage/ssd1/vagrant"
+
 export BAT_THEME="Solarized (light)"
 
 export SVDIR=~/service
@@ -462,6 +465,7 @@ bindkey -v
 set blink-matching-paren on
 export KEYTIMEOUT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
+export QT_QPA_PLATFORMTHEME=gtk2
 
 # fnm
 eval "$(fnm env)"

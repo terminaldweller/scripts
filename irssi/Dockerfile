@@ -75,7 +75,7 @@ RUN set -eux; \
       | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
   )"; \
   apk add --no-network --virtual .irssi-rundeps $runDeps; \
-  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg; \
+  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https; \
   apk del --no-network .build-deps; \
   \
 # basic smoke test

@@ -1428,10 +1428,12 @@ augroup ALEJS
   autocmd FileType javascript let b:ale_fixers = {'javascript': ['prettier']}
 augroup END
 let g:ale_python_black_options = "--line-length 79"
+let b:ale_python_flake8_options = "--ignore=E203,W503"
+let b:ale_python_isort_options = "--multiline 3 --profile black"
 augroup ALEPY
   autocmd!
-  autocmd FileType python let b:ale_linters = {'python': ['flake8']}
-  autocmd FileType python let b:ale_fixers = {'python': ['black']}
+  autocmd FileType python let b:ale_linters = {'python': ['flake8','mypy', 'pylint', 'bandit']}
+  autocmd FileType python let b:ale_fixers = {'python': ['black', 'isort']}
 augroup END
 augroup ALERUBY
   autocmd!

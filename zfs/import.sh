@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 sudo zpool import -N -R /mnt zroot
 sudo zfs load-key -L prompt zroot
