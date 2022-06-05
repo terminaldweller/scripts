@@ -90,3 +90,4 @@ function fd {
 export SHELL="ksh"
 export PATH=$PATH:/home/devi/scripts/bin
 export PATH=$PATH:/home/devi/bin
+export GOPROXY=https://goproxy.io

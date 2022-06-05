@@ -1,0 +1,6 @@
+@-moz-document domain("godocs.io") {
+  body > main:nth-child(2) > div:nth-child(1) {
+    width: 90%;
+    max-width: 90%;
+  }
+}

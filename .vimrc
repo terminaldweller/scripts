@@ -534,6 +534,8 @@ cnoremap <C-e> <End>
 " nnoremap gj j
 nmap <leader>m :make<CR>
 nmap <leader>sh :so $VIMRUNTIME/syntax/hitest.vim<CR>
+nmap <c-q> :e #<cr>
+vmap <c-q> :e #<cr>
 
 nmap [q :col<CR>
 nmap ]q :cnew<CR>
@@ -1504,6 +1506,7 @@ hi CtrlSpaceNormal ctermfg=36 ctermbg=NONE
 hi CtrlSpaceSelected ctermbg=27 ctermfg=15
 hi CtrlSpaceSearch ctermfg=25 ctermbg=NONE
 hi CtrlSpaceStatusLine ctermfg=99 ctermbg=NONE cterm=bold
+let g:CtrlSpaceSetDefaultMapping = 1
 
 "vim-go
 let g:go_auto_sameids = 0
