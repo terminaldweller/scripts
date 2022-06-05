@@ -1472,6 +1472,10 @@ augroup ALELUA
   autocmd FileType lua let b:ale_linters = {'lua': ['luacheck']}
   autocmd FileType lua let b:ale_fixers = {'lua': ['lua-format']}
 augroup END
+augroup ALEDOCKER
+  autocmd!
+  autocmd FileType Dockerfile let b:ale_linters = {'Dockerfile': ['hadolint']}
+augroup END
 " let b:ale_sh_shfmt_options = '-w -p -i=2 -bn -ci -sr -kp'
 let b:ale_sh_shfmt_options = "-w -"
 let b:ale_sh_shellcheck_options = '-x'
