@@ -1,0 +1,5 @@
+@-moz-document domain("readmanganato.com") {
+  .container-chapter-reader {
+    filter: sepia(1) brightness(0.7) contrast(0.9) saturate(0.9);
+  }
+}
