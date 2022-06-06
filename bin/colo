@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 # _*_ coding=utf-8 _*_
+"""prints colors"""
 
 import argparse
-import signal
-import sys
-from html.parser import HTMLParser
+import html.parser
 
 
 # BASH_STR = 'printf "\x1b[38;5;XXXmcolourXXX YYY \x1b[0m\t";'
 BASH_STR = "\x1b[38;5;XXXmcolourXXX YYY \x1b[0m\t"
 BASH_ANSI_STR = "\\x1b[38;5;XXXm"
-COLO_LIST = []
+colo_list = []
 LJUST_CONST = 4
 
 COLORS = """<td>0</td><td>Black</td><td>#000000</td><td>rgb(0,0,0)</td><td>hsl(0,0%,0%)</td>
@@ -272,12 +271,9 @@ COLORS = """<td>0</td><td>Black</td><td>#000000</td><td>rgb(0,0,0)</td><td>hsl(0
 """
 
 
-def SigHandler_SIGINT(signum, frame):
-    print()
-    sys.exit(0)
+class Argparser:  # pylint: disable=too-few-public-methods
+    """argparser class"""
 
-
-class Argparser(object):
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -298,102 +294,142 @@ class Argparser(object):
         parser.add_argument(
             "--hex", action="store_true", help="bool", default=False
         )
-        parser.add_argument(
-            "--dbg", action="store_true", help="debug", default=False
-        )
         self.args = parser.parse_args()
 
 
-class ColoParser(HTMLParser):
+class ColoParser(html.parser.HTMLParser):
+    """html parser that ignores new lines"""
+
     def handle_data(self, data):
         if data == "\n":
             pass
         else:
-            COLO_LIST.append(data)
+            colo_list.append(data)
 
 
-def main():
+def color_hsi(number_colo_list) -> str:
+    """print hsi color codes"""
+    print_list = str()
+    hsi_colo_list = [
+        colo_list[j] for j in range(0, len(colo_list)) if ((j + 1) % 5) == 0
+    ]
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 6 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", hsi_colo_list[i]
+        )
+    return print_list
+
+
+def color_rgb(number_colo_list) -> str:
+    """print rgb color codes"""
+    print_list = str()
+    rgb_colo_list = [
+        colo_list[j] for j in range(0, len(colo_list)) if ((j + 1) % 5) == 4
+    ]
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 6 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", rgb_colo_list[i]
+        )
+    return print_list
+
+
+def color_number(number_colo_list) -> str:
+    """print color numbers"""
+    print_list = str()
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 12 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", number_colo
+        )
+    return print_list
+
+
+def color_name(number_colo_list) -> str:
+    """print color names"""
+    print_list = str()
+    name_colo_list = [
+        colo_list[j] for j in range(0, len(colo_list)) if ((j + 1) % 5) == 2
+    ]
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 6 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", name_colo_list[i]
+        )
+    return print_list
+
+
+def color_hex(number_colo_list) -> str:
+    """print color hex codes"""
+    print_list = str()
+    hex_colo_list = [
+        colo_list[j] for j in range(0, len(colo_list)) if ((j + 1) % 5) == 3
+    ]
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 8 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", hex_colo_list[i]
+        )
+    return print_list
+
+
+def color_ansi(number_colo_list) -> str:
+    """print color ansi escape sequnces"""
+    print_list = str()
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 6 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", BASH_ANSI_STR.replace("XXX", number_colo)
+        )
+    return print_list
+
+
+def color_default(number_colo_list) -> str:
+    """print numbers only"""
+    print_list = str()
+    for i, number_colo in enumerate(number_colo_list):
+        if i % 12 == 0 and i != 0:
+            print_list += "\n"
+        print_list += BASH_STR.replace("XXX", number_colo).replace(
+            "YYY", number_colo
+        )
+    return print_list
+
+
+def main() -> None:
+    """prints the colors"""
     argparser = Argparser()
-    signal.signal(signal.SIGINT, SigHandler_SIGINT)
-    PRINT_LIST = str()
+    print_list = str()
     lines = COLORS.split("\n")
     for line in lines:
         parser = ColoParser()
         parser.feed(line)
-    NUMBER_COLO_LIST = [
-        COLO_LIST[j] for j in range(0, len(COLO_LIST)) if ((j + 1) % 5) == 1
+    number_colo_list = [
+        colo_list[j] for j in range(0, len(colo_list)) if ((j + 1) % 5) == 1
     ]
 
     if argparser.args.hsi:
-        HSL_COLO_LIST = [
-            COLO_LIST[j]
-            for j in range(0, len(COLO_LIST))
-            if ((j + 1) % 5) == 0
-        ]
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 6 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", HSL_COLO_LIST[i]
-            )
+        print_list = color_hsi(number_colo_list)
     elif argparser.args.rgb:
-        RGB_COLO_LIST = [
-            COLO_LIST[j]
-            for j in range(0, len(COLO_LIST))
-            if ((j + 1) % 5) == 4
-        ]
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 6 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", RGB_COLO_LIST[i]
-            )
+        print_list = color_rgb(number_colo_list)
     elif argparser.args.number:
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 12 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NUMBER_COLO_LIST[i]
-            )
+        print_list = color_number(number_colo_list)
     elif argparser.args.name:
-        NAME_COLO_LIST = [
-            COLO_LIST[j]
-            for j in range(0, len(COLO_LIST))
-            if ((j + 1) % 5) == 2
-        ]
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 6 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NAME_COLO_LIST[i]
-            )
+        print_list = color_name(number_colo_list)
     elif argparser.args.hex:
-        HEX_COLO_LIST = [
-            COLO_LIST[j]
-            for j in range(0, len(COLO_LIST))
-            if ((j + 1) % 5) == 3
-        ]
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 8 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", HEX_COLO_LIST[i]
-            )
+        print_list = color_hex(number_colo_list)
     elif argparser.args.ansi:
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 6 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", BASH_ANSI_STR.replace("XXX", NUMBER_COLO_LIST[i])
-            )
+        print_list = color_ansi(number_colo_list)
     else:
-        for i in range(0, len(NUMBER_COLO_LIST)):
-            if i % 12 == 0 and i != 0:
-                PRINT_LIST += "\n"
-            PRINT_LIST += BASH_STR.replace("XXX", NUMBER_COLO_LIST[i]).replace(
-                "YYY", NUMBER_COLO_LIST[i]
-            )
-    print(PRINT_LIST)
+        print_list = color_default(number_colo_list)
+    print(print_list)
 
 
 if __name__ == "__main__":
