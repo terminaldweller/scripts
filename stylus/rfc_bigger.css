@@ -1,0 +1,10 @@
+@-moz-document domain("datatracker.ietf.org"), domain("rfc-editor.org") {
+  body {
+    font-size: 15px;
+  }
+
+  #content {
+    width: 100%;
+    max-width: 100%;
+  }
+}

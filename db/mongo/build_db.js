@@ -42,13 +42,36 @@ const mangas = {
   "baki-dou": "https://readmanganato.com/manga-cc980259",
   "everyone's loose screw'": "https://manganato.com/manga-ga983883",
   "kumo desu": "https://readmanganato.com/manga-zd976712",
+  "dungeon sherpa": "https://manganato.com/manga-kt987428",
+  gachiakuta: "https://manganato.com/manga-na990935",
 };
 
 db = connect("192.168.1.109:27117/devi");
-// cursor = db.collection.find();
-// while (cursor.hasNext()) {
-//   printjson(cursor.next());
-// }
 
-db.mangas.insertOne(mangas);
-db.animes.insertOne(animes);
+var mangas_entry = db.mangas.find({});
+Object.keys(mangas_entry).forEach((prop) => {
+  console.log(prop);
+});
+while (mangas_entry.hasNext()) {
+  var mangas_id = mangas_entry.next()._id;
+  console.log(mangas_id);
+}
+db.mangas.updateOne(
+  { _id: mangas_id },
+  {
+    $set: {
+      "dungeon sherpa": "https://manganato.com/manga-kt987428",
+      gachiakuta: "https://manganato.com/manga-na990935",
+    },
+  }
+);
+
+var animes_entry = db.animes.find({});
+Object.keys(animes_entry).forEach((prop) => {
+  console.log(prop);
+});
+while (animes_entry.hasNext()) {
+  var animes_id = animes_entry.next()._id;
+  console.log(animes_id);
+}
+db.animes.updateOne({ _id: animes_id }, { $set: {} });

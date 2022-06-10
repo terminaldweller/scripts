@@ -206,6 +206,7 @@ Plug 'hrother/offlineimaprc.vim'
 Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 Plug 'HiPhish/info.vim'
 Plug 'kmonad/kmonad-vim'
+Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'Konfekt/vim-office'
@@ -235,7 +236,6 @@ Plug 'kmonad/kmonad-vim'
 " Plug 'xolox/vim-misc'
 " Plug 'metakirby5/codi.vim'
 " Plug 'vim-scripts/tagexplorer.vim'
-" Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'severin-lemaignan/vim-minimap'
 " Plug 'ervandew/supertab'
 " Plug 'Valloric/ListToggle'
@@ -825,16 +825,16 @@ let g:pdf_convert_on_read = 1
 let g:session_autoload="no"
 
 "highlight groups
-hi def InterestingWord1 ctermfg=16 ctermbg=214
-hi def InterestingWord2 ctermfg=16 ctermbg=154
-hi def InterestingWord3 ctermfg=16 ctermbg=121
-hi def InterestingWord4 ctermfg=16 ctermbg=137
-hi def InterestingWord5 ctermfg=16 ctermbg=211
-hi def InterestingWord6 ctermfg=16 ctermbg=195
-hi def InterestingWord7 ctermfg=16 ctermbg=99
-hi def InterestingWord8 ctermfg=16 ctermbg=35
-hi def InterestingWord9 ctermfg=16 ctermbg=209
-hi def InterestingWord0 ctermfg=16 ctermbg=39
+hi def InterestingWord1 ctermfg=16 ctermbg=214 guifg=#000000 guibg=#ffaf00
+hi def InterestingWord2 ctermfg=16 ctermbg=154 guifg=#000000 guibg=#afff00
+hi def InterestingWord3 ctermfg=16 ctermbg=121 guifg=#000000 guibg=#87ffaf
+hi def InterestingWord4 ctermfg=16 ctermbg=137 guifg=#000000 guibg=#af875f
+hi def InterestingWord5 ctermfg=16 ctermbg=211 guifg=#000000 guibg=#ff87af
+hi def InterestingWord6 ctermfg=16 ctermbg=195 guifg=#000000 guibg=#d7ffff
+hi def InterestingWord7 ctermfg=16 ctermbg=99 guifg=#000000 guibg=#875fff
+hi def InterestingWord8 ctermfg=16 ctermbg=35 guifg=#000000 guibg=#00af5f
+hi def InterestingWord9 ctermfg=16 ctermbg=209 guifg=#000000 guibg=#ff875f
+hi def InterestingWord0 ctermfg=16 ctermbg=39 guifg=#000000 guibg=#00afff
 
 "Steve Losh's highlight function
 function HighInterestingWord(n)
@@ -1446,14 +1446,16 @@ augroup ALEMARKDOWN
   autocmd!
   autocmd FileType markdown let b:ale_linters = {'markdown': ['markdownlint']}
 augroup END
+let b:ale_c_flawfinder_executable= "/home/devi/devi/flawfinder/flawfinder-2.0.19/flawfinder.py"
 augroup ALEC
   autocmd!
-  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy']}
+  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy', 'flawfinder']}
   autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
 augroup END
+let b:ale_cpp_flawfinder_executable= "/home/devi/devi/flawfinder/flawfinder-2.0.19/flawfinder.py"
 augroup ALECPP
   autocmd!
-  autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy']}
+  autocmd FileType cpp let b:ale_linters = {'cpp': ['clang-tidy', 'flawfinder']}
   autocmd FileType cpp let b:ale_fixers = {'cpp': ['clang-format']}
 augroup END
 augroup ALEHTML
@@ -1656,6 +1658,43 @@ let g:Infofallback = function("s:vvman")
 
 " fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" vim-bookmarks
+let g:bookmark_no_default_key_mappings=1
+nmap <Leader>mm <Plug>BookmarkToggle
+nmap <Leader>mi <Plug>BookmarkAnnotate
+nmap <Leader>ma <Plug>BookmarkShowAll
+nmap <Leader>mj <Plug>BookmarkNext
+nmap <Leader>mk <Plug>BookmarkPrev
+nmap <Leader>mc <Plug>BookmarkClear
+nmap <Leader>mx <Plug>BookmarkClearAll
+nmap <Leader>mkk <Plug>BookmarkMoveUp
+nmap <Leader>mjj <Plug>BookmarkMoveDown
+nmap <Leader>mg <Plug>BookmarkMoveToLine
+" let g:bookmark_save_per_working_dir=1
+let g:bookmark_auto_save=1
+let g:bookmark_location_list=1
+let g:bookmark_manage_per_buffer=1
+highlight BookmarkLine ctermbg=23 ctermfg=0 cterm=bold
+highlight BookmarkAnnotationLine ctermbg=23 ctermfg=0 cterm=bold
+let g:bookmark_highlight_lines=1
+" Finds the Git super-project directory based on the file passed as an argument.
+function! g:BMBufferFileLocation(file)
+    let filename = 'vim-bookmarks'
+    let location = ''
+    if isdirectory(fnamemodify(a:file, ":p:h").'/.git')
+        " Current work dir is git's work tree
+        let location = fnamemodify(a:file, ":p:h").'/.git'
+    else
+        " Look upwards (at parents) for a directory named '.git'
+        let location = finddir('.git', fnamemodify(a:file, ":p:h").'/.;')
+    endif
+    if len(location) > 0
+        return simplify(location.'/.'.filename)
+    else
+        return simplify(fnamemodify(a:file, ":p:h").'/.'.filename)
+    endif
+endfunction
 
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16
