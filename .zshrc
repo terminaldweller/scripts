@@ -227,6 +227,8 @@ alias nviminit="vim ~/scripts/init.vim"
 alias fixnviminit="cp ~/scripts/init.vim ~/.config/nvim/init.vim"
 alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 alias socat="socat -d -d"
+alias cmusrc="vim ~/scripts/.config/cmus/rc"
+alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"

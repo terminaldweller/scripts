@@ -44,6 +44,7 @@ const mangas = {
   "kumo desu": "https://readmanganato.com/manga-zd976712",
   "dungeon sherpa": "https://manganato.com/manga-kt987428",
   gachiakuta: "https://manganato.com/manga-na990935",
+  "black lagoon": "https://readmanganato.com/manga-",
 };
 
 db = connect("192.168.1.109:27117/devi");
@@ -62,6 +63,7 @@ db.mangas.updateOne(
     $set: {
       "dungeon sherpa": "https://manganato.com/manga-kt987428",
       gachiakuta: "https://manganato.com/manga-na990935",
+      "black lagoon": "https://readmanganato.com/manga-",
     },
   }
 );

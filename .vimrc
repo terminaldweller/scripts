@@ -83,7 +83,7 @@ let g:is_posix = 1
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin', 'python.plugin', 'python-compiler.plugin', 'python-indent.plugin', 'c.plugin', 'cpp.plugin']
+let g:polyglot_disabled = ['sensible', 'go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin', 'python', 'c.plugin', 'cpp.plugin']
 
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/bundle')
