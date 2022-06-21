@@ -1,0 +1,10 @@
+[options]
+  columns = "status,name,id,cpu,mem,net,io,pids"
+  filterStr = ""
+  sortField = "state"
+
+[toggles]
+  allContainers = false
+  enableHeader = false
+  fullRowCursor = false
+  sortReversed = false
