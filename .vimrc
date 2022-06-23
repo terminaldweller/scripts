@@ -1491,6 +1491,21 @@ augroup ALECSS
   autocmd FileType css let b:ale_fixers = {'css': ['prettier']}
 augroup END
 
+" we can edit gzip files because of this
+augroup gzip
+ autocmd!
+ autocmd BufReadPre,FileReadPre *.gz set bin
+ autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
+ autocmd BufReadPost,FileReadPost   *.gz set nobin
+ autocmd BufReadPost,FileReadPost   *.gz execute ":doautocmd BufReadPost " . expand("%:r")
+ autocmd BufWritePost,FileWritePost *.gz !mv <afile> <afile>:r
+ autocmd BufWritePost,FileWritePost *.gz !gzip <afile>:r
+ autocmd FileAppendPre      *.gz !gunzip <afile>
+ autocmd FileAppendPre      *.gz !mv <afile>:r <afile>
+ autocmd FileAppendPost     *.gz !mv <afile> <afile>:r
+ autocmd FileAppendPost     *.gz !gzip <afile>:r
+augroup END
+
 "latex
 let g:tex_flavor = 'latex'
 let g:vimtex_matchparen_enabled = 0

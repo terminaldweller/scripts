@@ -1,4 +1,13 @@
 {
-	"data-root":"/home/devi/storage/ssd1/docker",
-	"storage-driver":"overlay2"
+    "data-root": "/home/devi/storage/ssd1/docker",
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "nvidia-container-runtime"
+        },
+        "runsc": {
+            "path": "/home/devi/gvisor/runsc"
+        }
+    },
+    "storage-driver": "overlay2"
 }

@@ -142,7 +142,7 @@ TAGS:tags
 
 #https://github.com/rizsotto/Bear
 BEAR: clean
-	bear make
+	bear -- make
 
 tags:$(SRCS)
 	$(shell $(CC) -c -I $(CTAGS_I_PATH) -M $(SRCS)|\

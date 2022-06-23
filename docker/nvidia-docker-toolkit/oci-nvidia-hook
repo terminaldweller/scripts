@@ -1,0 +1,2 @@
+#!/bin/sh
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/devi/nvidia-docker-toolkit" exec nvidia-container-toolkit "$@"

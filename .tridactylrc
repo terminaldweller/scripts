@@ -7,3 +7,4 @@ completionfuzziness 1
 " bind tp tabmove -1
 " bind tn tabmove +1
 seturl duolingo.com  superignore true
+seturl localhost:8889 superignore true

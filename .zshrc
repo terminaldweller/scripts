@@ -166,7 +166,7 @@ alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
-alias socks5vpn3="autossh -M 0 -N -D 9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
 alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3022 2a07:e01:3:204::1"
 alias cloud_one="ssh 130.185.121.80 -l ubuntu -p 1022"
@@ -229,6 +229,7 @@ alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 alias socat="socat -d -d"
 alias cmusrc="vim ~/scripts/.config/cmus/rc"
 alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
+# alias cointop="ssh -oHostKeyAlgorithms=+ssh-rsa cointop@185.112.147.110 -p 2222 -t cointop --colorscheme devi"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
