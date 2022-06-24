@@ -3,7 +3,7 @@ default_view = "default"
 default_chart_range = "1Y"
 api = "coingecko"
 colorscheme = "devi"
-refresh_rate = 60
+refresh_rate = 600
 cache_dir = "/tmp"
 
 [shortcuts]
@@ -92,7 +92,7 @@ cache_dir = "/tmp"
 
 [favorites]
   columns = ["rank", "name", "symbol", "price", "1h_change", "24h_change", "7d_change", "24h_volume", "market_cap", "available_supply", "total_supply", "last_updated"]
-  names = ["BNB", "Binance USD", "Chainlink", "Dai", "Energi", "Ethereum", "Filecoin", "Monero", "Mysterium", "PancakeSwap", "Polygon"]
+  names = ["Aave", "BNB", "Binance USD", "Chainlink", "Dai", "Energi", "Ethereum", "Filecoin", "Monero", "Mysterium", "PancakeSwap", "Polygon"]
   symbols = []
 
 [portfolio]
@@ -106,5 +106,5 @@ cache_dir = "/tmp"
   pro_api_key = ""
 
 [table]
-  columns = ["rank", "name", "symbol", "price", "1h_change", "24h_change", "7d_change", "24h_volume", "market_cap", "available_supply", "total_supply", "last_updated"]
+  columns = ["rank", "name", "symbol", "price", "1h_change", "24h_change", "7d_change","30d_change","1y_change", "24h_volume", "market_cap", "available_supply", "total_supply", "last_updated"]
   keep_row_focus_on_sort = false

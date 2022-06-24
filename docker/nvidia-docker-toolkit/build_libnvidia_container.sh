@@ -6,4 +6,5 @@ torsocks make CFLAGS="-I/usr/include/tirpc -fPIC -O2" LDFLAGS=-ltirpc all
 ln -s libnvidia-container.so.1.10.0 libnvidia-container.so.1
 sudo cp libnvidia-container.so.1.10.0 /usr/lib64
 sudo ${TOOLKIT} install /home/devi/nvidia-docker-toolkit
-# nvidia-container-cli
+# all the executables should be in /usr/bin. cant use user's home directory paths.
+# will run into permission problems.

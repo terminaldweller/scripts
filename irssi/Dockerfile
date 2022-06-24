@@ -75,13 +75,14 @@ RUN set -eux; \
       | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
   )"; \
   apk add --no-network --virtual .irssi-rundeps $runDeps; \
-  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https; \
+  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng; \
   apk del --no-network .build-deps; \
   \
 # basic smoke test
   irssi --version
 
+COPY ./proxychains.conf /etc/proxychains/
 WORKDIR $HOME
 
 USER user
-CMD ["irssi"]
+CMD ["proxychains4", "-q", "irssi"]
