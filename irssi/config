@@ -6,7 +6,7 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
-    password = "";
+    password = "password";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -15,7 +15,7 @@ servers = (
     address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
-    password = "";
+    password = "password";
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
@@ -66,7 +66,7 @@ servers = (
     address = "185.112.147.110";
     chatnet = "Undernet-ZNC";
     port = "1025";
-    password = "";
+    password = "password/password";
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
@@ -118,7 +118,7 @@ chatnets = {
   EFnet = { type = "IRC"; };
   DALnet = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +HCi;wait 3000";
+    autosendcmd = "/^mode terminaldweller +HCi;msg nickserv@services.dal.net identify password;wait 3000";
   };
 };
 
