@@ -582,12 +582,13 @@ nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_save_on_switch = 2
-" nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+let g:tmux_navigator_disable_when_zoomed = 0
+let g:tmux_navigator_save_on_switch = 1
+let g:tmux_navigator_preserve_zoom = 0
+nnoremap <silent> <C-a>h :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-a>j :TmuxNavigateDown<cr>
+nnoremap <silent> <C-a>k :TmuxNavigateUp<cr>
+nnoremap <silent> <C-a>l :TmuxNavigateRight<cr>
 nnoremap <silent> <C-w><C-w> :TmuxNavigatePrevious<cr>
 
 "vim.session options
@@ -1417,6 +1418,8 @@ let g:ale_completion_enabled = 0
 let g:ale_warn_about_trailing_whitespace = 0
 let g:ale_disable_lsp = 1
 let g:ale_change_sign_column_color = 1
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_echo_msg_error_str = 'E'
@@ -1716,3 +1719,7 @@ hi SpecialKey ctermbg=16
 hi Pmenu ctermbg=233
 hi SignColumn ctermbg=16
 hi Exception ctermbg=None ctermfg=61
+hi ALEInfoSign ctermbg=97
+hi ALEWarningSign ctermbg=203
+hi ALEStyleWarning ctermbg=203
+hi ALEStyleWarningSign ctermbg=203

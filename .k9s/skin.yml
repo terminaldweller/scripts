@@ -1,42 +1,42 @@
 # adapted from InTheNavy...
 k9s:
   body:
-    fgColor: dodgerblue4
+    fgColor: dodgerblue
     bgColor: '#000000'
     logoColor: '#0000ff'
   prompt:
     fgColor: cadetblue
     bgColor: black
-    suggestColor: dodgerblue4
+    suggestColor: dodgerblue
   info:
     fgColor: lightskyblue
     sectionColor: steelblue
   dialog:
-    fgColor: dodgerblue4
+    fgColor: dodgerblue
     bgColor: black
-    buttonFgColor: black
-    buttonBgColor: dodgerblue4
+    buttonFgColor: orchid
+    buttonBgColor: dodgerblue
     buttonFocusFgColor: white
-    buttonFocusBgColor: slateblue3
-    labelFgColor: slateblue3
-    fieldFgColor: dodgerblue4
+    buttonFocusBgColor: slateblue
+    labelFgColor: slateblue
+    fieldFgColor: dodgerblue
   help:
     fgColor: white
-    bgColor: default
-    keyColor: cyan
-    numKeyColor: dodgerblue4
+    bgColor: black
+    keyColor: slateblue
+    numKeyColor: dodgerblue
     sectionColor: gray
   frame:
     border:
-      fgColor: dodgerblue4
+      fgColor: dodgerblue
       focusColor: aliceblue
     menu:
-      fgColor: dodgerblue4
+      fgColor: dodgerblue
       keyColor: cornflowerblue
       numKeyColor: cadetblue
     crumbs:
       fgColor: white
-      bgColor: default
+      bgColor: black
       activeColor: deepskyblue
     status:
       newColor: darkgreen
@@ -46,40 +46,61 @@ k9s:
       pendingColor: mediumpruple
       highlightcolor: royalblue
       killColor: slategray
-      completedColor: slateblue3
+      completedColor: slateblue
     title:
       fgColor: aqua
-      bgColor: default
+      bgColor: black
       highlightColor: skyblue
       counterColor: slateblue
       filterColor: slategray
   views:
     table:
       fgColor: blue
-      bgColor: default
-      cursorColor: aqua
+      bgColor: black
+      cursorColor: orange
       header:
         fgColor: white
-        bgColor: default
+        bgColor: black
         sorterColor: orange
     yaml:
       keyColor: steelblue
       colonColor: blue
       valueColor: royalblue
     logs:
-      fgColor: white
-      bgColor: default
-    xray:
-      fgColor: blue
+      fgColor: '#005f5f'
       bgColor: black
-      cursorColor: aqua
+    xray:
+      fgColor: seagreen
+      bgColor: black
+      cursorColor: steelblue
       graphicColor: cornflowerblue
-      showIcons: false
+      showIcons: true
     charts:
       bgColor: black
+      dialBgColor: black
+      chartBgColor: black
       defaultDialColors:
-        - linegreen
-        - orangered
+        - "#005f00"
+        - "#005faf"
       defaultChartColors:
-        - linegreen
-        - orangered
+        - "#005f00"
+        - "#005faf"
+      resourceColors:
+        batch/v1/jobs:
+          - "#005f00"
+          - "#005faf"
+        v1/persistentvolumes:
+          - "#005f00"
+          - "#005faf"
+        cpu:
+          - "#005f00"
+          - "#005faf"
+        mem:
+          - "#005f00"
+          - "#005faf"
+        v1/events:
+          - "#005f00"
+          - "#005faf"
+        v1/pods:
+          - "#005f00"
+          - "#005faf"
