@@ -3,4 +3,6 @@
 # xhost +
 # enable anyone to use pulseaudio over tcp:
 # load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;192.168.1.0/24 auth-anonymous=1
-env DISPLAY=:0.0 PULSE_SERVER=127.0.0.1 steam
+#
+# also make sure we are using quad9, not pihole. pihole doesnt like steam.
+env DISPLAY=:0.0 PULSE_SERVER=127.0.0.1 steam -tcp -no-cef-sandbox

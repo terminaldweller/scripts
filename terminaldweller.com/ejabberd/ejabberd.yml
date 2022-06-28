@@ -19,10 +19,8 @@ c2s_ciphers: 'TLS_CIPHERS'
 s2s_ciphers: 'TLS_CIPHERS'
 c2s_protocol_options: 'TLS_OPTIONS'
 s2s_protocol_options: 'TLS_OPTIONS'
-certfiles:
-  - '/var/lib/ejabberd/acme/ejabberd.pem'
-
-auth_password_format: scram
+#certfiles:
+#  - '/var/lib/ejabberd/acme/ejabberd.pem'
 
 listen:
   - port: 5222
@@ -179,9 +177,11 @@ shaper_rules:
 max_fsm_queue: 10000
 
 acme:
+  # for auto ACME requests, we need this to be true
   auto: false
-  contact: 'mailto:devi@terminaldweller.com'
-  ca_url: 'https://acme-staging-v02.api.letsencrypt.org'
+  contact: 
+    - mailto:devi@terminaldweller.com
+  ca_url: https://acme-v02.api.letsencrypt.org/directory
 
 oauth_expire: 31536000
 oauth_access: all
