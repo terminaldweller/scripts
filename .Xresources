@@ -22,7 +22,7 @@ xterm*scaleHeight: 1.01
 #define base05 #75507B
 #define base06 #06989A
 #define base07 #D3D7CF
-#define base08 #000000
+#define base08 #767676
 #define base09 #EF2929
 #define base0A #8AE234
 #define base0B #FCE94F

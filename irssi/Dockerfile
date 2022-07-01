@@ -1,6 +1,14 @@
 # https://github.com/jessfraz/irssi
-FROM alpine:3.13
+# For the time being we have build on alpine:edge since perl::Glib::Object::Introspection is only available on edge/testing
+FROM alpine:edge
+# https://georgik.rocks/how-to-start-d-bus-in-docker-container/
+# apk add dbus dbus-x11
+# dbus-uuidgen > /var/lib/dbus/machine-id
+# mkdir -p /var/run/dbus
+# dbus-daemon --config-file=/usr/share/dbus-1/system.conf --print-address
+# export $(dbus-launch)
 
+RUN echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update
 RUN apk add --no-cache \
     ca-certificates \
     perl-libwww
@@ -75,7 +83,8 @@ RUN set -eux; \
       | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
   )"; \
   apk add --no-network --virtual .irssi-rundeps $runDeps; \
-  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng; \
+  echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
+  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection libnotify; \
   apk del --no-network .build-deps; \
   \
 # basic smoke test
