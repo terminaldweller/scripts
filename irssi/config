@@ -6,7 +6,7 @@ servers = (
     address = "irc.gitter.im";
     chatnet = "gitter";
     port = "6697";
-    password = "password";
+    password = "9e184da16a69ba773e71914c48060965c1e9f290";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -15,7 +15,7 @@ servers = (
     address = "192.99.102.52";
     chatnet = "FRRouting.slack.com";
     port = "6667";
-    password = "password";
+    password = "xoxc-162493688432-2090314984309-2093779171413-ca37c32503d3e6f878a29b26434da3e337ca27f23e9245babb9f64aba72c0391|d=gBhFnyIGQ4C8WJaElyR1Xm9va0QP81%2FfSgdg8qXdwG9%2F8UwLC6lDZX0Fok0s4dPPwesLmtX9a%2BhgmopNNqWBx4nPQBEA4jZhX7cWkJYS1xUy2bMXLeMrZ7O3Q7ZeXxw1G%2Bw4WwflypWLftsnb6kP6kW5gZ5DbnyjKK40PONs2cmgr1opX%2FTsxKkK;";
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
@@ -66,7 +66,7 @@ servers = (
     address = "185.112.147.110";
     chatnet = "Undernet-ZNC";
     port = "1025";
-    password = "password/password";
+    password = "terminaldweller/undernet:gorgoroth";
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
@@ -118,7 +118,7 @@ chatnets = {
   EFnet = { type = "IRC"; };
   DALnet = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +HCi;msg nickserv@services.dal.net identify password;wait 3000";
+    autosendcmd = "/^mode terminaldweller +HCi;msg nickserv@services.dal.net identify Xashmith#666;wait 3000";
   };
 };
 

@@ -123,3 +123,4 @@
 	diffFilter = diff-highlight
 [core]
 	editor = vim
+	# hooksPath = ~/devi-githooks

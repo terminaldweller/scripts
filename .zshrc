@@ -312,7 +312,11 @@ export STARDICT_DATA_DIR
 export LIBGL_ALWAYS_INDIRECT=1
 #export PULSE_SERVER=tcp:192.168.1.103
 export WWW_HOME="duckduckgo.com"
+# http://download.huzheng.org/
 alias def="sdcv --color"
+alias defe="sdcv --color -u dictd_www.dict.org_gcide"
+alias defd="sdcv --color -u LDaF"
+alias deff="sdcv --color -u XMLittre"
 #goenv
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
@@ -711,6 +715,13 @@ eval "$(luarocks-5.3 path)"
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+
+# deno
+export DENO_INSTALL="/home/devi/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export DVM_DIR="/home/devi/.dvm"
+export PATH="$DVM_DIR/bin:$PATH"
+export PATH=/home/devi/.bun/bin:$PATH
 
 [[ -s "/home/devi/.gvm/scripts/gvm" ]] && source "/home/devi/.gvm/scripts/gvm"
 # [[ -s "/usr/share/grc/grc.zsh" ]] && source /usr/share/grc/grc.zsh
