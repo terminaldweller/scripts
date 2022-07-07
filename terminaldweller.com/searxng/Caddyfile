@@ -1,6 +1,7 @@
 {
   admin off
   https_port 8081
+  http_port 8082
 }
 
 {$SEARXNG_HOSTNAME} {

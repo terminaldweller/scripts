@@ -64,9 +64,9 @@ case "$1" in
     *.qbs|*.slim|*.xqy|*.xquery|*.xq|*.xql|*.xqm|*.whiley|*.x10)
         pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$1" | nl -b a;;
     *)
-        # interp=$(get_interp "$1")
-        # pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -l "$interp" "$1" | nl -b a
-        pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -g "$1" | nl -b a
+        interp=$(get_interp "$1")
+        pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -l "$interp" "$1" | nl -b a
+        # pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -g "$1" | nl -b a
 esac
 
 exit 0
