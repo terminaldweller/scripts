@@ -23,7 +23,7 @@ eval `dircolors ~/.dir_colors`
 unalias dr
 alias gd="git diff --color-words"
 
-alias w3m="torsocks w3m -o auto_image=FALSE -graph"
+alias w3m="torsocks /home/devi/w3m/w3m -o auto_image=FALSE -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -130,7 +130,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="irssi -n terminaldweller"
-alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
+alias irssi="TERM=screen-256color docker run --runtime=runc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" --network=host -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
 alias joplinkeymap="vim ~/scripts/.config/joplin/keymap.json"
 alias fixjoplinkeymap="cp ~/scripts/.config/joplin/keymap.json ~/.config/joplin/keymap.json"
 alias postitrc="vim ~/scripts/postit"
@@ -232,6 +232,7 @@ alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
 # alias cointop="ssh -oHostKeyAlgorithms=+ssh-rsa cointop@185.112.147.110 -p 2222 -t cointop --colorscheme devi"
 alias zshenv="vim ~/scripts/.zshenv"
 alias fixzshenv="cp ~/scripts/.zshenv ~/.zshenv"
+alias postman="flatpak run com.getpostman.Postman"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -311,7 +312,7 @@ STARDICT_DATA_DIR="/home/devi/.stardict"
 export STARDICT_DATA_DIR
 export LIBGL_ALWAYS_INDIRECT=1
 #export PULSE_SERVER=tcp:192.168.1.103
-export WWW_HOME="duckduckgo.com"
+export WWW_HOME="searx.terminaldweller.com"
 # http://download.huzheng.org/
 alias def="sdcv --color"
 alias defe="sdcv --color -u dictd_www.dict.org_gcide"
