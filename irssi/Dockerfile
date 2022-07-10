@@ -85,6 +85,11 @@ RUN set -eux; \
   apk add --no-network --virtual .irssi-rundeps $runDeps; \
   echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
   apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection libnotify; \
+  # apk add dbus; \
+  # dbus-uuidgen > /var/lib/dbus/machine-id; \
+  # mkdir -p /var/run/dbus; \
+  # dbus-daemon --config-file=/usr/share/dbus-1/system.conf --print-address; \
+  # export $(dbus-launch); \
   apk del --no-network .build-deps; \
   \
 # basic smoke test
