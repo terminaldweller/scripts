@@ -5,25 +5,33 @@ services:
     networks:
       - ejabberdnet
     ports:
-      - "80:80"
+      #- "80:80"
       - "5222:5222"
-      - "127.0.0.1:5269:5269"
+      - "5223:5223"
+      #- "5269:5269"
       - "5280:5280"
       - "5443:5443"
-      - "1883:1883"
-      - "127.0.0.1:5080:5080"
+      #- "1883:1883"
+      #- "127.0.0.1:5080:5080"
     restart: unless-stopped
     volumes:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml
-      - ./acme:/var/lib/ejabberd/acme
-      - ./dh:/usr/local/etc/ejabberd
+      - /etc/letsencrypt/archive/chat.terminaldweller.com/:/opt/ejabberd/certs/
+      - ./dh:/usr/local/etc/ejabberd/dh
+      - ./acme:/usr/local/etc/self_signed/
       - confs_certs:/home/ejabberd/conf/
       - mnesia_db:/home/ejabberd/database/
+      - vault:/var/lib/ejabberd/
+    environment:
+      - XMPP_DOMAIN=chat.terminaldweller.com
+      - ERLANG_NODE=ejabberd
+    #entrypoint: ["tail", "-f", "/dev/null"]
 networks:
   ejabberdnet:
 volumes:
   confs_certs:
   mnesia_db:
+  vault:
 # openssl dhparam -out dhparams.pem 4096
-# certbot certonly --standlone -d chat.terminaldweller.com -e devi@terminaldweller.com --agree-tos --noninteractive --dry-run
+# certbot certonly --standlone -d chat.terminaldweller.com -e devi@terminaldweller.com --agree-tos --noninteractive
 # docker exec -it 6eebd16a2385 bin/ejabberdctl register admin chat.terminaldweller.com password
