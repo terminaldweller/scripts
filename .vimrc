@@ -103,7 +103,6 @@ Plug 'mhinz/vim-signify'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vimwiki/vimwiki'
 Plug 'flazz/vim-colorschemes'
-Plug 'plasticboy/vim-markdown'
 Plug 'neomutt/neomutt.vim'
 Plug 'sngn/vim-i3blocks-syntax'
 Plug 'rhysd/vim-wasm'
@@ -209,6 +208,7 @@ Plug 'kmonad/kmonad-vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'plasticboy/vim-markdown'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'Konfekt/vim-office'
@@ -1331,6 +1331,7 @@ map <leader>v <Plug>(Vman)
 autocmd Filetype man setlocal relativenumber
 autocmd Filetype man setlocal number
 let g:vim_man_cmd = 'man -O width=200'
+" let g:vim_man_cmd = 'xman'
 
 "context
 let g:context_enabled = 0
@@ -1340,6 +1341,11 @@ let g:context_presenter = 'vim-popup'
 augroup AUSpell
   autocmd!
   autocmd FileType markdown,txt,vimwiki,tex setlocal spell
+augroup END
+
+augroup MDInsert
+  autocmd!
+  autocmd FileType markdown,vimwiki,pandoc imap <C-b> </br>
 augroup END
 
 nnoremap <leader>b :Make<CR>

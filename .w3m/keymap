@@ -120,7 +120,9 @@ keymap XS COMMAND "SHELL ~/.w3m/cgi-bin/fzf_surfraw.cgi ; TAB_GOTO /usr/lib/w3m/
 # keymap xs COMMAND "SHELL /home/bloodstalker/scripts/bin/fzf_surfraw"
 keymap go COMMAND "SHELL /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
 # keymap XS COMMAND "SHELL /home/bloodstalker/scripts/bin/fzf_surfraw; TAB_GOTO /home/bloodstalker/scripts/bin/goto_clipboard.cgi"
-#
+
+keymap SPC-s COMMAND "TAB_GOTO searx.terminaldweller.com"
+
 keymap d COMMAND "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
 keymap u TAB_GOTO /usr/lib/w3m/cgi-bin/restore_tab.cgi
 

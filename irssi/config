@@ -123,9 +123,12 @@ chatnets = {
 };
 
 channels = (
-  { name = "#dpdk"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#fdio-vpp"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#dpdk"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#fdio-vpp"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#openssl"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#netbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#netplan"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#ubuntu"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
@@ -142,7 +145,7 @@ channels = (
   { name = "#git"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#neomutt"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#busybox"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "LiberaChat"; autojoin = "yes"; },
@@ -473,6 +476,9 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#go-nuts" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#neomutt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kvm" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netbsd" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ubuntu" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netplan" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssl" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
@@ -485,7 +491,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#git" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#debian-next" );
   },

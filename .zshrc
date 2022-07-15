@@ -193,6 +193,7 @@ alias zh_router_root="zssh root@192.168.90.71"
 alias zh_router_admin="zssh admin@192.168.90.71"
 alias youtube_dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube-dl"
 alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --no-video"
+alias youtube="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --ytdl-format=160+249"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
 alias man="man -O width=210"
@@ -233,6 +234,9 @@ alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
 alias zshenv="vim ~/scripts/.zshenv"
 alias fixzshenv="cp ~/scripts/.zshenv ~/.zshenv"
 alias postman="flatpak run com.getpostman.Postman"
+alias skype="flatpak run com.skype.Client"
+alias run_devdocs_server="docker run -p 9292:9292 devdocs"
+alias tree="tree -aCDpugh -L 10 --gitignore | less -r"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -577,8 +581,15 @@ fzf-down() {
   fzf-tmux -p 80%,80% -- --bind ctrl-/:toggle-preview "$@"
 }
 
-dff(){
-  df -h "$@" | colcol | column -t
+dff() {
+  df -hT "$@" | colcol | column -t
+}
+
+jcurl() {
+  curl "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE
+}
+xcurl() {
+  curl "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE
 }
 
 # these i stole from junegunn to try out

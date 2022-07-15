@@ -21,6 +21,7 @@ wget https://scripts.irssi.org/scripts/timezones.pl
 wget https://scripts.irssi.org/scripts/trackbar.pl
 wget https://scripts.irssi.org/scripts/uberprompt.pl
 wget https://scripts.irssi.org/scripts/usercount.pl
+wget https://scripts.irssi.org/scripts/tracknick.pl
 
 cd ~/scripts/irssi
 cp ./config ~/.irssi/config
