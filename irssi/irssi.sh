@@ -22,6 +22,8 @@ wget https://scripts.irssi.org/scripts/trackbar.pl
 wget https://scripts.irssi.org/scripts/uberprompt.pl
 wget https://scripts.irssi.org/scripts/usercount.pl
 wget https://scripts.irssi.org/scripts/tracknick.pl
+wget https://scripts.irssi.org/scripts/cmdind.pl
+wget https://scripts.irssi.org/scripts/settingshelp.pl
 
 cd ~/scripts/irssi
 cp ./config ~/.irssi/config

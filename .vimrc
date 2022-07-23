@@ -1458,8 +1458,8 @@ augroup END
 let b:ale_c_flawfinder_executable= "/home/devi/devi/flawfinder/flawfinder-2.0.19/flawfinder.py"
 augroup ALEC
   autocmd!
-  " autocmd FileType c let b:ale_linters = {'c': ['clang-tidy', 'flawfinder']}
-  " autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
+  autocmd FileType c let b:ale_linters = {'c': ['clang-tidy', 'flawfinder']}
+  autocmd FileType c let b:ale_fixers = {'c': ['clang-format']}
 augroup END
 let b:ale_cpp_flawfinder_executable= "/home/devi/devi/flawfinder/flawfinder-2.0.19/flawfinder.py"
 augroup ALECPP

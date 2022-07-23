@@ -102,7 +102,7 @@ chatnets = {
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
   bitlbee = {
-    autosendcmd = "^identify gorgoroth;wait 3000";
+    autosendcmd = "/^msg &bitlbee identify gorgoroth;wait 3000";
     type = "IRC";
   };
   LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
@@ -125,18 +125,20 @@ chatnets = {
 channels = (
   # { name = "#dpdk"; chatnet = "LiberaChat"; autojoin = "yes"; },
   # { name = "#fdio-vpp"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#openssl"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#openssl"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#netbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#netplan"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#netplan"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#ubuntu"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
+  # { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
+  # { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
   { name = "#tor"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#openssh"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#gdb"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#llvm"; chatnet = "OFTC"; autojoin = "yes"; },
+  # { name = "#openssh"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#gdb"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#openbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#go-nuts"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#security"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#crypto"; chatnet = "LiberaChat"; autojoin = "yes"; },
@@ -149,7 +151,12 @@ channels = (
   { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "LiberaChat"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#kvm"; chatnet = "LiberaChat"; autojoin = "yes"; }
+  { name = "#bookz"; chatnet = "Undernet-ZNC"; autojoin = "yes"; },
+  { name = "#postgresql"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  { name = "#news"; chatnet = "Rizon"; autojoin = "yes"; },
+  { name = "#irc"; chatnet = "IRCNet"; autojoin = "yes"; },
+  { name = "#supersonic"; chatnet = "DALNet"; autojoin = "yes"; }
+  # { name = "#kvm"; chatnet = "LiberaChat"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -342,27 +349,6 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
-    awl_1 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_1 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
-    awl_2 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_2 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
-    awl_3 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_3 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
   };
 };
 settings = {
@@ -491,7 +477,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#git" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
-  {
+  { 
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#debian-next" );
   },
@@ -504,6 +490,12 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#security" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#busybox" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#bookz" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#supersonic" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#news" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#postgresql" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#llvm" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irc" ); },
   { level = "CTCPS"; },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#zsh" ); }
 );

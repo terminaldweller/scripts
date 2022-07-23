@@ -131,6 +131,7 @@ alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="irssi -n terminaldweller"
 alias irssi="TERM=screen-256color docker run --runtime=runc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" --network=host -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
+alias openbb="TERM=screen-256color docker run --runtime=runc -it --env-file=/home/devi/.openbb/.env -e TERM -e DISPLAY=${DISPLAY} --log-driver=none --network=host -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/openbb-finance/openbbterminal-poetry:latest"
 alias joplinkeymap="vim ~/scripts/.config/joplin/keymap.json"
 alias fixjoplinkeymap="cp ~/scripts/.config/joplin/keymap.json ~/.config/joplin/keymap.json"
 alias postitrc="vim ~/scripts/postit"
@@ -235,8 +236,15 @@ alias zshenv="vim ~/scripts/.zshenv"
 alias fixzshenv="cp ~/scripts/.zshenv ~/.zshenv"
 alias postman="flatpak run com.getpostman.Postman"
 alias skype="flatpak run com.skype.Client"
-alias run_devdocs_server="docker run -p 9292:9292 devdocs"
+alias chromium_flatpak="flatpak run org.chromium.Chromium"
 alias tree="tree -aCDpugh -L 10 --gitignore | less -r"
+alias lsblk="grc lsblk -Dfp"
+alias k="grc kubectl"
+alias run_devdocs_server="docker run -p 9292:9292 devdocs"
+alias voiddocs="w3m /usr/share/doc/void/html/index.html"
+alias archwiki="python -m http.server --directory /home/devi/chroots/arch/usr/share/doc/arch-wiki/html"
+alias bombadillo="bombadillo -t"
+alias record_desktop="recordmydesktop --device hw:1,0 --no-wm-check -x 1920 --width 1920 --height 1080 --fps 15"
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -356,12 +364,16 @@ export YTFZF_CACHE=~/.cache/ytfzf
 
 backup_home(){
   # wget https://raw.githubusercontent.com/rubo77/rsync-homedir-excludes/master/rsync-homedir-excludes.txt -O /var/tmp/ignorelist
-  rsync -rlptgoDAXHv \
+  sudo rsync -rxlPptgoDAXHvaE \
+    --delete \
+    --devices \
+    --specials \
     --info=PROGRESS2,MOUNT2 \
-    --exclude-from=/var/tmp/ignorelist \
+    --exclude-from=/home/devi/scripts/rsync/ignorelist \
     --exclude="storage" \
     --exclude="sambashare" \
     /home/devi/ \
+    /home/devi/storage \
     /home/devi/storage/backup/devi/ \
     "$@"
 }
@@ -410,7 +422,7 @@ export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/upstream/emscripten
 export PATH=$PATH:/home/devi/devi/git-scripts.git/master
 
 ks() {
-  kubectl -n kube-system "$@"
+  grc kubectl -n kube-system "$@"
 }
 
 export EDITOR=vim

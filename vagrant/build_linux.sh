@@ -50,7 +50,7 @@ mkdir -p /dev/pts
 mount -t devpts devpts /dev/pts
 echo /sbin/mdev > /proc/sys/kernel/hotplug
 mdev -s
-echo "****************Hello itas109******************"
+echo "****************Hello Hello******************"
 echo "Kernel Version:linux-5.4.50"
 echo "***********************************************"
 EOL

@@ -49,6 +49,12 @@ const mangas = {
 
 db = connect("192.168.1.109:27117/devi");
 
+const movies = {
+  "mad god": "https://www.imdb.com/title/tt15090124/",
+};
+
+db.movies.insertOne(movies);
+
 var mangas_entry = db.mangas.find({});
 Object.keys(mangas_entry).forEach((prop) => {
   console.log(prop);

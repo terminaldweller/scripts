@@ -4,10 +4,15 @@
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 Vagrant.require_version '>= 2.2.6'
 Vagrant.configure('2') do |config|
-  config.vm.box = 'generic/alpine315'
-  config.vm.box_version = '3.6.8'
+  config.vm.box = 'generic/alpine316'
+  config.vm.box_version = '4.1.0'
   config.vm.box_check_update = false
-  config.vm.hostname = 'virt-disposable-alpine315'
+  config.vm.hostname = 'virt-disposable-alpine316'
+
+  if Vagrant.has_plugin?('vagrant-proxyconf')
+    config.proxy.http = 'socks5://192.168.1.103:9995'
+    config.proxy.https = 'socks5://192.168.1.103:9995'
+  end
 
   # ssh
   config.ssh.insert_key = true
@@ -20,7 +25,7 @@ Vagrant.configure('2') do |config|
   config.ssh.connect_timeout = 15
 
   # shares
-  config.vm.synced_folder '.', '/vagrant', type: 'nfs', nfs_version: 4, nfs_udp: false
+  # config.vm.synced_folder '.', '/vagrant', type: 'nfs', nfs_version: 4, nfs_udp: false
 
   config.vagrant.plugins = ['vagrant-reload', { 'vagrant-libvirt' => { 'version' => '^0.6.2' } }]
 
@@ -33,8 +38,8 @@ Vagrant.configure('2') do |config|
     libvirt.qemuargs value: '-nographic'
     libvirt.qemuargs value: '-nodefaults'
     libvirt.qemuargs value: '-no-user-config'
-    libvirt.qemuargs value: '-serial'
-    libvirt.qemuargs value: 'telnet::4321,server,nowait'
+    # libvirt.qemuargs value: '-serial'
+    # libvirt.qemuargs value: 'telnet::4321,server,nowait'
     libvirt.random model: 'random'
   end
 
