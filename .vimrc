@@ -369,6 +369,7 @@ imap <PageDown> <Nop>
 au BufEnter .i3blocks.conf setlocal filetype=i3blocks
 au BufEnter *.zsh-theme setlocal filetype=zsh
 au BufEnter .muttrc setlocal filetype=neomuttrc
+au BufEnter .psqlrc setlocal filetype=pgsql
 au BufEnter *.toml setlocal filetype=toml
 au BufEnter *.s setlocal filetype=gas
 

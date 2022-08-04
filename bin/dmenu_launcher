@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+dmenu_path | dmenu -fn "DejaVuSansMono Nerd Font Mono-11.3;antialias=true;autohint=true" "$@" | ${SHELL:-"/bin/sh"} &

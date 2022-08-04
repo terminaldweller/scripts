@@ -194,6 +194,7 @@ alias zh_router_root="zssh root@192.168.90.71"
 alias zh_router_admin="zssh admin@192.168.90.71"
 alias youtube_dl="proxychains4 -f /home/devi/proxies/ca/proxychains.conf youtube-dl"
 alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --no-video"
+alias tormpv="torsocks mpv --no-video"
 alias youtube="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --ytdl-format=160+249"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
@@ -217,7 +218,7 @@ alias vagrant="https_proxy=socks5://[::1]:9993 vagrant --color --timestamp"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
-alias ip="ip --color=auto"
+alias ip="grc ip"
 alias zathura="tabbed -c -r 2 zathura -e id"
 alias ytfzf="proxychains4 -q -f ~/proxies/ice/proxychains.conf ytfzf"
 alias newsboat="proxychains4 -q -f ~/proxies/ice/proxychains.conf newsboat"
@@ -245,6 +246,14 @@ alias voiddocs="w3m /usr/share/doc/void/html/index.html"
 alias archwiki="python -m http.server --directory /home/devi/chroots/arch/usr/share/doc/arch-wiki/html"
 alias bombadillo="bombadillo -t"
 alias record_desktop="recordmydesktop --device hw:1,0 --no-wm-check -x 1920 --width 1920 --height 1080 --fps 15"
+alias mongoshrc="vim ~/scripts/.mongoshrc.js"
+alias fixmongoshrc="cp ~/scripts/.mongoshrc.js ~/.mongoshrc.js"
+alias phone_net="sudo ip netns exec phone_ns"
+alias netbsd_bmake="/usr/pkg/bin/bmake"
+
+get_domain_dns_records() {
+  jcurl -X GET -H "Accept: application/json" -H "Authorization: $(cat ~/scripts/arvan-api-key)" "https://napi.arvancloud.com/cdn/4.0/domains/terminaldweller.com/dns-records"
+}
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"
@@ -396,7 +405,6 @@ export PATH=$PATH:/home/devi/.fzf/bin
 # export PATH=$PATH:/home/devi/.ghcup/bin
 export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
-export PATH=$PATH:/home/devi/mongosh/mongosh-1.1.7-linux-x64/bin
 export PATH=$PATH:/home/devi/powershell
 export PATH=$PATH:/home/devi/ytfzf.git/rewrite
 export PATH=$PATH:/home/devi/gotty

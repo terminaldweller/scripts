@@ -1,5 +1,7 @@
 "use strict;";
 
+disableTelemetry();
+
 const animes = {
   "vampire cosmonaut":
     "https://kissanime.lol/Anime/irina-the-vampire-cosmonaut.wowwo/",
@@ -49,11 +51,33 @@ const mangas = {
 
 db = connect("192.168.1.109:27117/devi");
 
-const movies = {
+const movies_obj = {
   "mad god": "https://www.imdb.com/title/tt15090124/",
 };
 
-db.movies.insertOne(movies);
+const stash_obj = {
+  momo: "https://spankbang.com/73cjr/video/monoka+nishina",
+};
+
+function inser_into_db(mongo_collection, object) {
+  var entries = mongo_collection.find({});
+  Object.keys(entries).forEach((prop) => {
+    console.log(prop);
+  });
+  while (entries.hasNext()) {
+    var entry_id = entries.next()._id;
+    console.log(entry_id);
+  }
+  mongo_collection.updateOne(
+    { _id: entry_id },
+    {
+      $set: object,
+    }
+  );
+}
+
+inser_into_db(db.stash, stash_obj);
+inser_into_db(db.movies, movies_obj);
 
 var mangas_entry = db.mangas.find({});
 Object.keys(mangas_entry).forEach((prop) => {
@@ -67,9 +91,7 @@ db.mangas.updateOne(
   { _id: mangas_id },
   {
     $set: {
-      "dungeon sherpa": "https://manganato.com/manga-kt987428",
-      gachiakuta: "https://manganato.com/manga-na990935",
-      "black lagoon": "https://readmanganato.com/manga-",
+      "hunter x hunter": "https://readmanganato.com/manga-oc955385",
     },
   }
 );
