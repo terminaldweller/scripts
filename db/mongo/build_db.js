@@ -56,7 +56,7 @@ const movies_obj = {
 };
 
 const stash_obj = {
-  momo: "https://spankbang.com/73cjr/video/monoka+nishina",
+  something: "https://spankbang.com/74bwd/video/porn",
 };
 
 function inser_into_db(mongo_collection, object) {
@@ -91,7 +91,7 @@ db.mangas.updateOne(
   { _id: mangas_id },
   {
     $set: {
-      "hunter x hunter": "https://readmanganato.com/manga-oc955385",
+      "chainsaw man": "https://readmanganato.com/manga-dn980422",
     },
   }
 );

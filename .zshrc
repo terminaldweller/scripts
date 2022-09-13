@@ -219,6 +219,7 @@ alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
 alias ip="grc ip"
+alias ipp="ip -s -s -d"
 alias zathura="tabbed -c -r 2 zathura -e id"
 alias ytfzf="proxychains4 -q -f ~/proxies/ice/proxychains.conf ytfzf"
 alias newsboat="proxychains4 -q -f ~/proxies/ice/proxychains.conf newsboat"
@@ -244,12 +245,19 @@ alias k="grc kubectl"
 alias run_devdocs_server="docker run -p 9292:9292 devdocs"
 alias voiddocs="w3m /usr/share/doc/void/html/index.html"
 alias archwiki="python -m http.server --directory /home/devi/chroots/arch/usr/share/doc/arch-wiki/html"
-alias bombadillo="bombadillo -t"
+alias bombadillo="proxychains4 -q -f ~/proxies/ice/proxychains.conf bombadillo -t"
 alias record_desktop="recordmydesktop --device hw:1,0 --no-wm-check -x 1920 --width 1920 --height 1080 --fps 15"
 alias mongoshrc="vim ~/scripts/.mongoshrc.js"
 alias fixmongoshrc="cp ~/scripts/.mongoshrc.js ~/.mongoshrc.js"
 alias phone_net="sudo ip netns exec phone_ns"
+alias home_net="sudo ip netns exec home_ns"
 alias netbsd_bmake="/usr/pkg/bin/bmake"
+alias hive_node_1="ssh ubuntu@95.217.143.98"
+
+# change the 4th terminal color to #0000ff
+# echo -e '\e]P40000ff'
+# reset all
+# echo -e '\e]R'
 
 get_domain_dns_records() {
   jcurl -X GET -H "Accept: application/json" -H "Authorization: $(cat ~/scripts/arvan-api-key)" "https://napi.arvancloud.com/cdn/4.0/domains/terminaldweller.com/dns-records"

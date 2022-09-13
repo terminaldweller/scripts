@@ -7,6 +7,15 @@ https://suckless.org/atom.xml
 https://microservices.io/feed.xml
 https://news.ycombinator.com/rss
 
+# (Twitter)
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=donttouchjustl1&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PancakeSwap&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Pancakeswap"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=OrchidProtocol&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~OrchidProtocol"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=ethereum&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Ethereum"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=torproject&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~TorProject"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=HiveBlockchain&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Hive"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PrivexInc&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Privex"_("Twitter")
+
 # (Youtube)
 # Horror
 https://www.youtube.com/feeds/videos.xml?channel_id=UC4QEH0BC7ZQMYIEmr1yAHfQ "~RomNex"_("youtube")

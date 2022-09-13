@@ -38,7 +38,10 @@ set ttyfast
 set relativenumber
 set wildignorecase
 set shm=a
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" the mypy_cache is added because gutentags actually adds tags from that.
+" the build_dir and staging_dir are to prevent gutentags from adding anything
+" from those dirs for openwrt.
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.mypy_cache,node_modules,build_dir,staging_dir
 set wildmenu
 set confirm
 set magic
@@ -209,6 +212,8 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'plasticboy/vim-markdown'
+Plug 'cmcaine/vim-uci'
+Plug 'Glench/Vim-Jinja2-Syntax'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'Konfekt/vim-office'
@@ -551,7 +556,7 @@ function! GetBufferList()
   redir END
   return buflist
 endfunction
-autocmd FileType markdown,html inoremap <C-b> <br/>
+autocmd FileType markdown,html,jinja inoremap <C-b> <br/>
 
 function! ToggleList(bufname, pfx)
   let buflist = GetBufferList()
@@ -1326,6 +1331,8 @@ nmap _P :r ~/.vi_tmp<CR>
 "gutentags
 let g:gutentags_generate_on_empty_buffer = 1
 let g:gutentags_plus_nomap = 1
+let g:gutentags_ctags_exclude_wildignore = 1
+let g:gutentags_ctags_exclude = [".mypy_cache"]
 
 "run Vman for the word under the cursor
 map <leader>v <Plug>(Vman)

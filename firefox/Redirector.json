@@ -1,0 +1,40 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2022-08-06T06:47:02.721Z",
+    "redirects": [
+        {
+            "description": "medium redirect",
+            "exampleUrl": "https://medium.com/zocdoc-engineering/monorepo-magic-escaping-version-hell-by-decoupling-dependencies-46e817073bdf",
+            "exampleResult": "https://scribe.rip/zocdoc-engineering/monorepo-magic-escaping-version-hell-by-decoupling-dependencies-46e817073bdf",
+            "error": null,
+            "includePattern": "https://medium.com/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$1",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "medium redirect",
+            "exampleUrl": "https://dreamume.medium.com/leetcode-458-poor-pigs-adc1bef981c1",
+            "exampleResult": "https://scribe.rip/leetcode-458-poor-pigs-adc1bef981c1",
+            "error": null,
+            "includePattern": "https://*.medium.com/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}

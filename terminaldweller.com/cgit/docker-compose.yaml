@@ -1,0 +1,30 @@
+version: "3"
+services:
+  cgit:
+    image: cgit
+    build:
+      context: ./cgit/
+    networks:
+      - cgitnet
+    ports:
+      - "8040:8080"
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./cgitrc:/etc/cgitrc:ro
+      - storage:/etc/gitrepos/
+  bootstrap:
+    image: bootstrap
+    build:
+      context: ./bootstrap
+    networks:bootstrapnet
+    volumes:
+      - storage:/etc/gitrepos/
+    entrypoint: ["/docker-entrypoint.sh"]
+    cap_drop:
+      - ALL
+networks:
+  cgitnet:
+  bootstrapnet:
+volumes:
+  storage:

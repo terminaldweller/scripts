@@ -1,0 +1,19 @@
+css=/cgit/cgit.css
+# logo=/cgit.png
+
+# git repos go here
+scan-path=/srv/git/
+
+virtual-root=/
+
+# automatically render READMEs
+about-file=/usr/lib/cgit/filters/about-formatting.sh
+readme:=README.md
+
+# robots
+robots=noindex, nofollow
+
+include=/etc/cgitrepos
+
+# syntax highlighting
+source-filter=/usr/lib/cgit/filters/syntax-highlighting-edited.sh

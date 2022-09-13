@@ -1,0 +1,12 @@
+@-moz-document domain("vagrant-libvirt.github.io") {
+  #top {
+    max-width: 75%;
+    width: 75%;
+    margin: auto;
+  }
+
+  .side-bar {
+    max-width: 13%;
+    width: 13%;
+  }
+}
