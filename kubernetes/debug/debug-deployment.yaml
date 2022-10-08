@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      containers:
+      - name: debug
+        image: 192.168.1.103:5000/bullseye-slim
+        imagePullPolicy: IfNotPresent
+        command:
+          - tail
+          - -f
+          - /dev/null
+        env:
+          - name: HTTP_PROXY
+            value: socks5://192.168.1.103:9995
+          - name: HTTPS_PROXY
+            value: socks5://192.168.1.103:9995
+          - name: NO_PROXY
+            value: localhost, 127.0.0.1, 10.0.0.0/24
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: debug-service
+spec:
+  selector:
+    app: debug
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: "7777"
+      port: 27777
+      targetPort: 27777
+      nodePort: 30777

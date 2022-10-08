@@ -9,7 +9,7 @@ SOCKS_PROXY=socks5://127.0.0.1:9050 xlocate "man/man..\?/$1\.[0-9]" 2>/dev/null 
 	while read -r pkg page; do
 		page=${page#* -> }
 		# xbps-query --cat=$page ${pkg%-*} | mandoc -O width=205 -a
-		SOCKS_PROXY=socks5://127.0.0.1:9050 xbps-query --cat=$page ${pkg%-*} |
+		SOCKS_PROXY=socks5://127.0.0.1:9995 xbps-query --cat=$page ${pkg%-*} |
 			mandoc -O width=205 -c | col -b |
 			vim - -M -R \
 				-c 'set ft=man nomod nolist' \

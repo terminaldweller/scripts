@@ -17,16 +17,40 @@ spec:
       containers:
       - name: bitlbee-libpurple
         image: ezkrg/bitlbee-libpurple:debian-20220408145536
+        imagePullPolicy: IfNotPresent
+        command:
+          - /usr/sbin/bitlbee
+          - -F
+          - -n
+          - -u
+          - bitlbee
+          - -c
+          - /var/lib/bitlbee/bitlbee.conf
+          - -d
+          - /bitlbee-user-data/
         ports:
           - containerPort: 6667
-        # volumeMounts:
-        #   - name: bitlbee-libpurple-conf
-        #     mountPath: /var/lib/bitlbee
-        #     readOnly: true
-      # volumes:
-        # - name: bitlbee-conf
-        #   configMap:
-        #     name: bitlbee-config-file
+        volumeMounts:
+          - name: bitlbee-conf
+            mountPath: /var/lib/bitlbee/bitlbee.conf
+            subPath: bitlbee.conf
+            readOnly: true
+          - name: bitlbee-data
+            mountPath: /bitlbee-user-data/
+        env:
+          - name: HTTPS_PROXY
+            value: socks5://192.168.1.103:9995
+          - name: HTTP_PROXY
+            value: socks5://192.168.1.103:9995
+          - name: NO_PROXY
+            value: localhost, 127.0.0.1, 10.0.0.0/24
+      volumes:
+        - name: bitlbee-conf
+          configMap:
+            name: bitlbee-config-file
+        - name: bitlbee-data
+          persistentVolumeClaim:
+            claimName: bitlbee-data
 ---
 apiVersion: v1
 kind: Service

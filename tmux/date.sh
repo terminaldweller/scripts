@@ -22,8 +22,8 @@ if [ ! $? ]; then
 else
   WEATHER="#[fg=colour255 bg=colour32]"$WEATHER_INFO
 fi
-CPU_TEMP=$(sensors | grep temp1 | head -n 1 | awk '{print $2}')
-CPU_SECTION="#[fg=colour36 bg=colour16]$SEPARATOR_LEFT_BOLD#[fg=colour16 bg=colour36]$CPU_TEMP"
+CPU_TEMP=$(sensors -j | jq .["\"coretemp-isa-0000\""]."\"Package id 0\"".temp1_input)
+CPU_SECTION="#[fg=colour36 bg=colour16]$SEPARATOR_LEFT_BOLD#[fg=colour16 bg=colour36]$CPU_TEMP C" 
 BATTERY=$(upower -i "$(upower -e | grep 'BAT')" | grep -E "percentage" | awk '{print $2}')
 
 echo "$CPU_SECTION#[fg=colour32 bg=colour36]\

@@ -12,8 +12,8 @@
 PHONE_NS=phone_ns
 IF=enp0s20f0u3u3
 
-# sudo ip netns add ${PHONE_NS}
-# sudo ip link set ${IF} netns ${PHONE_NS}
+sudo ip netns add ${PHONE_NS}
+sudo ip link set ${IF} netns ${PHONE_NS}
 sudo ip netns exec ${PHONE_NS} ip link set ${IF} up
 sudo ip netns exec ${PHONE_NS} ip link set dev lo up
 # will need to install dhclient before runnning this dummy

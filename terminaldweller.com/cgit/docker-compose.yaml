@@ -17,7 +17,8 @@ services:
     image: bootstrap
     build:
       context: ./bootstrap
-    networks:bootstrapnet
+    networks:
+      - bootstrapnet
     volumes:
       - storage:/etc/gitrepos/
     entrypoint: ["/docker-entrypoint.sh"]

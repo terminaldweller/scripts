@@ -15,6 +15,7 @@ http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=B
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=torproject&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~TorProject"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=HiveBlockchain&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Hive"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PrivexInc&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Privex"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=binance&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~binance"_("Twitter")
 
 # (Youtube)
 # Horror
@@ -36,6 +37,8 @@ https://www.youtube.com/feeds/videos.xml?user=CreepsMcPasta "~CreepsMcPasta"_("y
 https://www.youtube.com/feeds/videos.xml?user=WeArEraW11 "~ScaryJUJU"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UCuoMasRkMhlj1VNVAOJdw5w "~Local58TV"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9YXCCz-A28lxhMA-ArfBaA "~Gemini_Home_Entertainment"_("youtube")
+https://www.youtube.com/feeds/videos.xml?channel_id=UCxMZO9A4Jixjr9lbgeBiQ6w "~Vormithrax"_("youtube")
+
 # Tech
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-91UA-Xy2Cvb98deRXuggA "~Joshua Fluke"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UC17mJJnvzAa_e9qQqLIfIeQ "~Semicolon&amp;Sons"_("youtube")

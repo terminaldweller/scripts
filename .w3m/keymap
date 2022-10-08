@@ -124,7 +124,8 @@ keymap go COMMAND "SHELL /usr/lib/w3m/cgi-bin/goto_clipboard.cgi"
 keymap SPC-s COMMAND "TAB_GOTO searx.terminaldweller.com"
 
 keymap d COMMAND "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
-keymap u TAB_GOTO /usr/lib/w3m/cgi-bin/restore_tab.cgi
+#keymap u TAB_GOTO /usr/lib/w3m/cgi-bin/restore_tab.cgi
+keymap u TAB_GOTO /home/devi/.w3m/cgi-bin/restore_tab.cgi
 
 keymap SPC-m CURSOR_MIDDLE
 keymap SPC-l CURSOR_BOTTOM
