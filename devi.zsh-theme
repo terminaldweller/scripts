@@ -257,15 +257,6 @@ pwd_shortened() {
   echo $shortened_path
 }
 
-rebuildquery() {
-  make -q > /dev/null 2>&1
-  if [[ $? == 1 ]]; then
-    echo " ::rebuild::"
-  else
-    ;
-  fi
-}
-
 zstyle ':zsh-kubectl-prompt:' separator ':'
 getkubernetesinfo() {
   local SUB_PROMPT="%{$somegreen%}<<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>>%{$reset_color%}"
@@ -279,7 +270,9 @@ getterminal() {
   if [ ! $TTY = "" ]; then echo $TTY;else echo $STY;fi
 }
 
-PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$(rebuildquery)%{$reset_color%} $(getkubernetesinfo)%{$batred%}$(dir_writeable)%{$reset_color%}'
+rbq_info_msg=""
+
+PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$batred%}$(dir_writeable)%{$reset_color%}'
 PS2=$''
 PS3=$'\n%{$randomblue%}--➜%{$reset_color%}'
 get_prompt_len() {
@@ -364,6 +357,65 @@ timer_precmd() {
   fi
 }
 add-zsh-hook precmd timer_precmd
+
+# async jobs
+_async_rbq_start() {
+  async_start_worker rbq_info
+  async_register_callback rbq_info _async_rbq_info_done
+}
+
+_async_rbq_info() {
+  make -C $1 -q > /dev/null 2>&1
+  if [[ $? == 1 ]]; then
+    echo " ::rebuild::"
+  else
+    ;
+  fi
+}
+
+_async_rbq_info_done() {
+  local stdout=$3
+  rbq_info_msg=$stdout
+  zle reset-prompt
+}
+
+_async_vcs_start() {
+  async_start_worker vcs_info
+  async_register_callback vcs_info _async_vcs_info_done
+}
+
+_async_vcs_info() {
+  cd -q $1
+  vcs_info
+  print ${vcs_info_msg_0}
+}
+
+_async_vcs_info_done() {
+  local studout=$3
+  vcs_info_msg_0=$stdout
+  zle reset-prompt
+}
+
+# zsh-anyc https://github.com/mafredri/zsh-async
+source /home/devi/zsh-async.git/v1.8.5/async.zsh
+async_init
+_async_rbq_start
+_async_vcs_start
+
+add-zsh-hook precmd() {
+  async_job vcs_info _async_vcs_info $PWD
+}
+ass-zsh-hook chpwd() {
+  vcs_info_msg_0=
+}
+
+add-zsh-hook precmd() {
+  async_job rbq_info _async_rbq_info $PWD
+}
+
+add-zsh-hook chpwd() {
+  rbq_info_msg=
+}
 
 #function vi-replacee {
 #  RPS1="$VIM_PROMPT_REPLACE %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
