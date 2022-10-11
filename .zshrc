@@ -164,7 +164,7 @@ alias zssh="proxychains4 ssh"
 alias zscp="proxychains4 scp"
 alias ztelnet="proxychains4 telnet"
 alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
-alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 terminaldweller.com"
+alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
 alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
@@ -261,6 +261,7 @@ alias nd_proxy="proxychains4 -q -f ~/proxies/nd/proxychains.conf"
 alias swe_proxy="proxychains4 -q -f ~/proxies/swe/proxychains.conf"
 alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
+alias glow="glow -s ~/.config/glow/dark.json -p"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
