@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+set -x
 
 GIT_REPO_DIR=/etc/gitrepos
 ORIGIN_HTTPS=https://github.com/terminaldweller
@@ -28,7 +29,6 @@ REPOS="cgrep \
   seer \
   devi-githooks \
   kaminokumo \
-  wikis \
   grpc \
   faultreiber \
   luatablegen \
@@ -42,12 +42,12 @@ bootstrap() {
 
 update_repos() {
   for REPO in ${REPOS}; do
-    (cd "${GIT_REPO_DIR}/${REPO}" && git fetch)
+    (cd "${GIT_REPO_DIR}/${REPO}".git && git fetch || true)
   done
 }
 
 on_startup() {
-  dir_list=$(ls -A == "$1")
+  dir_list=$(ls -A "$1")
   if [ -z "$dir_list" ]; then
     bootstrap
   else

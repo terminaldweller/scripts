@@ -2,7 +2,7 @@ css=/cgit/cgit.css
 # logo=/cgit.png
 
 # git repos go here
-scan-path=/srv/git/
+scan-path=/home/git/repositories
 
 virtual-root=/
 
@@ -13,7 +13,7 @@ readme:=README.md
 # robots
 robots=noindex, nofollow
 
-include=/etc/cgitrepos
+# include=/etc/gitrepos
 
 # syntax highlighting
 source-filter=/usr/lib/cgit/filters/syntax-highlighting-edited.sh

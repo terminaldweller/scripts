@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
+set -x
 
 . /bootstrap.sh
-on_startup
-crond -s -P -f
+on_startup /etc/gitrepos/
+crond -n -s -P
