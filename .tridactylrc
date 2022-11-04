@@ -1,6 +1,6 @@
 sanitize tridactyllocal tridactylsync
 guiset_quiet hoverlink right
-autocmd DocStart mail.google.com mode ignore
+" autocmd DocStart mail.google.com mode ignore
 colourscheme dark
 completionfuzziness 1
 
@@ -8,3 +8,7 @@ completionfuzziness 1
 " bind tn tabmove +1
 seturl duolingo.com  superignore true
 seturl localhost:8889 superignore true
+
+blacklistadd mail.google.com/mail
+blacklistadd mail.terminaldweller.com
+blacklistadd mail.terminaldweller.com

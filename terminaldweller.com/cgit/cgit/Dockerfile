@@ -1,2 +1,5 @@
-FROM alpine:3.16
-RUN apk add && apk add --no-cache busybox-initscripts cgit git spawn-fcgi fcgiwrap highlight nginx
+FROM woahbase/alpine-cgit:x86_64
+RUN apk add && apk add --no-cache python3 py3-pip
+RUN pip3 install pygments
+RUN pip3 install md2html
+RUN pip3 install markdown

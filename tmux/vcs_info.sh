@@ -72,14 +72,23 @@ function repo_info {
   fi
 }
 
+function get_eth_price {
+  eth_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=ETH&unit=USD" | jq ".price")
+  cake_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=CAKE&unit=USD" | jq ".price")
+  monero_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=XMR&unit=USD" | jq ".price")
+  echo "${eth_price}/${cake_price}/${monero_price}"
+}
+
 tmux_session_info=" #S:#I.#P"
 branch_info="#[fg=colour16]$(repo_info)#[fg=colour0 bg=colour39]"$(git_branch_info)
 untracked_info="#[fg=colour255 bg=colour244]"$(git_untracked_info)
 deletions_info="#[fg=colour255 bg=colour1]"$(gitdeletions)
-additions__info="#[fg=colour255 bg=colour22]"$(gitadditions)
+additions_info="#[fg=colour255 bg=colour22]"$(gitadditions)
+eth_price="#[fg=colour16 bg=colour37]"$(get_eth_price)
 
 echo "#[fg=colour255 bg=colour26]$tmux_session_info #[fg=colour26 bg=colour39]$SEPARATOR_RIGHT_BOLD \
 $branch_info #[fg=colour39 bg=colour22]$SEPARATOR_RIGHT_BOLD \
-$additions__info #[fg=colour22 bg=colour1]$SEPARATOR_RIGHT_BOLD \
+$additions_info #[fg=colour22 bg=colour1]$SEPARATOR_RIGHT_BOLD \
 $deletions_info #[fg=colour1 bg=colour244]$SEPARATOR_RIGHT_BOLD \
-$untracked_info #[fg=colour244 bg=colour16]$SEPARATOR_RIGHT_BOLD"
+$untracked_info #[fg=colour244 bg=colour37]$SEPARATOR_RIGHT_BOLD \
+$eth_price #[fg=colour37 bg=colour16]$SEPARATOR_RIGHT_BOLD"

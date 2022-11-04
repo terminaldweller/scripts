@@ -1,24 +1,28 @@
 version: "3"
 services:
   cgit:
-    image: woahbase/alpine-cgit:x86_64
+    image: cgit
+    build:
+      context: ./cgit/
     networks:
       - cgitnet
     ports:
-      - "8041:80"
+      - "127.0.0.1:8041:80"
       - "8042:22"
+      - "8043:443"
     restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
     volumes:
-      # - ./cgit/cgitrc:/etc/cgitrc:ro
+      - ./cgit/cgitrc:/etc/cgitrc:ro
       - storage:/home/git/repositories
       - ./data/ssh:/etc/ssh
       # - ./data/web:/var/www
       # - /etc/hosts:/etc/hosts:ro
       # - /etc/localtime:/etc/localtime:ro
-      # - ./cgit.conf:/etc/lighttpd/conf.d/cgit.conf
+      - ./cgit.conf:/etc/lighttpd/cgit.conf:ro
+      - /etc/letsencrypt/archive/git.terminaldweller.com/ssl.pem:/etc/certs/git.pem:ro
   bootstrap:
     image: bootstrap
     build:

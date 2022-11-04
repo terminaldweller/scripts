@@ -20,15 +20,15 @@ servers = (
     tls_verify = "no";
     autoconnect = "yes";
   },
-  {
-    address = "irc.oftc.net";
-    chatnet = "OFTC";
-    port = "6697";
-    use_tls = "yes";
-    tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "yes";
-    autoconnect = "yes";
-  },
+  # {
+  #   address = "irc.oftc.net";
+  #   chatnet = "OFTC";
+  #   port = "6697";
+  #   use_tls = "yes";
+  #   tls_cert = "~/.irssi/certs/nick.pem";
+  #   tls_verify = "yes";
+  #   autoconnect = "no";
+  # },
   {
     address = "192.168.1.109";
     port = "6667";
@@ -36,23 +36,30 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.libera.chat";
-    chatnet = "LiberaChat";
+    address = "185.112.147.110";
     port = "6697";
+    chatnet = "bitlbee_r";
+    autoconnect = "no";
     use_tls = "yes";
-    tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "yes";
-    autoconnect = "yes";
   },
-  {
-    address = "irc.rizon.net";
-    chatnet = "Rizon";
-    port = "6697";
-    use_tls = "yes";
-    tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "yes";
-    autoconnect = "yes";
-  },
+  # {
+  #   address = "irc.libera.chat";
+  #   chatnet = "LiberaChat";
+  #   port = "6697";
+  #   use_tls = "yes";
+  #   tls_cert = "~/.irssi/certs/nick.pem";
+  #   tls_verify = "yes";
+  #   autoconnect = "no";
+  # },
+  # {
+  #   address = "irc.rizon.net";
+  #   chatnet = "Rizon";
+  #   port = "6697";
+  #   use_tls = "yes";
+  #   tls_cert = "~/.irssi/certs/nick.pem";
+  #   tls_verify = "yes";
+  #   autoconnect = "no";
+  # },
   {
     address = "ssl.ircnet.io";
     chatnet = "IRCNet";
@@ -63,11 +70,42 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "185.112.147.110";
+    address = "185.130.45.46";
+    chatnet = "Libera-ZNC";
+    port = "1025";
+    password = "terminaldweller/Liberachat:"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "185.130.45.46";
+    chatnet = "OFTC-ZNC";
+    port = "1025";
+    password = "terminaldweller/OFTC:network"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "185.130.45.46";
+    chatnet = "Rizon-ZNC";
+    port = "1025";
+    password = "terminaldweller/Rizon:network"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "185.130.45.46";
     chatnet = "Undernet-ZNC";
     port = "1025";
-    password = "";
+    password = "terminaldweller/undernet:network"; #pragma: allowlist secret
     use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
     autoconnect = "yes";
   },
@@ -98,6 +136,14 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
+  "OFTC-ZNC" = {
+    type = "IRC";
+    nick = "terminaldweller";
+    autosendcmd = "/^msg nickserv set cloak on;mode terminaldweller j;wait 3000";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
+  };
   gitter = { type = "IRC"; nick = "terminaldweller"; };
   "app.slack.com" = { type = "IRC"; nick = "terminaldweller"; };
   "FRRouting.slack.com" = { type = "IRC"; };
@@ -106,9 +152,17 @@ chatnets = {
     type = "IRC";
   };
   LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
-  Rizon = {
+  "Libera-ZNC" = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +px;wait 3000";
+    autosendcmd = "/^mode terminaldweller +g;wait 3000";
+  };
+  # Rizon = {
+  #   type = "IRC";
+  #   autosendcmd = "/^mode terminaldweller +px;wait 3000";
+  # };
+  "Rizon-ZNC" = {
+    type = "IRC";
+    autosendcmd = "/^mode terminaldweller +RCGpx;wait 3000";
   };
   IRCNet = { type = "IRC"; };
   "Undernet-ZNC" = {
@@ -118,45 +172,47 @@ chatnets = {
   EFnet = { type = "IRC"; };
   DALnet = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +HCi;msg nickserv@services.dal.net identify password;wait 3000";
+    autosendcmd = "/^mode terminaldweller +HCi;msg nickserv@services.dal.net identify Xashmith#666;wait 3000";
   };
 };
 
 channels = (
-  # { name = "#dpdk"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#fdio-vpp"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#openssl"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#netbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#netplan"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#ubuntu"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#qemu"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
-  # { name = "#virt"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#openwrt"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#tor"; chatnet = "OFTC"; autojoin = "yes"; },
-  { name = "#llvm"; chatnet = "OFTC"; autojoin = "yes"; },
-  # { name = "#openssh"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#gdb"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#openbsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#go-nuts"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#voidlinux"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#security"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#crypto"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#tmux"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#vim"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#git"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#neomutt"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#busybox"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  # { name = "#shadow"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#freebsd"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#linux"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "LiberaChat"; autojoin = "yes"; },
+  # { name = "#dpdk"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#fdio-vpp"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#openssl"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#netbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#netplan"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#ubuntu"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#qemu"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#debian"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  # { name = "#virt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#openwrt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#tor"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#llvm"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  # { name = "#openssh"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#gdb"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#openbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#znc"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#go-nuts"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#voidlinux"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#CataclysmDDA"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#security"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#crypto"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#tmux"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#git"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#neomutt"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#busybox"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  # { name = "#shadow"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#freebsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#linux"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#irssi"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#bookz"; chatnet = "Undernet-ZNC"; autojoin = "yes"; },
-  { name = "#postgresql"; chatnet = "LiberaChat"; autojoin = "yes"; },
-  { name = "#news"; chatnet = "Rizon"; autojoin = "yes"; },
+  { name = "#postgresql"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#news"; chatnet = "Rizon-ZNC"; autojoin = "yes"; },
   { name = "#irc"; chatnet = "IRCNet"; autojoin = "yes"; },
-  { name = "#supersonic"; chatnet = "DALNet"; autojoin = "yes"; }
-  # { name = "#kvm"; chatnet = "LiberaChat"; autojoin = "yes"; }
+  { name = "#supersonic"; chatnet = "DALNet"; autojoin = "yes"; },
+  # { name = "#kvm"; chatnet = "Libera-ZNC"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -462,6 +518,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#go-nuts" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#neomutt" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kvm" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#znc" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netbsd" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ubuntu" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netplan" ); },
@@ -477,7 +534,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#git" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#debian-next" );
   },
@@ -488,6 +545,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#shadow" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#CataclysmDDA" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#security" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#busybox" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#bookz" ); },

@@ -45,3 +45,4 @@ zssh root@192.168.90.7 'tcpdump -ni enp3s0f0 -U -s0 -w - ' | wireshark -k -i -
 echo 1 > /proc/sys/kernel/task_delayacct
 irancell 196242684
 rust tutorial https://www.youtube.com/watch?v=ygL_xcavzQ4
+https://wms.cs.kuleuven.be/cs/studeren/master-artificial-intelligence/MAI_SIP/masters-thesis/thesis-topic-proposals

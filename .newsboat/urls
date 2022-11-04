@@ -16,6 +16,7 @@ http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=B
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=HiveBlockchain&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Hive"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PrivexInc&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Privex"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=binance&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~binance"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=igor_chubin&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~igor_chubin"_("Twitter")
 
 # (Youtube)
 # Horror

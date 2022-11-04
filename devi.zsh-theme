@@ -359,6 +359,7 @@ timer_precmd() {
 add-zsh-hook precmd timer_precmd
 
 # async jobs
+# https://github.com/vincentbernat/zshrc/blob/d66fd6b6ea5b3c899efb7f36141e3c8eb7ce348b/rc/vcs.zsh
 _async_rbq_start() {
   async_start_worker rbq_info
   async_register_callback rbq_info _async_rbq_info_done
@@ -403,14 +404,14 @@ _async_rbq_start
 _async_vcs_start
 
 add-zsh-hook precmd() {
-  async_job vcs_info _async_vcs_info $PWD
+  async_job vcs_info _async_vcs_info $PWD > /dev/null 2>&1
 }
 ass-zsh-hook chpwd() {
   vcs_info_msg_0=
 }
 
 add-zsh-hook precmd() {
-  async_job rbq_info _async_rbq_info $PWD
+  async_job rbq_info _async_rbq_info $PWD > /dev/null 2>&1
 }
 
 add-zsh-hook chpwd() {
