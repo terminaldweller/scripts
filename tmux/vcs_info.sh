@@ -63,7 +63,7 @@ function repo_info {
     insertions=$(git --no-pager diff --numstat | awk '{sum1+=$1}END{print sum1}')
     git remote -v | grep github > /dev/null 2>&1
     if [[ $? == 0 ]]; then
-      echo 
+      echo  
     else
       echo  
     fi

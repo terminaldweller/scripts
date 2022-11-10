@@ -103,6 +103,7 @@ alias vpn="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 192.99.102.52 -
 alias vpn2="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 145.239.165.137 -l rooot"
 alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh root@185.112.147.110 -p 2022"
 alias vpn6="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.45.46"
+alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.81"
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 185.126.202.69 -l ubuntu -p 1022"
 alias cloud_one="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 130.185.121.80 -l ubuntu -p 1022"
 alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
@@ -133,8 +134,26 @@ alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="irssi -n terminaldweller"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" --network=host -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
-alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
-alias openbb="TERM=screen-256color docker run --runtime=runc -it --env-file=/home/devi/.openbb/.env -e TERM -e DISPLAY=${DISPLAY} -e OPENBB_BACKEND=Qt5Agg --log-driver=none --network=host -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/openbb-finance/openbbterminal-poetry:latest"
+alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias openbb="TERM=screen-256color \
+  docker \
+  run \
+  --runtime=runc \
+  -it \
+  --env-file=/home/devi/.openbb/.env \
+  -e TERM \
+  -e DISPLAY=${DISPLAY} \
+  -e OPENBB_BACKEND=Qt5Agg \
+  -e HTTP_PROXY=socks5://192.168.1.103:9995 \
+  -e HTTPS_PROXY=socks5://192.168.1.103:9995 \
+  -e NO_PROXY=localhost,127.0.0.0/8,dockerhost.local \
+  -e http_proxy=socks5://192.168.1.103:9995 \
+  -e https_proxy=socks5://192.168.1.103:9995 \
+  -e no_proxy=localhost,127.0.0.0/8,dockerhost.local \
+  --log-driver=none \
+  --network=host \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  ghcr.io/openbb-finance/openbbterminal-poetry:latest"
 alias joplinkeymap="vim ~/scripts/.config/joplin/keymap.json"
 alias fixjoplinkeymap="cp ~/scripts/.config/joplin/keymap.json ~/.config/joplin/keymap.json"
 alias postitrc="vim ~/scripts/postit"
@@ -155,7 +174,7 @@ alias pwsh="/mnt/c/Program\ Files/PowerShell/7/pwsh.exe"
 alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd.exe"
 alias xonshrc="vim ~/scripts/.xonshrc"
 alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
-alias deviphone="ssh 192.168.1.110 -l u0_a601 -p 8022"
+alias deviphone="ssh u0_a601@deviphone.lan -p 8022"
 alias rpiz2="ssh 192.168.1.116 -l pi"
 alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
 alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
@@ -172,10 +191,8 @@ alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAl
 alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
 alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias socks5vpn5="autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3022 2a07:e01:3:204::1"
-alias zharf_server="zssh 192.168.12.5 -l farzad"
-alias zharf_server2="zssh 192.168.90.7 -l root"
-alias zharf_server3="zssh 192.168.90.8 -l root"
+alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3333 2a07:e01:3:204::1"
+alias socks5vpn7="autossh -M 0 -N -D 9992 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 130.185.47.81"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -231,7 +248,7 @@ alias dud="du -hcD --max-depth=1 | sort -hr | colcol | column -t"
 alias bbox="busybox"
 alias gitconfigrc="vim ~/scripts/.gitconfig"
 alias fixgitconfigrc="cp ~/scripts/.gitconfig ~/.gitconfig"
-alias nviminit="vim ~/scripts/init.vim"
+alias nviminit="nvim ~/scripts/init.vim"
 alias fixnviminit="cp ~/scripts/init.vim ~/.config/nvim/init.vim"
 alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 alias socat="socat -d -d"

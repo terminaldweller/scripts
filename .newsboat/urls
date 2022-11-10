@@ -8,7 +8,7 @@ https://microservices.io/feed.xml
 https://news.ycombinator.com/rss
 
 # (Twitter)
-http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=donttouchjustl1&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=_margery28_&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PancakeSwap&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Pancakeswap"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=OrchidProtocol&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~OrchidProtocol"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=ethereum&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Ethereum"_("Twitter")
@@ -17,6 +17,7 @@ http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=B
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PrivexInc&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Privex"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=binance&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~binance"_("Twitter")
 http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=igor_chubin&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~igor_chubin"_("Twitter")
+http://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=TheBlock__&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~the_block"_("Twitter")
 
 # (Youtube)
 # Horror
@@ -41,6 +42,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC9YXCCz-A28lxhMA-ArfBaA "~G
 https://www.youtube.com/feeds/videos.xml?channel_id=UCxMZO9A4Jixjr9lbgeBiQ6w "~Vormithrax"_("youtube")
 
 # Tech
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqK_GSMbpiV8spgD3ZGloSw "~Coin Bureau"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-91UA-Xy2Cvb98deRXuggA "~Joshua Fluke"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UC17mJJnvzAa_e9qQqLIfIeQ "~Semicolon&amp;Sons"_("youtube")
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke_Smith"_("youtube")

@@ -86,7 +86,7 @@ endfunction
 " autocmd QueInit UIEnter * call OnUIEnter(deepcopy(v:event))
 
 colo jellybeans
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 try
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_sep = ' '
@@ -190,7 +190,7 @@ let g:qs_highlight_on_keys = ["f", "F", "t", "T"]
 " undotree
 set undolevels=1000
 if has("persistent_undo")
-    set undodir=~/.undodir/
+    set undodir=~/.nundodir/
     set undofile
 endif
 let g:undotree_WindowLayout = 4
@@ -281,16 +281,16 @@ let g:mucomplete#completion_delay = 1
 " firenvim write changes automatically, throttle writes
 let g:timer_started = v:false
 function! My_Write(timer) abort
-	let g:timer_started = v:false
-	write
+  let g:timer_started = v:false
+  write
 endfunction
 
 function! Delay_My_Write() abort
-	if g:timer_started
-		return
-	end
-	let g:timer_started = v:true
-	call timer_start(10000, 'My_Write')
+  if g:timer_started
+    return
+  end
+  let g:timer_started = v:true
+  call timer_start(10000, 'My_Write')
 endfunction
 
 au TextChanged * ++nested call Delay_My_Write()
@@ -301,3 +301,15 @@ let g:firenvim_config = {
         \ 'cmdlineTimeout': 3000,
     \ }
 \ }
+
+"python syntax highlighting
+"let g:python_slow_sync = 0
+let python_highlight_all = 1
+hi link pythonBuiltin Define
+hi link pythonInclude PreCondit
+hi link pythonClassParameters Constant
+hi link pythonFunctionParameters Constant
+hi link pythonExtraOperator Keyword
+hi link pythonDoctest Tag
+hi link pythonRawString Tag
+hi link pythonTripleQuotes SpecialComment
