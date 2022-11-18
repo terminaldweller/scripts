@@ -37,6 +37,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   muckgreen="%F{29}"
   batgreen="%F{76}"
   batred="%F{88}"
+  tsocks="%F{132}"
   purblue="%F{69}"
   swampgreen="%F{64}"
   purple4="%F{54}"
@@ -156,6 +157,25 @@ add-zsh-hook precmd steeef_precmd
 # }
 # add-zsh-hook precmd guess_who
 
+tsocks_on() {
+  if echo $LD_PRELOAD | grep libtsocks > /dev/null 2>&1; then
+    # echo -ne "\x1b[38;5;0m\x1b[48;5;22m$reset_color\x1b[38;5;22m"
+    echo "%K{22}%F{0}$reset_color%F{22}"
+  else
+    echo "$reset_color"
+    ;
+  fi
+}
+
+sudo_query() {
+  if sudo -nv > /dev/null 2>&1; then
+    echo "%K{33}%F{0}%K{0}%F{33} "
+  else
+    echo "$reset_color"
+  fi
+}
+
+
 time_function() {
   date | gawk '{print $2" "$3" "$4}'
 }
@@ -170,18 +190,12 @@ ruby_version() {
   echo " <$version>"
 }
 
-sudo_query() {
-  sudo -nv > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
-    #echo 
-    echo " "
-  else
-    ;
-  fi
-}
-
 dir_writeable() {
-  if [ -w $(pwd) ]; then :;else echo " ";fi
+  if [ -w $(pwd) ]; then
+    echo "$reset_color"
+  else
+    echo " %K{196}%F{0}$reset_color%F{196}"
+  fi
 }
 
 sneaky() {
@@ -272,9 +286,9 @@ getterminal() {
 
 rbq_info_msg=""
 
-PS1=$'%{$new2%}$(sudo_query)%{$reset_color%}%{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$batred%}$(dir_writeable)%{$reset_color%}'
+PS1=$'%{$reset_color%}$(dir_writeable)$(tsocks_on)$(sudo_query)%{$reset_color%} %{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$reset_color%}'
 PS2=$''
-PS3=$'\n%{$randomblue%}--➜%{$reset_color%}'
+PS3=$'\n%{$randomblue%}--➜%{$reset_color%} '
 get_prompt_len() {
   local zero='%([BSUbfksu]|([FK]|){*})'
   local FOOLENGTH=${#${(S%%)PS1//$~zero/}}

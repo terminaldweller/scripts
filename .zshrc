@@ -23,6 +23,8 @@ eval `dircolors ~/.dir_colors`
 unalias dr
 alias gd="git diff --color-words"
 
+# enable aliases with sudo in the alias
+alias sudo="sudo "
 alias w3m="proxychains4 -q -f ~/proxies/ice/proxychains.conf /home/devi/w3m/w3m -o auto_image=FALSE -graph"
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
@@ -104,6 +106,7 @@ alias vpn2="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 145.239.165.13
 alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh root@185.112.147.110 -p 2022"
 alias vpn6="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.45.46"
 alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.81"
+alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.208"
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 185.126.202.69 -l ubuntu -p 1022"
 alias cloud_one="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 130.185.121.80 -l ubuntu -p 1022"
 alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
@@ -175,7 +178,8 @@ alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd
 alias xonshrc="vim ~/scripts/.xonshrc"
 alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
 alias deviphone="ssh u0_a601@deviphone.lan -p 8022"
-alias rpiz2="ssh 192.168.1.116 -l pi"
+alias rpiz2="ssh 192.168.1.205 -l pi"
+alias rpiz13="ssh 192.168.1.101 -l root"
 alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
 alias moshvps="mosh ubuntu@terminaldweller.com --ssh='ssh -p 1022'"
 alias proxychainsrc="vim ~/scripts/.proxychains/proxychains.conf"
@@ -193,6 +197,7 @@ alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAl
 alias socks5vpn5="autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3333 2a07:e01:3:204::1"
 alias socks5vpn7="autossh -M 0 -N -D 9992 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 130.185.47.81"
+alias socks5vpn8="autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -279,11 +284,16 @@ alias hive_node_1="ssh ubuntu@95.217.143.98"
 alias ca_proxy="proxychains4 -q -f ~/proxies/ca/proxychains.conf"
 alias fr_proxy="proxychains4 -q -f ~/proxies/fr/proxychains.conf"
 alias nd_proxy="proxychains4 -q -f ~/proxies/nd/proxychains.conf"
+alias nd2_proxy="proxychains4 -q -f ~/proxies/nd2/proxychains.conf"
 alias swe_proxy="proxychains4 -q -f ~/proxies/swe/proxychains.conf"
 alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
+alias tor_carrier_proxy="proxychains4 -q -f ~/proxies/tor_carrier/proxychains.conf"
 alias glow="glow -s ~/.config/glow/dark.json -p"
 alias nmap="grc nmap"
+alias fdisk="grc fdisk"
+alias blkid="grc blkid"
+alias b="buku --suggest"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
