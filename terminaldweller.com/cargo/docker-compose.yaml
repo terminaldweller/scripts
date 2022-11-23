@@ -12,7 +12,12 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /home/ubuntu/cargo:/cargo
+      - /etc/letsencrypt/archive/cargo.terminaldweller.com/:/certs/
     cap_drop:
       - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
 networks:
   cargonet:

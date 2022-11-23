@@ -1,0 +1,13 @@
+version: "3"
+services:
+  browsh:
+    image: browsh/browsh:v1.8.0
+    networks:
+      - browshnet
+    ports:
+      - "4333:4333"
+    restart: unless-stopped
+    entrypoint: "/app/bin/browsh"
+    command: ["--http-server-mode"]
+networks:
+  browshnet:

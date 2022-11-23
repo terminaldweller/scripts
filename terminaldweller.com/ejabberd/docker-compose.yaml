@@ -16,14 +16,14 @@ services:
     restart: unless-stopped
     volumes:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml
-      - /etc/letsencrypt/archive/chat.terminaldweller.com/:/opt/ejabberd/certs/
+      - /etc/letsencrypt/archive/jabber.terminaldweller.com/:/opt/ejabberd/certs/
       - ./dh:/usr/local/etc/ejabberd/dh
       - ./acme:/usr/local/etc/self_signed/
       - confs_certs:/home/ejabberd/conf/
       - mnesia_db:/home/ejabberd/database/
       - vault:/var/lib/ejabberd/
     environment:
-      - XMPP_DOMAIN=chat.terminaldweller.com
+      - XMPP_DOMAIN=jabber.terminaldweller.com
       - ERLANG_NODE=ejabberd
     #entrypoint: ["tail", "-f", "/dev/null"]
 networks:

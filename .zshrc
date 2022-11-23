@@ -294,6 +294,9 @@ alias nmap="grc nmap"
 alias fdisk="grc fdisk"
 alias blkid="grc blkid"
 alias b="buku --suggest"
+alias whois="grc whois -H"
+alias scapy="scapy -H"
+alias dg="grc /usr/bin/dig"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

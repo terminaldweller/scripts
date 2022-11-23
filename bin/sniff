@@ -1,33 +1,37 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+"""Sniffs different file types in a given URL."""
 
 import argparse
-import signal
-import sys
 import re
-from requests import get
-from requests.exceptions import RequestException
-from contextlib import closing
-from bs4 import BeautifulSoup
+import typing
+import contextlib
+import requests  # type:ignore
+import bs4  # type:ignore
 
 
-def SigHandler_SIGINT(signum, frame):
-    print()
-    sys.exit(0)
+def log_error(error):
+    """A logger wrapper."""
+    print(error)
 
 
-def simple_get(url):
+def simple_get(url) -> typing.Optional[typing.ByteString]:
+    """A simple get wrapper."""
     try:
-        with closing(get(url, stream=True)) as resp:
+        with contextlib.closing(
+            requests.get(url, stream=True, timeout=10)
+        ) as resp:
             if is_good_response(resp):
                 return resp.content
-            else:
-                return None
-    except RequestException as e:
-        log_error("Error during requests to {0} : {1}".format(url, str(e)))
+        return None
+    except requests.exceptions.RequestException as error:
+        log_error(
+            f"Error during requests to {0} : {1}".format(url, str(error))
+        )
         return None
 
 
 def is_good_response(resp):
+    """Checks if the response we get is a good response."""
     content_type = resp.headers["Content-Type"].lower()
     return (
         resp.status_code == 200
@@ -36,11 +40,10 @@ def is_good_response(resp):
     )
 
 
-def log_error(e):
-    print(e)
+# pylint: disable=too-few-public-methods
+class Argparser:
+    """Argparser"""
 
-
-class Argparser(object):
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--src", type=str, help="url")
@@ -49,7 +52,7 @@ class Argparser(object):
             "--vid", action="store_true", help="video", default=False
         )
         parser.add_argument(
-            "--dbg", action="store_true", help="debug", default=False
+            "--img", action="store_true", help="sniff images", default=False
         )
         parser.add_argument(
             "--url", action="store_true", help="url", default=False
@@ -57,7 +60,7 @@ class Argparser(object):
         self.args = parser.parse_args()
 
 
-VID_FMT = [
+VID_FMTS = [
     "webm",
     "mpg",
     "mp2",
@@ -74,28 +77,43 @@ VID_FMT = [
     "mkv",
     "svi",
 ]
-# write code here
 
 
-def premain(argparser):
-    signal.signal(signal.SIGINT, SigHandler_SIGINT)
-    # here
+def image_finder(url: str) -> None:
+    """Sniffs images."""
+    # raw_url_content = simple_get(url)
+    response = requests.get(url, timeout=10, allow_redirects=True)
+    # print(response.content)
+    if response.content is None:
+        return None
+
+    soup = bs4.BeautifulSoup(response.content, "lxml")
+    search_results = soup.findAll("img")
+    for result in search_results:
+        print(result["src"])
+        # img_response = requests.get(
+        #     result["src"], timeout=10, allow_redirects=True
+        # )
+    return None
+
+
+def main() -> None:
+    """Entry point."""
+    argparser = Argparser()
+    if argparser.args.img:
+        image_finder(argparser.args.src)
     raw_ml = simple_get(argparser.args.src)
-    # print("raw html length is " + repr(len(raw_ml)))
-    ml = BeautifulSoup(raw_ml, "lxml")
-    ml_str = repr(ml)
-    tmp = open("/tmp/riecher", "w")
+    ml_str = repr(bs4.BeautifulSoup(raw_ml, "lxml"))
+    tmp = open("/tmp/riecher", "w", encoding="utf-8")
     tmp.write(ml_str)
     tmp.close()
-    tmp = open("/tmp/riecher", "r")
+    tmp = open("/tmp/riecher", "r", encoding="utf-8")
     if argparser.args.src:
         if argparser.args.vid:
             for line in tmp:
-                # hit = False
-                for elem in VID_FMT:
+                for elem in VID_FMTS:
                     if line.find("." + elem) > -1:
                         print(line)
-                        # hit = True
     if argparser.args.url:
         dump_list = []
         for line in tmp:
@@ -109,17 +127,6 @@ def premain(argparser):
             print(elem)
 
     tmp.close()
-
-
-def main():
-    argparser = Argparser()
-    if argparser.args.dbg:
-        try:
-            premain(argparser)
-        except Exception as e:
-            print(e)
-    else:
-        premain(argparser)
 
 
 if __name__ == "__main__":

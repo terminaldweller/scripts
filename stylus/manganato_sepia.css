@@ -6,4 +6,8 @@
   img:hover {
     filter: none;
   }
+
+  .container-chapter-reader {
+    background-color: #000000;
+  }
 }
