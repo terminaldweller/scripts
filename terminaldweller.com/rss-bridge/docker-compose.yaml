@@ -5,12 +5,32 @@ services:
     networks:
       - rssbridgenet
     ports:
-      - "3000:443"
+      - "127.0.0.1:3080:80"
     restart: unless-stopped
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt/archive/rssgen.terminaldweller.com/:/certs/:ro
+    depends_on:
+      - nginx
+    # volumes:
+    #   - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    #   - /etc/letsencrypt/archive/rssgen.terminaldweller.com/:/certs/:ro
     # cap_drop:
     #   - ALL
+  nginx:
+    image: nginx:stable
+    ports:
+      - "3000:443"
+    networks:
+      - rssbridgenet
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+      - NET_BIND_SERVICE
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/archive/browsh.terminaldweller.com/:/certs/:ro
 networks:
   rssbridgenet:
