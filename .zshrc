@@ -178,7 +178,7 @@ alias pwsh="/mnt/c/Program\ Files/PowerShell/7/pwsh.exe"
 alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd.exe"
 alias xonshrc="vim ~/scripts/.xonshrc"
 alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
-alias deviphone="ssh u0_a601@deviphone.lan -p 8022"
+alias deviphone="ssh -p 8022 u0_a601@farzad-s-galaxy-a51.lan"
 alias rpiz2="ssh 192.168.1.205 -l pi"
 alias rpiz13="ssh 192.168.1.101 -l root"
 alias moshvpn="mosh rooot@192.99.102.52 --ssh='ssh -p 1022'"
@@ -292,7 +292,7 @@ alias swe_proxy="proxychains4 -q -f ~/proxies/swe/proxychains.conf"
 alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
 alias tor_carrier_proxy="proxychains4 -q -f ~/proxies/tor_carrier/proxychains.conf"
-alias glow="glow -s ~/.config/glow/dark.json -p"
+alias glow="glow --style ~/.config/glow/dark.json --pager --local"
 alias nmap="grc nmap"
 alias fdisk="grc fdisk"
 alias blkid="grc blkid"
@@ -300,11 +300,18 @@ alias b="buku --suggest"
 alias whois="grc whois -H"
 alias scapy="scapy -H"
 alias dg="grc /usr/bin/dig"
+alias lsof="grc lsof"
+alias xxd="xxd -g 2 -E -u -c 32"
+alias torcurl="curl --user-agent '' --sock5-hostname localhost:9053"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
 # reset all
 # echo -e '\e]R'
+
+# mdcat(){
+#   mdcat --fail --local "$@" | bat
+# }
 
 get_domain_dns_records() {
   jcurl -X GET -H "Accept: application/json" -H "Authorization: $(cat ~/scripts/arvan-api-key)" "https://napi.arvancloud.com/cdn/4.0/domains/terminaldweller.com/dns-records"
@@ -665,6 +672,10 @@ jcurl() {
 }
 xcurl() {
   curl "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE
+}
+
+hcurl() {
+  torsocks --port 9054 curl -i -D /dev/stderr --user-agent 'Chrome/79' "https://papers.ssrn.com/sol3/papersstract_id=1925128" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE
 }
 
 # these i stole from junegunn to try out

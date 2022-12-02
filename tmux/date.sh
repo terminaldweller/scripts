@@ -16,12 +16,14 @@ JDATE="#[fg=colour255 bg=colour29]"$(jdate | gawk '{print $2" "$3}')
 
 # OPENWEATHERMAP_TOKEN=$(jq -r ".token" < /home/devi/scripts/tmux/openweathermap.json)
 # WEATHER_INFO=$(sleep 120 && proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf curl "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=${OPENWEATHERMAP_TOKEN}&units=metric"|jq ".main.temp")
-WEATHER_INFO=$(curl 'wttr.in/tehran?T&format=%f')
+WEATHER_INFO=$(proxychains4 -f ~/proxies/ice/proxychains.conf curl 'wttr.in/tehran?T&format=%f')
 if echo "${WEATHER_INFO}" | grep Unknown\ location; then
   WEATHER="#[fg=colour255 bg=colour32]"no_temp
 else
   WEATHER="#[fg=colour255 bg=colour32]"${WEATHER_INFO}
 fi
+
+date >> /tmp/time_counter
 
 CPU_TEMP=$(sensors -j | jq .["\"coretemp-isa-0000\""]."\"Package id 0\"".temp1_input)
 CPU_SECTION="#[fg=colour36 bg=colour24]${SEPARATOR_LEFT_BOLD}#[fg=colour16 bg=colour36]${CPU_TEMP} C"

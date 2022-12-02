@@ -1,0 +1,27 @@
+version: "3"
+services:
+  bitlbee:
+    image: ezkrg/bitlbee-libpurple:debian-20220408145536
+    networks:
+      - bitlbeenet
+    ports:
+      - "7777:6667"
+    restart: unless-stopped
+    user: "101:101"
+    volumes:
+      - ./bitlbee.conf:/var/lib/bitlbee/bitlbee.conf:ro
+      - bitlbeedata:/bitlbee-user-data
+    entrypoint: ["/usr/sbin/bitlbee"]
+    command: ["-F", "-n", "-u", "bitlbee", "-c", "/var/lib/bitlbee/bitlbee.conf","-d","/bitlbee-user-data"]
+    env_file:
+      - .env
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+networks:
+  bitlbeenet:
+volumes:
+  bitlbeedata:

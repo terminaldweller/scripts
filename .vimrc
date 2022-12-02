@@ -252,6 +252,7 @@ Plug 'goerz/jupytext.vim'
 " Plug 'gcmt/wildfire.vim'
 " Plug 'luochen1990/rainbow'
 " Plug 'voldikss/vim-floaterm'
+" Plug 'fidian/hexmode'
 call plug#end()
 filetype plugin indent on
 

@@ -1,6 +1,6 @@
 @-moz-document domain("readmanganato.com"), domain("chapmanganato.com") {
   img {
-    filter: sepia(1) brightness(0.7) contrast(0.9) saturate(0.9);
+    filter: sepia(1) brightness(0.5) contrast(1) saturate(0.6);
   }
 
   img:hover {

@@ -92,7 +92,7 @@ db.mangas.updateOne(
   { _id: mangas_id },
   {
     $set: {
-      "gantz:e": "https://manganato.com/manga-ho984623",
+      "at the mountains of madness": "https://manganato.com/manga-ct979576",
     },
   }
 );

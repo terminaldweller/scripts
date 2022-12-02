@@ -1,0 +1,57 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2022-11-29T07:44:23.356Z",
+    "redirects": [
+        {
+            "description": "medium redirect",
+            "exampleUrl": "https://medium.com/zocdoc-engineering/monorepo-magic-escaping-version-hell-by-decoupling-dependencies-46e817073bdf",
+            "exampleResult": "https://scribe.rip/zocdoc-engineering/monorepo-magic-escaping-version-hell-by-decoupling-dependencies-46e817073bdf",
+            "error": null,
+            "includePattern": "https://medium.com/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$1",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "reddit redirect",
+            "exampleUrl": "https://www.reddit.com/r/voidlinux/",
+            "exampleResult": "https://teddit.net/r/voidlinux/",
+            "error": null,
+            "includePattern": "https://www.reddit.com/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://teddit.net/$1",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "medium redirect",
+            "exampleUrl": "https://dreamume.medium.com/leetcode-458-poor-pigs-adc1bef981c1",
+            "exampleResult": "https://scribe.rip/leetcode-458-poor-pigs-adc1bef981c1",
+            "error": null,
+            "includePattern": "https://*.medium.com/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": true,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}
