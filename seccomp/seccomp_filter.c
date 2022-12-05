@@ -8,6 +8,8 @@
 #include <string.h>
 #include <unistd.h>
 
+// https://blog.mnus.de/2020/05/sandboxing-soldatserver-with-bubblewrap-and-seccomp/
+
 void log_all_syscalls(void) {
   scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_LOG);
   seccomp_arch_add(ctx, SCMP_ARCH_X86_64);

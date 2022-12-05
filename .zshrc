@@ -25,8 +25,8 @@ alias gd="git diff --color-words"
 
 # enable aliases with sudo in the alias
 alias sudo="sudo "
-alias w3m="proxychains4 -q -f ~/proxies/ice/proxychains.conf /home/devi/w3m/w3m -o auto_image=FALSE -graph"
-alias torw3m="torsocks --port 9053 /home/devi/w3m/w3m -o auto_image=FALSE -graph"
+alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf /home/devi/w3m/w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias torw3m='torsocks --port 9053 /home/devi/w3m/w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -302,7 +302,10 @@ alias scapy="scapy -H"
 alias dg="grc /usr/bin/dig"
 alias lsof="grc lsof"
 alias xxd="xxd -g 2 -E -u -c 32"
-alias torcurl="curl --user-agent '' --sock5-hostname localhost:9053"
+alias torcurl='curl --user-agent "$(get_random_ua.sh)" --socks5-hostname localhost:9053'
+alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg2"
+alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
+alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

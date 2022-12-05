@@ -42,7 +42,7 @@ get_ua() {
   shuf -n 1 "${UA_FILE}"
 } 
 
-if [ "$1" = "--help" ]; then
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
   echo "prints a random user agent string."
   echo "you can specify a --kind to get a random user agent of a specific browser."
   echo "currently the valid values are: andy,opera,ffox,ie,chrome,edge,safari,all"
