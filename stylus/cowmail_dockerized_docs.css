@@ -1,0 +1,18 @@
+@-moz-document domain("docs.mailcow.email") {
+  img {
+    filter: sepia(1) brightness(0.5) contrast(1) saturate(0.6);
+  }
+
+  img:hover {
+    filter: none;
+  }
+
+  .md-main__inner {
+    max-width: 90%;
+    width: 90%;
+  }
+
+  body {
+    font-size: 20px;
+  }
+}
