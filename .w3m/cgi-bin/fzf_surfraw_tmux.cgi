@@ -34,7 +34,7 @@ PREFIX=$(surfraw -elvi | grep -v 'LOCAL\|GLOBAL'| fzf -e | awk '{print $1}')
 if [ "$PREFIX" = "" ]; then exit; fi
 
 # get user input
-read -r -e -p "  $PREFIX >> Enter Your Search Keyword: " INPUT
+read -r "  $PREFIX >> Enter Your Search Keyword: " INPUT
 
 # print proper url and copy to primary clipboard (aka highlighted clipboard) and tmux clipboard
 # surfraw -p "$PREFIX" "$INPUT" | xsel -p

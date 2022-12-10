@@ -29,7 +29,7 @@ mkdir -p "$HOME/.w3m/bin"
 RESTORE_SESSSION="$HOME/.w3m/bin/w3mlastsession"
 # add shell header
 echo "#!/usr/bin/env sh" > "$RESTORE_SESSSION"
-echo "torsocks w3m -graph \\" >> "$RESTORE_SESSSION"
+echo "proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -graph \\" >> "$RESTORE_SESSSION"
 # remove dupes without sorting, add -N flag at beginning and append trailing slash to each url
 awk '!x[$0]++' "$HOME/.w3m/RestoreSession.txt" | while read -r line ; do echo "-N '$line' \\" >> "$RESTORE_SESSSION" ; done
 # echo "2>/dev/null" >> "$RESTORE_SESSSION"

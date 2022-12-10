@@ -25,8 +25,8 @@ alias gd="git diff --color-words"
 
 # enable aliases with sudo in the alias
 alias sudo="sudo "
-alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf /home/devi/w3m/w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
-alias torw3m='torsocks --port 9053 /home/devi/w3m/w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias torw3m='torsocks --port 9053 w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -46,7 +46,7 @@ alias fixtmuxrc='cp ~/scripts/.tmux.conf ~/.tmux.conf'
 alias fixctagsrc='cp ~/scripts/.ctags ~/.ctags'
 # alias fixtvrc='cp ~/scripts/.tvrc ~/.tvrc'
 # alias tmuxpowerline='vim ~/scripts/default.sh'
-alias speedtest="curl -o /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip"
+alias speedtest="curl --connect-timeout 10 -o /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip"
 alias zshrc="vim ~/scripts/.zshrc"
 alias vimrc="vim ~/scripts/.vimrc"
 alias tmuxrc="vim ~/scripts/.tmux.conf"
@@ -246,7 +246,7 @@ alias pulsemixer="pulsemixer --color 1"
 alias vagrant="https_proxy=socks5://[::1]:9993 vagrant --color --timestamp"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
-alias checktor="curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
+alias checktor="curl --socks5 localhost:9054 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
 alias ip="grc ip"
 alias ipp="ip -s -s -d"
 alias zathura="tabbed -c -r 2 zathura -e id"
@@ -302,10 +302,15 @@ alias scapy="scapy -H"
 alias dg="grc /usr/bin/dig"
 alias lsof="grc lsof"
 alias xxd="xxd -g 2 -E -u -c 32"
-alias torcurl='curl --user-agent "$(get_random_ua.sh)" --socks5-hostname localhost:9053'
+alias torcurl='curl --connect-timeout 10 --user-agent "$(get_random_ua.sh)" --socks5-hostname localhost:9053'
 alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg2"
 alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
 alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
+alias iptables="grc iptables"
+alias ping="grc ping"
+alias list_iptables="sudo iptables -nvL --line-numbers"
+alias sensors_pp="sensors -A -j 2> /dev/null | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER"
+alias vdiff="vimdiff"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -453,15 +458,11 @@ backup_home(){
 }
 
 fixrc() {
-  cp ~/scripts/.zshrc ~/.zshrc
-  # source ~/.zshrc
-  exec zsh
+  cp ~/scripts/.zshrc ~/.zshrc && exec zsh
 }
 
 fixtheme() {
-  cp ~/scripts/devi.zsh-theme ~/.oh-my-zsh/themes/devi.zsh-theme
-  # source ~/.zshrc
-  exec zsh
+  cp ~/scripts/devi.zsh-theme ~/.oh-my-zsh/themes/devi.zsh-theme && exec zsh
 }
 
 export PATH=$PATH:/home/devi/.cargo/bin
@@ -671,14 +672,14 @@ dff() {
 }
 
 jcurl() {
-  curl "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE
+  curl --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 xcurl() {
-  curl "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE
+  curl --connect-timeout 10 "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 
 hcurl() {
-  torsocks --port 9054 curl -i -D /dev/stderr --user-agent 'Chrome/79' "https://papers.ssrn.com/sol3/papersstract_id=1925128" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE
+  torsocks --port 9054 curl --connect-timeout 10 -i -D /dev/stderr --user-agent "$(get_random_ua.sh)" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 
 # these i stole from junegunn to try out

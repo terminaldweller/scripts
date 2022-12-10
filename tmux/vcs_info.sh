@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source common.sh
+# source common.sh
 SEPARATOR_RIGHT_BOLD=""
 # SEPARATOR_RIGHT_THIN=""
 
@@ -12,60 +12,52 @@ get_tmux_cwd() {
   tmux display -p -F "#{pane_current_path}"
 }
 tmux_path=$(get_tmux_cwd)
-cd "$tmux_path"
-IFS='/' read -ra tmux_path_array <<< "$tmux_path"
-pos=$(( ${#tmux_path_array[*]} - 1 ))
-last=${tmux_path_array[$pos]}
-for i in "${tmux_path_array[@]}"
-do
-  if [[ $i == "$last" ]]; then
-    shortened_path+=$i
-  else
-    shortened_path+=${i:0:1}/
-  fi
-done
+# cd "$tmux_path" && IFS='/' read -ra tmux_path_array <<<"$tmux_path"
+# pos=$((${#tmux_path_array[*]} - 1))
+# last=${tmux_path_array[$pos]}
+# for i in "${tmux_path_array[@]}"; do
+#   if [[ $i == "$last" ]]; then
+#     shortened_path+=$i
+#   else
+#     shortened_path+=${i:0:1}/
+#   fi
+# done
 
 function gitadditions {
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
+  if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     insertions=$(git --no-pager diff --numstat | awk '{sum1+=$1}END{print sum1}')
-    echo +$insertions
+    echo +"$insertions"
   fi
 }
 
 function gitdeletions {
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
+  if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     deletions=$(git --no-pager diff --numstat | awk '{sum2+=$2}END{print sum2}')
-    echo -$deletions
+    echo -"$deletions"
   fi
 }
 
 function git_untracked_info {
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
+  if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     untracked=$(git ls-files --others --exclude-standard | wc -w)
-    echo ⋯$untracked
+    echo ⋯"$untracked"
   fi
 }
 
 function git_branch_info {
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
+  if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     branch=$(git rev-parse --abbrev-ref HEAD)
-    echo " "$branch
+    echo " $branch"
   fi
 }
 
 function repo_info {
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
+  if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     insertions=$(git --no-pager diff --numstat | awk '{sum1+=$1}END{print sum1}')
-    git remote -v | grep github > /dev/null 2>&1
-    if [[ $? == 0 ]]; then
+    if git remote -v | grep github >/dev/null 2>&1; then
       echo  
     else
-      echo  
+      echo 
     fi
   else
     :
@@ -73,9 +65,9 @@ function repo_info {
 }
 
 function get_eth_price {
-  eth_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=ETH&unit=USD" | jq ".price")
-  cake_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=CAKE&unit=USD" | jq ".price")
-  monero_price=$(proxychains4 -q -f ~/proxies/swe/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/price?name=XMR&unit=USD" | jq ".price")
+  eth_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=ETH&unit=USD" | jq ".price")
+  cake_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=CAKE&unit=USD" | jq ".price")
+  monero_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=XMR&unit=USD" | jq ".price")
   echo "${eth_price}/${cake_price}/${monero_price}"
 }
 
