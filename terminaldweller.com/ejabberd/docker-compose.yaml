@@ -8,7 +8,7 @@ services:
       #- "80:80"
       - "5222:5222"
       - "5223:5223"
-      #- "5269:5269"
+      - "5269:5269"
       - "5280:5280"
       - "5443:5443"
       #- "1883:1883"
@@ -33,5 +33,5 @@ volumes:
   mnesia_db:
   vault:
 # openssl dhparam -out dhparams.pem 4096
-# certbot certonly --standlone -d chat.terminaldweller.com -m devi@terminaldweller.com --agree-tos --noninteractive
+# certbot certonly --standalone -d chat.terminaldweller.com -m devi@terminaldweller.com --agree-tos --noninteractive --dryrun
 # docker exec -it 6eebd16a2385 bin/ejabberdctl register admin chat.terminaldweller.com password
