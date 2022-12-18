@@ -41,3 +41,10 @@ highlight article "\\[image [0-9][0-9]*\\]" color72  default  bold
 highlight article "\\[embedded flash: [0-9][0-9]*\\]" color72  default  bold
 highlight article ":.*\\(embedded flash\\)$" color74  default
 highlight article ":.*\\(image\\)$" color74  default
+
+# highlight articlelist "https?://[^ ]+" yellow red bold
+# highlight articlelist "[0-9]+" yellow red bold
+
+articlelist-format "%4i %f %D %L %?T?;%-17T; ?%t %a" 
+# articlelist-title-format "%N %V %S %n - Articles in feed %T (%u unread, %t total) - %U \n %l - %L"
+feedlist-format "%4i %4S %11T %n %11u %t"

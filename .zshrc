@@ -136,9 +136,9 @@ alias fixpgclirc="cp ~/scripts/.config/pgcli/config ~/.config/pgcli/config"
 alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
-# alias irssi="irssi -n terminaldweller"
-# alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" --network=host -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro bloodstalker/irssi:latest"
-alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+# alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none tor_irssi"
 alias openbb="TERM=screen-256color \
   docker \
   run \
@@ -200,7 +200,7 @@ alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAl
 alias socks5vpn7="autossh -M 0 -N -D 9992 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 130.185.47.81"
 alias socks5vpn8="autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias tormapped6="autossh -M 0 -N -L 9053:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-alias tormapped8="autossh -M 0 -N -L 9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+alias tormapped8="autossh -M 0 -N -L 0.0.0.0:9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -220,8 +220,8 @@ alias zh_linux="zssh dev@192.168.90.17"
 alias zh_router_root="zssh root@192.168.90.71"
 alias zh_router_admin="zssh admin@192.168.90.71"
 alias youtube_dl="proxychains4 -f /home/devi/proxies/ice/proxychains.conf youtube-dl"
-alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --no-video"
-alias tormpv="torsocks mpv --no-video"
+# alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --no-video"
+alias tormpv="torsocks --port 9054 mpv --no-video"
 alias youtube144="proxychains4 -f /home/devi/proxies/ice/proxychains.conf mpv --ytdl-format=160+249"
 alias youtube360="proxychains4 -f /home/devi/proxies/ice/proxychains.conf mpv --ytdl-format=243+160"
 alias youtube480="proxychains4 -f /home/devi/proxies/ice/proxychains.conf mpv --ytdl-format=244+140"
@@ -243,7 +243,7 @@ alias qutebrowserrc="vim ~/scripts/qtbrowser/config.py"
 alias fixqutebrowserrc="cp ~/scripts/qtbrowser/config.py ~/.config/qutebrowser/config.py"
 alias pulsemixer="pulsemixer --color 1"
 # alias vagrant="https_proxy=http://[::1]:8118 vagrant --color --timestamp"
-alias vagrant="https_proxy=socks5://[::1]:9993 vagrant --color --timestamp"
+alias vagrant="vagrant --color --timestamp"
 alias vm_disposable="cp ~/scripts/vagrant/disposable/Vagrantfile ."
 alias vm_disposable_alpine="cp ~/scripts/vagrant/disposable-alpine/Vagrantfile ."
 alias checktor="curl --socks5 localhost:9054 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip"
@@ -302,15 +302,18 @@ alias scapy="scapy -H"
 alias dg="grc /usr/bin/dig"
 alias lsof="grc lsof"
 alias xxd="xxd -g 2 -E -u -c 32"
-alias torcurl='curl --connect-timeout 10 --user-agent "$(get_random_ua.sh)" --socks5-hostname localhost:9053'
+alias torcurl='curl -s --connect-timeout 10 --user-agent "$(get_random_ua.sh)" --socks5-hostname localhost:9053'
 alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg2"
 alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
-alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
+# alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
+alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,volatile.eth0.hwaddr:MAC,a,b,u,e,D,m,S,s,P -f compact type=container status=running'
 alias iptables="grc iptables"
 alias ping="grc ping"
 alias list_iptables="sudo iptables -nvL --line-numbers"
 alias sensors_pp="sensors -A -j 2> /dev/null | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER"
 alias vdiff="vimdiff"
+alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
+alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -494,6 +497,8 @@ export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/node/14.18.2_64bit/bin
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/upstream/emscripten
 export PATH=$PATH:/home/devi/devi/git-scripts.git/master
+# flatpaks
+export PATGH=$PATH:/var/lib/flatpak/exports/bin
 
 ks() {
   grc kubectl -n kube-system "$@"
@@ -672,14 +677,13 @@ dff() {
 }
 
 jcurl() {
-  curl --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
+  torsocks --port 9054 curl -s --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 xcurl() {
-  curl --connect-timeout 10 "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | $PAGER
+  torsocks --port 9054 curl -s --connect-timeout 10 "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | $PAGER
 }
-
 hcurl() {
-  torsocks --port 9054 curl --connect-timeout 10 -i -D /dev/stderr --user-agent "$(get_random_ua.sh)" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE | $PAGER
+  torsocks --port 9054 curl -s --connect-timeout 10 -i -D /dev/stderr --user-agent "$(get_random_ua.sh)" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 
 # these i stole from junegunn to try out
@@ -778,7 +782,7 @@ export LESS_TERMCAP_me=$'\e[0m'           # end mode
 export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
 # export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
 # export LESS_TERMCAP_so=$'\e[1;92m'        # begin standout-mode - info box
-export LESS_TERMCAP_so=$'\x1b[38;5;22m'
+export LESS_TERMCAP_so=$'\x1b[48;5;22m\x1b[38;5;0m'
 export LESS_TERMCAP_ue=$'\e[0m'           # end underline
 export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
 # handle the format of the zsh built-in time

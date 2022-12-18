@@ -4,4 +4,5 @@ RUN apk update && apk add --no-cache git cronie busybox-initscripts
 COPY ./bootstrap.sh /bootstrap.sh 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./crontab /etc/crontabs/root
-ENTRYPOINT ["/bootstrap.sh"]
+RUN chmod 0744 /bootstrap.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]

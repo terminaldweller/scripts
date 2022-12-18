@@ -32,7 +32,7 @@ set laststatus=2
 set smartcase
 set more
 set lazyredraw
-set synmaxcol=333
+set synmaxcol=500
 syntax sync minlines=64
 set ttyfast
 set relativenumber
@@ -1140,7 +1140,7 @@ autocmd FileType javasript let b:vcm_tab_complete = 'omni'
 "sets the dictionary for autocompletion with <C-n> and <C-p> for the
 "filetypes
 set dictionary+=/usr/share/dict/words
-autocmd FileType markdown,text,vimwiki,tex setlocal complete+=k
+autocmd FileType pandoc,markdown,text,vimwiki,tex setlocal complete+=k
 
 "fzf
 map <leader>f <Esc><Esc>:Files!<CR>

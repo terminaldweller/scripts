@@ -32,17 +32,20 @@ REPOS="cgrep \
   grpc \
   faultreiber \
   luatablegen \
+  magni \
   cfe-extra"
 
 bootstrap() {
   for REPO in ${REPOS}; do
-    (cd "${GIT_REPO_DIR}" && git clone --bare "${ORIGIN_HTTPS}/${REPO}")
+    if [ ! -d ${GIT_REPO_DIR}/${REPO}.git ]; then
+        (cd "${GIT_REPO_DIR}" && git clone --bare "${ORIGIN_HTTPS}/${REPO}")
+    fi
   done
 }
 
 update_repos() {
   for REPO in ${REPOS}; do
-    (cd "${GIT_REPO_DIR}/${REPO}".git && git fetch || true)
+    (cd "${GIT_REPO_DIR}/${REPO}".git && git fetch origin *:*)
   done
 }
 

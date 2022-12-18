@@ -57,7 +57,7 @@ const movies_obj = {
 };
 
 const stash_obj = {
-  something: "https://spankbang.com/74bwd/video/porn",
+  momotaro: "https://www.tnaflix.com/amateur-porn/fcdc-056/video6241864",
 };
 
 function inser_into_db(mongo_collection, object) {

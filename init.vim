@@ -275,7 +275,7 @@ nmap _P :r ~/.vi_tmp<CR>
 
 "mucomplete
 set completeopt+=menuone
-let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#enable_auto_at_startup = 0
 let g:mucomplete#completion_delay = 1
 
 " firenvim write changes automatically, throttle writes

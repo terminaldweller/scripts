@@ -3,5 +3,6 @@ set -e
 set -x
 
 . /bootstrap.sh
-on_startup /etc/gitrepos/
+bootstrap
+update_repos
 crond -n -s -P

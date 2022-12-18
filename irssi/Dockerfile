@@ -21,7 +21,7 @@ RUN set -eux; \
 
 ENV LANG C.UTF-8
 
-ENV IRSSI_VERSION 1.2.3
+ENV IRSSI_VERSION 1.4.3
 
 RUN set -eux; \
   \
@@ -37,6 +37,9 @@ RUN set -eux; \
     libtool \
     lynx \
     make \
+    meson \
+    ninja \
+    xz \
     ncurses-dev \
     openssl \
     openssl-dev \
@@ -61,19 +64,17 @@ RUN set -eux; \
   rm /tmp/irssi.tar.xz; \
   \
   cd /usr/src/irssi; \
-  gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
-  ./configure \
-    --build="$gnuArch" \
-    --enable-true-color \
-    --with-bot \
-    --with-proxy \
-    --with-socks \
-    --with-otr=static \
+  meson \
+    -Denable-true-color=yes \
+    -Dwith-bot=yes \
+    -Dwith-perl=yes \
+    -Dwith-proxy=yes \
+    -Dwith-otr=yes \
+    Build \
   ; \
-  make -j "$(nproc)"; \
-  make install; \
-  \
-  cd /; \
+  ninja -C Build -j "$(nproc)"; \
+  ninja -C Build install;
+RUN cd /; \
   rm -rf /usr/src/irssi; \
   \
   runDeps="$( \
@@ -82,7 +83,7 @@ RUN set -eux; \
       | sort -u \
       | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
   )"; \
-  apk add --no-network --virtual .irssi-rundeps $runDeps; \
+  apk add --virtual .irssi-rundeps $runDeps; \
   echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
   apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection libnotify; \
   # apk add dbus; \
