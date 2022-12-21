@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ircslack:
+    image: ircslack
+    build:
+      context: .
+    networks:
+      - ircslacknet
+    restart: unless-stopped
+    ports:
+      - "6667:6667"
+    entrypoint: ["/irc-slack/irc-slack"]
+    command: ["--port", "6667", "--host", "0.0.0.0", "--cert", "/certs/server.cert", "--key", "/certs/server.key"]
+    cap_drop:
+      - ALL
+networks:
+  ircslacknet:
+    driver: bridge

@@ -1,0 +1,12 @@
+@-moz-document domain("www.geeksforgeeks.org") {
+  #whatsNewCardContainer {
+    display: none;
+    max-width: 0%;
+    width: 0%;
+  }
+
+  .article--viewer {
+    max-width: 130%;
+    width: 130%;
+  }
+}

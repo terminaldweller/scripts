@@ -5,5 +5,5 @@ mountpoint -q /sys/fs/cgroup/systemd || {
     mkdir -p /sys/fs/cgroup/systemd;
     mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd;
 }
-#exec env HTTP_PROXY="http://127.0.0.1:9999" chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
-exec env NO_PROXY="localhost,127.0.0.1,192.168.1/24" HTTPS_PROXY="socks5://127.0.0.1:9995" HTTP_PROXY="socks5://127.0.0.1:9995" chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
+#exec chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
+exec env NO_PROXY="localhost,127.0.0.0/8,192.168.0.0/24,10.0.0.0/8,172.16.0.0/12" HTTPS_PROXY="socks5://127.0.0.1:9995" HTTP_PROXY="socks5://127.0.0.1:9995" chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1

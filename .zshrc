@@ -108,6 +108,7 @@ alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh root@185.112.1
 alias vpn6="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.45.46"
 alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.81"
 alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.208"
+alias vpn9="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -i ~/.ssh/id_rsa -p 3333 ubuntu@185.130.47.81 ssh -tt -i /home/ubuntu/.ssh/id_rsa_lv2 2a07:e01:3:1c4::1 -p 3333 -l ubuntu"
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 185.126.202.69 -l ubuntu -p 1022"
 alias cloud_one="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 130.185.121.80 -l ubuntu -p 1022"
 alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
@@ -314,6 +315,7 @@ alias sensors_pp="sensors -A -j 2> /dev/null | json_pp -json_opt pretty,canonica
 alias vdiff="vimdiff"
 alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
 alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
+alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -355,6 +357,10 @@ docc() {
   # cp ~/scripts/cfam.vimrc ./.vimrc
   # cp ~/scripts/compiler-explorer/ceconfig.json ./
   # cp ~/scripts/c/debug.dbg ./
+}
+
+pfd() {
+  ps aux | grep -v grep | grep "$@"
 }
 
 dockernuke() {

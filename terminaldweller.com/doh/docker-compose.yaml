@@ -1,0 +1,39 @@
+version: "3"
+services:
+  doh-server:
+    image: satishweb/doh-server
+    networks:
+      - dohnet
+    ports:
+      - "127.0.0.1:8053:8053"
+    restart: unless-stopped
+    environment:
+      - DEBUG="0"
+      - UPSTREAM_DNS_SERVER=udp:208.67.222.222:53
+      - DOH_HTTP_PREFIX=/getnsrecord
+      - DOH_SERVER_LISTEN=:8053
+      - DOH_SERVER_TIMEOUT=10
+      - DOH_SERVER_TRIES=3
+      - DOH_SERVER_VERBOSE=true
+    depends_on:
+      - nginx
+  nginx:
+    image: nginx:stable
+    ports:
+      - "443:443"
+    networks:
+      - dohnet
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+      - NET_BIND_SERVICE
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/archive/doh.terminaldweller.com/:/certs/:ro
+networks:
+  dohnet:

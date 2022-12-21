@@ -1,9 +1,12 @@
 \set QUIET 1
 
 /* prompts */
-\set PROMPT1 '\x1b[38;5;34m%n\x1b[0m@\x1b[38;5;39m%M\x1b[0m:\x1b[38;5;37m%> \x1b[38;5;69m%`date +%H:%M:%S` \x1b[38;5;4m[%/] \x1b[38;5;31m%x\x1b[38;5;104m%#\x1b[38;5;34m%R\n\x1b[38;5;28m>>>\x1b[0m'
+/* \set PROMPT1 '\x1b[38;5;34m%n@\x1b[38;5;39m%M:\x1b[38;5;37m%> \x1b[38;5;69m%`date +%H:%M:%S` \x1b[38;5;4m[%/] \x1b[38;5;31m%x\x1b[38;5;104m%#\x1b[38;5;34m%R\n\x1b[38;5;28m>>>\x1b[38;5;255m' */
+/* \set PROMPT2 '... ' */
+/* \set PROMPT3 '\x1b[38;5;38m>>>\x1b[38;5;255m' */
+\set PROMPT1 '%n@%M:%> %`date +%H:%M:%S` [%/] %x%#%R\n>>>'
 \set PROMPT2 '... '
-\set PROMPT3 '\x1b[38;5;38m>>>\x1b[0m'
+\set PROMPT3 '>>>'
 
 \pset null '[null]'
 \set COMP_KEYWORD_CASE upper
@@ -16,6 +19,7 @@
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
 
+
 \set ON_ERROR_STOP on
 \set ON_ERROR_ROLLBACK interactive
 
@@ -25,7 +29,7 @@
 \pset unicode_column_linestyle single
 \pset unicode_header_linestyle double
 
+\unset QUIET
+
 \set version 'SELECT version();'
 \set extensions 'select * from pg_available_extensions;'
-
-\unset QUIET

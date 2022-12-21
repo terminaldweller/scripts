@@ -1,0 +1,9 @@
+@-moz-document domain("scribe.rip") {
+  img {
+    filter: sepia(1) brightness(0.5) contrast(1) saturate(0.6);
+  }
+
+  img:hover {
+    filter: none;
+  }
+}
