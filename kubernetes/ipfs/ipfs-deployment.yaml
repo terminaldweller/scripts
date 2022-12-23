@@ -18,6 +18,8 @@ spec:
       - name: ipfs
         image: linuxserver/ipfs:2.13.0
         ports:
+        - containerPort: 80
+        - containerPort: 443
         - containerPort: 4001
         - containerPort: 5001
         - containerPort: 8080
@@ -45,9 +47,19 @@ spec:
       port: 5001
       targetPort: 5001
       nodePort: 30402
-      name: "ipfs-tcp-80"
+      name: "ipfs-tcp-5001"
     - protocol: TCP
       port: 8080
       targetPort: 8080
       nodePort: 30403
+      name: "ipfs-tcp-8080"
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30404
+      name: "ipfs-tcp-80"
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      nodePort: 30405
       name: "ipfs-tcp-443"

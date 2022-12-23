@@ -139,7 +139,7 @@ alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
 alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none tor_irssi"
+alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi tor_irssi"
 alias openbb="TERM=screen-256color \
   docker \
   run \
@@ -316,6 +316,7 @@ alias vdiff="vimdiff"
 alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
 alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
 alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
+alias bun="ALL_PROXY=socks5h://127.0.0.1:9995 bun"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -499,9 +500,12 @@ export PATH=$PATH:/home/devi/vagrant
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
 export PATH=$PATH:/home/devi/google-java-format
 export PATH=$PATH:/home/devi/gradle/gradle-7.2/bin
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/node/14.18.2_64bit/bin
-export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/upstream/emscripten
+# export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8
+# export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/node/14.18.2_64bit/bin
+# export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.8/upstream/emscripten
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28/node/14.18.2_64bit/bin
+export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28/upstream/emscripten
 export PATH=$PATH:/home/devi/devi/git-scripts.git/master
 # flatpaks
 export PATGH=$PATH:/var/lib/flatpak/exports/bin
