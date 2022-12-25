@@ -263,7 +263,7 @@ alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 alias socat="socat -d -d"
 alias cmusrc="vim ~/scripts/.config/cmus/rc"
 alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
-# alias cointop="ssh -oHostKeyAlgorithms=+ssh-rsa cointop@185.112.147.110 -p 2222 -t cointop --colorscheme devi"
+alias cointop="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.130.45.46 TERM=screen-256color /home/ubuntu/cointop/cointop"
 alias zshenv="vim ~/scripts/.zshenv"
 alias fixzshenv="cp ~/scripts/.zshenv ~/.zshenv"
 alias postman="flatpak run com.getpostman.Postman"
@@ -308,6 +308,7 @@ alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:99
 alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
 # alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
 alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,volatile.eth0.hwaddr:MAC,a,b,u,e,D,m,S,s,P -f compact type=container status=running'
+alias virttop='watch -x -c -d -t -n 5 virttop'
 alias iptables="grc iptables"
 alias ping="grc ping"
 alias list_iptables="sudo iptables -nvL --line-numbers"
