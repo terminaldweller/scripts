@@ -7,9 +7,10 @@
 # defusedxml.defuse_stdlib()
 import argparse
 import dataclasses
+import enum
 import subprocess
+import sys
 
-# import time
 import typing
 from xml.dom.minidom import Document
 from defusedxml import ElementTree  # type:ignore
@@ -41,7 +42,7 @@ class Argparser:  # pylint: disable=too-few-public-methods
 
 
 # pylint: disable=too-few-public-methods
-class Colors:
+class Colors(enum.EnumType):
     """static color definitions"""
 
     purple = "\033[95m"
@@ -65,6 +66,7 @@ class Colors:
 class VirtData:
     """Holds the data that we collect to display to the user"""
 
+    vm_id: typing.List[str] = dataclasses.field(default_factory=list)
     name: typing.List[str] = dataclasses.field(default_factory=list)
     cpu_times: typing.List[str] = dataclasses.field(default_factory=list)
     mem_actual: typing.List[str] = dataclasses.field(default_factory=list)
@@ -75,6 +77,8 @@ class VirtData:
     ips: typing.List[str] = dataclasses.field(default_factory=list)
     disk_reads: typing.List[str] = dataclasses.field(default_factory=list)
     disk_writes: typing.List[str] = dataclasses.field(default_factory=list)
+    snapshot_counts: typing.List[str] = dataclasses.field(default_factory=list)
+    uri: typing.List[str] = dataclasses.field(default_factory=list)
 
 
 def get_network_info(
@@ -211,7 +215,9 @@ def size_abr(num: float, shift_by: float) -> str:
 def fill_virt_data_uri(conn, active_hosts, virt_data: VirtData) -> None:
     """fill VirtData for one URI."""
     for host_id in active_hosts:
+        virt_data.uri.append(conn.getURI())
         dom = conn.lookupByID(host_id)
+        virt_data.snapshot_counts.append(repr(dom.snapshotNum()))
         virt_data.cpu_times.append(
             repr(
                 int(dom.getCPUStats(total=True)[0]["cpu_time"] / 1_000_000_000)
@@ -223,7 +229,12 @@ def fill_virt_data_uri(conn, active_hosts, virt_data: VirtData) -> None:
 
         mem_stats = dom.memoryStats()
         virt_data.mem_actual.append(size_abr(mem_stats["actual"], 1000))
-        virt_data.mem_unused.append(size_abr(mem_stats["unused"], 1000))
+
+        # BSD guests dont have unused memory
+        try:
+            virt_data.mem_unused.append(size_abr(mem_stats["unused"], 1000))
+        except KeyError:
+            virt_data.mem_unused.append("N/A")
 
         tree = ElementTree.fromstring(dom.XMLDesc())
         iface = tree.find("devices/interface/target").get("dev")
@@ -249,23 +260,39 @@ def main() -> None:
     for hv_host in argparser.args.uri:
         conn = libvirt.openReadOnly(hv_host)
         active_hosts = conn.listDomainsID()
-        fill_virt_data_uri(conn, active_hosts, virt_data)
+        if len(active_hosts) > 0:
+            # pools = conn.listAllStoragePools()
+            # networks = conn.listAllNetworks()
+            # print([pool.name() for pool in conn.listAllStoragePools()])
+            # print([net.name() for net in conn.listAllNetworks()])
+            virt_data.vm_id = [repr(vm_id) for vm_id in conn.listDomainsID()]
+            fill_virt_data_uri(conn, active_hosts, virt_data)
+            # for conn_id in conn.listAllDomains():
+            #     print(conn_id.name())
+            #     print(conn_id.state())
+        else:
+            print("no active VMs found.")
+            sys.exit(1)
 
     lines = ffs(
-        3,
+        2,
         [
-            "name",
-            "cpu",
-            "mem_actual",
-            "mem_unused",
-            "net_write_B",
-            "net_read_B",
+            "ID",
+            "NAME",
+            "CPU",
+            "MEM_ACTUAL",
+            "MEM_UNUSED",
+            "NET_WRITE_B",
+            "NET_READ_B",
             "MAC",
             "IP",
-            "IO_read_B",
-            "IO_write_B",
+            "IO_READ_B",
+            "IO_WRITE_B",
+            "SNAPSHOTS",
+            "URI",
         ],
-        True,
+        False,
+        virt_data.vm_id,
         virt_data.name,
         virt_data.cpu_times,
         virt_data.mem_actual,
@@ -276,10 +303,11 @@ def main() -> None:
         virt_data.ips,
         virt_data.disk_reads,
         virt_data.disk_writes,
+        virt_data.snapshot_counts,
+        virt_data.uri,
     )
     for line in lines:
         print(line)
-        # time.sleep(argparser.args.delay)
 
 
 if __name__ == "__main__":

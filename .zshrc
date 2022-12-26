@@ -308,7 +308,7 @@ alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:99
 alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
 # alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
 alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,volatile.eth0.hwaddr:MAC,a,b,u,e,D,m,S,s,P -f compact type=container status=running'
-alias virttop='watch -x -c -d -t -n 5 virttop'
+alias virttop='watch -x -c -t -n 5 virttop'
 alias iptables="grc iptables"
 alias ping="grc ping"
 alias list_iptables="sudo iptables -nvL --line-numbers"
