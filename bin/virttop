@@ -6,9 +6,9 @@
 # import defusedxml  # type:ignore
 # defusedxml.defuse_stdlib()
 import argparse
+import csv
 import dataclasses
 import enum
-import subprocess
 import sys
 
 import typing
@@ -98,34 +98,23 @@ def get_network_info(
     return result_dict
 
 
-def get_ip_by_arp(mac: str) -> str:
-    """Get ip adress using the arp table."""
-    # arp -n | grep xx:xx:xx:xx:xx:xx | gawk '{print $1}'
+def get_arp_table() -> typing.Dict[str, str]:
+    """Get the ARP table. return a dict with MAC/IP as key/value pair."""
+    result: typing.Dict[str, str] = {}
+    with open("/proc/net/arp", encoding="utf-8") as arp_table:
+        reader = csv.reader(arp_table, skipinitialspace=True, delimiter=" ")
+        for arp_entry in reader:
+            result[arp_entry[3]] = arp_entry[0]
+
+    return result
+
+
+def get_ip_from_arp_table(arp_table: typing.Dict[str, str], mac: str) -> str:
+    """get IP from MAC address using the arp table"""
     try:
-        proc1 = subprocess.run(
-            ["/usr/bin/arp", "-n"],
-            capture_output=True,
-            check=True,
-            shell=False,
-        )
-        proc2 = subprocess.run(
-            ["/usr/bin/grep", mac],
-            input=proc1.stdout,
-            capture_output=True,
-            check=True,
-            shell=False,
-        )
-        proc3 = subprocess.run(
-            ["/usr/bin/awk", "{print $1}"],
-            input=proc2.stdout,
-            capture_output=True,
-            check=True,
-            shell=False,
-        )
-        ip_address = proc3.stdout.decode("utf-8").strip("\n")
-    except subprocess.CalledProcessError:
-        ip_address = "N/A"
-    return ip_address
+        return arp_table[mac]
+    except KeyError:
+        return "N/A"
 
 
 def get_disk_info(
@@ -212,7 +201,13 @@ def size_abr(num: float, shift_by: float) -> str:
     return "N/A"
 
 
-def fill_virt_data_uri(conn, active_hosts, virt_data: VirtData) -> None:
+# pylint: disable=too-many-locals
+def fill_virt_data_uri(
+    conn: libvirt.virConnect,
+    active_hosts: typing.List[int],
+    virt_data: VirtData,
+    arp_table: typing.Dict[str, str],
+) -> None:
     """fill VirtData for one URI."""
     for host_id in active_hosts:
         virt_data.uri.append(conn.getURI())
@@ -250,13 +245,18 @@ def fill_virt_data_uri(conn, active_hosts, virt_data: VirtData) -> None:
 
         network_info = get_network_info(xml_doc)
         virt_data.macs.append(network_info["address"])
-        virt_data.ips.append(get_ip_by_arp(network_info["address"]))
+        # virt_data.ips.append(get_ip_by_arp(network_info["address"]))
+        # TODO-this is obviously not going to work for remote URIs
+        virt_data.ips.append(
+            get_ip_from_arp_table(arp_table, network_info["address"])
+        )
 
 
 def main() -> None:
     """entrypoint"""
     argparser = Argparser()
     virt_data = VirtData()
+    arp_table = get_arp_table()
     for hv_host in argparser.args.uri:
         conn = libvirt.openReadOnly(hv_host)
         active_hosts = conn.listDomainsID()
@@ -266,7 +266,7 @@ def main() -> None:
             # print([pool.name() for pool in conn.listAllStoragePools()])
             # print([net.name() for net in conn.listAllNetworks()])
             virt_data.vm_id = [repr(vm_id) for vm_id in conn.listDomainsID()]
-            fill_virt_data_uri(conn, active_hosts, virt_data)
+            fill_virt_data_uri(conn, active_hosts, virt_data, arp_table)
             # for conn_id in conn.listAllDomains():
             #     print(conn_id.name())
             #     print(conn_id.state())
