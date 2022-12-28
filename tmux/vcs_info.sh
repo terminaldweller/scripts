@@ -23,6 +23,7 @@ tmux_path=$(get_tmux_cwd)
 #   fi
 # done
 
+cd "${tmux_path}"
 function gitadditions {
   if cd "${tmux_path}" && git rev-parse --git-dir >/dev/null 2>&1; then
     insertions=$(git --no-pager diff --numstat | awk '{sum1+=$1}END{print sum1}')

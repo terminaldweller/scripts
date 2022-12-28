@@ -1,16 +1,11 @@
-#!/bin/python3
+#!/usr/bin/env python3
+"""a leb128 decoder,encoder"""
 
 import argparse
-import signal
-import sys
-
-
-def SigHandler_SIGINT(signum, frame):
-    print()
-    sys.exit(0)
 
 
 def devibytes(val):
+    """A custom arg handler, just to handle bytes in hex format"""
     ret = []
     for byte in val.split(","):
         ret.append(int(byte, 16))
@@ -18,6 +13,7 @@ def devibytes(val):
 
 
 def LEB128UnsignedDecode(bytelist):
+    """LEB128 unsiged decoder"""
     result = 0
     shift = 0
     for byte in bytelist:
@@ -29,6 +25,7 @@ def LEB128UnsignedDecode(bytelist):
 
 
 def LEB128SignedDecode(bytelist):
+    """LEB128 signed decoder"""
     result = 0
     shift = 0
     for byte in bytelist:
@@ -43,9 +40,10 @@ def LEB128SignedDecode(bytelist):
 
 
 def LEB128UnsignedEncode(int_val):
+    """LEB128 signed encoder"""
     if int_val < 0:
         raise Exception("value must not be negative")
-    elif int_val == 0:
+    if int_val == 0:
         return bytes([0])
     byte_array = bytearray()
     while int_val:
@@ -57,6 +55,7 @@ def LEB128UnsignedEncode(int_val):
 
 
 def LEB128SignedEncode(int_val):
+    """LEB128 signed encoder"""
     byte_array = bytearray()
     while True:
         byte = int_val & 0x7F
@@ -70,7 +69,10 @@ def LEB128SignedEncode(int_val):
     return byte_array
 
 
-class Argparser(object):
+# pylint: disable=too-few-public-methods
+class Argparser:
+    """CLI args"""
+
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--se", type=int, help="leb128 signed encode")
@@ -88,11 +90,8 @@ class Argparser(object):
         self.args = parser.parse_args()
 
 
-# write code here
-
-
-def premain():
-    signal.signal(signal.SIGINT, SigHandler_SIGINT)
+def main():
+    """entrypoint"""
     argparser = Argparser()
     # here
     if argparser.args.se:
@@ -109,13 +108,6 @@ def premain():
         print(LEB128SignedDecode(argparser.args.sd))
     if argparser.args.ud:
         print(LEB128UnsignedDecode(argparser.args.ud))
-
-
-def main():
-    try:
-        premain()
-    except Exception as e:
-        print(e)
 
 
 if __name__ == "__main__":

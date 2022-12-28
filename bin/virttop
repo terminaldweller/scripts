@@ -10,9 +10,9 @@ import csv
 import dataclasses
 import enum
 import sys
-
 import typing
 from xml.dom.minidom import Document
+
 from defusedxml import ElementTree  # type:ignore
 from defusedxml import minidom
 import libvirt  # type:ignore

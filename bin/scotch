@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""A strace wrapper with colors."""
 
+import enum
 import sys
 import subprocess
 
@@ -478,7 +480,10 @@ syscall_set = set(
 )
 
 
-class Color:
+# pylint: disable=too-few-public-methods
+class Color(enum.EnumType):
+    """Color enumes"""
+
     bold = "\033[1m"
     faint = "\033[2m"
     italic = "\033[3m"
@@ -506,41 +511,57 @@ class Color:
 
 
 def call_from_shell_list(command_list):
-    if sys.version_info < (3, 7):
-        return subprocess.run(command_list, stdout=subprocess.PIPE)
-    else:
-        return subprocess.run(command_list, capture_output=True)
+    """run a shell command"""
+    # we explicitly dont want to check for a non-zero return code
+    # since we sometimes use strace to debuf failing applications
+    return subprocess.run(command_list, capture_output=True)
 
 
 def main():
+    """entrypoint"""
     if len(sys.argv) < 2:
         print("you want to run something right?\nright?")
         sys.exit(1)
 
     args = sys.argv[1:]
-    args.insert(0, "strace")
+    args.insert(0, "/usr/bin/strace")
     result = call_from_shell_list(args)
     lines = result.stderr.decode("utf-8").split("\n")
-    end_line = lines[-2]
-    lines = lines[:-2]
-    for line in lines:
-        if line[0 : line.find("(")] in syscall_set:
-            syscall = line[0 : line.find("(")]
-            sysargs = line[line.find("(") + 1 : line.find(")")].split()
-            exitvalue = line[line.find(")") + 1 :]
-            print(Color.one + syscall, end=" ")
-            print(Color.two, end=" ")
-            sysargs = list(filter(None, sysargs))
-            for arg in sysargs:
-                if arg.find("|") > 0:
-                    print(Color.five, arg, end=" ")
-                else:
-                    print(arg, end=" ")
-            print(Color.three + exitvalue + Color.reset)
-        else:
-            # leave regular stdout/stderr alone. we only want syscalls
+    if not sys.stdout.isatty():
+        for line in lines:
             print(line)
-    print(Color.reset + Color.bold + Color.nine + end_line + Color.reset)
+    else:
+        end_line = lines[-2]
+        lines = lines[:-2]
+        for line in lines:
+            # this is here to support the -i option
+            if line[0] == "[":
+                idx = line.find("]")
+                if idx - 1 < 16:
+                    print(Color.twelve + line[0 : idx + 1], end=" ")
+                    line = line[idx + 2 :]
+            if line[0] == "[":
+                idx = line.find("]")
+                if idx - 1 == 16:
+                    print(Color.thirteen + line[0 : idx + 1], end=" ")
+                    line = line[idx + 2 :]
+            if line[0 : line.find("(")] in syscall_set:
+                syscall = line[0 : line.find("(")]
+                sysargs = line[line.find("(") + 1 : line.find(")")].split()
+                exitvalue = line[line.find(")") + 1 :]
+                print(Color.one + syscall, end=" ")
+                print(Color.two, end=" ")
+                sysargs = list(filter(None, sysargs))
+                for arg in sysargs:
+                    if arg.find("|") > 0:
+                        print(Color.five, arg, end=" ")
+                    else:
+                        print(arg, end=" ")
+                print(Color.three + exitvalue + Color.reset)
+            else:
+                # leave regular stdout/stderr alone. we only want syscalls
+                print(line)
+        print(Color.reset + Color.bold + Color.nine + end_line + Color.reset)
 
 
 if __name__ == "__main__":

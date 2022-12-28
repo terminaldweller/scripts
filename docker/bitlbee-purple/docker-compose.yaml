@@ -1,16 +1,22 @@
 version: "3.7"
 services:
   bitlbee:
-    # image: ezkrg/bitlbee-libpurple
-    image: luzifer/bitlbee
+    image: bitlbee_devi
     networks:
       - bitlbeenet
     ports:
-      - "127.0.0.1:6667:6667"
+      - "8667:6667"
     restart: unless-stopped
-    # this is causing permission issues
-    # user: "bitlbee:bitlbee"
-    # volumes:
-    #   - ./conf:/var/lib/bitlbee
+    network_mode: bridge
+    user: "bitlbee:bitlbee"
+    command: ["/usr/sbin/bitlbee", "-F","-n","-u","bitlbee","-c","/var/lib/bitlbee/bitlbee.conf", "-d","bitlbee-user-data"]
+    volumes:
+      - ./conf/bitlbee.conf:/var/lib/bitlbee/bitlbee.conf
 networks:
   bitlbeenet:
+    ipam:
+      driver: overlay
+      config:
+        - subnet: 172.18.0.0/16
+        - ip_range: 172.18.5.0.24
+        - gateway: 172.18.0.1
