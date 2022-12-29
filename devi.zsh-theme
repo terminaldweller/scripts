@@ -411,7 +411,7 @@ _async_vcs_info_done() {
   zle reset-prompt
 }
 
-# zsh-anyc https://github.com/mafredri/zsh-async
+# zsh-async https://github.com/mafredri/zsh-async
 source /home/devi/zsh-async.git/v1.8.5/async.zsh
 async_init
 _async_rbq_start

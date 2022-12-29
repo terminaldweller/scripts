@@ -9,13 +9,22 @@ import argparse
 import csv
 import dataclasses
 import enum
+import signal
 import sys
+import time
 import typing
 from xml.dom.minidom import Document
 
 from defusedxml import ElementTree  # type:ignore
 from defusedxml import minidom
 import libvirt  # type:ignore
+
+
+# pylint: disable=unused-argument
+def sig_handler_sigint(signum, frame):
+    """Just to handle C-c gracefully"""
+    print()
+    sys.exit(0)
 
 
 class Argparser:  # pylint: disable=too-few-public-methods
@@ -59,6 +68,8 @@ class Colors(enum.EnumType):
     blueblue = "\x1b[38;5;24m"
     greenie = "\x1b[38;5;23m"
     goo = "\x1b[38;5;22m"
+    screen_clear = "\033c\033[3J"
+    hide_cursor = "\033[?25l"
 
 
 @dataclasses.dataclass
@@ -135,53 +146,68 @@ def get_disk_info(
     return result_dict
 
 
-def ffs(offset: int, header_list: typing.List[str], numbered: bool, *args):
+# pylint: disable=too-many-locals
+def ffs(
+    offset: int,
+    header_list: typing.Optional[typing.List[str]],
+    numbered: bool,
+    *args,
+):
     """A simple columnar printer"""
     max_column_width = []
     lines = []
     numbers_f: typing.List[int] = []
     dummy = []
 
-    if numbered:
-        numbers_f.extend(range(1, len(args[-1]) + 1))
-        max_column_width.append(max(len(repr(number)) for number in numbers_f))
-        header_list.insert(0, "idx")
+    if sys.stdout.isatty():
+        greenie = Colors.greenie
+        bold = Colors.BOLD
+        endc = Colors.ENDC
+        goo = Colors.goo
+        blueblue = Colors.blueblue
+    else:
+        greenie = ""
+        bold = ""
+        endc = ""
+        goo = ""
+        blueblue = ""
 
     for arg in args:
         max_column_width.append(max(len(repr(argette)) for argette in arg))
 
-    index = range(0, len(header_list))
-    for header, width, i in zip(header_list, max_column_width, index):
-        max_column_width[i] = max(len(header), width) + offset
+    if header_list is not None:
+        if numbered:
+            numbers_f.extend(range(1, len(args[-1]) + 1))
+            max_column_width.append(
+                max(len(repr(number)) for number in numbers_f)
+            )
+            header_list.insert(0, "idx")
 
-    for i in index:
-        dummy.append(
-            Colors.greenie
-            + Colors.BOLD
-            + header_list[i].ljust(max_column_width[i])
-            + Colors.ENDC
-        )
-    lines.append("".join(dummy))
-    dummy.clear()
+        index = range(0, len(header_list))
+        for header, width, i in zip(header_list, max_column_width, index):
+            max_column_width[i] = max(len(header), width) + offset
+
+        for i in index:
+            dummy.append(
+                greenie
+                + bold
+                + header_list[i].ljust(max_column_width[i])
+                + endc
+            )
+        lines.append("".join(dummy))
+        dummy.clear()
 
     index2 = range(0, len(args[-1]))
     for i in index2:
         if numbered:
             dummy.append(
-                Colors.goo
-                + Colors.BOLD
-                + repr(i).ljust(max_column_width[0])
-                + Colors.ENDC
+                goo + bold + repr(i).ljust(max_column_width[0]) + endc
             )
             for arg, width in zip(args, max_column_width[1:]):
-                dummy.append(
-                    Colors.blueblue + (arg[i]).ljust(width) + Colors.ENDC
-                )
+                dummy.append(blueblue + (arg[i]).ljust(width) + endc)
         else:
             for arg, width in zip(args, max_column_width):
-                dummy.append(
-                    Colors.blueblue + (arg[i]).ljust(width) + Colors.ENDC
-                )
+                dummy.append(blueblue + (arg[i]).ljust(width) + endc)
         lines.append("".join(dummy))
         dummy.clear()
     return lines
@@ -254,60 +280,69 @@ def fill_virt_data_uri(
 
 def main() -> None:
     """entrypoint"""
+    signal.signal(signal.SIGINT, sig_handler_sigint)
     argparser = Argparser()
-    virt_data = VirtData()
-    arp_table = get_arp_table()
-    for hv_host in argparser.args.uri:
-        conn = libvirt.openReadOnly(hv_host)
-        active_hosts = conn.listDomainsID()
-        if len(active_hosts) > 0:
-            # pools = conn.listAllStoragePools()
-            # networks = conn.listAllNetworks()
-            # print([pool.name() for pool in conn.listAllStoragePools()])
-            # print([net.name() for net in conn.listAllNetworks()])
-            virt_data.vm_id = [repr(vm_id) for vm_id in conn.listDomainsID()]
-            fill_virt_data_uri(conn, active_hosts, virt_data, arp_table)
-            # for conn_id in conn.listAllDomains():
-            #     print(conn_id.name())
-            #     print(conn_id.state())
-        else:
-            print("no active VMs found.")
-            sys.exit(1)
+    print(Colors.screen_clear, end="")
+    while True:
+        virt_data = VirtData()
+        arp_table = get_arp_table()
+        for hv_host in argparser.args.uri:
+            conn = libvirt.openReadOnly(hv_host)
+            active_hosts = conn.listDomainsID()
+            if len(active_hosts) > 0:
+                # pools = conn.listAllStoragePools()
+                # networks = conn.listAllNetworks()
+                # print([pool.name() for pool in conn.listAllStoragePools()])
+                # print([net.name() for net in conn.listAllNetworks()])
+                virt_data.vm_id = [
+                    repr(vm_id) for vm_id in conn.listDomainsID()
+                ]
+                fill_virt_data_uri(conn, active_hosts, virt_data, arp_table)
+                # for conn_id in conn.listAllDomains():
+                #     print(conn_id.name())
+                #     print(conn_id.state())
+            else:
+                print("no active VMs found.")
+                sys.exit(1)
 
-    lines = ffs(
-        2,
-        [
-            "ID",
-            "NAME",
-            "CPU",
-            "MEM_ACTUAL",
-            "MEM_UNUSED",
-            "NET_WRITE_B",
-            "NET_READ_B",
-            "MAC",
-            "IP",
-            "IO_READ_B",
-            "IO_WRITE_B",
-            "SNAPSHOTS",
-            "URI",
-        ],
-        False,
-        virt_data.vm_id,
-        virt_data.name,
-        virt_data.cpu_times,
-        virt_data.mem_actual,
-        virt_data.mem_unused,
-        virt_data.write_bytes,
-        virt_data.read_bytes,
-        virt_data.macs,
-        virt_data.ips,
-        virt_data.disk_reads,
-        virt_data.disk_writes,
-        virt_data.snapshot_counts,
-        virt_data.uri,
-    )
-    for line in lines:
-        print(line)
+        lines = ffs(
+            2,
+            [
+                "ID",
+                "NAME",
+                "CPU",
+                "MEM_ACTUAL",
+                "MEM_UNUSED",
+                "NET_WRITE_B",
+                "NET_READ_B",
+                "MAC",
+                "IP",
+                "IO_READ_B",
+                "IO_WRITE_B",
+                "SNAPSHOTS",
+                "URI",
+            ],
+            False,
+            virt_data.vm_id,
+            virt_data.name,
+            virt_data.cpu_times,
+            virt_data.mem_actual,
+            virt_data.mem_unused,
+            virt_data.write_bytes,
+            virt_data.read_bytes,
+            virt_data.macs,
+            virt_data.ips,
+            virt_data.disk_reads,
+            virt_data.disk_writes,
+            virt_data.snapshot_counts,
+            virt_data.uri,
+        )
+        for line in lines:
+            print(line)
+        time.sleep(argparser.args.delay)
+        # clears the screen
+        print(Colors.screen_clear, end="")
+        print(Colors.hide_cursor, end="")
 
 
 if __name__ == "__main__":

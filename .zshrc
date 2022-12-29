@@ -34,7 +34,7 @@ alias l="ls"
 # alias ls="ls --color=auto"
 alias la="exa -a"
 # alias la="ls -A"
-alias ll="exa -abghHliSmxF --color-scale --git -@"
+alias ll="exa -abghHliSmxFuU --color-scale --git -@"
 # alias ll="\ls -lZspihbFA --color=never --full-time --author | colcol | column -t"
 alias lss="exa -Sls=size"
 # alias lss="ls -sASh"
@@ -388,7 +388,7 @@ math() {
 }
 
 fd() {
-  ls $(find -iname "*$1*")
+  ls -d $(find -O3 -iname "*$1*")
 }
 
 pss() {
