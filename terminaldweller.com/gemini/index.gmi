@@ -1,0 +1,50 @@
+# This is a list of links
+
+This is a list of links:
+
+The same links are available on IPFS on https://ipfs.terminaldweller.com[1] or on terminaldweller.eth[2]
+
+WKD direct and advanced are setup on/for the domain.
+* GPG: 9E 20 46 4F 1C CF 3B 10 32 49 FA 93 A6 A0 F5 15 8B 38 81 DFj[3]
+* SSH: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4[4]
+
+* IRC Libera[5]: terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
+* IRC OFTC[6]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+* IRC Tilde[7]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+* IRC Rizon[8]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+
+XMPP: devi@jabber.terminaldweller.com
+
+The order is significant:
+* Email: devi@terminaldweller.com
+* Email: thabogre@gmail.com
+* Email: farzadsadeghi@protonmail.ch
+
+Github: terminaldweller[9]
+
+Mastodon: @terminaldweller@terminaldweller.com[10]
+If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org[11]
+
+Git mirror: git.terminaldweller.com[12]
+
+Blog: Blog[13] RSS[14]
+
+Linkedin[15]
+
+Services: N/A
+
+[1] https://ipfs.terminaldweller.com
+[2] https://terminaldweller.eth.link
+[3] https://github.com/terminaldweller.gpg
+[4] https://github.com/terminaldweller.keys
+[5] https://libera.chat
+[6] https://oftc.net
+[7] https://tilde.chat
+[8] https://rizon.net
+[9] https://github.com/terminaldweller
+[10] https://fosstodon.org/@terminaldweller
+[11] https://fosstodon.org/@terminaldweller
+[12] https://git.terminaldweller.com
+[13] https://blog.terminaldweller.com
+[14] https://blog.terminaldweller.com/rss/feed
+[15] https://www.linkedin.com/in/farzad-sadeghi

@@ -1,0 +1,20 @@
+version: "3"
+services:
+  agate:
+    image: agate
+    build:
+      context: .
+    networks:
+      - agatenet
+    ports:
+      - "1965:1965"
+    restart: unless-stopped
+    entrypoint: ["/root/.cargo/bin/agate","--content", "/srv", "--addr", "0.0.0.0:1965", "--hostname", "gemini.terminaldweller.com", "--lang", "en-US"]
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+networks:
+  agatenet:

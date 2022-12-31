@@ -1,0 +1,14 @@
+@-moz-document domain("libvirt.org") {
+  #domain-xml-format {
+    max-width: 90%;
+    width: 90%;
+  }
+
+  #element-and-attribute-overview {
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+    font-family: mono;
+    background: #000000;
+  }
+}

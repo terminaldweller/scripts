@@ -251,9 +251,9 @@ def fill_virt_data_uri(
         mem_stats = dom.memoryStats()
         virt_data.mem_actual.append(size_abr(mem_stats["actual"], 1000))
 
-        # BSD guests dont have unused memory
+        # BSD guests dont support mem balloons?
         try:
-            virt_data.mem_unused.append(size_abr(mem_stats["unused"], 1000))
+            virt_data.mem_unused.append(size_abr(mem_stats["available"], 1000))
         except KeyError:
             virt_data.mem_unused.append("N/A")
 
@@ -312,7 +312,7 @@ def main() -> None:
                 "NAME",
                 "CPU",
                 "MEM_ACTUAL",
-                "MEM_UNUSED",
+                "MEM_AVAIL",
                 "NET_WRITE_B",
                 "NET_READ_B",
                 "MAC",

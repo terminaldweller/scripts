@@ -2,10 +2,14 @@ https://www.reddit.com/r/CryptoCurrency.rss
 http://feeds.feedburner.com/abseilio
 https://www.cyberciti.biz/atom/atom.xml
 https://www.semicolonandsons.com/feed
-https://blog.terminaldweller.com/rss/feed
+https://blog.terminaldweller.com/rss/feed "~terminaldweller"Blog
 https://suckless.org/atom.xml "~Suckless"Suckless
 https://microservices.io/feed.xml
 https://news.ycombinator.com/rss "~HN"HN
+https://www.ecliptik.com/feed.xml "~Ecliptik"Blog
+
+gemini://mozz.us/journal/atom.xml "~GEMINI"MOZZ
+gemini://midnight.pub/feed.xml "~GEMINI"Midnight_Pub
 
 # (Twitter)
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=_margery28_&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"Twitter

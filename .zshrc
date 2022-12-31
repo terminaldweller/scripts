@@ -104,7 +104,7 @@ alias pirate-get="pirate-get -S ~/magnets/"
 alias vps="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 87.236.209.206 -l ubuntu -p 1022"
 alias vpn="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 192.99.102.52 -l rooot -p 1022"
 alias vpn2="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 145.239.165.137 -l rooot"
-alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh root@185.112.147.110 -p 2022"
+alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=yes root@jump3.terminaldweller.com -p 2022"
 alias vpn6="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.45.46"
 alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.81"
 alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.208"
@@ -149,12 +149,14 @@ alias openbb="TERM=screen-256color \
   -e TERM \
   -e DISPLAY=${DISPLAY} \
   -e OPENBB_BACKEND=Qt5Agg \
-  -e HTTP_PROXY=socks5://192.168.1.103:9995 \
-  -e HTTPS_PROXY=socks5://192.168.1.103:9995 \
-  -e NO_PROXY=localhost,127.0.0.0/8,dockerhost.local \
-  -e http_proxy=socks5://192.168.1.103:9995 \
-  -e https_proxy=socks5://192.168.1.103:9995 \
-  -e no_proxy=localhost,127.0.0.0/8,dockerhost.local \
+  -e ALL_PROXY=socks5h://192.168.1.214:9995 \
+  -e HTTP_PROXY=socks5h://192.168.1.214:9995 \
+  -e HTTPS_PROXY=socks5h://192.168.1.214:9995 \
+  -e NO_PROXY=localhost,127.0.0.0/8,dockerhost.local,172.16.0.0/16,10.0.0.0/8,192.168.0.0/16 \
+  -e all_proxy=socks5h://192.168.1.214:9995 \
+  -e http_proxy=socks5h://192.168.1.214:9995 \
+  -e https_proxy=socks5h://192.168.1.214:9995 \
+  -e no_proxy=localhost,127.0.0.0/8,dockerhost.local,172.16.0.0/16,10.0.0.0/8.19.168.0.0/16 \
   --log-driver=none \
   --network=host \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -194,7 +196,7 @@ alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
-alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=yes -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 jump3.terminaldweller.com"
 alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias socks5vpn5="autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3333 2a07:e01:3:204::1"
@@ -277,7 +279,7 @@ alias k="grc kubectl"
 alias run_devdocs_server="docker run -p 9292:9292 devdocs"
 alias voiddocs="w3m /usr/share/doc/void/html/index.html"
 alias archwiki="python -m http.server --directory /home/devi/chroots/arch/usr/share/doc/arch-wiki/html"
-alias bombadillo="proxychains4 -q -f ~/proxies/ice/proxychains.conf bombadillo -t"
+# alias bombadillo="proxychains4 -q -f ~/proxies/ice/proxychains.conf bombadillo -t"
 alias record_desktop="recordmydesktop --device hw:1,0 --no-wm-check -x 1920 --width 1920 --height 1080 --fps 15"
 alias mongoshrc="vim ~/scripts/.mongoshrc.js"
 alias fixmongoshrc="cp ~/scripts/.mongoshrc.js ~/.mongoshrc.js"
@@ -318,7 +320,10 @@ alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/v
 alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
 alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
 alias bun="ALL_PROXY=socks5h://127.0.0.1:9995 bun"
-alias ffox_i2p='ssh -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/machines/default/libvirt/private_key vagrant@i2p-host.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
+alias ffox_i2p='ssh -C -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/machines/default/libvirt/private_key vagrant@i2p-host.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
+alias sotn="prime-run mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue"
+alias silent_hill="prime-run mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
+alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt proxychains4 -q bombadillo '
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

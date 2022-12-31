@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck source=../zshrc_stripped.sh
 . ~/scripts/zshrc_stripped.sh
 COMMAND=$(echo "" | dmenu -fn "DejaVuSansMono Nerd Font Mono-11.3;antialias=true;autohint=true" -l 20 -p "Quick Term:")
 RESULT=$(eval "$COMMAND")
