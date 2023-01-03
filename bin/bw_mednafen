@@ -1,0 +1,105 @@
+#!/usr/bin/env sh
+set -eu
+
+xdg_runtime="${XDG_RUNTIME_DIR-/run/user/$(id -u)}"
+
+joystick="Razer_Serval"
+serval=$(find /dev/input/by-id/ -iname "*${joystick}*")
+serval_dev=$(readlink -e ${serval})
+
+joystick_args=""
+for dev in ${serval_dev}; do
+  joystick_args="${joystick_args} --dev-bind ${dev} ${dev}"
+done
+echo "${joystick_args} \\"
+
+# glxinfo and nvidia-smi are added for testing
+# we are using X11 so we are insecure by default
+env -i \
+  bwrap \
+  --unshare-all \
+  --ro-bind /usr/lib /usr/lib \
+  --ro-bind /usr/lib64 /usr/lib64 \
+  --ro-bind /usr/share/X11/xkb /usr/share/X11/xkb \
+  --ro-bind /usr/bin/mednafen /usr/bin/mednafen \
+  --ro-bind /usr/bin/nvidia-smi /usr/bin/nvidia-smi \
+  --ro-bind /usr/bin/glxinfo /usr/bin/glxinfo \
+  --ro-bind /home/devi/.mednafen /home/devi/.mednafen \
+  --ro-bind /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2 \
+  --ro-bind /lib/libasound.so.2 /usr/lib64/libasound.so.2 \
+  --ro-bind /lib/libpthread.so.0 /usr/lib64/libpthread.so.0 \
+  --ro-bind /lib/libSDL2-2.0.so.0 /usr/lib64/libSDL2-2.0.so.0 \
+  --ro-bind /lib/libFLAC.so.8 /usr/lib64/libFLAC.so.8 \
+  --ro-bind /lib/libz.so.1 /usr/lib64/libz.so.1 \
+  --ro-bind /lib/libstdc++.so.6 /usr/lib64/libstdc++.so.6 \
+  --ro-bind /lib/libm.so.6 /usr/lib64/libm.so.6 \
+  --ro-bind /lib/libgcc_s.so.1 /usr/lib64/libgcc_s.so.1 \
+  --ro-bind /lib/libc.so.6 /usr/lib64/libc.so.6 \
+  --ro-bind /lib/libdl.so.2 /usr/lib64/libdl.so.2 \
+  --ro-bind /lib/libpulse.so.0 /usr/lib64/libpulse.so.0 \
+  --ro-bind /lib/libX11.so.6 /usr/lib64/libX11.so.6 \
+  --ro-bind /lib/libXext.so.6 /usr/lib64/libXext.so.6 \
+  --ro-bind /lib/libXcursor.so.1 /usr/lib64/libXcursor.so.1 \
+  --ro-bind /lib/libXi.so.6 /usr/lib64/libXi.so.6 \
+  --ro-bind /lib/libXfixes.so.3 /usr/lib64/libXfixes.so.3 \
+  --ro-bind /lib/libXrandr.so.2 /usr/lib64/libXrandr.so.2 \
+  --ro-bind /lib/libXss.so.1 /usr/lib64/libXss.so.1 \
+  --ro-bind /lib/libwayland-egl.so.1 /usr/lib64/libwayland-egl.so.1 \
+  --ro-bind /lib/libwayland-client.so.0 /usr/lib64/libwayland-client.so.0 \
+  --ro-bind /lib/libwayland-cursor.so.0 /usr/lib64/libwayland-cursor.so.0 \
+  --ro-bind /lib/libxkbcommon.so.0 /usr/lib64/libxkbcommon.so.0 \
+  --ro-bind /lib/libdecor-0.so.0 /usr/lib64/libdecor-0.so.0 \
+  --ro-bind /lib/libogg.so.0 /usr/lib64/libogg.so.0 \
+  --ro-bind /usr/lib64/pulseaudio/libpulsecommon-15.0.so /usr/lib64/pulseaudio/libpulsecommon-15.0.so \
+  --ro-bind /lib/libdbus-1.so.3 /usr/lib64/libdbus-1.so.3 \
+  --ro-bind /lib/libxcb.so.1 /usr/lib64/libxcb.so.1 \
+  --ro-bind /lib/libXrender.so.1 /usr/lib64/libXrender.so.1 \
+  --ro-bind /lib/libffi.so.7 /usr/lib64/libffi.so.7 \
+  --ro-bind /lib/librt.so.1 /usr/lib64/librt.so.1 \
+  --ro-bind /lib/libsndfile.so.1 /usr/lib64/libsndfile.so.1 \
+  --ro-bind /lib/libasyncns.so.0 /usr/lib64/libasyncns.so.0 \
+  --ro-bind /lib/libXau.so.6 /usr/lib64/libXau.so.6 \
+  --ro-bind /lib/libXdmcp.so.6 /usr/lib64/libXdmcp.so.6 \
+  --ro-bind /lib/libvorbis.so.0 /usr/lib64/libvorbis.so.0 \
+  --ro-bind /lib/libvorbisenc.so.2 /usr/lib64/libvorbisenc.so.2 \
+  --ro-bind /lib/libopus.so.0 /usr/lib64/libopus.so.0 \
+  --ro-bind /lib/libmpg123.so.0 /usr/lib64/libmpg123.so.0 \
+  --ro-bind /lib/libmp3lame.so.0 /usr/lib64/libmp3lame.so.0 \
+  --ro-bind /lib/libresolv.so.2 /usr/lib64/libresolv.so.2 \
+  --uid 1000 \
+  --gid 1000 \
+  --proc /proc \
+  --dev /dev --tmpfs /tmp ${joystick_args} \
+  --dev-bind /dev/dri /dev/dri \
+  --dev-bind /dev/video0 /dev/video0 \
+  --dev-bind /dev/video1 /dev/video1 \
+  --dev-bind /dev/nvidia0 /dev/nvidia0 \
+  --dev-bind /dev/nvidiactl /dev/nvidiactl \
+  --ro-bind /sys/dev/char /sys/dev/char \
+  --ro-bind /sys/devices/system /sys/devices/system \
+  --ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
+  --ro-bind /sys/bus/pci/drivers/nvidia /sys/bus/pci/drivers/nvidia \
+  --ro-bind /sys/class/input /sys/class/input \
+  --ro-bind "${XAUTHORITY}" "${HOME}/.Xauthority" \
+  --setenv XAUTHORITY "${HOME}" \
+  --setenv HOME "${HOME}" \
+  --bind "${HOME}"/.mednafen "${HOME}"/.mednafen \
+  --ro-bind "${HOME}"/roms "${HOME}"/roms \
+  --setenv SHELL /sbin/nologin \
+  --setenv TERM screen-256color \
+  --setenv __NV_PRIME_RENDER_OFFLOAD 1 \
+  --setenv __GLX_VENDOR_LIBRARY_NAME nvidia \
+  --setenv __VK_LAYER_NV_optimus NVIDIA_only \
+  --setenv XDG_RUNTIME_DIR "${xdg_runtime}" \
+  --bind /tmp/.X11-unix /tmp/.X11-unix \
+  --setenv DISPLAY "${DISPLAY}" \
+  --ro-bind /run/dbus /run/dbus \
+  --ro-bind "${xdg_runtime}/pulse" "${xdg_runtime}/pulse" \
+  --cap-drop ALL \
+  --new-session \
+  --die-with-parent \
+  --hostname RESTRICTED \
+  --seccomp 9 \
+  mednafen \
+  "$@" \
+  9<"/tmp/seccomp_logging_filter.bpf"

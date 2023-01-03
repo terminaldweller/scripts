@@ -196,7 +196,19 @@ alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
-alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=yes -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 jump3.terminaldweller.com"
+alias socks5vpn3="autossh \
+  -M 0 \
+  -N \
+  -D 0.0.0.0:9995 \
+  -o StrictHostKeyChecking=no \
+  -o UserKnownHostsFile=/dev/null \
+  -o VerifyHostKeyDNS=no \
+  -o ServerAliveInterval=180 \
+  -o ServerAliveCountMax=3 \
+  -o ExitOnForwardFailure=yes \
+  -l root \
+  -p 2022 \
+  185.112.147.110"
 alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias socks5vpn5="autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3333 2a07:e01:3:204::1"
@@ -273,7 +285,7 @@ alias skype="flatpak run com.skype.Client"
 alias chromium_flatpak="flatpak run org.chromium.Chromium"
 alias firefox_flatpak="flatpak run org.mozilla.firefox"
 alias librewolf_flatpak="flatpak run io.gitlab.librewolf-community"
-alias tree="tree -aCDpugh -L 10 --gitignore | less -r"
+alias tree="tree -lxaCDpugh -L 10 --gitignore | less -r"
 alias lsblk="grc lsblk -Dfp"
 alias k="grc kubectl"
 alias run_devdocs_server="docker run -p 9292:9292 devdocs"

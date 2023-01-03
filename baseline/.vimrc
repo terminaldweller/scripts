@@ -270,7 +270,7 @@ function! s:pythondoc()
   set syntax=man
   1
 endfunction
-command! -complete=shellcmd -nargs=0 PythonDoc call s:pythondoc()
+command! PythonDoc call s:pythondoc()
 nnoremap <leader>h :<C-U>PythonDoc<cr>
 
 "camel and snake case motion
