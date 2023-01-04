@@ -336,6 +336,7 @@ alias ffox_i2p='ssh -C -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/
 alias sotn="bw_mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue"
 alias silent_hill="bw_mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
 alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt proxychains4 -q bombadillo '
+alias mount="grc mount"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

@@ -13,4 +13,4 @@ sudo mkdir -p /tmp/tmpfs4_1
 sudo mount -t tmpfs -o size=4000M tmpfs /tmp/tmpfs4_1
 sudo chown devi:devi /tmp/tmpfs4_1
 # virsh pool-define-as --name ramdisk --type dir --target /tmp/tmpfs4_1
-# virsh pool-start ramdisk
+virsh pool-start ramdisk
