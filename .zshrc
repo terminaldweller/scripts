@@ -333,8 +333,8 @@ alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.va
 alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
 alias bun="ALL_PROXY=socks5h://127.0.0.1:9995 bun"
 alias ffox_i2p='ssh -C -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/machines/default/libvirt/private_key vagrant@i2p-host.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
-alias sotn="prime-run mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue"
-alias silent_hill="prime-run mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
+alias sotn="bw_mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue"
+alias silent_hill="bw_mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
 alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt proxychains4 -q bombadillo '
 
 # change the 4th terminal color to #0000ff
@@ -345,10 +345,6 @@ alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagr
 # mdcat(){
 #   mdcat --fail --local "$@" | bat
 # }
-
-get_domain_dns_records() {
-  jcurl -X GET -H "Accept: application/json" -H "Authorization: $(cat ~/scripts/arvan-api-key)" "https://napi.arvancloud.com/cdn/4.0/domains/terminaldweller.com/dns-records"
-}
 
 #autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f5fff,bg=#000000,bold,underline"

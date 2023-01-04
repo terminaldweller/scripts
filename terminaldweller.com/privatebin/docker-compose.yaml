@@ -1,0 +1,38 @@
+version: "3"
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:stable
+    networks:
+      - privatebinnet
+    ports:
+      - "127.0.0.1:3180:8080"
+    restart: unless-stopped
+    depends_on:
+      - nginx
+    volumes:
+      - ./conf.php:/srv/cfg/conf.php:ro
+    #   - privatebin-vault:/srv/data
+    # cap_drop:
+    #   - ALL
+  nginx:
+    image: nginx:stable
+    ports:
+      - "3010:443"
+    networks:
+      - privatebinnet
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+      - NET_BIND_SERVICE
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/archive/pastebin.terminaldweller.com/:/certs/:ro
+networks:
+  privatebinnet:
+volumes:
+  privatebin-vault:
