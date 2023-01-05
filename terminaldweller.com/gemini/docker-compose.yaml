@@ -16,5 +16,11 @@ services:
       - CHOWN
       - SETGID
       - SETUID
+    volumes:
+      # we have to use the same cert because of TOFU
+      - certs:/.certificates/
+      - ./index.gmi:/srv/index.gmi:ro
 networks:
   agatenet:
+volumes:
+  certs:

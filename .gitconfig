@@ -3,6 +3,7 @@
 # Please adapt and uncomment the following lines:
 	name = terminaldweller
 	email = thabogre@gmail.com
+	signingkey = /home/devi/.ssh/id_rsa.pub
 
 # https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git
 [color "decorate"]
@@ -123,3 +124,8 @@
 	diffFilter = diff-highlight
 [core]
 	editor = vim
+	# hooksPath = ~/devi-githooks
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh

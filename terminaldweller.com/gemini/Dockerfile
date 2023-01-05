@@ -9,5 +9,5 @@ RUN apk update \
       && apk add --no-cache cargo \
       && cargo install agate
 #COPY --from=certbuilder /certs /certs
-COPY ./index.gmi /srv/index.gmi
+# COPY ./index.gmi /srv/index.gmi
 #ENTRYPOINT ["agate"]
