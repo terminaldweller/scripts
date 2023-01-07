@@ -308,6 +308,7 @@ alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
 alias tor_carrier_proxy="proxychains4 -q -f ~/proxies/tor_carrier/proxychains.conf"
 alias glow="glow --style ~/.config/glow/dark.json --pager --local"
+alias mdcat="mdcat --local --fail --paginate"
 alias nmap="grc nmap"
 alias fdisk="grc fdisk"
 alias blkid="grc blkid"
@@ -328,7 +329,8 @@ alias ping="grc ping"
 alias list_iptables="sudo iptables -nvL --line-numbers"
 alias sensors_pp="sensors -A -j 2> /dev/null | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER"
 alias vdiff="vimdiff"
-alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
+# alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
+alias finger="/nix/store/rqc8gdpx6dzwk38dx01ddb4kfcrkyiwq-bsd-finger-0.17/bin"
 alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
 alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
 alias bun="ALL_PROXY=socks5h://127.0.0.1:9995 bun"
@@ -337,6 +339,10 @@ alias sotn="bw_mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue
 alias silent_hill="bw_mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
 alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt proxychains4 -q bombadillo '
 alias mount="grc mount"
+alias picocom="picocom --escape b"
+# https://wiki.slipfox.xyz/wiki/ANSI_escape_code#OSC_(Operating_System_Command)_sequences)
+# https://github.com/sos4nt/dynamic-colors
+alias turn_green='echo -e "\033]10;#005f5f\007"'
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -645,6 +651,14 @@ timezsh() {
 #   preview="git diff $@ --color=always -- {-1}"
 #   git diff $@ --name-only | fzf -m --ansi --preview $preview
 # }
+
+
+# https://unix.stackexchange.com/questions/81408/how-can-i-figure-out-which-ptys-are-from-which-qemu
+list_virsh_ptys() {
+  for i in `virsh list | awk '{print $2}' | egrep -v "^$|Name"`; do
+    printf "%-14s:%s\n" $i $(virsh ttyconsole $i | grep -v "^$");
+  done
+}
 
 pod2w3m() {
   pod2html $1 | w3m -T text/html
