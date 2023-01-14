@@ -25,6 +25,8 @@ macro index,pager <f4> '<sync-mailbox><refresh><enter-command>source ~/.mutt/acc
 # macros
 macro index A "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>” “mark all messages read"
 
+set new_mail_command="notify-send.sh 'New Email' '%n new messages, %u unread.' &"
+
 # gives us all the mailboxes in the sidebar
 set imap_check_subscribed
 

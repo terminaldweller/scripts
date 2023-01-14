@@ -1,0 +1,32 @@
+@-moz-document domain("readthedocs.io") {
+  #configurations-and-zone-files {
+    background: #121212;
+  }
+
+  .wy-nav-side {
+    background: #121212;
+  }
+
+  .wy-nav-content-wrap {
+    background: #121212;
+  }
+
+  .wy-menu {
+    background: #121212;
+  }
+
+  html.writer-html5.TridactylThemeDark
+    body.wy-body-for-nav
+    div.wy-grid-for-nav
+    nav.wy-nav-side {
+    background: #121212;
+  }
+
+  .rst-content {
+    background: #121212;
+  }
+
+  .wy-nav-content {
+    background: #121212;
+  }
+}

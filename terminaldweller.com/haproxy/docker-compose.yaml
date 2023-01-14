@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   haproxy:
-    image: haproxy
+    image: haproxy:2.7.1-bullseye
     ports:
       - "80:80"
       - "443:443"
@@ -17,51 +17,63 @@ services:
       - "587:587"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-      - ./certs:/usr/local/etc/certs:ro
+      # - ./certs:/usr/local/etc/certs:ro
     networks:
       - proxynet
-      - certnet
+      - metricsnet
+      # - certnet
     restart: unless-stopped
     cap_drop:
       - ALL
-  certbot:
-    image: certbot
-    build:
-      context: ./certbot
-    ports:
-      - "127.0.0.1:9080:80"
-      - "127.0.0.1:9443:443"
+  # certbot:
+  #   image: certbot
+  #   build:
+  #     context: ./certbot
+  #   ports:
+  #     - "127.0.0.1:9080:80"
+  #     - "127.0.0.1:9443:443"
+  #   networks:
+  #     - certnet
+  #   # restart: unless-stopped
+  #   volumes:
+  #     - ./letsencrypt:/etc/letsencrypt
+  #     - ./webroot:/webroot
+  #     - ./certs:/certs
+  #   # command: ["certonly","--test-cert","--webroot","-w","/webroot","-d","chat.terminaldweller.com","--email","thabogre@gmail.com","--non-interactive","--agree-tos"]
+  #   entrypoint: ["/certbot-entrypoint.sh"]
+  #   environment:
+  #     - DOMAIN=chat.terminaldweller.com
+  #     - EMAIL=devi@mail.terminaldweller.com
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - "127.0.0.1:8080:80"
+  #   networks:
+  #     - certnet
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./webroot:/usr/share/nginx/html
+  # udpproxy:
+  #   image: nginx
+  #   ports:
+  #     - "127.0.0.1:3478:3478/udp"
+  #     - "127.0.0.1:5349:5349/udp"
+  #   networks:
+  #     - proxynet
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  prometheus:
+    image: bitnami/prometheus:2.41.0
     networks:
-      - certnet
-    # restart: unless-stopped
-    volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - ./webroot:/webroot
-      - ./certs:/certs
-    # command: ["certonly","--test-cert","--webroot","-w","/webroot","-d","chat.terminaldweller.com","--email","thabogre@gmail.com","--non-interactive","--agree-tos"]
-    entrypoint: ["/certbot-entrypoint.sh"]
-    environment:
-      - DOMAIN=chat.terminaldweller.com
-      - EMAIL=devi@mail.terminaldweller.com
-  nginx:
-    image: nginx
-    ports:
-      - "127.0.0.1:8080:80"
-    networks:
-      - certnet
+      - metricsnet
     restart: unless-stopped
     volumes:
-      - ./webroot:/usr/share/nginx/html
-  udpproxy:
-    image: nginx
-    ports:
-      - "127.0.0.1:3478:3478/udp"
-      - "127.0.0.1:5349:5349/udp"
-    networks:
-      - proxynet
-    restart: unless-stopped
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - metricsvault:/opt/bitnami/prometheus/data
+      - ./conf.yml:/opt/bitnami/prometheus/conf/prometheus.yml:ro
 networks:
   proxynet:
-  certnet:
+  metricsnet:
+  # certnet:
+volumes:
+  metricsvault:

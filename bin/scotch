@@ -535,16 +535,18 @@ def main():
         lines = lines[:-2]
         for line in lines:
             # this is here to support the -i option
-            if line[0] == "[":
+            if "-t" in sys.argv or "-tt" in sys.argv or "-ttt" in sys.argv:
+                timestamp_end_index = line.find(" ")
+                print(Color.six + line[: timestamp_end_index - 1], end=" ")
+                line = line[timestamp_end_index + 1 :]
+            if "-n" in sys.argv:
                 idx = line.find("]")
-                if idx - 1 < 16:
-                    print(Color.twelve + line[0 : idx + 1], end=" ")
-                    line = line[idx + 2 :]
-            if line[0] == "[":
+                print(Color.twelve + line[0 : idx + 1], end=" ")
+                line = line[idx + 2 :]
+            if "-i" in sys.argv:
                 idx = line.find("]")
-                if idx - 1 == 16:
-                    print(Color.thirteen + line[0 : idx + 1], end=" ")
-                    line = line[idx + 2 :]
+                print(Color.thirteen + line[0 : idx + 1], end=" ")
+                line = line[idx + 2 :]
             if line[0 : line.find("(")] in syscall_set:
                 syscall = line[0 : line.find("(")]
                 sysargs = line[line.find("(") + 1 : line.find(")")].split()

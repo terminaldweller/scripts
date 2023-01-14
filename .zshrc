@@ -104,7 +104,8 @@ alias pirate-get="pirate-get -S ~/magnets/"
 alias vps="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 87.236.209.206 -l ubuntu -p 1022"
 alias vpn="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 192.99.102.52 -l rooot -p 1022"
 alias vpn2="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 145.239.165.137 -l rooot"
-alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=yes root@jump3.terminaldweller.com -p 2022"
+# alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=yes root@jump3.terminaldweller.com -p 2022"
+alias vpn3="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 2022 root@185.112.147.110"
 alias vpn6="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.45.46"
 alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.81"
 alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -p 3333 ubuntu@185.130.47.208"
@@ -196,19 +197,7 @@ alias socks5z="ssh -N -D 9998 -o ExitOnForwardFailure=yes -l pi 192.168.1.108"
 alias socks5ir="autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 alias socks5vpn1="autossh -M 0 -N -D 9999 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot 145.239.165.137"
 alias socks5vpn2="autossh -M 0 -N -D 9996 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l rooot -p 1022 192.99.102.52"
-alias socks5vpn3="autossh \
-  -M 0 \
-  -N \
-  -D 0.0.0.0:9995 \
-  -o StrictHostKeyChecking=no \
-  -o UserKnownHostsFile=/dev/null \
-  -o VerifyHostKeyDNS=no \
-  -o ServerAliveInterval=180 \
-  -o ServerAliveCountMax=3 \
-  -o ExitOnForwardFailure=yes \
-  -l root \
-  -p 2022 \
-  185.112.147.110"
+alias socks5vpn3="autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=no -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
 alias socks5vpn4="autossh -M 0 -N -D 9994 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 130.185.121.80"
 alias socks5vpn5="autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 alias socks5vpn6="autossh -M 0 -N -D 9993 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -6 -l ubuntu -p 3333 2a07:e01:3:204::1"
@@ -216,6 +205,12 @@ alias socks5vpn7="autossh -M 0 -N -D 9992 -o ServerAliveInterval=180 -o ServerAl
 alias socks5vpn8="autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias tormapped6="autossh -M 0 -N -L 9053:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 alias tormapped8="autossh -M 0 -N -L 0.0.0.0:9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+alias i2pmappedserver6="autossh -M 0 -N -L 0.0.0.0:9066:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+alias i2pmapped6http="autossh -M 0 -N -L 0.0.0.0:9064:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+alias i2pmapped6socks="autossh -M 0 -N -L 0.0.0.0:9067:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+alias i2pmappedserver8="autossh -M 0 -N -L 0.0.0.0:9166:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+alias i2pmapped8http="autossh -M 0 -N -L 0.0.0.0:9164:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+alias i2pmapped8socks="autossh -M 0 -N -L 0.0.0.0:9167:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -308,7 +303,6 @@ alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
 alias tor_carrier_proxy="proxychains4 -q -f ~/proxies/tor_carrier/proxychains.conf"
 alias glow="glow --style ~/.config/glow/dark.json --pager --local"
-alias mdcat="mdcat --local --fail --paginate"
 alias nmap="grc nmap"
 alias fdisk="grc fdisk"
 alias blkid="grc blkid"
@@ -343,6 +337,11 @@ alias picocom="picocom --escape b"
 # https://wiki.slipfox.xyz/wiki/ANSI_escape_code#OSC_(Operating_System_Command)_sequences)
 # https://github.com/sos4nt/dynamic-colors
 alias turn_green='echo -e "\033]10;#005f5f\007"'
+alias turn_blue='echo -e "\033]10;#005f87\007"'
+alias turn_white='echo -e "\033]10;#c0c0c0\007"'
+alias bandwhich="turn_green && bandwhich"
+alias powertop="turn_green && powertop"
+alias mdcat="turn_green && mdcat --local --fail --paginate"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

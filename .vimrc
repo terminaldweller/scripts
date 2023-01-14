@@ -1222,6 +1222,12 @@ nnoremap <leader>rr :YcmCompleter RefactorRename<space>
 nmap <leader>D <plug>(YCMHover)
 " nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
 " nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+let g:ycm_enable_semantic_highlighting = 1
+let g:ycm_enable_inlay_hints = 1
+let g:ycm_clear_inlay_hints_in_insert_mode = 1
+let g:ycm_echo_current_diagnostic = "virtual-text"
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_update_diagnostics_in_insert_mode = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_auto_hover = "CursorHold"

@@ -2,19 +2,27 @@
 
 This is a list of links:
 
-The same links are available on IPFS on https://ipfs.terminaldweller.com[1] or on terminaldweller.eth[2]
+This page is available on:
+web2[1]
+IPFS from https://ipfs.terminaldweller.com[2] or from terminaldweller.eth[3]
+Gemini[4]
+i2p[5]
+tor[6]
 
 WKD direct and advanced are setup on/for the domain.
 
-keyoxide[3]
+keyoxide[7]
+I don't use all the accounts listed on keyoxide regularly. The preferred methods of contacting me are the ones that are listed here, IRC, XMPP and email (The order is not significant).
 
-* GPG: 9E 20 46 4F 1C CF 3B 10 32 49 FA 93 A6 A0 F5 15 8B 38 81 DFj[4]
-* SSH: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4[5]
+* PGP FP: 9E20464F1CCF3B103249FA93A6A0F5158B3881DF - here[8] and here[9]
+I also upload my PGP key to https://keys.openpgp.org and https://pgp.mit.edu .
+* SSH FP: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4 - here[10] and here[11]
 
-* IRC Libera[6]: terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
-* IRC OFTC[7]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-* IRC Tilde[8]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-* IRC Rizon[9]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+* IRC Libera[12]: terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
+* IRC OFTC[13]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+* IRC Tilde[14]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+* IRC Rizon[15]: terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+You can also find me on Libera, OFTC and Rizon in ##terminaldweller.
 
 XMPP: devi@jabber.terminaldweller.com
 
@@ -22,33 +30,40 @@ The order is significant:
 * Email: devi@terminaldweller.com
 * Email: thabogre@gmail.com
 * Email: farzadsadeghi@protonmail.ch
+All emails have the ssh and pgp key fingerprints as signature.
 
-Github: terminaldweller[10]
+Github: terminaldweller[16]
 
-Mastodon: @terminaldweller@terminaldweller.com[11]
-If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org[12]
+Mastodon: @terminaldweller@terminaldweller.com[17]
+If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org[18]
 
-Git mirror: git.terminaldweller.com[13]
+Git mirror: git.terminaldweller.com[19]
 
-Blog: Blog[14] RSS[15]
+Blog: Blog[20] RSS[21]
 
-Linkedin[16]
+Linkedin[22]
 
 Services: N/A
 
-[1] https://ipfs.terminaldweller.com
-[2] https://terminaldweller.eth.link
-[3] https://keyoxide.org/hkp/9e20464f1ccf3b103249fa93a6a0f5158b3881df
-[4] https://github.com/terminaldweller.gpg
-[5] https://github.com/terminaldweller.keys
-[6] https://libera.chat
-[7] https://oftc.net
-[9] https://tilde.chat
-[9] https://rizon.net
-[10] https://github.com/terminaldweller
-[11] https://fosstodon.org/@terminaldweller
-[12] https://fosstodon.org/@terminaldweller
-[13] https://git.terminaldweller.com
-[14] https://blog.terminaldweller.com
-[15] https://blog.terminaldweller.com/rss/feed
-[16] https://www.linkedin.com/in/farzad-sadeghi
+[1]https://terminaldweller.com
+[2] https://ipfs.terminaldweller.com
+[3] https://terminaldweller.eth.link
+[4]gemini://gemini.terminaldweller.com
+[5]http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/
+[6]http://dqunl5rzlv6skqfklqr4dwi4zph2vqoaennc7qoinqs5mlug4docq2yd.onion/
+[7] https://keyoxide.org/hkp/9e20464f1ccf3b103249fa93a6a0f5158b3881df
+[8] https://github.com/terminaldweller.gpg
+[9] https://terminaldweller.com/keys/gpg_pubkey
+[10] https://github.com/terminaldweller.keys
+[11] https://terminaldweller.com/keys/id_rsa.pub
+[12] https://libera.chat
+[13] https://oftc.net
+[14] https://tilde.chat
+[15] https://rizon.net
+[16] https://github.com/terminaldweller
+[17] https://fosstodon.org/@terminaldweller
+[18] https://fosstodon.org/@terminaldweller
+[19] https://git.terminaldweller.com
+[20] https://blog.terminaldweller.com
+[21] https://blog.terminaldweller.com/rss/feed
+[22] https://www.linkedin.com/in/farzad-sadeghi
