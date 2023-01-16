@@ -211,6 +211,7 @@ alias i2pmapped6socks="autossh -M 0 -N -L 0.0.0.0:9067:127.0.0.1:4447 -o ServerA
 alias i2pmappedserver8="autossh -M 0 -N -L 0.0.0.0:9166:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias i2pmapped8http="autossh -M 0 -N -L 0.0.0.0:9164:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 alias i2pmapped8socks="autossh -M 0 -N -L 0.0.0.0:9167:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+alias haproxy_prompammed="autossh -M 0 -N -L 0.0.0.0:9099:127.0.0.1:9099 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 alias k9sskin="vim ~/scripts/.k9s/skin.yml"
 alias k9sconfig="vim ~/scripts/.k9s/config.yml"
 alias fixk9sskin="cp ~/scripts/.k9s/skin.yml ~/.config/k9s/skin.yml"
@@ -342,6 +343,9 @@ alias turn_white='echo -e "\033]10;#c0c0c0\007"'
 alias bandwhich="turn_green && bandwhich"
 alias powertop="turn_green && powertop"
 alias mdcat="turn_green && mdcat --local --fail --paginate"
+alias mariadb="mariadb --safe-updates"
+alias tunneltoprc="vim ~/scripts/.tunneltop.toml"
+alias fixtunneltoprc="cp ~/scripts/.tunneltop.toml ~/.tunneltop.toml"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'
@@ -451,6 +455,7 @@ export PYGMENTIZE_STYLE="paraiso-dark"
 # export LD_PRELOAD=/usr/local/lib/libtrash.so.3.5
 # alias trashon=”export TRASH_OFF=NO”
 # alias trashoff=”export TRASH_OFF=YES”
+export MYSQL_PS1="\U@\N:\p [\d] - \R:\m:\s - \v\n>>>"
 
 # TZ=Asia/Tehran
 # export TZ

@@ -152,7 +152,7 @@ def ffs(
     header_list: typing.Optional[typing.List[str]],
     numbered: bool,
     *args,
-):
+) -> typing.List[str]:
     """A simple columnar printer"""
     max_column_width = []
     lines = []

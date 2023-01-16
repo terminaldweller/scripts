@@ -1,0 +1,116 @@
+[socks5ir]
+address = "127.0.0.1"
+port = 9997
+command = "autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
+test_command = "curl -s -4 --socks5 127.0.0.1:9997 --connect-timeout 10 icanhazip.com"
+test_command_result = "87.236.209.206"
+test_interval = 300
+test_timeout = 10
+
+[socks5_3]
+address = "127.0.0.1"
+port = 9995
+command = "autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=no -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+test_command = "curl -s -4 --socks5 127.0.0.1:9995 --connect-timeout 10 icanhazip.com"
+test_command_result = "185.112.147.110"
+test_interval = 300
+test_timeout = 10
+
+[socks5_5]
+address = "127.0.0.1"
+port = 9990
+command = "autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = "curl -s -4 --socks5 127.0.0.1:9990 --connect-timeout 10 icanhazip.com"
+test_command_result = "185.130.45.46"
+test_interval = 300
+test_timeout = 10
+
+[socks5_8]
+address = "127.0.0.1"
+port = 9989
+command = "autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+test_command = "curl -s -4 --socks5 127.0.0.1:9989 --connect-timeout 10 icanhazip.com"
+test_command_result = "185.130.47.208"
+test_interval = 300
+test_timeout = 10
+
+[i2pmapped6http]
+address = "127.0.0.1"
+port = 9064
+command = "autossh -M 0 -N -L 0.0.0.0:9064:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9064 --connect-timeout 30 http://planet.i2p'
+test_command_result = 200
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped6server]
+address = "127.0.0.1"
+port = 9066
+command = "autossh -M 0 -N -L 0.0.0.0:9066:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --connect-timeout 30 localhost:9066'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped6socks]
+address = "127.0.0.1"
+port = 9067
+command = "autossh -M 0 -N -L 0.0.0.0:9067:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9067 --connect-timeout 30 http://planet.i2p'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped8http]
+address = "127.0.0.1"
+port = 9164
+command = "autossh -M 0 -N -L 0.0.0.0:9164:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9164 --connect-timeout 30 http://planet.i2p'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped8server]
+address = "127.0.0.1"
+port = 9166
+command = "autossh -M 0 -N -L 0.0.0.0:9166:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --connect-timeout 30 localhost:9166'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped8socks]
+address = "127.0.0.1"
+port = 9167
+command = "autossh -M 0 -N -L 0.0.0.0:9167:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9167 --connect-timeout 30 http://planet.i2p'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[tormapped6]
+address = "127.0.0.1"
+port = 9053
+command = "autossh -M 0 -N -L 9053:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9053 --connect-timeout 20 icanhazip.com'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 20
+
+[tormapped8]
+address = "127.0.0.1"
+port = 9054
+command = "autossh -M 0 -N -L 0.0.0.0:9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
+test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9054 --connect-timeout 20 icanhazip.com'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 20
+
+[haproxy_prom_mapped]
+address = "127.0.0.1"
+port = 9099
+command = "autossh -M 0 -N -L 0.0.0.0:9099:127.0.0.1:9099 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
+test_command = "curl -s --connect-timeout 10 localhost:9099"
+test_command_result = "<a href=\"/graph\">Found</a>."
+test_interval = 300
+test_timeout = 10

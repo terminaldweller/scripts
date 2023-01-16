@@ -34,6 +34,12 @@ services:
     entrypoint: ["/docker-entrypoint.sh"]
     cap_drop:
       - ALL
+    healthcheck:
+      test: exit 1
+      interval: 1d
+      timeout: 10s
+      retries: 1
+    restart: unless-stopped
 networks:
   cgitnet:
   bootstrapnet:

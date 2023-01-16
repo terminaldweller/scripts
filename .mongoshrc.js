@@ -24,3 +24,7 @@ function get_mangas() {
 function get_animes() {
   return db.animes.find();
 }
+
+function get_movies() {
+  return db.movies.find();
+}

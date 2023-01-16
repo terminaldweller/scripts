@@ -17,47 +17,29 @@ services:
       - "587:587"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-      # - ./certs:/usr/local/etc/certs:ro
     networks:
       - proxynet
       - metricsnet
-      # - certnet
     restart: unless-stopped
     cap_drop:
       - ALL
-  # certbot:
-  #   image: certbot
-  #   build:
-  #     context: ./certbot
-  #   ports:
-  #     - "127.0.0.1:9080:80"
-  #     - "127.0.0.1:9443:443"
-  #   networks:
-  #     - certnet
-  #   # restart: unless-stopped
-  #   volumes:
-  #     - ./letsencrypt:/etc/letsencrypt
-  #     - ./webroot:/webroot
-  #     - ./certs:/certs
-  #   # command: ["certonly","--test-cert","--webroot","-w","/webroot","-d","chat.terminaldweller.com","--email","thabogre@gmail.com","--non-interactive","--agree-tos"]
-  #   entrypoint: ["/certbot-entrypoint.sh"]
-  #   environment:
-  #     - DOMAIN=chat.terminaldweller.com
-  #     - EMAIL=devi@mail.terminaldweller.com
-  # nginx:
-  #   image: nginx
-  #   ports:
-  #     - "127.0.0.1:8080:80"
-  #   networks:
-  #     - certnet
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./webroot:/usr/share/nginx/html
   # udpproxy:
   #   image: nginx
   #   ports:
   #     - "127.0.0.1:3478:3478/udp"
   #     - "127.0.0.1:5349:5349/udp"
+  #     - "80:80"
+  #     - "443:443"
+  #     - "5222:5222"
+  #     - "5280:5280"
+  #     - "5443:5443"
+  #     - "143:143"
+  #     - "993:993"
+  #     - "110:110"
+  #     - "995:995"
+  #     - "25:25"
+  #     - "465:465"
+  #     - "587:587"
   #   networks:
   #     - proxynet
   #   restart: unless-stopped
@@ -68,12 +50,18 @@ services:
     networks:
       - metricsnet
     restart: unless-stopped
+    ports:
+      - "127.0.0.1:9099:9090"
     volumes:
       - metricsvault:/opt/bitnami/prometheus/data
       - ./conf.yml:/opt/bitnami/prometheus/conf/prometheus.yml:ro
+    environment:
+      - HTTPS_PROXY=socks5h://172.17.0.1:9993
+      - HTTP_PROXY=socks5h://172.17.0.1:9993
+      - ALL_PROXY=socks5h://172.17.0.1:9993
+      - NO_PROXY=localhost,127.0.0.0/8,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16
 networks:
   proxynet:
   metricsnet:
-  # certnet:
 volumes:
   metricsvault:
