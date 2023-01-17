@@ -346,6 +346,7 @@ alias mdcat="turn_green && mdcat --local --fail --paginate"
 alias mariadb="mariadb --safe-updates"
 alias tunneltoprc="vim ~/scripts/.tunneltop.toml"
 alias fixtunneltoprc="cp ~/scripts/.tunneltop.toml ~/.tunneltop.toml"
+alias tokei="tokei --hidden --num-format underscores -s lines"
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

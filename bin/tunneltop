@@ -262,7 +262,6 @@ class TunnelTop:
 
     async def main(self) -> None:
         """entrypoint"""
-        # signal.signal(signal.SIGHUP, self.sighup_handler)
         print(Colors.screen_clear, end="")
         print(Colors.hide_cursor, end="")
 

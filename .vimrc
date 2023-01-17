@@ -1219,11 +1219,12 @@ nnoremap <leader>gt :YcmCompleter GetType<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <leader>gc :YcmCompleter GoToDocumentOutline<CR>
 nnoremap <leader>rr :YcmCompleter RefactorRename<space>
+nnoremap <silent> <leader>ii <Plug>(YCMToggleInlayHints))
 nmap <leader>D <plug>(YCMHover)
 " nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
 " nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 let g:ycm_enable_semantic_highlighting = 1
-let g:ycm_enable_inlay_hints = 1
+let g:ycm_enable_inlay_hints = 0
 let g:ycm_clear_inlay_hints_in_insert_mode = 1
 let g:ycm_echo_current_diagnostic = "virtual-text"
 let g:ycm_enable_diagnostic_highlighting = 1
