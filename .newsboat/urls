@@ -26,6 +26,15 @@ https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=nobitexmarket&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~nobitex"Twitter
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=CVEnew&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~CVEnew"Twitter
 
+# Google Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/264763670533121619 "~Monero"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/3412771701207347411 "~Ethereum"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/13483223157227276101 "~Tor_Network"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/2769088908428192247 "~i2p"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/16765140344737729825 "~TheGreenPlace"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/11780712112899033397 "~Security_Breach"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/8312907097599403294 "~Terminaldweller"Google_Alerts
+
 # (Youtube)
 # Horror
 https://www.youtube.com/feeds/videos.xml?channel_id=UC4QEH0BC7ZQMYIEmr1yAHfQ "~RomNex"youtube

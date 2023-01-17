@@ -49,9 +49,9 @@ Services: N/A
 => http://dqunl5rzlv6skqfklqr4dwi4zph2vqoaennc7qoinqs5mlug4docq2yd.onion/  tor mirror
 => https://keyoxide.org/hkp/9e20464f1ccf3b103249fa93a6a0f5158b3881df  keyoxide
 => https://github.com/terminaldweller.gpg  here
-=> https://terminaldweller.com/keys/gpg_pubkey  here
+=> keys/gpg_pubkey  here
 => https://github.com/terminaldweller.keys  here
-=> https://terminaldweller.com/keys/id_rsa.pub  here
+=> keys/id_rsa_pub  here
 => https://libera.chat  Libera
 => https://oftc.net  OFTC
 => https://rizon.net/  Rizon

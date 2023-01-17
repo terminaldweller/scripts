@@ -17,9 +17,8 @@ services:
       - SETGID
       - SETUID
     volumes:
-      # we have to use the same cert because of TOFU
-      - certs:/.certificates/
-      - ./index.gmi:/srv/index.gmi:ro
+      - certs:/.certificates/:ro
+      - ./srv:/srv:ro
 networks:
   agatenet:
 volumes:

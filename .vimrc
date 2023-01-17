@@ -1459,6 +1459,7 @@ augroup END
 let g:ale_python_black_options = "--line-length 79"
 let b:ale_python_flake8_options = "--ignore=E203,W503"
 let b:ale_python_isort_options = "--multiline 3 --profile black"
+let b:ale_python_mypy_options = "--check-untyped-defs"
 augroup ALEPY
   autocmd!
   autocmd FileType python let b:ale_linters = {'python': ['flake8','mypy', 'pylint', 'bandit']}
