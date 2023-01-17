@@ -5,6 +5,7 @@ import argparse
 import asyncio
 import copy
 import enum
+import os
 import signal
 import sys
 import typing
@@ -21,21 +22,22 @@ class Argparser:  # pylint: disable=too-few-public-methods
             "--config",
             "-c",
             type=str,
-            help="the path to the .tunneltop.toml file",
-            default="/home/devi/.tunneltop.toml",
+            help="The path to the .tunneltop.toml file,"
+            " defaults to $HOME/.tunneltop.toml",
+            default="~/.tunneltop.toml",
         )
         self.parser.add_argument(
             "--noheader",
             "-n",
             type=bool,
-            help="dont print the header",
+            help="Dont print the header in the output",
             default=False,
         )
         self.parser.add_argument(
             "--delay",
             "-d",
             type=float,
-            help="The delay between updates in seconds",
+            help="The delay between redraws in seconds, defaults to 5 seconds",
             default=5,
         )
         self.args = self.parser.parse_args()
@@ -201,8 +203,42 @@ class TunnelTop:
 
         return tasks
 
-    # pylint: disable=unused-argument
-    async def sighup_handler(self, signum, frame):
+    async def sighup_handler_async_worker(self, data_cols_new):
+        """Handles the actual updating of tasks when we get SIGTERM"""
+        for k, value in data_cols_new.items():
+            if k not in self.data_cols:
+                self.tunnel_tasks.append(
+                    asyncio.create_task(
+                        self.run_subshell(value["command"]), name=k
+                    )
+                )
+                await asyncio.sleep(0)
+            else:
+                if (
+                    self.data_cols[k]["command"] != data_cols_new[k]["command"]
+                    or self.data_cols[k]["port"] != data_cols_new[k]["port"]
+                    or self.data_cols[k]["address"]
+                    != data_cols_new[k]["address"]
+                ):
+                    for task in self.tunnel_tasks:
+                        if task.get_name() == k:
+                            task.cancel()
+                    self.data_cols[k] = copy.deepcopy(data_cols_new[k])
+                    self.tunnel_tasks.append(
+                        asyncio.create_task(
+                            self.run_subshell(value["command"]), name=k
+                        )
+                    )
+                    await asyncio.sleep(0)
+
+        for k, _ in self.data_cols.items():
+            if k not in data_cols_new:
+                for task in self.tunnel_tasks:
+                    if task.get_name() == k:
+                        task.cancel()
+                del self.data_cols[k]
+
+    async def sighup_handler(self):
         """SIGHUP handler. we want to reload the config."""
         # type: ignore # pylint: disable=E0203
         data_cols_new: typing.Dict[str, typing.Dict[str, str]] = {}
@@ -222,47 +258,17 @@ class TunnelTop:
                     "stdout": "",
                     "stderr": "",
                 }
-
-        for k, value in data_cols_new.items():
-            if k not in self.data_cols:
-                self.tunnel_tasks.append(
-                    asyncio.create_task(
-                        self.run_subshell(value["command"]), name=k
-                    )
-                )
-                await asyncio.sleep(0)
-            else:
-                if (
-                    self.data_cols[k]["command"] != data_cols_new[k]["command"]
-                    or self.data_cols[k]["port"] != data_cols_new[k]["port"]
-                    or self.data_cols[k]["address"]
-                    != data_cols_new[k]["address"]
-                ):
-                    for task in self.tunnel_tasks:
-                        if task.get_name() == k:
-                            task.cancel()
-                        self.data_cols[k] = copy.deepcopy(data_cols_new[k])
-                        self.tunnel_tasks.append(
-                            asyncio.create_task(
-                                self.run_subshell(value["command"]), name=k
-                            )
-                        )
-                        await asyncio.sleep(0)
-
-        for k, _ in self.data_cols.items():
-            if k not in data_cols_new:
-                for task in self.tunnel_tasks:
-                    if task.get_name() == k:
-                        task.cancel()
-                del self.data_cols[k]
+        await self.sighup_handler_async_worker(data_cols_new)
 
     async def main(self) -> None:
         """entrypoint"""
-        signal.signal(signal.SIGHUP, self.sighup_handler)
+        # signal.signal(signal.SIGHUP, self.sighup_handler)
         print(Colors.screen_clear, end="")
         print(Colors.hide_cursor, end="")
 
-        with open(self.argparser.args.config, "rb") as conf_file:
+        with open(
+            os.path.expanduser(self.argparser.args.config), "rb"
+        ) as conf_file:
             data = tomllib.load(conf_file)
             for key, value in data.items():
                 self.data_cols[key] = {
@@ -279,6 +285,11 @@ class TunnelTop:
                     "stderr": "",
                 }
 
+        loop = asyncio.get_event_loop()
+        loop.add_signal_handler(
+            signal.SIGHUP,
+            lambda: asyncio.create_task(self.sighup_handler()),
+        )
         self.tunnel_tasks = await self.tunnel_procs()
 
         while True:
@@ -300,8 +311,8 @@ class TunnelTop:
                 print(line)
 
             await asyncio.sleep(self.argparser.args.delay)
-            # print(Colors.screen_clear, end="")
-            # print(Colors.hide_cursor, end="")
+            print(Colors.screen_clear, end="")
+            print(Colors.hide_cursor, end="")
 
 
 if __name__ == "__main__":
