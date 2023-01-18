@@ -11,6 +11,12 @@ https://www.ecliptik.com/feed.xml "~Ecliptik"Blog
 gemini://mozz.us/journal/atom.xml "~GEMINI"MOZZ
 gemini://midnight.pub/feed.xml "~GEMINI"Midnight_Pub
 
+https://rssgen.terminaldweller.com/?action=display&bridge=BinanceBridge&format=Atom "~Binance_Blog"Binance_Blog
+https://rssgen.terminaldweller.com/?action=display&bridge=HaveIBeenPwnedBridge&order=dateAdded&item_limit=20&format=Atom "~HIBP"HIBP
+https://rssgen.terminaldweller.com/?action=display&bridge=OpenwrtSecurityBridge&format=Atom "~OpenWRT_Sec_Ad"OpenWRT_Sec_Ad
+https://rssgen.terminaldweller.com/?action=display&bridge=MozillaSecurityBridge&format=Atom "~Moz_Sec_Ad"Moz_Sec_Ad
+https://rssgen.terminaldweller.com/?action=display&bridge=WikiLeaksBridge&category=-News-&format=Atom "~Wikileaks"Wikileaks
+
 # (Twitter)
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=_margery28_&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"Twitter
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PancakeSwap&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Pancakeswap"Twitter

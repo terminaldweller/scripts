@@ -3,7 +3,7 @@
 #
 #
 # Enable caching of up to 1000 output entries
-# cache-size=5
+cache-size=100
 
 ## ttl for root page
 cache-root-ttl=5
@@ -15,7 +15,7 @@ cache-repo-ttl=5
 cache-dynamic-ttl=5
 
 ## ttl for static pages (addressed by SHA-1)
-cache-static-ttl=-1
+cache-static-ttl=-5
 
 # css
 css=/cgit/cgit.css
@@ -42,6 +42,8 @@ enable-log-linecount=1
 
 enable-remote-branches=1
 enable-tree-linenumbers=1
+
+enable-blame=1
 
 # summary info
 summary-branches=10
