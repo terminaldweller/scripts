@@ -5,4 +5,4 @@ set -x
 . /bootstrap.sh
 bootstrap
 update_repos
-crond -n -s -P
+crond -f -l 2

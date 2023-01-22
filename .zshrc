@@ -20,11 +20,9 @@ autoload -U compinit && compinit -u
 eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
-unalias dr
-alias gd="git diff --color-words"
-
 # enable aliases with sudo in the alias
 alias sudo="sudo "
+alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=9600 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
 alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias torw3m='torsocks --port 9053 w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias rm="rm -I --one-file-system --preserve-root=all"
@@ -337,9 +335,9 @@ alias mount="grc mount"
 alias picocom="picocom --escape b"
 # https://wiki.slipfox.xyz/wiki/ANSI_escape_code#OSC_(Operating_System_Command)_sequences)
 # https://github.com/sos4nt/dynamic-colors
-alias turn_green='echo -e "\033]10;#005f5f\007"'
-alias turn_blue='echo -e "\033]10;#005f87\007"'
-alias turn_white='echo -e "\033]10;#c0c0c0\007"'
+alias turn_green='echo -e "\033]10;#005f5f\007" '
+alias turn_blue='echo -e "\033]10;#005f87\007" '
+alias turn_white='echo -e "\033]10;#c0c0c0\007" '
 alias bandwhich="turn_green && bandwhich"
 alias powertop="turn_green && powertop"
 alias mdcat="turn_green && mdcat --local --fail --paginate"
@@ -724,13 +722,13 @@ dff() {
 }
 
 jcurl() {
-  torsocks --port 9054 curl -s --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
+  curl --socks5 socks5h://127.0.0.1:9054 -s --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 xcurl() {
-  torsocks --port 9054 curl -s --connect-timeout 10 "$@" | xml_pp | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | $PAGER
+  curl --socks5 socks5h://127.0.0.1:9054 -s --connect-timeout 10 "$@" | xml_pp -s nice | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 hcurl() {
-  torsocks --port 9054 curl -s --connect-timeout 10 -i -D /dev/stderr --user-agent "$(get_random_ua.sh)" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE | $PAGER
+  curl --socks5 socks5h://127.0.0.1:9054 -s --connect-timeout 10 -i -D /dev/stderr --user-agent "$(get_random_ua.sh)" "$@" | pygmentize -l html -P style=$PYGMENTIZE_STYLE | $PAGER
 }
 
 # these i stole from junegunn to try out

@@ -2,7 +2,7 @@
 address = "127.0.0.1"
 port = 9997
 command = "autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9997 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9997 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -12,7 +12,7 @@ test_timeout = 10
 address = "127.0.0.1"
 port = 9995
 command = "autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=no -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9995 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9995 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -22,7 +22,7 @@ test_timeout = 10
 address = "127.0.0.1"
 port = 9990
 command = "autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9990 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9990 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -32,7 +32,7 @@ test_timeout = 10
 address = "127.0.0.1"
 port = 9989
 command = "autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9989 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9989 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -102,7 +102,7 @@ test_timeout = 30
 address = "127.0.0.1"
 port = 9053
 command = "autossh -M 0 -N -L 9053:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9053 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9053 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -112,7 +112,7 @@ test_timeout = 20
 address = "127.0.0.1"
 port = 9054
 command = "autossh -M 0 -N -L 0.0.0.0:9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9054 https://icanhazallips.terminaldweller.com'
+test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9054 https://icanhazallips.terminaldweller.com:9380'
 # test_command = ""
 test_command_result = "200"
 test_interval = 300

@@ -1,13 +1,14 @@
 hosts:
   - jabber.terminaldweller.com
 
-auth_method: internal
+auth_method: internal 
 auth_password_format: scram # pragma: allowlist secret
 # anonymous_protocol: both
 allow_multiple_connections: true
 loglevel: 5
 log_rotate_size: 10485760
 log_rotate_count: 1
+default_db: mnesia
 
 define_macro:
   'TLS_CIPHERS': "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:RSA-PSK-AES256-GCM-SHA384:DHE-PSK-AES256-GCM-SHA384:RSA-PSK-CHACHA20-POLY1305:DHE-PSK-CHACHA20-POLY1305:ECDHE-PSK-CHACHA20-POLY1305:AES256-GCM-SHA384:PSK-AES256-GCM-SHA384:PSK-CHACHA20-POLY1305:RSA-PSK-AES128-GCM-SHA256:DHE-PSK-AES128-GCM-SHA256:AES128-GCM-SHA256:PSK-AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:ECDHE-PSK-AES256-CBC-SHA384:ECDHE-PSK-AES256-CBC-SHA:SRP-RSA-AES-256-CBC-SHA:SRP-AES-256-CBC-SHA:RSA-PSK-AES256-CBC-SHA384:DHE-PSK-AES256-CBC-SHA384:RSA-PSK-AES256-CBC-SHA:DHE-PSK-AES256-CBC-SHA:AES256-SHA:PSK-AES256-CBC-SHA384:PSK-AES256-CBC-SHA:ECDHE-PSK-AES128-CBC-SHA256:ECDHE-PSK-AES128-CBC-SHA:SRP-RSA-AES-128-CBC-SHA:SRP-AES-128-CBC-SHA:RSA-PSK-AES128-CBC-SHA256:DHE-PSK-AES128-CBC-SHA256:RSA-PSK-AES128-CBC-SHA:DHE-PSK-AES128-CBC-SHA:AES128-SHA:PSK-AES128-CBC-SHA256:PSK-AES128-CBC-SHA"
@@ -45,9 +46,9 @@ listen:
     access: c2s
     starttls: true
     starttls_required: true
-    #protocol_options: 'TLS_OPTIONS'
-    #ciphers: 'TLS_CIPHERS'
-    #dhfile: 'DH_FILE'
+    protocol_options: 'TLS_OPTIONS'
+    ciphers: 'TLS_CIPHERS'
+    dhfile: 'DH_FILE'
     zlib: false
     tls_compression: false
   - port: 5223
@@ -56,6 +57,9 @@ listen:
     max_stanza_size: 65536
     shaper: c2s_shaper
     access: c2s
+    protocol_options: 'TLS_OPTIONS'
+    ciphers: 'TLS_CIPHERS'
+    dhfile: 'DH_FILE'
     tls: true
     tls_compression: false
   - port: 5269
@@ -77,6 +81,8 @@ listen:
       '/upload': mod_http_upload
       '/ws': ejabberd_http_ws
       '/oauth': ejabberd_oauth
+      '/.well-known/host-meta': mod_host_meta
+      '/.well-known/host-meta.json': mod_host_meta
   - port: 5080
     ip: '0.0.0.0'
     module: ejabberd_http
@@ -133,9 +139,9 @@ access_rules:
   configure:
     allow: admin
   muc_create:
-    allow: local
+    allow: admin
   pubsub_createnode:
-    allow: local
+    allow: admin
   trusted_network:
     allow: loopback
 
@@ -201,7 +207,7 @@ max_fsm_queue: 10000
 acme:
   # for auto ACME requests, we need this to be true
   auto: false
-  contact:
+  contact: 
     - mailto:devi@terminaldweller.com
   ca_url: https://acme-v02.api.letsencrypt.org/directory
 
@@ -298,3 +304,6 @@ modules:
   mod_vcard_xupdate: {}
   mod_version:
     show_os: false
+  mod_host_meta:
+    bosh_service_url: "https://@HOST@:5443/bosh"
+    websocket_url: "wss://@HOST@:5443/ws"

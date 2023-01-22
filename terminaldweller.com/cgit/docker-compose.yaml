@@ -8,7 +8,7 @@ services:
       - cgitnet
     ports:
       - "127.0.0.1:8041:80"
-      - "8042:22"
+      - "127.0.0.1:8042:22"
       - "8043:443"
     restart: unless-stopped
     environment:
@@ -22,7 +22,7 @@ services:
       # - /etc/hosts:/etc/hosts:ro
       # - /etc/localtime:/etc/localtime:ro
       - ./cgit.conf:/etc/lighttpd/cgit.conf:ro
-      - /etc/letsencrypt/archive/git.terminaldweller.com/ssl.pem:/etc/certs/git.pem:ro
+      - /etc/letsencrypt/archive/git.terminaldweller.com/:/etc/certs/:ro
   bootstrap:
     image: bootstrap
     build:
@@ -32,8 +32,8 @@ services:
     volumes:
       - storage:/etc/gitrepos/
     entrypoint: ["/docker-entrypoint.sh"]
-    cap_drop:
-      - ALL
+      # cap_drop:
+      # - ALL
     healthcheck:
       test: exit 1
       interval: 1d

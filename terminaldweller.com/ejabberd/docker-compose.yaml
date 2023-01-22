@@ -1,7 +1,7 @@
 version: "3.4" 
 services:
   ejabberd:
-    image: ejabberd/ecs:21.07
+    image: ejabberd/ecs:23.01
     networks:
       - ejabberdnet
     ports:
@@ -33,5 +33,5 @@ volumes:
   mnesia_db:
   vault:
 # openssl dhparam -out dhparams.pem 4096
-# certbot certonly --standalone -d chat.terminaldweller.com -m devi@terminaldweller.com --agree-tos --noninteractive --dryrun
+# certbot certonly --standlone -d chat.terminaldweller.com -e devi@terminaldweller.com --agree-tos --noninteractive
 # docker exec -it 6eebd16a2385 bin/ejabberdctl register admin chat.terminaldweller.com password

@@ -14,7 +14,6 @@ REPOS="cgrep \
   devourer \
   hived \
   mdrtl \
-  simplex \
   scripts \
   vagrantboxes \
   dockerimages \

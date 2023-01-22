@@ -99,7 +99,7 @@ env -i \
   --new-session \
   --die-with-parent \
   --hostname RESTRICTED \
-  --seccomp 9 \
   mednafen \
-  "$@" \
-  9<"/tmp/seccomp_logging_filter.bpf"
+  "$@"
+  # --seccomp 9 \
+  # 9<"/tmp/seccomp_logging_filter.bpf"
