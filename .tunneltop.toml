@@ -68,6 +68,24 @@ test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
+[i2pmapped6irssilitia]
+address = "127.0.0.1"
+port = 9068
+command = "autossh -M 0 -N -L 0.0.0.0:9068:127.0.0.1:6668 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = ""
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[i2pmapped6irssipostman]
+address = "127.0.0.1"
+port = 9069
+command = "autossh -M 0 -N -L 0.0.0.0:9069:127.0.0.1:6669 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = ""
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
 [i2pmapped8http]
 address = "127.0.0.1"
 port = 9164

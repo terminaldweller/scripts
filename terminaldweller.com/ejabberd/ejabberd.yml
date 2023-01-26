@@ -66,6 +66,14 @@ listen:
     ip: '0.0.0.0'
     module: ejabberd_s2s_in
     max_stanza_size: 524288
+  - port: 5270
+    ip: '0.0.0.0'
+    module: ejabberd_s2s_in
+    max_stanza_size: 524288
+    protocol_options: 'TLS_OPTIONS'
+    ciphers: 'TLS_CIPHERS'
+    dhfile: 'DH_FILE'
+    tls: true
   - port: 5443
     ip: '0.0.0.0'
     module: ejabberd_http

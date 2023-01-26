@@ -138,7 +138,8 @@ alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
 alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi tor_irssi"
+alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
+alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
   docker \
   run \
@@ -176,7 +177,6 @@ alias lsdrc="vim ~/scripts/.config/lsd/config.yaml"
 alias fixlsdrc="cp ~/scripts/.config/lsd/config.yaml ~/.config/lsd/config.yaml"
 alias cygwin="/mnt/d/home/apps/cygwin/bin/bash.exe -l -i"
 alias farmanager="/mnt/c/Program\ Files/Far\ Manager/Far.exe"
-alias pwsh="/mnt/c/Program\ Files/PowerShell/7/pwsh.exe"
 alias wincmd="/mnt/c/Windows/System32/runas.exe /profile /user:administrator cmd.exe"
 alias xonshrc="vim ~/scripts/.xonshrc"
 alias fixxonshrc="cp ~/scripts/.xonshrc ~/.xonshrc"
@@ -222,8 +222,8 @@ alias inputrc="vim ~/scripts/.inputrc"
 alias fixinputrc="cp ~/scripts/.inputrc ~/.inputrc"
 alias gdbinit="vim ~/scripts/.gdbinit"
 alias fixgdbinit="cp ~/scripts/.gdbinit ~/.gdbinit"
-alias d="ALL_PROXY=socks5://127.0.0.1:9995 grc docker"
-alias dc="ALL_PROXY=socks5://127.0.0.1:9995 grc docker-compose"
+alias d="ALL_PROXY=socks5h://127.0.0.1:9995 grc docker"
+alias dc="ALL_PROXY=socks5h://127.0.0.1:9995 grc docker-compose"
 alias zh_freebsd="zssh dev@192.168.90.15"
 alias zh_linux="zssh dev@192.168.90.17"
 alias zh_router_root="zssh root@192.168.90.71"
@@ -338,13 +338,18 @@ alias picocom="picocom --escape b"
 alias turn_green='echo -e "\033]10;#005f5f\007" '
 alias turn_blue='echo -e "\033]10;#005f87\007" '
 alias turn_white='echo -e "\033]10;#c0c0c0\007" '
-alias bandwhich="turn_green && bandwhich"
-alias powertop="turn_green && powertop"
-alias mdcat="turn_green && mdcat --local --fail --paginate"
+alias bandwhich="bandwhich"
+alias powertop="powertop"
+alias mdcat="mdcat --local --fail --paginate"
 alias mariadb="mariadb --safe-updates"
 alias tunneltoprc="vim ~/scripts/.tunneltop.toml"
 alias fixtunneltoprc="cp ~/scripts/.tunneltop.toml ~/.tunneltop.toml"
 alias tokei="tokei --hidden --num-format underscores -s lines"
+
+function ccgrep() {
+  EXTRA_ARG_BEFORE=$(llvm-config --libdir)/clang/$(llvm-config --version)/include
+  cgrep --extra-arg-before="-I${EXTRA_ARG_BEFORE}" "$@"
+}
 
 # change the 4th terminal color to #0000ff
 # echo -e '\e]P40000ff'

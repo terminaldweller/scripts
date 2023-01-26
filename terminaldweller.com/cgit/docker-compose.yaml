@@ -8,12 +8,13 @@ services:
       - cgitnet
     ports:
       - "127.0.0.1:8041:80"
-      - "127.0.0.1:8042:22"
+      - "8042:22"
       - "8043:443"
     restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
+      - PYGMENTIZE_STYLE=paraiso-dark
     volumes:
       - ./cgit/cgitrc:/etc/cgitrc:ro
       - storage:/home/git/repositories
@@ -23,6 +24,8 @@ services:
       # - /etc/localtime:/etc/localtime:ro
       - ./cgit.conf:/etc/lighttpd/cgit.conf:ro
       - /etc/letsencrypt/archive/git.terminaldweller.com/:/etc/certs/:ro
+      - cache:/cgit_cache
+      - ./authorized_keys:/home/git/.ssh/authorized_keys
   bootstrap:
     image: bootstrap
     build:
@@ -34,14 +37,15 @@ services:
     entrypoint: ["/docker-entrypoint.sh"]
       # cap_drop:
       # - ALL
-    healthcheck:
-      test: exit 1
-      interval: 1d
-      timeout: 10s
-      retries: 1
+      # healthcheck:
+      # test: exit 1
+      # interval: 1d
+      # timeout: 10s
+      # retries: 1
     restart: unless-stopped
 networks:
   cgitnet:
   bootstrapnet:
 volumes:
   storage:
+  cache:

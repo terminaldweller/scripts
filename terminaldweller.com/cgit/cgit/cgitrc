@@ -5,6 +5,7 @@
 # Enable caching of up to 1000 output entries
 # cache-size=100
 
+cache-root=/cgit_cache
 ## ttl for root page
 cache-root-ttl=5
 
@@ -62,7 +63,7 @@ max-stats=year
 local-time=1
 
 root-title=cGit
-root-desc=Keep ALL the stuff in VERSION CONTROL!!
+root-desc=terminaldweller's personal git
 root-readme=/var/www/about.html
 # footer=/var/www/footer.html
 
@@ -84,7 +85,7 @@ about-filter=/usr/lib/cgit/filters/about-formatting.sh
 snapshots=tar.gz zip
 
 # Specify some default clone urls using macro expansion
-clone-url=ssh://git@hostname.local:64822~repositories/$CGIT_REPO_URL git@hostname.local:/home/git/repositories/$CGIT_REPO_URL
+clone-url=https://git.terminaldweller.com/$CGIT_REPO_URL ssh://git@git.terminaldweller.com/$CGIT_REPO_URL git@git.terminaldweller.com:$CGIT_REPO_URL
 
 ##
 ## List of common mimetypes

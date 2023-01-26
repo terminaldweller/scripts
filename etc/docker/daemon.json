@@ -1,5 +1,6 @@
 {
     "data-root": "/home/devi/storage/ssd1/docker",
+    "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2375"],
     "runtimes": {
         "nvidia": {
             "args": [],

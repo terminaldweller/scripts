@@ -1507,6 +1507,11 @@ augroup ALEDOCKER
   autocmd!
   autocmd FileType Dockerfile let b:ale_linters = {'Dockerfile': ['hadolint']}
 augroup END
+let b:ale_powershell_powershell_executable = "/home/devi/bin/pwsh"
+augroup ALEPWSH
+  autocmd!
+  autocmd FileType ps1 let b:ale_linters = {'ps1': ['powershell']}
+augroup END
 " let b:ale_sh_shfmt_options = '-w -p -i=2 -bn -ci -sr -kp'
 let b:ale_sh_shfmt_options = "-w -"
 let b:ale_sh_shellcheck_options = '-x'
