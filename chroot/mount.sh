@@ -10,7 +10,7 @@ sudo mount -t ext4 -U a27a2530-a37e-4bb3-9f4b-4b3975253e43 /home/devi/storage/ss
 sudo mount -o bind /home/devi/storage/ssd1/nix/store /nix/store
 
 sudo mkdir -p /tmp/tmpfs4_1
-sudo mount -t tmpfs -o size=4000M tmpfs /tmp/tmpfs4_1
+sudo mount -t tmpfs -o size=4096M tmpfs /tmp/tmpfs4_1
 sudo chown devi:devi /tmp/tmpfs4_1
 # virsh pool-define-as --name ramdisk --type dir --target /tmp/tmpfs4_1
 virsh pool-start ramdisk

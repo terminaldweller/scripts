@@ -17,6 +17,9 @@ https://rssgen.terminaldweller.com/?action=display&bridge=OpenwrtSecurityBridge&
 https://rssgen.terminaldweller.com/?action=display&bridge=MozillaSecurityBridge&format=Atom "~Moz_Sec_Ad"Moz_Sec_Ad
 https://rssgen.terminaldweller.com/?action=display&bridge=WikiLeaksBridge&category=-News-&format=Atom "~Wikileaks"Wikileaks
 
+https://rssgen.terminaldweller.com/?action=display&bridge=RedditBridge&context=single&r=i2p&f=&score=&d=hot&search=&format=Atom "~I2P_Reddit"Reddit
+https://rssgen.terminaldweller.com/?action=display&bridge=RedditBridge&context=single&r=tor&f=&score=&d=hot&search=&format=Atom "~Tor_Reddit"Reddit
+
 # (Twitter)
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=_margery28_&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"Twitter
 https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PancakeSwap&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Pancakeswap"Twitter
@@ -102,6 +105,15 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA "~F
 https://www.youtube.com/feeds/videos.xml?channel_id=UCW6xlqxSY3gGur4PkGPEUeA "~Seytonic"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCqajGNTzlQLk5uRsD8R5m3Q "~Wolf_Lord_Rho"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCUdkjbeIFea0qUSgwR1CUOg "~Studying_With_Alex"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCZgt6AzoyjslHTC9dz0UoTw "~ByteByteGo"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCavTvSwEoRABvnPtLg0e6LQ "~Crypto_Tips"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC3ltptWa0xfrDweghW94Acg "~Karl_Jobst"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUxmjSBn7Blx6eWpeC0I4xQ "~Maryam_Sadeghi"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCaiL2GDNpLYH6Wokkk1VNcg "~mCoding"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCd26IHBHcbtxD7pUdnIgiCw "~Mike_Levin"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCS4FAVeYW_IaZqAbqhlvxlA "~Context_Free"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYVU6rModlGxvJbszCclGGw "~Rob_Braxman_Tech"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVik6mzTCurdJmvdj5dCa7A "~My_PlayHouse"youtube
 
 https://www.youtube.com/feeds/videos.xml?user=g297125009 "~Gavin_Freeborn"youtube
 https://www.youtube.com/feeds/videos.xml?user=Hak5Darren "~Hak_5"youtube
@@ -109,7 +121,7 @@ https://www.youtube.com/feeds/videos.xml?user=GISIGeometry "~Hussein_Nasser"yout
 https://www.youtube.com/feeds/videos.xml?user=geerlingguy "~Jeff_Geerling"youtube
 https://www.youtube.com/feeds/videos.xml?user=JtheLinuxguy "~Learn_Linux_TV"youtube
 https://www.youtube.com/feeds/videos.xml?user=NetworkChuck "~NetworkChuck"youtube
-# Misc
+
 https://www.youtube.com/feeds/videos.xml?channel_id=UC0Whg8Zz7TT1VSpWeCjghKg "~-sokoninaru-そこに鳴る"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3M7l8ved_rYQ45AVzS0RGA "~The_Jimmy_Dore_Show"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC6gD8kk_Z_5bX2PcRk2fwDg "~Pagefire"youtube

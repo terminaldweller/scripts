@@ -8,5 +8,6 @@ mount | grep mnt
 sudo mount -t proc proc /mnt/proc
 sudo mount -t sysfs sys /mnt/sys
 sudo mount -B /dev /mnt/dev
-sudo mount -t devpts pts /mnt/dev/pts
+# sudo mount -t devpts pts /mnt/dev/pts
+sudo mount -t devpts none /mnt/dev/pts -o ptmxmode=0666,newinstance
 sudo chroot /mnt /bin/bash
