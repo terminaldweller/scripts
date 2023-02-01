@@ -10,6 +10,22 @@ set move = no
 set ssl_starttls=yes
 set ssl_force_tls=yes
 
+# crypto options for autosigning and autoencrypting
+set crypt_autopgp=yes
+set crypt_autosign=yes
+
+set crypt_opportunistic_encrypt=yes
+set crypt_opportunistic_encrypt_strong_keys=yes
+
+set crypt_protected_headers_read=yes
+set crypt_protected_headers_subject=yes
+set crypt_protected_headers_write=yes
+
+set crypt_reply_encrypt=yes
+set crypt_reply_sign=yes
+set crypt_reply_sign_encrypted=yes
+set crypt_timestamp=yes
+
 folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
 folder-hook 'account.self' 'source ~/.mutt/account.self'
 folder-hook 'account.zharf' 'source ~/.mutt/account.zharf'

@@ -109,6 +109,7 @@ alias vpn7="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ub
 alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.130.47.208"
 alias vpn9="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -i ~/.ssh/id_rsa -p 3333 ubuntu@185.130.47.81 ssh -tt -i /home/ubuntu/.ssh/id_rsa_lv2 2a07:e01:3:1c4::1 -p 3333 -l ubuntu"
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt 185.126.202.69 -l ubuntu -p 1022"
+alias vpnvv="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.244.29.79"
 alias -g DOCKER_HOST_VPS="ssh://ubuntu@87.236.209.206:1022"
 alias -g DOCKER_HOST_VPN="ssh://rooot@192.99.102.52:1022"
 alias -g DOCKER_HOST_VPN2="ssh://rooot@145.239.165.137:22"
@@ -325,7 +326,6 @@ alias gpg2="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:99
 alias gpg="HTTP_PROXY=socks5://127.0.0.1:9995 HTTPS_PROXY=socks5://127.0.0.1:9995 gpg"
 # alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,a,b,u,e,D,m,S,s,P'
 alias lxctop='watch -x -c -d -t -n 5 lxc list -c n,t,4,volatile.eth0.hwaddr:MAC,a,b,u,e,D,m,S,s,P -f compact type=container status=running'
-alias virttop='watch -x -c -t -n 5 virttop'
 alias iptables="grc iptables"
 alias ping="grc ping"
 alias list_iptables="sudo iptables -nvL --line-numbers"
