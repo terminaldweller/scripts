@@ -207,9 +207,11 @@ channels = (
   # { name = "#openssh"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#gdb"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#openbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#lobsters"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#gnupg"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#znc"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#go-nuts"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#opennic"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "##terminaldweller"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#voidlinux"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#CataclysmDDA"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
@@ -306,7 +308,7 @@ statusbar = {
 
     # treated "normally", you could change the time/user name to whatever
     time = "{sb $Z}";
-    user = "%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00{sbaway $A}}%N";
+    user = "%9%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00{sbaway $A}}%N";
 
     # treated specially .. window is printed with non-empty windows,
     # window_empty is printed with empty windows
@@ -315,7 +317,7 @@ statusbar = {
     prompt = "please%z005f87{%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87}%n";
     prompt_empty = "you%z005f87%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%n";
 
-    topic = " $topic";
+    topic = "%Z005f00%k%z005f00%N%Z005f00%N %Z5f5faf%9 $topic%N";
     topic_empty = " Irssi v$J - http://www.irssi.org";
 
     # all of these treated specially, they're only displayed when needed
@@ -327,6 +329,8 @@ statusbar = {
     # vim_mode
     vim_mode_1 = "%z005f5f%Zffffff%z005f5f%k%9 $vim_cmd_mode%N";
     vim_windows_1 = "%Z005f5f%0%z005f5f%k%9 $vim_wins%z005f5f";
+
+    itime = "%Z005f00%k%z005f00%9 $0 %z005f00";
   };
 
   # there's two type of statusbars. root statusbars are either at the top
@@ -354,11 +358,11 @@ statusbar = {
         user = { };
         window = { };
         window_empty = { };
-        mh_sbsplitmode = { };
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
         otr = { priority = "100"; alignment = "right"; };
         usercount = { };
+        inputlength = { alignment = "right"; };
         rotator = { alignment = "right"; };
         vim_windows_1 = { alignment = "right"; };
         vim_mode_1 = { priority = "100"; alignment = "right"; };
@@ -406,6 +410,7 @@ statusbar = {
       items = {
         barstart = { };
         timezones = { };
+        itime = { priority = "1"; alignment = "right"; };
         barend = { alignment = "right"; };
       };
     };
@@ -438,9 +443,26 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_3 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_3 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_4 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_4 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
+  misc = {
+    split_line_end = "↪";
+  }
   core = {
     real_name = "john doe";
     user_name = "devi";
@@ -456,7 +478,8 @@ settings = {
     theme = "solarized-powerline";
     hilight_color = "%Zd75f5f";
     emphasis_italics = "yes";
-    emphasis_replace = "yes";
+    emphasis_multiword = "yes";
+    emphasis_replace = "no";
     show_names_on_join = "no";
   };
   "fe-text" = { actlist_sort = "refnum"; };
@@ -508,6 +531,12 @@ settings = {
     start_cmd = "yes";
     vim_mode_start_cmd = "yes";
     vim_mode_max_undo_lines = "100";
+    # inputlength
+    inputlength_width = "0";
+    inputlength_padding_char = "%Z005f00  ";
+    # bitlbee_typing_notice
+    bitlbee_send_typing = "0";
+    bitlbee_typing_allwin = "1";
   };
   "irc/dcc" = {
     dcc_download_path = "~/.irssi/downloads/";
@@ -593,11 +622,13 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#news" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#mednafen" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#forgefed" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#lobsters" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#s6" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#postgresql" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#meta" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gemini" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#llvm" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#opennic" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#selfhosting" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irc" ); },
   { level = "CTCPS"; },

@@ -1,74 +1,83 @@
-[socks5ir]
+[color]
+header_fg = 4
+header_bg = 0
+active_fg = 23
+active_bg = 0
+disabled_fg = 8
+disabled_bg = 0
+timeout_fg = 63
+timeout_bg = 0
+unknown_fg = 38
+unknown_bg = 0
+down_fg = 208
+down_bg = 0
+box_fg = 22
+box_bg = 0
+
+[tunnel.socks5ir]
 address = "127.0.0.1"
 port = 9997
 command = "autossh -M 0 -N -D 9997 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9997 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9997 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
 
-[socks5_3]
+[tunnel.socks5_3]
 address = "127.0.0.1"
 port = 9995
 command = "autossh -M 0 -N -D 0.0.0.0:9995 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o VerifyHostKeyDNS=no -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9995 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9995 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
 
-[socks5_5]
+[tunnel.socks5_5]
 address = "127.0.0.1"
 port = 9990
 command = "autossh -M 0 -N -D 0.0.0.0:9990 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9990 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9990 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
 
-[socks5_8]
+[tunnel.socks5_8]
 address = "127.0.0.1"
 port = 9989
 command = "autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9989 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9989 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
 
-[i2pmapped6http]
+[tunnel.i2pmapped6http]
 address = "127.0.0.1"
 port = 9064
 command = "autossh -M 0 -N -L 0.0.0.0:9064:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9064 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9064 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped6server]
+[tunnel.i2pmapped6server]
 address = "127.0.0.1"
 port = 9066
 command = "autossh -M 0 -N -L 0.0.0.0:9066:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 localhost:9066'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9066'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped6socks]
+[tunnel.i2pmapped6socks]
 address = "127.0.0.1"
 port = 9067
 command = "autossh -M 0 -N -L 0.0.0.0:9067:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9067 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9067 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped6irssilitia]
+[tunnel.i2pmapped6irssilitia]
 address = "127.0.0.1"
 port = 9068
 command = "autossh -M 0 -N -L 0.0.0.0:9068:127.0.0.1:6668 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
@@ -77,7 +86,7 @@ test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped6irssipostman]
+[tunnel.i2pmapped6irssipostman]
 address = "127.0.0.1"
 port = 9069
 command = "autossh -M 0 -N -L 0.0.0.0:9069:127.0.0.1:6669 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
@@ -86,62 +95,101 @@ test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped8http]
+[tunnel.i2pmapped8http]
 address = "127.0.0.1"
 port = 9164
 command = "autossh -M 0 -N -L 0.0.0.0:9164:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9164 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9164 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped8server]
+[tunnel.i2pmapped8server]
 address = "127.0.0.1"
 port = 9166
 command = "autossh -M 0 -N -L 0.0.0.0:9166:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 localhost:9166'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9166'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[i2pmapped8socks]
+[tunnel.i2pmapped8socks]
 address = "127.0.0.1"
 port = 9167
 command = "autossh -M 0 -N -L 0.0.0.0:9167:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9167 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9167 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
 
-[tormapped6]
+[tunnel.i2pmappedvhttp]
+address = "127.0.0.1"
+port = 9264
+command = "autossh -M 0 -N -L 0.0.0.0:9264:127.0.0.1:4444 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.244.29.79"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://127.0.0.1:9264 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[tunnel.i2pmappedvserver]
+address = "127.0.0.1"
+port = 9266
+command = "autossh -M 0 -N -L 0.0.0.0:9266:127.0.0.1:7070 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.244.29.79"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9266'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[tunnel.i2pmappedvsocks]
+address = "127.0.0.1"
+port = 9267
+command = "autossh -M 0 -N -L 0.0.0.0:9267:127.0.0.1:4447 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.244.29.79"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h://127.0.0.1:9267 http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+
+[tunnel.tormapped6]
 address = "127.0.0.1"
 port = 9053
 command = "autossh -M 0 -N -L 9053:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9053 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9053 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
 
-[tormapped8]
+[tunnel.tormapped8]
 address = "127.0.0.1"
 port = 9054
 command = "autossh -M 0 -N -L 0.0.0.0:9054:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
-test_command = 'curl -s -o -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9054 https://icanhazallips.terminaldweller.com:9380'
-# test_command = ""
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9054 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
 
-[haproxy_prom_mapped]
+[tunnel.tormappedv]
+address = "127.0.0.1"
+port = 9055
+command = "autossh -M 0 -N -L 0.0.0.0:9055:127.0.0.1:9050 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.244.29.79"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9055 https://icanhazallips.terminaldweller.com:9380'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 20
+
+[tunnel.haproxy_prom_mapped]
 address = "127.0.0.1"
 port = 9099
 command = "autossh -M 0 -N -L 0.0.0.0:9099:127.0.0.1:9099 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 1022 87.236.209.206"
 test_command = "curl -s localhost:9099"
-# test_command = ""
+test_command_result = "<a href=\"/graph\">Found</a>."
+test_interval = 300
+test_timeout = 10
+
+[tunnel.upnp_2234]
+address = "127.0.0.1"
+port = 2234
+command = "autossh -M 0 -N -L 0.0.0.0:2234:127.0.0.1:2234 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+test_command = ""
 test_command_result = "<a href=\"/graph\">Found</a>."
 test_interval = 300
 test_timeout = 10

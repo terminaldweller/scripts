@@ -2,14 +2,16 @@ https://www.reddit.com/r/CryptoCurrency.rss
 http://feeds.feedburner.com/abseilio
 https://www.cyberciti.biz/atom/atom.xml
 https://www.semicolonandsons.com/feed
-https://blog.terminaldweller.com/rss/feed "~terminaldweller"Blog
-https://suckless.org/atom.xml "~Suckless"Suckless
+https://blog.terminaldweller.com/rss/feed "~terminaldweller"
+https://suckless.org/atom.xml "~Suckless"
 https://microservices.io/feed.xml
-https://news.ycombinator.com/rss "~HN"HN
-https://www.ecliptik.com/feed.xml "~Ecliptik"Blog
+https://news.ycombinator.com/rss "~HN"
+https://www.ecliptik.com/feed.xml "~Ecliptik"
+https://www.privacytools.io/guides/rss.xml "~Privacy_Tools"
 
-gemini://mozz.us/journal/atom.xml "~GEMINI"MOZZ
-gemini://midnight.pub/feed.xml "~GEMINI"Midnight_Pub
+"exec:gemget gemini://mozz.us/journal/atom.xml --output -" "~MOZZ"GEMINI
+"exec:gemget gemini://midnight.pub/feed.xml --output -" "~Midnight_Pub"GEMINI
+"exec:torsocks --address 127.0.0.1 --port 9054 curl gopher://gopher.black:70/0/rss.xml" "~Gopher_Black"GOPHER
 
 https://rssgen.terminaldweller.com/?action=display&bridge=BinanceBridge&format=Atom "~Binance_Blog"Binance_Blog
 https://rssgen.terminaldweller.com/?action=display&bridge=HaveIBeenPwnedBridge&order=dateAdded&item_limit=20&format=Atom "~HIBP"HIBP
@@ -116,6 +118,8 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCS4FAVeYW_IaZqAbqhlvxlA "~C
 https://www.youtube.com/feeds/videos.xml?channel_id=UCYVU6rModlGxvJbszCclGGw "~Rob_Braxman_Tech"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVik6mzTCurdJmvdj5dCa7A "~My_PlayHouse"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCdSnjmLUUe_NT4ml9OkUi1A "~NewWorldReview"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCpFFItkfZz1qz5PpHpqzYBw "~Nexpo"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9PIn6-XuRKZ5HmYeu46AIw "~Barely_Sociable"youtube
 
 https://www.youtube.com/feeds/videos.xml?user=g297125009 "~Gavin_Freeborn"youtube
 https://www.youtube.com/feeds/videos.xml?user=Hak5Darren "~Hak_5"youtube

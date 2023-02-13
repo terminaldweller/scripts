@@ -104,47 +104,47 @@ is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
-steeef_preexec() {
-  case "$2" in
-    *git*)
-      PR_GIT_UPDATE=1
-      ;;
-    *svn*)
-      PR_GIT_UPDATE=1
-      ;;
-  esac
-}
-add-zsh-hook preexec steeef_preexec
+# steeef_preexec() {
+#   case "$2" in
+#     *git*)
+#       PR_GIT_UPDATE=1
+#       ;;
+#     *svn*)
+#       PR_GIT_UPDATE=1
+#       ;;
+#   esac
+# }
+# add-zsh-hook preexec steeef_preexec
 
-steeef_chpwd() {
-  local result=$(git rev-parse --is-bare-repository 2> /dev/null)
-  if [[ $? == 0 ]]; then
-    if [[ $result == true ]]; then
-      PR_GIT_UPDATE=
-    else
-      PR_GIT_UPDATE=1
-    fi
-  else
-    PR_GIT_UPDATE=1
-  fi
-}
-add-zsh-hook chpwd steeef_chpwd
+# steeef_chpwd() {
+#   local result=$(git rev-parse --is-bare-repository 2> /dev/null)
+#   if [[ $? == 0 ]]; then
+#     if [[ $result == true ]]; then
+#       PR_GIT_UPDATE=
+#     else
+#       PR_GIT_UPDATE=1
+#     fi
+#   else
+#     PR_GIT_UPDATE=1
+#   fi
+# }
+# add-zsh-hook chpwd steeef_chpwd
 
-steeef_precmd() {
-  if [[ -n "$PR_GIT_UPDATE" ]] ; then
-    if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-      PR_GIT_UPDATE=1
-      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a%{$hotpink%} ●${PR_RST}"
-    else
-      FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
-    fi
-    zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
+# steeef_precmd() {
+#   if [[ -n "$PR_GIT_UPDATE" ]] ; then
+#     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+#       PR_GIT_UPDATE=1
+#       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a%{$hotpink%} ●${PR_RST}"
+#     else
+#       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
+#     fi
+#     zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
 
-    vcs_info 'prompt'
-    PR_GIT_UPDATE=
-  fi
-}
-add-zsh-hook precmd steeef_precmd
+#     vcs_info 'prompt'
+#     PR_GIT_UPDATE=
+#   fi
+# }
+# add-zsh-hook precmd steeef_precmd
 
 # function guess_who {
 #   upower -e > /dev/null 2>&1

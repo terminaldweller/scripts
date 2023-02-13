@@ -25,6 +25,7 @@ alias sudo="sudo "
 alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=9600 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
 alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias torw3m='torsocks --port 9053 w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias i2pw3m='proxychains4 -q -f ~/proxies/i2p_one/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
 alias ls="exa"
@@ -147,7 +148,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
 alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
 alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
@@ -242,7 +243,7 @@ alias youtube_dl="proxychains4 -f /home/devi/proxies/ice/proxychains.conf youtub
 # alias campv="proxychains4 -f /home/devi/proxies/ca/proxychains.conf mpv --no-video"
 alias tormpv="torsocks --port 9054 mpv --no-video"
 alias youtube144="mpv --ytdl-format=160+249"
-alias youtube360="mpv --ytdl-format=243+160"
+alias youtube360="mpv --ytdl-format=243+250"
 alias youtube480="mpv --ytdl-format=244+140"
 alias tridactylrc="vim ~/scripts/.tridactylrc"
 alias fixtridactylrc="cp ~/scripts/.tridactylrc ~/"
@@ -310,6 +311,9 @@ alias nd2_proxy="proxychains4 -q -f ~/proxies/nd2/proxychains.conf"
 alias swe_proxy="proxychains4 -q -f ~/proxies/swe/proxychains.conf"
 alias ir_proxy="proxychains4 -q -f ~/proxies/ir/proxychains.conf"
 alias ice_proxy="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
+alias tor_one_proxy="proxychains4 -q -f ~/proxies/tor_one/proxychains.conf"
+alias tor_two_proxy="proxychains4 -q -f ~/proxies/tor_two/proxychains.conf"
+alias tor_three_proxy="proxychains4 -q -f ~/proxies/tor_threece/proxychains.conf"
 alias tor_carrier_proxy="proxychains4 -q -f ~/proxies/tor_carrier/proxychains.conf"
 alias glow="glow --style ~/.config/glow/dark.json --pager --local"
 alias nmap="grc nmap"
@@ -333,7 +337,7 @@ alias sensors_pp="sensors -A -j 2> /dev/null | json_pp -json_opt pretty,canonica
 alias vdiff="vimdiff"
 # alias virt-top="/nix/store/gn20hprla1p86fkvml4c6im3839vmlzn-virt-top-1.1.1/bin/virt-top"
 alias finger="/nix/store/rqc8gdpx6dzwk38dx01ddb4kfcrkyiwq-bsd-finger-0.17/bin"
-alias fox_in_a_box='ssh -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
+alias fox_in_a_box='ssh -o Compression=no -X -i /home/devi/devi/vagrantboxes.git/main/dispffox/.vagrant/machines/default/libvirt/private_key vagrant@virt-dispffox.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox -no-remote"'
 alias run_doh_client="sudo doh-client -d doh.terminaldweller.com -r 185.130.47.81:443 -p getnsrecord --proxy-host 127.0.0.1:9995 --proxy-scheme socks5h --timeout 10"
 alias bun="ALL_PROXY=socks5h://127.0.0.1:9995 bun"
 alias ffox_i2p='ssh -C -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/machines/default/libvirt/private_key vagrant@i2p-host.vagrant-libvirt "XAUTHORITY=/home/vagrant/.Xauthority firefox"'
@@ -354,6 +358,7 @@ alias mariadb="mariadb --safe-updates"
 alias tunneltoprc="vim ~/scripts/.tunneltop.toml"
 alias fixtunneltoprc="cp ~/scripts/.tunneltop.toml ~/.tunneltop.toml"
 alias tokei="tokei --hidden --num-format underscores -s lines"
+alias waydroid="WAYLAND_DISPLAY=wayland-0 waydroid"
 
 function ccgrep() {
   EXTRA_ARG_BEFORE=$(llvm-config --libdir)/clang/$(llvm-config --version)/include
@@ -535,7 +540,7 @@ export PATH=$PATH:/home/devi/opam
 export PATH=$PATH:/home/devi/devi/ghorg
 export PATH=$PATH:/home/devi/kubectl
 export PATH=$PATH:/home/devi/solidity
-export PATH=$PATH:/home/devi/vagrant
+# export PATH=$PATH:/home/devi/vagrant
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/node/14.15.5_64bit/bin
 # export PATH=$PATH:/home/devi/devi/emsdk.git/main/upstream/emscripten
@@ -685,6 +690,10 @@ get_irssi_logs() {
   psql -h 192.168.1.109 -p 30432 -U postgres postgres -c '\c irc' -c 'select * from public.logs;'
 }
 
+virshxml() {
+  virsh dumpxml --domain "$@" | pygmentize -l xml -P style=$PYGMENTIZE_STYLE | nl | less
+}
+
 setopt APPEND_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
@@ -732,7 +741,7 @@ fzf-down() {
 }
 
 dff() {
-  df -hT "$@" | colcol | column -t
+  grc df --output -h
 }
 
 jcurl() {
@@ -887,6 +896,10 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export DVM_DIR="/home/devi/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 export PATH=/home/devi/.bun/bin:$PATH
+
+#plan9
+# PLAN9=/home/devi/devi/plan9port.git/master export PLAN9
+# PATH=$PATH:$PLAN9/bin export PATH
 
 [[ -s "/home/devi/.gvm/scripts/gvm" ]] && source "/home/devi/.gvm/scripts/gvm"
 # [[ -s "/usr/share/grc/grc.zsh" ]] && source /usr/share/grc/grc.zsh

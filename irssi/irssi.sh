@@ -8,7 +8,9 @@ wget https://scripts.irssi.org/scripts/desktop_notify.pl
 wget https://raw.githubusercontent.com/terminaldweller/irssi-scripts/master/vim-mode/vim_mode.pl
 wget https://raw.githubusercontent.com/terminaldweller/irssi-scripts/master/irssi-logger/irssi_logger.pl
 wget https://raw.githubusercontent.com/terminaldweller/irssi-scripts/master/hilite-url/hilite_url.pl
+wget https://raw.githubusercontent.com/terminaldweller/irssi-scripts/master/il/il.pl
 wget https://scripts.irssi.org/scripts/line_buffer.pl
+wget https://raw.githubusercontent.com/irssi/scripts.irssi.org/master/scripts/itime.pl
 wget https://scripts.irssi.org/scripts/messages_bottom.pl
 wget https://scripts.irssi.org/scripts/nm2.pl
 wget https://scripts.irssi.org/scripts/rotator.pl

@@ -79,6 +79,16 @@ if !has('nvim')
   set completeopt+=popup
 endif
 
+let $GOPROXY="https://goproxy.io"
+let $HTTP_PROXY="socks5://127.0.0.1:9995"
+let $HTTPS_PROXY="socks5://127.0.0.1:9995"
+let $ALL_PROXY="socks5://127.0.0.1:9995"
+let $NO_PROXY="localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24"
+let $http_proxy="socks5://127.0.0.1:9995"
+let $https_proxy="socks5://127.0.0.1:9995"
+let $all_proxy="socks5://127.0.0.1:9995"
+let $no_proxy="localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24"
+
 highlight clear Search
 let g:is_posix = 1
 
@@ -1523,6 +1533,12 @@ augroup END
 augroup ALECSS
   autocmd!
   autocmd FileType css let b:ale_fixers = {'css': ['prettier']}
+augroup END
+let b:ale_go_golangci_lint_options = "--enable-all"
+augroup ALEGO
+  autocmd!
+  autocmd FileType go let b:ale_fixers = {'go': ['gofumpt']}
+  autocmd FileType go let b:ale_linters = {'go': ['golangci-lint']}
 augroup END
 
 " we can edit gzip files because of this

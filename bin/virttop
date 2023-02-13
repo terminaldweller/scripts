@@ -9,11 +9,14 @@ import argparse
 import csv
 import dataclasses
 import enum
+import os
 import signal
 import sys
 import time
 import typing
-from xml.dom.minidom import Document
+
+# we are only using this for type annotation
+from xml.dom.minidom import Document  # nosec
 
 from defusedxml import ElementTree  # type:ignore
 from defusedxml import minidom
@@ -90,6 +93,11 @@ class VirtData:
     disk_writes: typing.List[str] = dataclasses.field(default_factory=list)
     snapshot_counts: typing.List[str] = dataclasses.field(default_factory=list)
     uri: typing.List[str] = dataclasses.field(default_factory=list)
+    memory_pool: typing.List[str] = dataclasses.field(default_factory=list)
+
+    pools: typing.List[libvirt.virStoragePool] = dataclasses.field(
+        default_factory=list
+    )
 
 
 def get_network_info(
@@ -249,7 +257,10 @@ def fill_virt_data_uri(
         virt_data.name.append(dom.name())
 
         mem_stats = dom.memoryStats()
-        virt_data.mem_actual.append(size_abr(mem_stats["actual"], 1000))
+        if "actual" in mem_stats:
+            virt_data.mem_actual.append(size_abr(mem_stats["actual"], 1000))
+        else:
+            virt_data.mem_actual.append("n/a")
 
         # BSD guests dont support mem balloons?
         try:
@@ -262,6 +273,18 @@ def fill_virt_data_uri(
         stats = dom.interfaceStats(iface)
         virt_data.write_bytes.append(size_abr(stats[4], 1))
         virt_data.read_bytes.append(size_abr(stats[0], 1))
+
+        found_the_pool: bool = False
+        disk = tree.find("devices/disk/source").get("file")
+        for pool in virt_data.pools:
+            if os.path.basename(disk) in pool.listVolumes():
+                virt_data.memory_pool.append(pool.name())
+                found_the_pool = True
+        # you could delete the pool but keep the volumes inside
+        # which results in a functional VM but it wont have a
+        # volume inside a pool that we can detect
+        if not found_the_pool:
+            virt_data.memory_pool.append("N/A")
 
         disk_info = get_disk_info(xml_doc)
         image_name = disk_info["file"]
@@ -290,7 +313,9 @@ def main() -> None:
             conn = libvirt.openReadOnly(hv_host)
             active_hosts = conn.listDomainsID()
             if len(active_hosts) > 0:
-                # pools = conn.listAllStoragePools()
+                virt_data.pools = conn.listAllStoragePools()
+                # for pool in virt_data.pools:
+                #     print(pool.listVolumes())
                 # networks = conn.listAllNetworks()
                 # print([pool.name() for pool in conn.listAllStoragePools()])
                 # print([net.name() for net in conn.listAllNetworks()])
@@ -321,6 +346,7 @@ def main() -> None:
                 "IO_WRITE_B",
                 "SNAPSHOTS",
                 "URI",
+                "STORAGE_POOL",
             ],
             False,
             virt_data.vm_id,
@@ -336,6 +362,7 @@ def main() -> None:
             virt_data.disk_writes,
             virt_data.snapshot_counts,
             virt_data.uri,
+            virt_data.memory_pool,
         )
         for line in lines:
             print(line)

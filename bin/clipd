@@ -8,9 +8,7 @@ local string = require("string")
 local signal = require("posix.signal")
 local argparse = require("argparse")
 local sys_stat = require("posix.sys.stat")
-local unistd_getuid = require("posix.unistd.getuid")
-local unistd_getgid = require("posix.unistd.getgid")
-local unistd_getpid = require("posix.unistd.getpid")
+local unistd = require("posix.unistd")
 local posix_syslog = require("posix.syslog")
 
 local function default_luarocks_modules()
@@ -50,8 +48,8 @@ local function log_to_syslog(log_str, log_priority)
 end
 
 local function check_clip_hist_perms(clip_hist)
-    local uid = unistd_getuid()
-    local gid = unistd_getgid()
+    local uid = unistd.getuid()
+    local gid = unistd.getgid()
     for k, v in pairs(sys_stat.stat(clip_hist)) do
         if k == "st_uid" then
             if v ~= uid then
@@ -70,7 +68,8 @@ local function check_clip_hist_perms(clip_hist)
             end
         end
         if k == "st_mode" then
-            if v & sys_stat.S_IRWXU ~= 0 then
+            if v and (sys_stat.S_IRUSR or sys_stat.S_IWUSR) ~=
+                (sys_stat.S_IRUSR or sys_stat.S_IWUSR) then
                 log_to_syslog(
                     "file permissions are too open. they need to be 0600.",
                     posix_syslog.LOG_CRIT)
@@ -81,16 +80,21 @@ local function check_clip_hist_perms(clip_hist)
 end
 
 local function check_pid_file()
-    local f = sys_stat("/var/run/clipd.pid")
+    local f = sys_stat.stat("/var/run/clipd.pid")
     if f ~= nil then
         log_to_syslog("clipd is already running", posix_syslog.LOG_CRIT)
         os.exit(1)
     end
 end
 
+-- FIXME- we cant write to /var/run since we are running as non-root user
 local function write_pid_file()
-    local f = io.open("/var/run/clipd.pid")
-    f.write(unistd_getpid())
+    local f = io.open("/var/run/clipd.pid", "w")
+    if f == nil then
+        log_to_syslog("cant open pid file for writing", posix_syslog.LOG_CRIT)
+        os.exit(1)
+    end
+    f.write(unistd.getpid())
 end
 
 local function remove_pid_file() end
@@ -145,7 +149,7 @@ local function main()
     local args = parser:parse()
     check_clip_hist_perms(args["hist_file"])
     check_pid_file()
-    write_pid_file()
+    -- write_pid_file()
     local status, err = pcall(loop(args["hist_file"], args["hist_size"]))
     if ~status then log_to_syslog(err, posix_syslog.LOG_CRIT) end
     remove_pid_file()

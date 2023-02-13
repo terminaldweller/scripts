@@ -88,7 +88,8 @@ abstracts = {
   channel = "%Z00af00$*%n";
 
   # nick is printed
-  nick = "%z005f87%Zeeeeee{nickcolor $*}";
+  # nick = "%z005f87%Zeeeeee{nickcolor $*}";
+  nick = "%Zeeeeee{nickcolor $*}";
   mynick = "%Zeeeeee{nickcolor $*}";
   inick = "%Zeeeeee{nickcolor $*}";
   # Inverted
@@ -186,19 +187,20 @@ abstracts = {
 
   # private message, $0 = nick, $1 = host
   # TODO: To test for Solarized
-  privmsg = " %m$0%G<%n$1-%G>%n ";
+  privmsg = " %m$0%G<%n$1-%G>%n %Z005f87";
 
   # private message from you, $0 = "msg", $1 = target nick
   # TODO: To test for Solarized
-  ownprivmsg = " %Z005f87$0%G<%Z005f87$1-%G>%n ";
+  ownprivmsg = " %Z005f87$0%G<%Z005f87$1-%G>%n %Z005f87";
 
   # own private message in query
-  ownprivmsgnick = "%z5f5fff%k{%z5f5fff $*}%N%Z5f5fff %C";
+  ownprivmsgnick = "%z5f5fff%k{%z5f5fff $*}%N%Z5f5fff %Z005f87";
   ownprivnick = "%k$*";
 
   # private message in query
   # NOTE: for some reason, we gotta handle both the nick & msg on in this line
-  privmsgnick = "%5%k{msgnick $*}%N%m %n";
+  # privmsgnick = "%5%k{ %5%k msgnick %m%0%N  $*}%N%m %n";
+  privmsgnick = "%z005f00%k{%z005f00%k %z005f00%k $*}%N%Z005f00 %n %Z005f87";
 
   ##
   ## Actions (/ME stuff)
@@ -479,4 +481,11 @@ formats = {
     neat_style = ",cp,,,,,,,";
     neat_custom_modes = "&%B&%n%Zeeeeee | @%g@%n%Zeeeeee | +%y+%n%Zeeeeee";
   };
+  "Irssi::Script::mh_sbsplitmode" = {
+    mh_sbsplitmode_line = "%Zaf5f87{server $0}: $1 {comment $2}";
+    mh_sbsplitmode_line_no_detail = "%Zaf5f87{server $0}: %Zaf5f87 {error $1}";
+    mh_sbsplitmode_info = "%Zaf5f87{server $0} $1 {hilight splitmode}";
+    mh_sbsplitmode_info_details = "%Zaf5f87{server $0} $1 {hilight splitmode} {comment $2}";
+    mh_sbsplitmode_error = "%Zaf5f87{error $0}";
+  }
 };

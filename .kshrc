@@ -4,7 +4,7 @@ set -o vi
 # set -o vi-tabcomplete
 # bind ^I=complete-list 
 HISTFILE="$HOME/.ksh_history"
-HISTSIZE=5000
+HISTSIZE=10000
 
 alias ..="cd ../"
 alias ...="cd ../../"
@@ -30,11 +30,17 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+alias def="sdcv --color"
+alias defe="sdcv --color -u dictd_www.dict.org_gcide"
+alias defd="sdcv --color -u LDaF"
+alias deff="sdcv --color -u XMLittre"
+
 function loginname {
-  echo $USER
+  echo "$USER"
 }
 
-PS1='$(echo -ne "\033[32m`loginname`@`hostname`:\033[00m";if [[ "${PWD#$HOME}" != "$PWD" ]] then; echo -ne "\033[34m~${PWD#$HOME}\033[00m"; else; echo -ne "\033[34m$PWD\033[00m";fi;echo -ne " >>> ")'
+# PS1='$(echo -ne "\033[32m`loginname`@`hostname`:\033[00m";if [[ "${PWD#$HOME}" != "$PWD" ]] then; echo -ne "\033[34m~${PWD#$HOME}\033[00m"; else; echo -ne "\033[34m$PWD\033[00m";fi;echo -ne " >>> ")'
+PS1='$(print -n "`logname`@`hostname`:";if [[ "${PWD#$HOME}" != "$PWD" ]] then; print -n "~${PWD#$HOME}"; else; print -n "$PWD";fi;print "\n$ ")'
 
 function docpp {
   cp ~/scripts/makefilecpp ./makefile
@@ -58,7 +64,7 @@ function docc {
 function dig {
   globalholecounter=0
   if test "$(ls -A "/home/devi/devi/abbatoir")"; then
-    while [ 1 ]; do
+    while true; do
       if [ -d "/home/devi/devi/abbatoir/hole$globalholecounter" ]; then
         # if its not empty
         if test "$(ls -A "/home/devi/devi/abbatoir/hole$globalholecounter")"; then
@@ -91,9 +97,11 @@ export SHELL="ksh"
 export PATH=$PATH:/home/devi/scripts/bin
 export PATH=$PATH:/home/devi/bin
 export GOPROXY=https://goproxy.io
-export HTTP_PROXY=socks5://127.0.0.1:9995
-export HTTPS_PROXY=socks5://127.0.0.1:9995
+export HTTP_PROXY=socks5h://127.0.0.1:9995
+export HTTPS_PROXY=socks5h://127.0.0.1:9995
 export NO_PROXY=localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24
-export http_proxy=socks5://127.0.0.1:9995
-export https_proxy=socks5://127.0.0.1:9995
+export http_proxy=socks5h://127.0.0.1:9995
+export https_proxy=socks5h://127.0.0.1:9995
 export no_proxy=localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24
+export ALL_PROXY=socks5h://127.0.0.1:9995
+export all_proxy=socks5h://127.0.0.1:9995

@@ -3,20 +3,47 @@
 # source common.sh
 SEPARATOR_LEFT_BOLD=""
 SEPARATOR_LEFT_THIN=""
+PROXY="proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf"
+
+internet_time_cache() {
+  INTERNET_TIME_CACHE_AGE=60
+  INTERNET_TIME_CACHE_OUTPUT=/tmp/tmux_internet_time_cache
+  # if the cache has not expired yet
+  if [ $(( $( stat --format=%Y $INTERNET_TIME_CACHE_OUTPUT ) + INTERNET_TIME_CACHE_AGE )) -gt $( date +%s ) ];then
+    :
+  else
+    date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9054 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime') > ${INTERNET_TIME_CACHE_OUTPUT}
+  fi
+  cat ${INTERNET_TIME_CACHE_OUTPUT}
+}
+
+weather_info_cache() {
+  WEATHER_INFO_CACHE_AGE=300
+  WEATHER_INFO_CACHE_OUTPUT=/tmp/tmux_weather_info_cache
+  if [ $(( $( stat --format=%Y $WEATHER_INFO_CACHE_OUTPUT ) + INTERNET_TIME_CACHE_AGE )) -gt $( date +%s ) ];then
+    :
+  else
+    ${PROXY} curl -s 'wttr.in/tehran?T&format=%f' > ${WEATHER_INFO_CACHE_OUTPUT}
+  fi
+  cat ${WEATHER_INFO_CACHE_OUTPUT}
+}
+
 
 RESULT=$(date +"%a %D %H:%M")
-PROXY="proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf"
 
 DAY="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $1}')
 DATE="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $2}')
 TIME="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $3}')
-UTC_TIME_RESULT=$(date -u +"%H:%M")
-UTC_TIME="#[fg=colour255 bg=colour25]"${UTC_TIME_RESULT}
+INTERNET_TIME_RESULT=$(date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9054 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime'))
+# UTC_TIME_RESULT=$(date -u +"%H:%M")
+# UTC_TIME="#[fg=colour255 bg=colour25]"${INTERNET_TIME_RESULT}
+UTC_TIME="#[fg=colour255 bg=colour25]"$(internet_time_cache)
 JDATE="#[fg=colour255 bg=colour29]"$(jdate | gawk '{print $2" "$3}')
 
 # OPENWEATHERMAP_TOKEN=$(jq -r ".token" < /home/devi/scripts/tmux/openweathermap.json)
 # WEATHER_INFO=$(sleep 120 && proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf curl "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=${OPENWEATHERMAP_TOKEN}&units=metric"|jq ".main.temp")
-WEATHER_INFO=$(${PROXY} curl -s 'wttr.in/tehran?T&format=%f')
+# WEATHER_INFO=$(${PROXY} curl -s 'wttr.in/tehran?T&format=%f')
+WEATHER_INFO=$(weather_info_cache)
 if echo "${WEATHER_INFO}" | grep Unknown\ location; then
   WEATHER="#[fg=colour255 bg=colour32]"no_temp
 else
