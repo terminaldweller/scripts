@@ -3,16 +3,18 @@
 # source common.sh
 SEPARATOR_LEFT_BOLD=""
 SEPARATOR_LEFT_THIN=""
-PROXY="proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf"
+# PROXY="proxychains4 -q -f /home/devi/proxies/ice/proxychains.conf"
 
 internet_time_cache() {
   INTERNET_TIME_CACHE_AGE=60
   INTERNET_TIME_CACHE_OUTPUT=/tmp/tmux_internet_time_cache
   # if the cache has not expired yet
-  if [ $(( $( stat --format=%Y $INTERNET_TIME_CACHE_OUTPUT ) + INTERNET_TIME_CACHE_AGE )) -gt $( date +%s ) ];then
+  if [ $(( $( stat --format=%Y $INTERNET_TIME_CACHE_OUTPUT ) + INTERNET_TIME_CACHE_AGE )) -gt "$( date +%s )" ];then
     :
   else
-    date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9054 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime') > ${INTERNET_TIME_CACHE_OUTPUT}
+    if OUTPUT=$(date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9053 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime')); then
+      echo "${OUTPUT}" > ${INTERNET_TIME_CACHE_OUTPUT}
+    fi
   fi
   cat ${INTERNET_TIME_CACHE_OUTPUT}
 }
@@ -20,10 +22,12 @@ internet_time_cache() {
 weather_info_cache() {
   WEATHER_INFO_CACHE_AGE=300
   WEATHER_INFO_CACHE_OUTPUT=/tmp/tmux_weather_info_cache
-  if [ $(( $( stat --format=%Y $WEATHER_INFO_CACHE_OUTPUT ) + INTERNET_TIME_CACHE_AGE )) -gt $( date +%s ) ];then
+  if [ $(( $( stat --format=%Y $WEATHER_INFO_CACHE_OUTPUT ) + WEATHER_INFO_CACHE_AGE )) -gt "$( date +%s )" ];then
     :
   else
-    ${PROXY} curl -s 'wttr.in/tehran?T&format=%f' > ${WEATHER_INFO_CACHE_OUTPUT}
+    if OUTPUT=$(curl -s --connect-timeout 10 --socks5-hostname socks5h://127.0.0.1:9053 'wttr.in/tehran?T&format=%f'); then 
+      echo "${OUTPUT}" > ${WEATHER_INFO_CACHE_OUTPUT}
+    fi
   fi
   cat ${WEATHER_INFO_CACHE_OUTPUT}
 }

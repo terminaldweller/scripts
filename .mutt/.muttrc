@@ -28,7 +28,7 @@ set crypt_timestamp=yes
 
 folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
 folder-hook 'account.self' 'source ~/.mutt/account.self'
-folder-hook 'account.zharf' 'source ~/.mutt/account.zharf'
+folder-hook 'account.zoho' 'source ~/.mutt/account.zoho'
 
 # default account
 source ~/.mutt/account.self
@@ -36,7 +36,7 @@ source ~/.mutt/account.self
 
 macro index,pager <f2> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.self<enter><change-folder>!<enter>'
 macro index,pager <f3> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.gmail<enter><change-folder>!<enter>'
-macro index,pager <f4> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.zharf<enter><change-folder>!<enter>'
+macro index,pager <f4> '<sync-mailbox><refresh><enter-command>source ~/.mutt/account.zoho<enter><change-folder>!<enter>'
 
 # macros
 macro index A "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>” “mark all messages read"

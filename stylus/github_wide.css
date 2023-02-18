@@ -1,0 +1,21 @@
+@-moz-document domain("github.com") {
+  div.clearfix:nth-child(4) {
+    max-width: 97%;
+    width: 97%;
+  }
+
+  .markdown-body {
+    max-width: 97%;
+    width: 97%;
+  }
+
+  div.clearfix:nth-child(2) {
+    max-width: 97%;
+    width: 97%;
+  }
+
+  div.container-xl:nth-child(2) {
+    max-width: 97%;
+    width: 97%;
+  }
+}

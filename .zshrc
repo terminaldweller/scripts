@@ -21,6 +21,7 @@ eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
 # enable aliases with sudo in the alias
+alias git="proxychains4 -q -f ~/proxies/ice/proxychains.conf git"
 alias sudo="sudo "
 alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=9600 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
 alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
@@ -95,6 +96,7 @@ alias cp="cp -i"
 alias nuke="rm -rf .[^.]* *"
 alias bruiser="bruiser --history ~/.bruiser/history.lua"
 alias digg="dig && clear"
+alias bburrow="burrow && clear"
 alias ogg="ogg123"
 alias mupdf="/home/devi/extra/mupdf/build/release/mupdf-x11 -D red -P black -I"
 alias googler="~/extra/googler/googler --colors GKmexy -c us -l en --count 7 --exact "
@@ -148,7 +150,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro irssi:1.2.3"
 alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
 alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
@@ -282,7 +284,8 @@ alias mysql='mysql --safe-updates --prompt="\u@\h [\d]>"'
 alias socat="socat -d -d"
 alias cmusrc="vim ~/scripts/.config/cmus/rc"
 alias fixcmusrc="cp ~/scripts/.config/cmus/rc ~/.config/cmus/rc"
-alias cointop="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.130.45.46 TERM=screen-256color /home/ubuntu/cointop/cointop"
+# alias cointop="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.130.45.46 TERM=screen-256color /home/ubuntu/cointop/cointop"
+alias cointop="proxychains4 -q -f ~/proxies/ice/proxychains.conf autossh -M 0 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -tt -p 3333 ubuntu@185.130.45.46 TERM=screen-256color /home/ubuntu/cointop/cointop"
 alias zshenv="vim ~/scripts/.zshenv"
 alias fixzshenv="cp ~/scripts/.zshenv ~/.zshenv"
 alias postman="flatpak run com.getpostman.Postman"
@@ -344,6 +347,7 @@ alias ffox_i2p='ssh -C -X -i /home/devi/devi/vagrantboxes.git/main/i2p/.vagrant/
 alias sotn="bw_mednafen ~/roms/sotn/Castlevania\ -\ Symphony\ of\ the\ Night.cue"
 alias silent_hill="bw_mednafen ~/roms/silent_hill/Silent Hill (v1.1).cue"
 alias bombadillo='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt proxychains4 -q bombadillo '
+alias safe_w3m='ssh -tt -i /home/devi/devi/vagrantboxes.git/main/openbsd/.vagrant/machines/default/libvirt/private_key vagrant@bomb-host.vagrant-libvirt WWW_HOME=searx.terminaldweller.com proxychains4 -q w3m '
 alias mount="grc mount"
 alias picocom="picocom --escape b"
 # https://wiki.slipfox.xyz/wiki/ANSI_escape_code#OSC_(Operating_System_Command)_sequences)
@@ -565,29 +569,59 @@ export BROWSER=w3m
 
 dig() {
   globalholecounter=0
-  if test "$("ls" -A "/home/devi/devi/abbatoir")"; then
+  local ABBATOIR_PATH="/home/devi/devi/abbatoir"
+  if test "$("ls" -A ${ABBATOIR_PATH})"; then
     while [ 1 ]; do
-      if [ -d "/home/devi/devi/abbatoir/hole$globalholecounter" ]; then
+      if [ -d "${ABBATOIR_PATH}/hole$globalholecounter" ]; then
         # if its not empty
-        if test "$("ls" -A "/home/devi/devi/abbatoir/hole$globalholecounter")"; then
+        if test "$("ls" -A "${ABBATOIR_PATH}/hole$globalholecounter")"; then
           :
         # if its empty
         else
-          cd /home/devi/devi/abbatoir/hole$globalholecounter
+          cd ${ABBATOIR_PATH}/hole$globalholecounter
           break
         fi
       else
-        mkdir /home/devi/devi/abbatoir/hole$globalholecounter
-        cd /home/devi/devi/abbatoir/hole$globalholecounter
+        mkdir ${ABBATOIR_PATH}/hole$globalholecounter
+        cd ${ABBATOIR_PATH}/hole$globalholecounter
         echo $globalholecounter
         break
       fi
       ((globalholecounter++))
     done
   else
-    mkdir /home/devi/devi/abbatoir
-    mkdir /home/devi/devi/abbatoir/hole$globalholecounter
-    cd /home/devi/devi/abbatoir/hole$globalholecounter
+    mkdir ${ABBATOIR_PATH}
+    mkdir ${ABBATOIR_PATH}/hole$globalholecounter
+    cd ${ABBATOIR_PATH}/hole$globalholecounter
+  fi
+}
+
+burrow() {
+  globalholecounter=0
+  local FLESH_PIT_PATH="/tmp/fleshpit"
+  if test "$("ls" -A ${FLESH_PIT_PATH})"; then
+    while [ 1 ]; do
+      if [ -d "${FLESH_PIT_PATH}/pit$globalholecounter" ]; then
+        # if its not empty
+        if test "$("ls" -A "${FLESH_PIT_PATH}/pit$globalholecounter")"; then
+          :
+        # if its empty
+        else
+          cd ${FLESH_PIT_PATH}/pit$globalholecounter
+          break
+        fi
+      else
+        mkdir ${FLESH_PIT_PATH}/pit$globalholecounter
+        cd ${FLESH_PIT_PATH}/pit$globalholecounter
+        echo $globalholecounter
+        break
+      fi
+      ((globalholecounter++))
+    done
+  else
+    mkdir ${FLESH_PIT_PATH}
+    mkdir ${FLESH_PIT_PATH}/pit$globalholecounter
+    cd ${FLESH_PIT_PATH}/pit$globalholecounter
   fi
 }
 

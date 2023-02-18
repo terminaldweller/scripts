@@ -1,22 +1,19 @@
 version: "3.7"
 services:
   bitlbee:
-    image: bitlbee_devi
+    image: ezkrg_bitlbee_libpurple
     networks:
       - bitlbeenet
     ports:
       - "8667:6667"
+    user: 1000:1000
     restart: unless-stopped
-    network_mode: bridge
     user: "bitlbee:bitlbee"
-    command: ["/usr/sbin/bitlbee", "-F","-n","-u","bitlbee","-c","/var/lib/bitlbee/bitlbee.conf", "-d","bitlbee-user-data"]
+    command: ["/usr/sbin/bitlbee", "-F","-n","-u","bitlbee","-c","/var/lib/bitlbee/bitlbee.conf", "-d","/var/lib/bitlbee"]
     volumes:
       - ./conf/bitlbee.conf:/var/lib/bitlbee/bitlbee.conf
+      - userdata:/var/lib/bitlbee
 networks:
   bitlbeenet:
-    ipam:
-      driver: overlay
-      config:
-        - subnet: 172.18.0.0/16
-        - ip_range: 172.18.5.0.24
-        - gateway: 172.18.0.1
+volumes:
+  userdata:

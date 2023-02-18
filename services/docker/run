@@ -6,4 +6,9 @@ mountpoint -q /sys/fs/cgroup/systemd || {
     mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd;
 }
 #exec chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
-exec env NO_PROXY="localhost,127.0.0.0/8,192.168.0.0/24,10.0.0.0/8,172.16.0.0/12" HTTPS_PROXY="socks5://127.0.0.1:9995" HTTP_PROXY="socks5://127.0.0.1:9995" chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
+# exec env NO_PROXY="localhost,127.0.0.0/8,192.168.0.0/24,10.0.0.0/8,172.16.0.0/12" HTTPS_PROXY="socks5://127.0.0.1:9995" HTTP_PROXY="socks5://127.0.0.1:9995" chpst -o 1048576 -p 1048576 dockerd $OPTS 2>&1
+# echo localhost,127.0.0.0/8,192.168.0.0/24,10.0.0.0/8,172.16.0.0/12 > /etc/sv/docker/envs/NO_PROXY
+# echo socks5://127.0.0.1:9995 > /etc/sv/docker/envs/HTTP_PROXY
+# echo socks5://127.0.0.1:9995 > /etc/sv/docker/envs/HTTPS_PROXY
+# echo socks5://127.0.0.1:9995 > /etc/sv/docker/envs/ALL_PROXY
+exec chpst -e /etc/sv/docker/envs -o 1048576 -p 1048576 dockerd $OPTS 2>&1

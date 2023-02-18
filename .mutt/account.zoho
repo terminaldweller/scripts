@@ -1,0 +1,17 @@
+# vim: filetype=neomuttrc
+
+unmailboxes *
+set from = 'bloodstalker@zoho.com'
+set imap_user = 'bloodstalker@zoho.com'
+source "gpg -d ~/scripts/mail.zoho.pass.gpg |"
+set smtp_url = 'smtps://bloodstalker@smtp.zoho.com:465'
+set realname = 'farzad sadeghi'
+set folder = 'imaps://imap.zoho.com:993'
+set spoolfile = '+Inbox'
+set postponed = '+Drafts'
+set record = '+Sent'
+set trash = '+Trash'
+set header_cache = ~/.mutt/zoho/cache/headers
+set message_cachedir = ~/.mutt/zoho/cache/bodies
+set certificate_file = ~/.mutt/zoho/certificates
+mailboxes "+Inbox" "+Drafts" "+Sent" "+Trash"

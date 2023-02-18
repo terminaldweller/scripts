@@ -66,10 +66,38 @@ function repo_info {
 }
 
 function get_eth_price {
-  eth_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=ETH&unit=USD" | jq ".price")
-  cake_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=CAKE&unit=USD" | jq ".price")
-  monero_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=XMR&unit=USD" | jq ".price")
-  echo "${eth_price}/${cake_price}/${monero_price}"
+  PRICE_TIME_CACHE=60
+  PRICE_CACHE_OUTPUT_ETH=/tmp/tmux_PRICE_CACHE_ETH
+  PRICE_CACHE_OUTPUT_XMR=/tmp/tmux_PRICE_CACHE_XMR
+  PRICE_CACHE_OUTPUT_CAKE=/tmp/tmux_PRICE_CACHE_CAKE
+  # eth_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=ETH&unit=USD" | jq ".price")
+  # cake_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=CAKE&unit=USD" | jq ".price")
+  # monero_price=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=XMR&unit=USD" | jq ".price")
+  if [ $(( $( stat --format=%Y $PRICE_CACHE_OUTPUT_ETH ) + PRICE_TIME_CACHE )) -gt "$( date +%s )" ];then
+    :
+  else
+    if ETH_OUTPUT=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=ETH&unit=USD" | jq ".price"); then 
+      echo "${ETH_OUTPUT}" > ${PRICE_CACHE_OUTPUT_ETH}
+    fi
+  fi
+  if [ $(( $( stat --format=%Y $PRICE_CACHE_OUTPUT_CAKE ) + PRICE_TIME_CACHE )) -gt "$( date +%s )" ];then
+    :
+  else
+    if CAKE_OUTPUT=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=CAKE&unit=USD" | jq ".price"); then 
+      echo "${CAKE_OUTPUT}" > ${PRICE_CACHE_OUTPUT_CAKE}
+    fi
+  fi
+  if [ $(( $( stat --format=%Y $PRICE_CACHE_OUTPUT_XMR ) + PRICE_TIME_CACHE )) -gt "$( date +%s )" ];then
+    :
+  else
+    if XMR_OUTPUT=$(proxychains4 -q -f ~/proxies/ice/proxychains.conf curl -s -X GET "https://api.terminaldweller.com/crypto/v1/price?name=XMR&unit=USD" | jq ".price"); then 
+      echo "${XMR_OUTPUT}" > ${PRICE_CACHE_OUTPUT_XMR}
+    fi
+  fi
+
+
+  result="$(cat ${PRICE_CACHE_OUTPUT_ETH})"/"$(cat ${PRICE_CACHE_OUTPUT_CAKE})"/"$(cat ${PRICE_CACHE_OUTPUT_XMR})"
+  echo "${result}"
 }
 
 tmux_session_info=" #S:#I.#P"

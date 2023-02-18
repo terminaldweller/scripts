@@ -1,3 +1,10 @@
 #!/bin/sh
 exec 2>&1
-DISPLAY=:0.0 exec /home/devi/scripts/bin/clipd -s 200 -f /home/devi/.clip_history
+# DISPLAY=:0.0 exec lua5.3 /home/devi/devi/lclip.git/sqlite3/lclipd.lua -s 200
+exec \
+  env \
+  XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR}" \
+  lua5.3 \
+  /home/devi/devi/lclip.git/sqlite3/lclipd.lua \
+  -s 200 \
+  > /dev/null 2>&1

@@ -1,6 +1,6 @@
 # https://github.com/jessfraz/irssi
 # For the time being we have build on alpine:edge since perl::Glib::Object::Introspection is only available on edge/testing
-FROM alpine:edge
+FROM alpine:3.17
 # https://georgik.rocks/how-to-start-d-bus-in-docker-container/
 # apk add dbus dbus-x11
 # dbus-uuidgen > /var/lib/dbus/machine-id
@@ -74,6 +74,18 @@ RUN set -eux; \
   ; \
   ninja -C Build -j "$(nproc)"; \
   ninja -C Build install;
+ENV HTTPS_PROXY=socks5://192.168.1.214:9995
+RUN apk add git glib python3-dev && \
+      cd /home/user && \
+      git clone https://github.com/irssi-import/irssi-python && \
+      cd /home/user/irssi-python && \
+      autoreconf -ivf -I. && \
+      ./configure --with-irssi=/usr/src/irssi && \
+      make -C src constants && \
+      make && \
+      mkdir /home/user/.irssi/modules && \
+      cp src/.libs/libpython.so ~/.irssi/modules
+ENV HTTPS_PROXY=
 RUN cd /; \
   rm -rf /usr/src/irssi; \
   \
@@ -85,7 +97,7 @@ RUN cd /; \
   )"; \
   apk add --virtual .irssi-rundeps $runDeps; \
   echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
-  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection libnotify; \
+  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection perl-mojolicious libnotify; \
   # apk add dbus; \
   # dbus-uuidgen > /var/lib/dbus/machine-id; \
   # mkdir -p /var/run/dbus; \
@@ -98,6 +110,7 @@ RUN cd /; \
 
 COPY ./proxychains.conf /etc/proxychains/
 WORKDIR $HOME
+RUN cp /home/user/.irssi/modules/libpython.so /usr/local/lib/irssi/modules/libpython_core.so
 
 USER user
 CMD ["proxychains4", "-q", "irssi"]

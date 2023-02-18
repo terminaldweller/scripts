@@ -1,0 +1,21 @@
+version: "3"
+services:
+  irc-gitter:
+    image: irc-gitter
+    build:
+      context: .
+    networks:
+      - ircgitternet
+    ports:
+      - "127.0.0.1:5667:6667"
+    restart: unless-stopped
+    entrypoint: ["npm", "start"]
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+networks:
+  ircgitternet:
+

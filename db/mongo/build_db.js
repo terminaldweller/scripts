@@ -31,7 +31,10 @@ const mangas = {
   gigantis: "https://manganato.com/manga-mv989778",
   "ningyo no kuni": "https://readmanganato.com/manga-uq971373",
   "dead tube": "https://readmanganato.com/manga-pp951398",
+  "at the mountains of madness": "https://manganato.com/manga-ct979576",
   "ooki onna": "https://manganato.com/manga-wb953636",
+  "gantz:e": "https://manganato.com/manga-ho984623",
+  leviathan: "https://readmanganato.com/manga-pj966444",
   ingoshima: "https://readmanganato.com/manga-ek981919",
   "kangoku kaguen": "https://readmanganato.com/manga-nl952268",
   tenkaichi: "https://manganato.com/manga-mj990344",
@@ -41,6 +44,8 @@ const mangas = {
   "murcielago.": "https://manganato.com/manga-vi953465",
   "black joke.": "https://manganato.com/manga-om952769",
   "pinsaro sniper": "https://manganato.com/manga-ig986163",
+  jinmen: "https://readmanganato.com/manga-ad978186",
+  "hunter x hunter": "https://readmanganato.com/manga-oc955385",
   "baki-dou": "https://readmanganato.com/manga-cc980259",
   "everyone's loose screw'": "https://manganato.com/manga-ga983883",
   "kumo desu": "https://readmanganato.com/manga-zd976712",
@@ -48,6 +53,13 @@ const mangas = {
   gachiakuta: "https://manganato.com/manga-na990935",
   "black lagoon": "https://readmanganato.com/manga-",
   "chainsaw man": "https://readmanganato.com/manga-dn980422",
+  "at the mountains of madness": "https://manganato.com/manga-ct979576",
+  "resurrection colloseum": "https://manganato.com/manga-qq993573",
+  "pumpkin night": "https://chapmanganato.com/manga-br979252",
+  "maou no hajemekata": "https://chapmanganato.com/manga-ki952417",
+  "savage hero": "https://manganato.com/manga-qb993758",
+  "cave of obscenity": "https://manganato.com/manga-pk993067",
+  "ataerareta skill wo": "https://chapmanganato.com/manga-or991826",
 };
 
 db = connect("192.168.1.109:27117/devi");
@@ -57,7 +69,11 @@ const movies_obj = {
 };
 
 const stash_obj = {
-  momotaro: "https://www.tnaflix.com/amateur-porn/fcdc-056/video6241864",
+  step: "https://spankbang.com/7s3ed/video/sharing+my+curvy+girlfriend+with+my+skinny+stepsis",
+};
+
+const manga_obj = {
+  "hell's tormentor kraken": "https://manganato.com/manga-or992226",
 };
 
 function inser_into_db(mongo_collection, object) {
@@ -79,30 +95,29 @@ function inser_into_db(mongo_collection, object) {
 
 inser_into_db(db.stash, stash_obj);
 inser_into_db(db.movies, movies_obj);
+inser_into_db(db.mangas, manga_obj);
 
-var mangas_entry = db.mangas.find({});
-Object.keys(mangas_entry).forEach((prop) => {
-  console.log(prop);
-});
-while (mangas_entry.hasNext()) {
-  var mangas_id = mangas_entry.next()._id;
-  console.log(mangas_id);
-}
-db.mangas.updateOne(
-  { _id: mangas_id },
-  {
-    $set: {
-      "at the mountains of madness": "https://manganato.com/manga-ct979576",
-    },
-  }
-);
+// var mangas_entry = db.mangas.find({});
+// Object.keys(mangas_entry).forEach((prop) => {
+//   console.log(prop);
+// });
+// while (mangas_entry.hasNext()) {
+//   var mangas_id = mangas_entry.next()._id;
+//   console.log(mangas_id);
+// }
+// db.mangas.updateOne(
+//   { _id: mangas_id },
+//   {
+//     $set: {},
+//   }
+// );
 
-var animes_entry = db.animes.find({});
-Object.keys(animes_entry).forEach((prop) => {
-  console.log(prop);
-});
-while (animes_entry.hasNext()) {
-  var animes_id = animes_entry.next()._id;
-  console.log(animes_id);
-}
-db.animes.updateOne({ _id: animes_id }, { $set: {} });
+// var animes_entry = db.animes.find({});
+// Object.keys(animes_entry).forEach((prop) => {
+//   console.log(prop);
+// });
+// while (animes_entry.hasNext()) {
+//   var animes_id = animes_entry.next()._id;
+//   console.log(animes_id);
+// }
+// db.animes.updateOne({ _id: animes_id }, { $set: {} });
