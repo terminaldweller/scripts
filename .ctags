@@ -1,3 +1,25 @@
+--recurse=yes
+
+--exclude=.git
+--exclude=BUILD
+--exclude=.svn
+--exclude=*.js
+--exclude=vendor/*
+--exclude=node_modules/*
+--exclude=db/*
+--exclude=log/*
+--exclude=\*.min.\*
+--exclude=\*.swp
+--exclude=\*.bak
+--exclude=\*.pyc
+--exclude=\*.class
+--exclude=\*.sln
+--exclude=\*.csproj
+--exclude=\*.csproj.user
+--exclude=\*.cache
+--exclude=\*.dll
+--exclude=\*.pdb
+
 --langdef=Solidity
 --langmap=Solidity:.sol
 --regex-Solidity=/^contract[ \t]+([a-zA-Z0-9_]+)/\1/c,contract/

@@ -88,6 +88,9 @@ let $http_proxy="socks5://127.0.0.1:9995"
 let $https_proxy="socks5://127.0.0.1:9995"
 let $all_proxy="socks5://127.0.0.1:9995"
 let $no_proxy="localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24"
+" let $GOROOT="/home/devi/.gvm/gos/go1.19"
+" let $GOPATH="/home/devi/.gvm/pkgsets/go1.19/global"
+" let $GOENV_ROOT="/home/devi/.goenv"
 
 highlight clear Search
 let g:is_posix = 1
@@ -1467,14 +1470,11 @@ augroup ALEJS
   autocmd FileType javascript let b:ale_linters = {'javascript': ['eslint']}
   autocmd FileType javascript let b:ale_fixers = {'javascript': ['prettier']}
 augroup END
-let g:ale_python_black_options = "--line-length 79"
-let b:ale_python_flake8_options = "--ignore=E203,W503"
-let b:ale_python_isort_options = "--multiline 3 --profile black"
 let b:ale_python_mypy_options = "--check-untyped-defs"
 augroup ALEPY
   autocmd!
-  autocmd FileType python let b:ale_linters = {'python': ['flake8','mypy', 'pylint', 'bandit']}
-  autocmd FileType python let b:ale_fixers = {'python': ['black', 'isort']}
+  autocmd FileType python let b:ale_linters = {'python': ['mypy', 'pylint', 'bandit', 'ruff']}
+  autocmd FileType python let b:ale_fixers = {'python': ['black', 'ruff']}
 augroup END
 augroup ALERUBY
   autocmd!
@@ -1535,10 +1535,11 @@ augroup ALECSS
   autocmd FileType css let b:ale_fixers = {'css': ['prettier']}
 augroup END
 let b:ale_go_golangci_lint_options = "--enable-all"
+let b:ale_go_golangci_lint_package = 1
 augroup ALEGO
   autocmd!
-  autocmd FileType go let b:ale_fixers = {'go': ['gofumpt']}
   autocmd FileType go let b:ale_linters = {'go': ['golangci-lint']}
+  autocmd FileType go let b:ale_fixers = {'go': ['gofumpt']}
 augroup END
 
 " we can edit gzip files because of this
@@ -1770,3 +1771,8 @@ hi ALEInfoSign ctermbg=97
 hi ALEWarningSign ctermbg=203
 hi ALEStyleWarning ctermbg=203
 hi ALEStyleWarningSign ctermbg=203
+hi ALEVirtualTextError ctermbg=1 ctermfg=0 cterm=bold
+hi ALEVirtualTextInfo ctermbg=97 ctermfg=0 cterm=bold
+hi ALEVirtualTextStyleError ctermbg=1 ctermfg=0 cterm=bold
+hi ALEVirtualTextStyleWarning ctermbg=203 ctermfg=0 cterm=bold
+hi ALEVirtualTextWarning ctermbg=203 ctermfg=0 cterm=bold

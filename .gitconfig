@@ -5,6 +5,8 @@
 	email = thabogre@gmail.com
 	signingkey = /home/devi/.ssh/id_rsa.pub
 
+[apply]
+	whitespace = nowarn
 # https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git
 [color "decorate"]
 	HEAD = bold blink italic 196

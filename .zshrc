@@ -21,9 +21,9 @@ eval `dircolors ~/.dir_colors`
 # _evalcache dircolors ~/.dir_colors
 
 # enable aliases with sudo in the alias
-alias git="proxychains4 -q -f ~/proxies/ice/proxychains.conf git"
+# alias git="proxychains4 -q -f ~/proxies/ice/proxychains.conf git"
 alias sudo="sudo "
-alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=9600 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
+alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=15000 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
 alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias torw3m='torsocks --port 9053 w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias i2pw3m='proxychains4 -q -f ~/proxies/i2p_one/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
@@ -150,7 +150,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro irssi:1.2.3"
+alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
 alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
 alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
@@ -661,6 +661,15 @@ set blink-matching-paren on
 export KEYTIMEOUT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 export QT_QPA_PLATFORMTHEME=gtk2
+# export APRIL_MODEL_PATH=/home/devi/devi/LiveCaptions/aprilv0_en-us.april
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/devi/devi/onnx_runtime/onnxruntime-linux-x64-1.13.1/lib
+livecaptions() {
+  meson devenv -C /home/devi/devi/LiveCaptions/builddir
+  env \
+    APRIL_MODEL_PATH=/home/devi/devi/LiveCaptions/aprilv0_en-us.april \
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/devi/devi/onnx_runtime/onnxruntime-linux-x64-1.13.1/lib \
+    /home/devi/devi/LiveCaptions/builddir/src/livecaptions
+}
 
 # fnm
 eval "$(fnm env)"

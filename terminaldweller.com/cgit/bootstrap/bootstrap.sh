@@ -32,6 +32,10 @@ REPOS="cgrep \
   faultreiber \
   luatablegen \
   magni \
+  virttop \
+  tunneltop \
+  memdump \
+  lclip \
   cfe-extra"
 
 bootstrap() {

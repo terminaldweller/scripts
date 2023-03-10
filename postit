@@ -54,3 +54,4 @@ https://github.com/net4people/bbs
 https://www.kaggle.com/datasets/hassan06/nslkdd
 https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15
 https://magma.lavafeld.org/guide/osint-sources.html#looking-glasses
+echo "" | GPG_TTY=$(tty) gpg2 --pinentry-mode loopback -a --default-key A6A0F5158B3881DF --detach-sig

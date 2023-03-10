@@ -63,6 +63,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
   somegreen="%F{22}"
   randomblue="%F{26}"
   yaorange="%F{67}"
+  greeniegreen="%F{35}"
 else
   turquoise="$fg[cyan]"
   orange="$fg[yellow]"
@@ -286,7 +287,15 @@ getterminal() {
 
 rbq_info_msg=""
 
-PS1=$'$(dir_writeable)$(tsocks_on)$(sudo_query)%{$reset_color%} %{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$reset_color%}'
+meson_env() {
+  if [[ -n "${MESON_PROJECT_NAME-}" ]];then
+    echo " [${MESON_PROJECT_NAME}]"
+  else
+    :
+  fi
+}
+
+PS1=$'$(dir_writeable)$(tsocks_on)$(sudo_query)%{$reset_color%} %{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$greeniegreen%}$(meson_env)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$reset_color%}'
 PS2=$''
 PS3=$'\n%{$randomblue%}--➜%K{0}%F{15}'
 get_prompt_len() {

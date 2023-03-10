@@ -10,36 +10,45 @@ tor mirror [4]
 WKD direct and advanced are setup on/for the domain.
 
 keyoxide [5]
-I don't use all the accounts listed on keyoxide regularly. The preferred methods of contacting me are the ones that are listed here, IRC, XMPP and email (The order is not significant).
+I don't use all the accounts listed on keyoxide regularly. The preferred methods of contacting me are the ones that are listed here, IRC, email and XMPP (The order is not significant).
 
 PGP FP: 9E20464F1CCF3B103249FA93A6A0F5158B3881DF - here [6] and here [7]
 I manually upload my PGP key to https://keys.openpgp.org and https://pgp.mit.edu/.
 SSH FP: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4 - here [8] and here [9]
 
-IRC Libera [10] : terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
-IRC OFTC [11] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-IRC Rizon [12] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-IRC Tilde [13] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+IRC:
+Libera [10] : terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
+OFTC [11] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Rizon [12] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Tilde [13] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
 You can also find me on Libera, OFTC and Rizon in ##terminaldweller.
 
-XMPP: devi@jabber.terminaldweller.com
+XMPP:
+devi@jabber.terminaldweller.com
+devi@draugr.de
 
-The order is significant:
-Email: devi@terminaldweller.com
-Email: thabogre@gmail.com
-Email: farzadsadeghi@protonmail.ch
-All emails have the ssh and pgp key fingerprints as signature.
+Email:
+(the order is significant)
+devi@terminaldweller.com
+thabogre@gmail.com
+farzadsadeghi@protonmail.ch
+All emails have the ssh and pgp key fingerprints as signature. You can ask for one.
 
+OpenID: https://launchpad.net/~terminaldweller
+
+Git:
 Github: terminaldweller [14]
+Mirrors:
+git.terminaldweller.com [15]
+codeberg.com/terminaldweller [16]
+The mirrors are updated automatically though it might take some time.
 
-Mastodon: @terminaldweller@terminaldweller.com [15]
-If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org [16]
+Mastodon: @terminaldweller@terminaldweller.com [17]
+If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org [18]
 
-Git mirror: git.terminaldweller.com [17]
+Blog: Blog [19] RSS [20]
 
-Blog: Blog [18] RSS [19]
-
-Linkedin [20]
+Linkedin [21]
 
 Services: N/A
 
@@ -57,9 +66,10 @@ Services: N/A
 => https://rizon.net/  Rizon
 => https://tilde.chat  Tilde
 => https://github.com/terminaldweller  terminaldweller
+=> https://git.terminaldweller.com  git.terminaldweller.com
+=> https://codeberg.org/terminaldweller  codeberg.com/terminaldweller
 => https://fosstodon.org/@terminaldweller  @terminaldweller@terminaldweller.com
 => https://fosstodon.org/@terminaldweller  @terminaldweller@fosstodon.org
-=> https://git.terminaldweller.com  git.terminaldweller.com
 => https://blog.terminaldweller.com  Blog
 => https://blog.terminaldweller.com/rss/feed  RSS
 => https://www.linkedin.com/in/farzad-sadeghi/  Linkedin

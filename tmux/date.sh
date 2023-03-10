@@ -38,7 +38,7 @@ RESULT=$(date +"%a %D %H:%M")
 DAY="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $1}')
 DATE="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $2}')
 TIME="#[fg=colour255 bg=colour31]"$(echo "$RESULT" | gawk '{print $3}')
-INTERNET_TIME_RESULT=$(date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9054 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime'))
+# INTERNET_TIME_RESULT=$(date -u +"%T" -d @$(curl -s --connect-timeout 10 --socks5-hostname localhost:9054 --user-agent "$(get_random_ua.sh)" http://worldtimeapi.org/api/timezone/Europe/London.json | jq '.unixtime'))
 # UTC_TIME_RESULT=$(date -u +"%H:%M")
 # UTC_TIME="#[fg=colour255 bg=colour25]"${INTERNET_TIME_RESULT}
 UTC_TIME="#[fg=colour255 bg=colour25]"$(internet_time_cache)
