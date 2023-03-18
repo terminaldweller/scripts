@@ -22,6 +22,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.socks5_3]
 address = "127.0.0.1"
@@ -31,6 +32,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.socks5_5]
 address = "127.0.0.1"
@@ -40,6 +42,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.socks5_8]
 address = "127.0.0.1"
@@ -49,6 +52,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.i2pmapped6http]
 address = "127.0.0.1"
@@ -58,6 +62,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://1
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped6server]
 address = "127.0.0.1"
@@ -67,6 +72,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9066'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped6socks]
 address = "127.0.0.1"
@@ -76,6 +82,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped6irssilitia]
 address = "127.0.0.1"
@@ -85,6 +92,7 @@ test_command = ""
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped6irssipostman]
 address = "127.0.0.1"
@@ -94,6 +102,7 @@ test_command = ""
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped8http]
 address = "127.0.0.1"
@@ -103,6 +112,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://1
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped8server]
 address = "127.0.0.1"
@@ -112,6 +122,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9166'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmapped8socks]
 address = "127.0.0.1"
@@ -121,6 +132,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmappedvhttp]
 address = "127.0.0.1"
@@ -130,6 +142,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --proxy http://1
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmappedvserver]
 address = "127.0.0.1"
@@ -139,6 +152,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 localhost:9266'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.i2pmappedvsocks]
 address = "127.0.0.1"
@@ -148,6 +162,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -I -4 --socks5 socks5h
 test_command_result = "200"
 test_interval = 300
 test_timeout = 30
+auto_start = true
 
 [tunnel.tormapped6]
 address = "127.0.0.1"
@@ -157,6 +172,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
+auto_start = true
 
 [tunnel.tormapped6control]
 address = "127.0.0.1"
@@ -166,6 +182,7 @@ test_command = ''
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
+auto_start = false
 
 [tunnel.tormapped8]
 address = "127.0.0.1"
@@ -175,6 +192,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
+auto_start = true
 
 [tunnel.tormapped8control]
 address = "127.0.0.1"
@@ -184,6 +202,7 @@ test_command = ''
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
+auto_start = false
 
 [tunnel.tormappedv]
 address = "127.0.0.1"
@@ -193,6 +212,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 20
+auto_start = true
 
 [tunnel.haproxy_prom_mapped]
 address = "127.0.0.1"
@@ -202,6 +222,7 @@ test_command = "curl -s localhost:9099"
 test_command_result = "<a href=\"/graph\">Found</a>."
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.slackircd]
 address = "127.0.0.1"
@@ -211,6 +232,7 @@ test_command = ""
 test_command_result = ""
 test_interval = 300
 test_timeout = 10
+auto_start = false
 
 [tunnel.ircgitter]
 address = "127.0.0.1"
@@ -220,15 +242,17 @@ test_command = ""
 test_command_result = ""
 test_interval = 300
 test_timeout = 10
+auto_start = false
 
 [tunnel.upnp_2234]
 address = "127.0.0.1"
 port = 2234
-command = "autossh -M 0 -N -L 0.0.0.0:2234:127.0.0.1:2234 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+command = "autossh -M 0 -N -R 0.0.0.0:2234:185.112.147.110:2234 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
 test_command = ""
 test_command_result = ""
 test_interval = 300
 test_timeout = 10
+auto_start = false
 
 [tunnel.6socks5_6]
 address = "::1"
@@ -238,6 +262,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -6 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.6socks5_7]
 address = "::1"
@@ -247,6 +272,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -6 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.6socks5_8]
 address = "::1"
@@ -256,6 +282,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -6 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.6socks5_9]
 address = "::1"
@@ -265,6 +292,7 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -6 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
 
 [tunnel.6socks5_vv]
 address = "::1"
@@ -274,3 +302,14 @@ test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -6 --socks5 sock
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
+auto_start = true
+
+[tunnel.lxc_geth]
+address = "127.0.0.1"
+port = 8545
+command = "autossh -M 0 -N -L 0.0.0.0:8545:127.0.0.1:8545 -l ubuntu 10.167.131.186"
+test_command = ''
+test_command_result = "200"
+test_interval = 300
+test_timeout = 10
+auto_start = false

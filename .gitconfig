@@ -2,7 +2,7 @@
 [user]
 # Please adapt and uncomment the following lines:
 	name = terminaldweller
-	email = thabogre@gmail.com
+	email = devi@terminaldweller.com
 	signingkey = /home/devi/.ssh/id_rsa.pub
 
 [apply]

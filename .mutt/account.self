@@ -16,4 +16,4 @@ set header_cache = ~/.mutt/self/cache/headers
 set message_cachedir = ~/.mutt/self/cache/bodies
 set certificate_file = ~/.mutt/self/certificates
 # mailboxes "+INBOX" "+Drafts" "+Sent" "+Trash"
-mailboxes "+INBOX" "+INBOX/Github" "+INBOX/Linkedin" "+INBOX/Launchpad" "+INBOX/Opennic" "+INBOX/Trf" "+INBOX/Devto" "+INBOX/Kaggle" "+INBOX/Codeberg" "+INBOX/Rumble"
+mailboxes "+INBOX" "+INBOX/Github" "+INBOX/Linkedin" "+INBOX/Launchpad" "+INBOX/Opennic" "+INBOX/Trf" "+INBOX/Devto" "+INBOX/Kaggle" "+INBOX/Codeberg" "+INBOX/Rumble" "+INBOX/Substack" "+INBOX/Infura" "+INBOX/Skiff"

@@ -26,6 +26,13 @@ set crypt_reply_sign=yes
 set crypt_reply_sign_encrypted=yes
 set crypt_timestamp=yes
 
+unset sig_dashes
+
+set ask_bcc = yes
+set ask_cc = yes
+
+set signature = "~/.mutt/.signature"
+
 folder-hook 'account.gmail' 'source ~/.mutt/account.gmail'
 folder-hook 'account.self' 'source ~/.mutt/account.self'
 folder-hook 'account.zoho' 'source ~/.mutt/account.zoho'
@@ -63,23 +70,22 @@ set sidebar_folder_indent = yes
 set sidebar_indent_string = "...."
 
 #subscriptions
-subscribe ^cfe-dev@lists.llvm.org$
-subscribe ^llvm-dev@lists.llvm.org$
+subscribe -group llvm-cfre cfe-dev@lists.llvm.org$
+subscribe -group llvm-llvm llvm-dev@lists.llvm.org$
 subscribe -group lua lua-l@lists.lua.org
 subscribe -group cygwin cygwin@cygwin.com
-subscribe ^dev-request@dpdk.org$
-subscribe ^freeradius-users-request@lists.freeradius.org$
-subscribe ^odp-request@lists.opendataplane.org$
+subscribe -group dpdk dev-request@dpdk.org$
+subscribe -group freeradius freeradius-users-request@lists.freeradius.org$
+subscribe -group odp odp-request@lists.opendataplane.org$
 
 color error         color196        default                        # message line error text
 color tilde         color81         default                        # vi-like tildes marking blank lines
 color message       color82         default
-color markers       brightcolor232  color222                        # wrapped-line /^\+/ markers
-color attachment    brightcolor165  default                        # attachment headers
+color markers       color210 default                        # wrapped-line /^\+/ markers
+color attachment    color141  default                        # attachment headers
 color search        color232        color154                        # search patterns in pager
-color status        brightcolor232  color39
 color indicator     brightcolor232  color33                        # selected email in index
-color tree          brightcolor165  default                        # arrow in threads (`-->')
+color tree          color141  default                        # arrow in threads (`-->')
 
 # basic monochrome screen
 mono bold           bold
@@ -182,7 +188,6 @@ color underline     color208        default
 color normal        color244        default
 
 ## pgp
-
 color body          color131        default        "^(Message-ID|Message-Id).*"
 color body          color132        default        "^Authentication-.*"
 color body          color25         default        "^Received:.*"
@@ -195,7 +200,7 @@ color body          color99         default        "^Content-.*"
 color body          color30         default        "^X-.*"
 color body          color160        default        "(BAD signature)"
 color body          color39         default        "(Good signature)"
-color body          color235        default        "^gpg: Good signature .*"
+color body          color39         default        "^gpg: Good signature .*"
 color body          color241        default        "^gpg: "
 color body          color241        color160        "^gpg: BAD signature from.*"
 color body          color30         default         "^# \.*"
@@ -240,16 +245,16 @@ color   attach_headers     green           default        "Type: [a-z]+/[a-z0-9\
 color   attach_headers     green           default        "Size: [0-9\.]+[KM]"
 
 # Color GPGME signature checks
-color   attach_headers     brightgreen     default        "Good signature from.*"
-color   attach_headers     brightred       default        "Bad signature from.*"
-color   attach_headers     brightred       default        "BAD signature from.*"
-color   attach_headers     brightred       default        "Note: This key has expired!"
-color   attach_headers     brightmagenta   default        "Problem signature from.*"
-color   attach_headers     brightmagenta   default        "WARNING: This key is not certified with a trusted signature!"
-color   attach_headers     brightmagenta   default        "         There is no indication that the signature belongs to the owner."
-color   attach_headers     brightmagenta   default        "can't handle these multiple signatures"
-color   attach_headers     brightmagenta   default        "signature verification suppressed"
-color   attach_headers     brightmagenta   default        "invalid node with packet of type"
+# color   attach_headers     brightgreen     default        "Good signature from.*"
+# color   attach_headers     brightred       default        "Bad signature from.*"
+# color   attach_headers     brightred       default        "BAD signature from.*"
+# color   attach_headers     brightred       default        "Note: This key has expired!"
+# color   attach_headers     brightmagenta   default        "Problem signature from.*"
+# color   attach_headers     brightmagenta   default        "WARNING: This key is not certified with a trusted signature!"
+# color   attach_headers     brightmagenta   default        "         There is no indication that the signature belongs to the owner."
+# color   attach_headers     brightmagenta   default        "can't handle these multiple signatures"
+# color   attach_headers     brightmagenta   default        "signature verification suppressed"
+# color   attach_headers     brightmagenta   default        "invalid node with packet of type"
 ###
 color index_collapsed blue default
 color index_date color31  default
@@ -260,7 +265,7 @@ color index_tags color27 default
 #color index_subject color166 default
 #color index_tag color165 default
 ###
-color prompt blue cyan
+color prompt blue default
 
 color sidebar_divider brightcolor39 default
 color sidebar_flagged color167 default
@@ -280,6 +285,7 @@ set index_format='%4C %D %Z %{%b %d} %H %-15.15L (%?l?%4l&%4c?) %s | To:%L'
 set sort=threads
 set sort_aux=last-date-received
 color status color39 default
+# color status        color210  color39
 color status color25 white '(New|Del|Flag):[0-9]+'
 color status color25 default '\([^)]+/[^)]+\)'
 color status default default '\(threads/last-date-received\)'

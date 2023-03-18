@@ -69,11 +69,11 @@ const movies_obj = {
 };
 
 const stash_obj = {
-  step: "https://spankbang.com/7s3ed/video/sharing+my+curvy+girlfriend+with+my+skinny+stepsis",
+  "a b": "c",
 };
 
 const manga_obj = {
-  "hell's tormentor kraken": "https://manganato.com/manga-or992226",
+  e: "f",
 };
 
 function inser_into_db(mongo_collection, object) {

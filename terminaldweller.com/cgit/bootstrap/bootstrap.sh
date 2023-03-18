@@ -36,6 +36,7 @@ REPOS="cgrep \
   tunneltop \
   memdump \
   lclip \
+  icanhazallips \
   cfe-extra"
 
 bootstrap() {

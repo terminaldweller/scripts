@@ -124,7 +124,8 @@ Plug 'sngn/vim-i3blocks-syntax'
 Plug 'rhysd/vim-wasm'
 " makes scrolling slow and doesnt work with vista popups
 " Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tomlion/vim-solidity'
+" Plug 'tomlion/vim-solidity'
+Plug 'thesis/vim-solidity'
 Plug 'dense-analysis/ale'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
@@ -230,6 +231,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'goerz/jupytext.vim'
 Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
 Plug 'mattn/vim-chatgpt'
+" Plug 'jelera/vim-javascript-syntax'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'Konfekt/vim-office'
@@ -243,7 +245,6 @@ Plug 'mattn/vim-chatgpt'
 " Plug 'vim-utils/vim-troll-stopper'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'skammer/vim-css-color'
-" Plug 'jelera/vim-javascript-syntax'
 " Plug 'szymonmaszke/vimpyter'
 " Plug 'puremourning/vimspector'
 " Plug 'kana/vim-submode'
@@ -1470,6 +1471,11 @@ augroup ALEJS
   autocmd FileType javascript let b:ale_linters = {'javascript': ['eslint']}
   autocmd FileType javascript let b:ale_fixers = {'javascript': ['prettier']}
 augroup END
+augroup ALETS
+  autocmd!
+  autocmd FileType typescript let b:ale_linters = {'typescript': ['eslint']}
+  autocmd FileType typescript let b:ale_fixers = {'typescript': ['prettier']}
+augroup END
 let b:ale_python_mypy_options = "--check-untyped-defs"
 augroup ALEPY
   autocmd!
@@ -1540,6 +1546,11 @@ augroup ALEGO
   autocmd!
   autocmd FileType go let b:ale_linters = {'go': ['golangci-lint']}
   autocmd FileType go let b:ale_fixers = {'go': ['gofumpt']}
+augroup END
+augroup ALESOL
+  autocmd!
+  autocmd FileType solidity let b:ale_linters = {'solidity': ['solhint', 'ethlint', 'solc']}
+  " autocmd FileType solidity let b:ale_fixers = {'solidity': ['solc']}
 augroup END
 
 " we can edit gzip files because of this

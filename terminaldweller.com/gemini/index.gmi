@@ -12,15 +12,15 @@ WKD direct and advanced are setup on/for the domain.
 keyoxide [5]
 I don't use all the accounts listed on keyoxide regularly. The preferred methods of contacting me are the ones that are listed here, IRC, email and XMPP (The order is not significant).
 
-PGP FP: 9E20464F1CCF3B103249FA93A6A0F5158B3881DF - here [6] and here [7]
+PGP FP: 9E20464F1CCF3B103249FA93A6A0F5158B3881DF - github [6], gitlab [7], codeberg [8], self-hosted [9]
 I manually upload my PGP key to https://keys.openpgp.org and https://pgp.mit.edu/.
-SSH FP: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4 - here [8] and here [9]
+SSH FP: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4 - github [10], gitlab [11], codeberg [12], self-hosted [13]
 
 IRC:
-Libera [10] : terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
-OFTC [11] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-Rizon [12] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-Tilde [13] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Libera [14] : terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
+OFTC [15] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Rizon [16] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Tilde [17] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
 You can also find me on Libera, OFTC and Rizon in ##terminaldweller.
 
 XMPP:
@@ -37,37 +37,42 @@ All emails have the ssh and pgp key fingerprints as signature. You can ask for o
 OpenID: https://launchpad.net/~terminaldweller
 
 Git:
-Github: terminaldweller [14]
+Github: terminaldweller [18]
 Mirrors:
-git.terminaldweller.com [15]
-codeberg.com/terminaldweller [16]
-The mirrors are updated automatically though it might take some time.
+git.terminaldweller.com [19]
+codeberg.org/terminaldweller [20]
+gitlab.com/terminaldweller [21]
 
-Mastodon: @terminaldweller@terminaldweller.com [17]
-If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org [18]
+Mastodon: @terminaldweller@terminaldweller.com [22]
+If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org [23]
 
-Blog: Blog [19] RSS [20]
+Blog: Blog [24] RSS [25]
 
-Linkedin [21]
+Linkedin [26]
 
 Services: N/A
 
 => https://terminaldweller.eth.link  terminaldweller.eth
 => gemini://gemini.terminaldweller.com  Gemini
-=> http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p:7774/  i2p mirror
+=> http://iedzwh5v2vouywqy4eak3eu33amfn3rzhdcln7j4r5kcyvf46cea.b32.i2p/  i2p mirror
 => http://dqunl5rzlv6skqfklqr4dwi4zph2vqoaennc7qoinqs5mlug4docq2yd.onion/  tor mirror
 => https://keyoxide.org/hkp/9e20464f1ccf3b103249fa93a6a0f5158b3881df  keyoxide
-=> https://github.com/terminaldweller.gpg  here
-=> keys/gpg_pubkey  here
-=> https://github.com/terminaldweller.keys  here
-=> keys/id_rsa_pub  here
+=> https://github.com/terminaldweller.gpg  github
+=> https://gitlab.com/terminaldweller.gpg  gitlab
+=> https://codeberg.org/terminaldweller.gpg  codeberg
+=> keys/gpg_pubkey  self-hosted
+=> https://github.com/terminaldweller.keys  github
+=> https://gitlab.com/terminaldweller.keys  gitlab
+=> https://codeberg.org/terminaldweller.keys  codeberg
+=> keys/id_rsa_pub  self-hosted
 => https://libera.chat  Libera
 => https://oftc.net  OFTC
 => https://rizon.net/  Rizon
 => https://tilde.chat  Tilde
 => https://github.com/terminaldweller  terminaldweller
 => https://git.terminaldweller.com  git.terminaldweller.com
-=> https://codeberg.org/terminaldweller  codeberg.com/terminaldweller
+=> https://codeberg.org/terminaldweller  codeberg.org/terminaldweller
+=> https://gitlab.com/terminaldweller  gitlab.com/terminaldweller
 => https://fosstodon.org/@terminaldweller  @terminaldweller@terminaldweller.com
 => https://fosstodon.org/@terminaldweller  @terminaldweller@fosstodon.org
 => https://blog.terminaldweller.com  Blog

@@ -363,6 +363,13 @@ alias tunneltoprc="vim ~/scripts/.tunneltop.toml"
 alias fixtunneltoprc="cp ~/scripts/.tunneltop.toml ~/.tunneltop.toml"
 alias tokei="tokei --hidden --num-format underscores -s lines"
 alias waydroid="WAYLAND_DISPLAY=wayland-0 waydroid"
+alias gw="git worktree"
+alias redshiftrc="vim ~/scripts/.config/redshift.conf"
+alias fixredshiftrc="cp ~/scripts/.config/redshift.conf ~/.config/redshift.conf"
+
+gwta() {
+  git worktree add ./"$1" $(git rev-parse "$1")
+}
 
 function ccgrep() {
   EXTRA_ARG_BEFORE=$(llvm-config --libdir)/clang/$(llvm-config --version)/include

@@ -14,20 +14,20 @@ services:
       - ./conf/bitlbee.conf:/var/lib/bitlbee/bitlbee.conf
       - userdata:/var/lib/bitlbee
       - /home/devi/.cache/docker-bitlbee/signald/run:/var/run/signald
-  signald:
-    image: signald/signald
-    networks: 
-      - signalnet
-    restart: unless-stopped
-    volumes:
-      - /home/devi/.cache/docker-bitlbee/signald/run:/signald
-      - ./net.properties:/conf/net.properties:ro
-    environment:
-      - ALL_PROXY=socks5h://192.168.1.214:9995
-      - FTP_PROXY=socks5h://192.168.1.214:9995
-      - HTTP_PROXY=socks5h://192.168.1.214:9995
-      - HTTPS_PROXY=socks5h://192.168.1.214:9995
-      - NOPROXY=localhost,127.0.0.0/8,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16
+  # signald:
+  #   image: signald/signald
+  #   networks: 
+  #     - signalnet
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /home/devi/.cache/docker-bitlbee/signald/run:/signald
+  #     - ./net.properties:/conf/net.properties:ro
+  #   environment:
+  #     - ALL_PROXY=socks5h://192.168.1.214:9995
+  #     - FTP_PROXY=socks5h://192.168.1.214:9995
+  #     - HTTP_PROXY=socks5h://192.168.1.214:9995
+  #     - HTTPS_PROXY=socks5h://192.168.1.214:9995
+  #     - NOPROXY=localhost,127.0.0.0/8,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16
   # matterircd:
   #   image: 42wim/matterircd:0.26
   #   networks:

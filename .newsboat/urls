@@ -9,6 +9,7 @@ https://news.ycombinator.com/rss "~HN"
 https://www.ecliptik.com/feed.xml "~Ecliptik"
 https://www.privacytools.io/guides/rss.xml "~Privacy_Tools"
 https://voidlinux.org/atom.xml "~VoidLinux"
+https://blog.qutebrowser.org/feeds/all.rss.xml "~Qutebrowser"
 
 "exec:gemget gemini://mozz.us/journal/atom.xml --output -" "~MOZZ"GEMINI
 "exec:gemget gemini://midnight.pub/feed.xml --output -" "~Midnight_Pub"GEMINI
