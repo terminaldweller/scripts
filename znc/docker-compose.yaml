@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  bitlbee:
+    image: znc:1.8.2
+    user: ${ZNC_UID}:${ZNC_GID}
+    networks:
+      - zncnet
+    ports:
+      - "1025:1025"
+    restart: unless-stopped
+    volumes:
+      - /home/znc/.znc/:~/.znc/
+networks:
+  zncnet:

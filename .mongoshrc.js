@@ -28,3 +28,7 @@ function get_animes() {
 function get_movies() {
   return db.movies.find();
 }
+
+function get_stash() {
+  return db.stash.find();
+}

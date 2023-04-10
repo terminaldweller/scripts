@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-CLIP_HIST_FILE=/tmp/.clip_history
-# POSTIT=$(cat ${CLIP_HIST_FILE} | dmenu -l 20 -p "Select Postit:")
-sqlite3 $(cat /tmp/lclipd/lclipd_db_name) 'select content from lclipd;' | dmenu -l 20 | xsel -ib
-# echo -n "${POSTIT:0:${#POSTIT}}" | xsel -ip
+SQL_DB="$(cat /tmp/lclipd/lclipd_db_name)"
+content=$(sqlite3 "${SQL_DB}" "select replace(content,char(10),' '),id from lclipd;" | dmenu -fn "DejaVuSansMono Nerd Font Mono-11.3;antialias=true;autohint=true" -D "|" -l 20 -p "lclipd:")
+sqlite3 "${SQL_DB}" "select content from lclipd where id = ${content}" | xsel -ib

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:12.1-alpine
+    container_name: pleroma_db
+    restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "pleroma"]
+    environment:
+      POSTGRES_USER: pleroma
+      POSTGRES_PASSWORD: # pragma: allowlist secret
+      POSTGRES_DB: pleroma
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      -  traefiknet
+  pleroma:
+    image: pleroma
+    container_name: pleroma_web
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -q --spider --proxy=off localhost:4000 || exit 1",
+        ]
+    restart: always
+    build:
+      context: .
+      args:
+        - "UID=1001"
+        - "GID=1001"
+        - "PLEROMA_VER=v2.4.2"
+    volumes:
+      - ./uploads:/var/lib/pleroma/uploads
+      - ./static:/var/lib/pleroma/static
+      - ./config.exs:/etc/pleroma/config.exs:ro
+      - ./config-override.exs:/var/lib/pleroma/config.exs:ro
+    environment:
+      DOMAIN: pleroma.terminaldweller.com
+      INSTANCE_NAME: Pleroma
+      ADMIN_EMAIL: devi@terminaldweller.com
+      NOTIFY_EMAIL: devi@terminaldweller.com
+      DB_USER: pleroma
+      DB_PASS: # pragma: allowlist secret
+      DB_NAME: pleroma
+    depends_on:
+      - db
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pleroma.entrypoints=websecure
+      - traefik.http.routers.pleroma.rule=Host(`pleroma.terminaldweller.com`)
+      - traefik.http.routers.pleroma.tls=true
+      - traefik.http.routers.pleroma.tls.certresolver=letls
+    networks:
+      - traefiknet
+networks:
+  traefiknet:
+    name: matrix_default
+    external: true

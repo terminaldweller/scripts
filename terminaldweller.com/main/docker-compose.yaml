@@ -10,7 +10,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt/archive/terminaldweller.com/:/certs/
+      - /etc/letsencrypt/live/terminaldweller.com/fullchain.pem:/etc/letsencrypt/live/terminaldweller.com/fullchain.pem:ro
+      - /etc/letsencrypt/live/terminaldweller.com/privkey.pem:/etc/letsencrypt/live/terminaldweller.com/privkey.pem:ro
       - ./srv:/srv
     cap_drop:
       - ALL

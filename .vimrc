@@ -1157,6 +1157,8 @@ autocmd FileType javasript let b:vcm_tab_complete = 'omni'
 "filetypes
 set dictionary+=/usr/share/dict/words
 autocmd FileType pandoc,markdown,text,vimwiki,tex setlocal complete+=k
+let g:pandoc#syntax#conceal#use = 0
+autocmd FileType pandoc PandocHighlight sh
 
 "fzf
 map <leader>f <Esc><Esc>:Files!<CR>
@@ -1373,7 +1375,7 @@ let g:context_presenter = 'vim-popup'
 
 augroup AUSpell
   autocmd!
-  autocmd FileType markdown,txt,vimwiki,tex setlocal spell
+  autocmd FileType markdown,txt,vimwiki,tex,pandoc setlocal spell
 augroup END
 
 augroup MDInsert
@@ -1477,6 +1479,7 @@ augroup ALETS
   autocmd FileType typescript let b:ale_fixers = {'typescript': ['prettier']}
 augroup END
 let b:ale_python_mypy_options = "--check-untyped-defs"
+let b:ale_python_pylint_options = "--generate-members"
 augroup ALEPY
   autocmd!
   autocmd FileType python let b:ale_linters = {'python': ['mypy', 'pylint', 'bandit', 'ruff']}

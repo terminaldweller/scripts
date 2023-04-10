@@ -57,3 +57,13 @@ https://magma.lavafeld.org/guide/osint-sources.html#looking-glasses
 echo "" | GPG_TTY=$(tty) gpg2 --pinentry-mode loopback -a --default-key A6A0F5158B3881DF --detach-sig
 echo 0 > /proc/sys/vm/compaction_proactiveness
 browser.fixup.domainsuffixwhitelist.loki
+https://www.remlab.net/miredo/
+https://ftp.mozilla.org/
+https://metacode.biz/openpgp/web-key-directory
+dpmx
+https://malltina.com/product/mlt-1675290
+https://grandvape.shop/
+https://artemislena.eu/
+https://gtmetrix.com/analyze.html
+adb shell settings put global http_proxy 192.168.1.214:8118
+https://open.spotify.com/show/2Mu5dTlsG1vRE25twu1P2l

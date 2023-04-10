@@ -33,5 +33,5 @@ volumes:
   mnesia_db:
   vault:
 # openssl dhparam -out dhparams.pem 4096
-# certbot certonly --standlone -d chat.terminaldweller.com -e devi@terminaldweller.com --agree-tos --noninteractive
+# certbot certonly --standalone -d chat.terminaldweller.com --email devi@terminaldweller.com --agree-tos --noninteractive --dry-run
 # docker exec -it 6eebd16a2385 bin/ejabberdctl register admin chat.terminaldweller.com password

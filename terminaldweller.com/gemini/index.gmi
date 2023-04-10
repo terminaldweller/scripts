@@ -17,10 +17,11 @@ I manually upload my PGP key to https://keys.openpgp.org and https://pgp.mit.edu
 SSH FP: SHA256:tyuaTy005jkJOIPXkrJAAlCKD91d1ftEXzGTqjmEZh4 - github [10], gitlab [11], codeberg [12], self-hosted [13]
 
 IRC:
-Libera [14] : terminaldweller FP:FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
-OFTC [15] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-Rizon [16] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
-Tilde [17] : terminaldweller FP:1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Libera [14] : terminaldweller FP: FEF763019F0799C1B5CD190FC89080240665CDCAE1CB889D4413775447A4826F48B18DC134D3ACDDE1D932CF3280E6026099857CF46177F1D87CD9AA859C615F
+OFTC [15] : terminaldweller FP: 1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Rizon [16] : terminaldweller FP: 1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Tilde [17] : terminaldweller FP: 1072EFECA623C6E3D7A6628BEB6021F77EA2C876
+Bonobonet [18] : terminaldweller FP: 5e3bd8ab6f8c6f6a614d4b2245fd6b5737a6e59917c6719de62b55bac77b978c
 You can also find me on Libera, OFTC and Rizon in ##terminaldweller.
 
 XMPP:
@@ -31,24 +32,31 @@ Email:
 (the order is significant)
 devi@terminaldweller.com
 thabogre@gmail.com
+bloodstalker@zoho.com
 farzadsadeghi@protonmail.ch
 All emails have the ssh and pgp key fingerprints as signature. You can ask for one.
+I sign all emails, unless I receive an encrypted email in which case, I will also encrypt the response.
+
+Matrix:
+@devi:terminaldweller.com [19]
+@terminaldweller:matrix.org [20]
 
 OpenID: https://launchpad.net/~terminaldweller
 
 Git:
-Github: terminaldweller [18]
+github.com/terminaldweller [21]
 Mirrors:
-git.terminaldweller.com [19]
-codeberg.org/terminaldweller [20]
-gitlab.com/terminaldweller [21]
+git.terminaldweller.com [22]
+codeberg.org/terminaldweller [23]
+gitlab.com/terminaldweller [24]
 
-Mastodon: @terminaldweller@terminaldweller.com [22]
-If you cant find the handle then you need to log in. I'm not hosting my own mastodon instance. I'm just hosting my own webfinger. The actual handle is @terminaldweller@fosstodon.org [23]
+Mastodon:
+@devi@pleroma.terminaldweller.com [25]
+@terminaldweller@fosstodon.com [26]
 
-Blog: Blog [24] RSS [25]
+Blog: Blog [27] RSS [28]
 
-Linkedin [26]
+Linkedin [29]
 
 Services: N/A
 
@@ -66,15 +74,18 @@ Services: N/A
 => https://codeberg.org/terminaldweller.keys  codeberg
 => keys/id_rsa_pub  self-hosted
 => https://libera.chat  Libera
-=> https://oftc.net  OFTC
+=> https://oftc.net/  OFTC
 => https://rizon.net/  Rizon
-=> https://tilde.chat  Tilde
-=> https://github.com/terminaldweller  terminaldweller
+=> https://tilde.chat/  Tilde
+=> https://bnet.eu.org/  Bonobonet
+=> https://matrix.to/#/@devi:terminaldweller.com  @devi:terminaldweller.com
+=> https://matrix.to/#/@terminaldweller:matrix.org  @terminaldweller:matrix.org
+=> https://github.com/terminaldweller  github.com/terminaldweller
 => https://git.terminaldweller.com  git.terminaldweller.com
 => https://codeberg.org/terminaldweller  codeberg.org/terminaldweller
 => https://gitlab.com/terminaldweller  gitlab.com/terminaldweller
-=> https://fosstodon.org/@terminaldweller  @terminaldweller@terminaldweller.com
-=> https://fosstodon.org/@terminaldweller  @terminaldweller@fosstodon.org
+=> https://pleroma.terminaldweller.com/users/devi  @devi@pleroma.terminaldweller.com
+=> https://fosstodon.org/@terminaldweller  @terminaldweller@fosstodon.com
 => https://blog.terminaldweller.com  Blog
 => https://blog.terminaldweller.com/rss/feed  RSS
 => https://www.linkedin.com/in/farzad-sadeghi/  Linkedin

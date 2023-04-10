@@ -24,8 +24,9 @@ eval `dircolors ~/.dir_colors`
 # alias git="proxychains4 -q -f ~/proxies/ice/proxychains.conf git"
 alias sudo="sudo "
 alias mpv="proxychains4 -q -f ~/proxies/swe/proxychains.conf mpv --save-position-on-quit --term-osd-bar --msg-module --msg-time --cache=yes --cache-secs=15000 --cache-on-disk --cache-dir=/tmp/ --demuxer-max-bytes=500MiB"
-alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias w3m='proxychains4 -q -f ~/proxies/ice/proxychains.conf w3m -s -W -4 -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias torw3m='torsocks --port 9053 w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
+alias boxed_w3m="ssh -tt -i /home/devi/devi/vagrantboxes.git/main/netbsd9/.vagrant/machines/default/libvirt/private_key vagrant@w3m-host.vagrant-libvirt torsocks --address 192.168.1.214 --port 9054 w3m -s -W -4 -o -graph"
 alias i2pw3m='proxychains4 -q -f ~/proxies/i2p_one/proxychains.conf w3m -o auto_image=FALSE -o user_agent="$(get_random_ua.sh)" -graph'
 alias rm="rm -I --one-file-system --preserve-root=all"
 alias vv="vim"
@@ -113,6 +114,7 @@ alias vpn8="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ub
 alias vpn9="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -i ~/.ssh/id_rsa -p 3333 ubuntu@185.130.47.81 ssh -tt -i /home/ubuntu/.ssh/id_rsa_lv2 2a07:e01:3:1c4::1 -p 3333 -l ubuntu"
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt 185.126.202.69 -l ubuntu -p 1022"
 alias vpnvv="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.244.29.79"
+alias vpn10="proxychains4 -q -f ~/proxies/swe/proxychains.conf ssh -tt -p 3333  root@89.147.110.30"
 alias -g DOCKER_HOST_VPS="ssh://ubuntu@87.236.209.206:1022"
 alias -g DOCKER_HOST_VPN="ssh://rooot@192.99.102.52:1022"
 alias -g DOCKER_HOST_VPN2="ssh://rooot@145.239.165.137:22"
@@ -122,6 +124,7 @@ alias -g DOCKER_HOST_VPN7="ssh://ubuntu@185.130.47.81:3333"
 alias -g DOCKER_HOST_VPN8="ssh://ubuntu@185.130.47.208:3333"
 # alias -g DOCKER_HOST_VPN9=""
 alias -g DOCKER_HOST_VMS="ssh://ubuntu@185.126.202.69:1022"
+alias -g DOCKER_HOST_VPN10="ssh://root@89.147.110.30:3333"
 # alias cloud_one="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh 130.185.121.80 -l ubuntu -p 1022"
 # alias pytags="ctags --fields=+l --languages=python --python-kinds=-iv -R ."
 alias v="vim"
@@ -150,7 +153,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
+alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro  devi_irssi"
 alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
 alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
@@ -366,6 +369,7 @@ alias waydroid="WAYLAND_DISPLAY=wayland-0 waydroid"
 alias gw="git worktree"
 alias redshiftrc="vim ~/scripts/.config/redshift.conf"
 alias fixredshiftrc="cp ~/scripts/.config/redshift.conf ~/.config/redshift.conf"
+alias waydroid_ssh="ssh -p 8022 u0_a411@192.168.240.112"
 
 gwta() {
   git worktree add ./"$1" $(git rev-parse "$1")
@@ -490,6 +494,8 @@ export MYSQL_PS1="\U@\N:\p [\d] - \R:\m:\s - \v\n>>>"
 # export TZ
 # export GPG_TTY=$(tty)
 
+export PS_FORMAT=pid,start,etime,%cpu,%mem,lxc,cgroup,tty,wchan,exe,cmd
+
 export VAGRANT_HOME="/home/devi/storage/ssd1/vagrant"
 
 export BAT_THEME="Solarized (light)"
@@ -539,7 +545,7 @@ export PATH=$PATH:/home/devi/.fzf/bin
 export PATH=$PATH:/home/devi/k3s
 export PATH=$PATH:/home/devi/kompose
 export PATH=$PATH:/home/devi/powershell
-export PATH=$PATH:/home/devi/ytfzf.git/rewrite
+export PATH=$PATH:/home/devi/ytfzf.git/v2.5.5.rc-5
 export PATH=$PATH:/home/devi/gotty
 export PATH=$PATH:/home/devi/.poetry/bin
 export PATH=$PATH:/home/devi/pulumi
@@ -564,6 +570,7 @@ export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28/node/14.18.2_64bit/bin
 export PATH=$PATH:/home/devi/devi/emsdk.git/3.1.28/upstream/emscripten
 export PATH=$PATH:/home/devi/devi/git-scripts.git/master
+export PATH=$PATH:/home/devi/mongo_db_tools/mongodb-database-tools-ubuntu2004-x86_64-100.5.2/bin
 # flatpaks
 export PATGH=$PATH:/var/lib/flatpak/exports/bin
 

@@ -10,6 +10,9 @@ https://www.ecliptik.com/feed.xml "~Ecliptik"
 https://www.privacytools.io/guides/rss.xml "~Privacy_Tools"
 https://voidlinux.org/atom.xml "~VoidLinux"
 https://blog.qutebrowser.org/feeds/all.rss.xml "~Qutebrowser"
+https://sfconservancy.org/feeds/omnibus/ "~SFC"
+https://www.fsf.org/static/fsforg/rss/blogs.xml "~FSF"
+https://www.eff.org/rss/updates.xml "~EFF"
 
 "exec:gemget gemini://mozz.us/journal/atom.xml --output -" "~MOZZ"GEMINI
 "exec:gemget gemini://midnight.pub/feed.xml --output -" "~Midnight_Pub"GEMINI
@@ -47,6 +50,8 @@ https://www.google.com/alerts/feeds/12093321976767190558/2769088908428192247 "~i
 https://www.google.com/alerts/feeds/12093321976767190558/16765140344737729825 "~TheGreenPlace"Google_Alerts
 https://www.google.com/alerts/feeds/12093321976767190558/11780712112899033397 "~Security_Breach"Google_Alerts
 https://www.google.com/alerts/feeds/12093321976767190558/8312907097599403294 "~Terminaldweller"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/14483201011249340076 "~ChancenKarte"Google_Alerts
+https://www.google.com/alerts/feeds/12093321976767190558/397063251466190481 "~thabogre@gmail.com"Google_Alerts
 
 # (Youtube)
 # Horror
@@ -101,7 +106,6 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "~B
 https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "~Linus_Tech_Tips"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCa6eh7gCkpPo5XXUDfygQQA "~Ippsec"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCdngmbVKX1Tgre699-XLlUA "~Tech_World_With_Nana"youtube
-https://www.youtube.com/feeds/videos.xml?channel_id=UCfp-lNJy4QkIGnaEE6NtDSg "~Terminalforlife"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCylGUf9BvQooEFjgdNudoQg "~The_Linux_Cast"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVhQ2NnY5Rskt6UjCUkJ_DA "~Arjan_code"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCFQMnBA3CS502aghlcr0_aw "~Coffezilla"youtube
@@ -123,6 +127,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCdSnjmLUUe_NT4ml9OkUi1A "~N
 https://www.youtube.com/feeds/videos.xml?channel_id=UCpFFItkfZz1qz5PpHpqzYBw "~Nexpo"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9PIn6-XuRKZ5HmYeu46AIw "~Barely_Sociable"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew "~Yannic_Kilcher"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCa4GzOwXZbQPQyPHhQmpKCQ "~Ants_Are_Everywhere"youtube
 
 https://www.youtube.com/feeds/videos.xml?user=g297125009 "~Gavin_Freeborn"youtube
 https://www.youtube.com/feeds/videos.xml?user=Hak5Darren "~Hak_5"youtube
