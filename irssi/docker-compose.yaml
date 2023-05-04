@@ -1,0 +1,59 @@
+version: "3.8"
+services:
+  irssi:
+    image: devi_irssi
+    build:
+      context: .
+    networks:
+      - irssinet
+    restart: unless-stopped
+    user: ${UID:-1000}:${GID:-1000}
+    volumes:
+      - /home/devi/.irssi-home:/home/user:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /home/devi/.irssi-home/.irssi/otr:/home/user/.irssi/otr:ro
+    environment:
+      - TERM=screen-256color
+      - COLORTERM=truecolor
+      - HTTP_PROXY=http://host.docker.internal:8118
+      - HTTPS_PROXY=http://host.docker.internal:8118
+      - ALL_PROXY=socks5h://host.docker.internal:9969
+      - NO_PROXY=localhost,127.0.0.0/8,[::1],192.168.0.0/24,172.16.0.0/16,10.0.0.0/8
+    runtime: runsc
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - pantalaimon
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - SET_GID
+      - SET_UID
+      - DAC_OVERRIDE
+  pantalaimon:
+    image: matrixdotorg/pantalaimon:v0.10.5
+    networks:
+      - irssinet
+    restart: unless-stopped
+    user: ${UID:-1000}:${GID:-1000}
+    volumes:
+      - ./pantalaimon.conf:/home/pantalaimon/.config/pantalaimon/pantalaimon.conf:ro
+    environment:
+      - HTTP_PROXY=http://host.docker.internal:8118
+      - HTTPS_PROXY=http://host.docker.internal:8118
+      - ALL_PROXY=http://host.docker.internal:8118
+      - NO_PROXY=localhost, 127.0.0.0/8,[::1],192.168.0.0/24,172.16.0.0/24,10.0.0.0/8
+    runtime: runsc
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - SET_GID
+      - SET_UID
+      - DAC_OVERRIDE
+      - CHOWN
+networks:
+  irssinet:

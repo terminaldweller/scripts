@@ -21,8 +21,6 @@ RUN set -eux; \
 
 ENV LANG C.UTF-8
 
-ENV IRSSI_VERSION 1.4.3
-
 RUN set -eux; \
   \
   apk add --no-cache --virtual .build-deps \
@@ -48,9 +46,12 @@ RUN set -eux; \
     tar \
     libotr-dev \
     libgcrypt-dev \
-  ; \
-  \
-  wget "https://github.com/irssi/irssi/releases/download/${IRSSI_VERSION}/irssi-${IRSSI_VERSION}.tar.xz" -O /tmp/irssi.tar.xz; \
+  ;
+
+ENV IRSSI_VERSION 1.4.4
+RUN apk add patch
+COPY ./otr_powerline.diff /
+RUN wget "https://github.com/irssi/irssi/releases/download/${IRSSI_VERSION}/irssi-${IRSSI_VERSION}.tar.xz" -O /tmp/irssi.tar.xz; \
   wget "https://github.com/irssi/irssi/releases/download/${IRSSI_VERSION}/irssi-${IRSSI_VERSION}.tar.xz.asc" -O /tmp/irssi.tar.xz.asc; \
   export GNUPGHOME="$(mktemp -d)"; \
 # gpg: key DDBEF0E1: public key "The Irssi project <staff@irssi.org>" imported
@@ -64,6 +65,7 @@ RUN set -eux; \
   rm /tmp/irssi.tar.xz; \
   \
   cd /usr/src/irssi; \
+  patch ./src/otr/otr-formats.c < /otr_powerline.diff; \
   meson \
     -Denable-true-color=yes \
     -Dwith-bot=yes \
@@ -75,16 +77,16 @@ RUN set -eux; \
   ninja -C Build -j "$(nproc)"; \
   ninja -C Build install;
 ENV HTTPS_PROXY=socks5://192.168.1.214:9995
-RUN apk add git glib python3-dev && \
-      cd /home/user && \
-      git clone https://github.com/irssi-import/irssi-python && \
-      cd /home/user/irssi-python && \
-      autoreconf -ivf -I. && \
-      ./configure --with-irssi=/usr/src/irssi && \
-      make -C src constants && \
-      make && \
-      mkdir /home/user/.irssi/modules && \
-      cp src/.libs/libpython.so ~/.irssi/modules
+# RUN apk add git glib python3-dev && \
+#       cd /home/user && \
+#       git clone https://github.com/irssi-import/irssi-python && \
+#       cd /home/user/irssi-python && \
+#       autoreconf -ivf -I. && \
+#       ./configure --with-irssi=/usr/src/irssi && \
+#       make -C src constants && \
+#       make && \
+#       mkdir /home/user/.irssi/modules && \
+#       cp src/.libs/libpython.so ~/.irssi/modules
 ENV HTTPS_PROXY=
 RUN cd /; \
   rm -rf /usr/src/irssi; \
@@ -97,7 +99,7 @@ RUN cd /; \
   )"; \
   apk add --virtual .irssi-rundeps $runDeps; \
   echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
-  apk add --no-cache perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection perl-mojolicious libnotify; \
+  apk add --no-cache perl-regexp-common-net-cidr perl-regexp-common perl-xml-rss perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection perl-mojolicious libnotify; \
   # apk add dbus; \
   # dbus-uuidgen > /var/lib/dbus/machine-id; \
   # mkdir -p /var/run/dbus; \
@@ -110,7 +112,7 @@ RUN cd /; \
 
 COPY ./proxychains.conf /etc/proxychains/
 WORKDIR $HOME
-RUN cp /home/user/.irssi/modules/libpython.so /usr/local/lib/irssi/modules/libpython_core.so
+# RUN cp /home/user/.irssi/modules/libpython.so /usr/local/lib/irssi/modules/libpython_core.so
 
 USER user
 CMD ["proxychains4", "-q", "irssi"]

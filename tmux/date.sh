@@ -25,11 +25,33 @@ weather_info_cache() {
   if [ $(( $( stat --format=%Y $WEATHER_INFO_CACHE_OUTPUT ) + WEATHER_INFO_CACHE_AGE )) -gt "$( date +%s )" ];then
     :
   else
-    if OUTPUT=$(curl -s --connect-timeout 10 --socks5-hostname socks5h://127.0.0.1:9053 'wttr.in/tehran?T&format=%f'); then 
+    if OUTPUT=$(curl -s --connect-timeout 10 --socks5-hostname socks5h://127.0.0.1:9053 'wttr.in/tehran?T&format=%f'); then
       echo "${OUTPUT}" > ${WEATHER_INFO_CACHE_OUTPUT}
     fi
   fi
   cat ${WEATHER_INFO_CACHE_OUTPUT}
+}
+
+ping_4() {
+  ping -4 -c 1 -w 5 icanhazallips.terminaldweller.com >/dev/null 2>&1
+}
+ping_4_status() {
+  if $(ping_4); then
+    echo "#[fg=colour22 bg=colour25]#[fg=colour0 bg=colour22 bold]4"
+  else
+    echo "#[fg=colour1 bg=colour25]#[fg=colour0 bg=colour1 bold]4"
+  fi
+}
+
+ping_6() {
+  ping -6 -c 1 -w 5 icanhazallips.terminaldweller.com >/dev/null 2>&1
+}
+ping_6_status() {
+  if $(ping_6); then
+    echo "#[fg=colour22 bg=colour0]#[fg=colour0 bg=colour22 bold]6"
+  else
+    echo "#[fg=colour1 bg=colour0]#[fg=colour0 bg=colour1 bold]6"
+  fi
 }
 
 
@@ -71,4 +93,5 @@ ${SEPARATOR_LEFT_BOLD}${WEATHER}#[fg=colour29 bg=colour32]\
 ${SEPARATOR_LEFT_BOLD}${JDATE} #[fg=colour31 bg=colour29]\
 ${SEPARATOR_LEFT_BOLD}${DAY} ${SEPARATOR_LEFT_THIN} ${DATE} ${SEPARATOR_LEFT_THIN} ${TIME} #[fg=colour214 bg=colour31]\
 ${SEPARATOR_LEFT_BOLD}#[fg=colour0 bg=colour214]${BATTERY} #[fg=colour25 bg=colour214]\
-${SEPARATOR_LEFT_BOLD}${UTC_TIME} "
+${SEPARATOR_LEFT_BOLD}${UTC_TIME}\
+$(ping_4_status)$(ping_6_status)"

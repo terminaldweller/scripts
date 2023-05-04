@@ -1,0 +1,13 @@
+version: '3'
+services:
+  matterbridge:
+    image: 42wim/matterbridge:1.26
+    volumes:
+      - ./matterbridge.toml:/etc/matterbridge/matterbridge.toml:ro
+    networks:
+      - matternet
+    restart: unless-stopped
+    labels:
+      - traefik.enable=false
+networks:
+  matternet:

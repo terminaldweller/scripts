@@ -12,7 +12,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /home/ubuntu/cargo:/cargo
-      - /etc/letsencrypt/archive/cargo.terminaldweller.com/:/certs/
+      - /etc/letsencrypt/live/cargo.terminaldweller.com/fullchain.pem:/etc/letsencrypt/live/cargo.terminaldweller.com/fullchain.pem:ro
+      - /etc/letsencrypt/live/cargo.terminaldweller.com/privkey.pem:/etc/letsencrypt/live/cargo.terminaldweller.com/privkey.pem:ro
     cap_drop:
       - ALL
     cap_add:

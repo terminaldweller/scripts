@@ -33,6 +33,7 @@ services:
       - NET_BIND_SERVICE
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt/archive/rssgen.terminaldweller.com/:/certs/:ro
+      - /etc/letsencrypt/live/rssgen.terminaldweller.com/fullchain.pem:/etc/letsencrypt/live/rssgen.terminaldweller.com/fullchain.pem:ro
+      - /etc/letsencrypt/live/rssgen.terminaldweller.com/privkey.pem:/etc/letsencrypt/live/rssgen.terminaldweller.com/privkey.pem:ro
 networks:
   rssbridgenet:

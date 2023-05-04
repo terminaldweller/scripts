@@ -8,15 +8,15 @@ servers = (
     port = "6667";
     autoconnect = "yes";
   },
-  {
-    address = "kfswfco7mfb38dj7hsm4b8gs13ppjnog886y8zcgzno4jt16cepy.loki";
-    chatnet = "BonoboNET_LOKI";
-    port = "6697";
-    tls_cert = "~/.irssi/certs/nick.pem";
-    use_tls = "yes";
-    tls_verify = "no";
-    autoconnect = "yes";
-  },
+  # {
+  #   address = "rany.irc.bnet.eu.org";
+  #   chatnet = "BonoboNET_LOKI";
+  #   port = "6697";
+  #   tls_cert = "~/.irssi/certs/nick.pem";
+  #   use_tls = "yes";
+  #   tls_verify = "no";
+  #   autoconnect = "yes";
+  # },
   # {
   #   address = "irc.oftc.net";
   #   chatnet = "OFTC";
@@ -38,12 +38,12 @@ servers = (
     chatnet = "bitlbee_local";
     autoconnect = "yes";
   },
-  {
-    address = "192.168.1.214";
-    port = "8668";
-    chatnet = "matterircd";
-    autoconnect = "no";
-  },
+  # {
+  #   address = "192.168.1.214";
+  #   port = "8668";
+  #   chatnet = "matterircd";
+  #   autoconnect = "no";
+  # },
   # {
   #   address = "192.168.1.214";
   #   port = "8667";
@@ -89,9 +89,20 @@ servers = (
   },
   {
     address = "185.130.45.46";
+    chatnet = "Bonobonet_ZNC";
+    port = "1025";
+    password = "terminaldweller/Bonobonet:babun"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/nick.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "185.130.45.46";
     chatnet = "IRCNet_ZNC";
     port = "1025";
-    password = "terminaldweller/IRCNET:network";# pragma: allowlist secret
+    password = "terminaldweller/IRCNET:network"; #pragma: allowlist secret
+    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -101,7 +112,7 @@ servers = (
   #   address = "185.130.45.46";
   #   chatnet = "BonoboNET_LOKI_ZNC";
   #   port = "1025";
-  #   password = "terminaldweller/Bonobonet_Loki:network";# pragma: allowlist secret
+  #   password = "terminaldweller/Bonobonet_Loki:network"; #pragma: allowlist secret
   #   tls_cert = "~/.irssi/certs/nick.pem";
   #   use_tls = "yes";
   #   tls_verify = "no";
@@ -111,7 +122,8 @@ servers = (
     address = "185.130.45.46";
     chatnet = "Libera-ZNC";
     port = "1025";
-    password = "terminaldweller/Liberachat:lama";# pragma: allowlist secret
+    password = "terminaldweller/Liberachat:lama"; #pragma: allowlist secret
+    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -121,7 +133,8 @@ servers = (
     address = "185.130.45.46";
     chatnet = "OFTC-ZNC";
     port = "1025";
-    password = "terminaldweller/OFTC:network";# pragma: allowlist secret
+    password = "terminaldweller/OFTC:network"; #pragma: allowlist secret
+    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -131,7 +144,8 @@ servers = (
     address = "185.130.45.46";
     chatnet = "Rizon-ZNC";
     port = "1025";
-    password = "terminaldweller/Rizon:network";# pragma: allowlist secret
+    password = "terminaldweller/Rizon:network"; #pragma: allowlist secret
+    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -141,7 +155,8 @@ servers = (
     address = "185.130.45.46";
     chatnet = "Undernet-ZNC";
     port = "1025";
-    password = "terminaldweller/undernet:network";# pragma: allowlist secret
+    password = "terminaldweller/undernet:network"; #pragma: allowlist secret
+    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -159,7 +174,7 @@ servers = (
     address = "185.130.45.46";
     chatnet = "EFnet_ZNC";
     port = "1025";
-    password = "terminaldweller/EFNET:locolobo";# pragma: allowlist secret
+    password = "terminaldweller/EFNET:locolobo"; #pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -177,7 +192,7 @@ servers = (
     address = "185.130.45.46";
     chatnet = "DALnet_ZNC";
     port = "1025";
-    password = "terminaldweller/DALNET:netwqkkk";# pragma: allowlist secret
+    password = "terminaldweller/DALNET:netwqkkk"; #pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
     tls_verify = "no";
@@ -187,7 +202,8 @@ servers = (
     address = "185.130.45.46";
     chatnet = "TildeChat_ZNC";
     port = "1025";
-    password = "terminaldweller/Tilde_Chat:network";# pragma: allowlist secret
+    password = "terminaldweller/Tilde_Chat:network"; #pragma: allowlist secret
+    # pragma: allowlist secret
     tls_cert = "~/.irssi/certs/nick.pem";
     use_tls = "yes";
     tls_verify = "no";
@@ -215,7 +231,7 @@ chatnets = {
   I2P_ILITIA = { type = "IRC"; nick = "useruseR"; };
   I2P_POSTMAN = { type = "IRC"; nick = "useruseR"; };
   PROBABLY_LOKI = { type = "IRC"; nick = "terminaldweller"; };
-  BonoboNET_LOKI = { type = "IRC"; nick = "terminaldweller"; };
+  Bonobonet_ZNC = { type = "IRC"; nick = "terminaldweller"; };
   # OFTC = {
   #   type = "IRC";
   #   nick = "terminaldweller";
@@ -250,6 +266,9 @@ chatnets = {
   "Libera-ZNC" = {
     type = "IRC";
     autosendcmd = "/^mode terminaldweller +g;wait 3000";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
   };
   # Rizon = {
   #   type = "IRC";
@@ -258,24 +277,44 @@ chatnets = {
   "Rizon-ZNC" = {
     type = "IRC";
     autosendcmd = "/^mode terminaldweller +RCGpx;msg hostserv on;wait 3000";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
   };
-  IRCNet_ZNC = { type = "IRC"; };
+  IRCNet_ZNC = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
+  };
   "Undernet-ZNC" = {
     type = "IRC";
     nick = "terminaldwel";
-    autosendcmd = "/^mode terminaldwel +ix;msg *status traffic;wait 3000";
+    autosendcmd = "/^mode terminaldwel +ix;msg *status listallusernetworks;wait 3000";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
   };
-  EFnet_ZNC = { type = "IRC"; nick = "termi";};
+  EFnet_ZNC = {
+    type = "IRC";
+    nick = "termi";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
   DALnet_ZNC = {
     type = "IRC";
     nick = "terminaldweller";
-    autosendcmd = "/^msg nickserv@services.dal.net identify ;mode terminaldweller HRCi;wait 3000";
+    autosendcmd = "/^msg nickserv@services.dal.net identify @@@@@@@@@@@@;mode terminaldweller HRCi;wait 3000";
+    max_kicks = "4";
+    max_msgs = "20";
+    max_whois = "30";
   };
   TildeChat_ZNC = { type = "IRC"; };
   devinet = {
     type = "IRC";
     nick = "terminaldweller";
-    # autosendcmd = "/^msg nickserv identify terminaldweller;wait 3000;";
+    autosendcmd = "/^msg hostserv on;wait 3000";
     sasl_mechanism = "EXTERNAL";
     sasl_username = "terminaldweller";
   };
@@ -285,6 +324,9 @@ channels = (
   # { name = "#dpdk"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#fdio-vpp"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#openssl"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#sopelbot"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#matterbridge"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#rss"; chatnet = "devinet"; autojoin = "yes"; },
   { name = "#netbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#netplan"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#ubuntu"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
@@ -292,7 +334,7 @@ channels = (
   { name = "#debian"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   # { name = "#virt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#openwrt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
-  { 
+  {
     name = "#selfhosting";
     chatnet = "TildeChat_ZNC";
     autojoin = "yes";
@@ -300,7 +342,7 @@ channels = (
   { name = "#tor"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#llvm"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#bitlbee"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
-  { 
+  {
     name = "##terminaldweller";
     chatnet = "OFTC-ZNC";
     autojoin = "yes";
@@ -314,15 +356,15 @@ channels = (
   { name = "#qutebrowser"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#lokinet"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
   { name = "#general"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
-  { name = "#crxn"; chatnet = "BonoboNET_LOKI"; autojoin = "yes"; },
+  { name = "#crxn"; chatnet = "Bonobonet_ZNC"; autojoin = "yes"; },
   {
     name = "#networking";
-    chatnet = "BonoboNET_LOKI";
+    chatnet = "Bonobonet_ZNC";
     autojoin = "yes";
   },
   {
     name = "#general";
-    chatnet = "BonoboNET_LOKI";
+    chatnet = "Bonobonet_ZNC";
     autojoin = "yes";
   },
   { name = "#go-nuts"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
@@ -439,11 +481,11 @@ statusbar = {
     # window_empty is printed with empty windows
     window = " %Z00af00{sb $tag/{channel $itemname} %C {sbmode $M}} %C%n ";
     window_empty = "{sb {sbservertag $tag}}";
-    prompt = "please%z005f87{%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87}%n";
-    prompt_empty = "you%z005f87%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%n";
+    # prompt = "please%z005f87{%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87}%n";
+    # prompt_empty = "you%z005f87%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%n";
 
-    topic = "%Z005f00%k%z005f00%N%Z005f00%N %Z5f5faf%9 $topic%N";
-    topic_empty = " Irssi v$J - http://www.irssi.org";
+    topic = "%Z005f00%k%z005f00%N%Z005f00%N %Z5f5faf%9 $topic%N %Z005f00%N%z005f00%k%N";
+    topic_empty = " Irssi v$J - https://www.irssi.org";
 
     # all of these treated specially, they're only displayed when needed
     # Powerline
@@ -456,6 +498,11 @@ statusbar = {
     vim_windows_1 = "%Z005f5f%0%z005f5f%k%9 $vim_wins%z005f5f";
 
     itime = "%Z005f00%k%z005f00%9 $0 %z005f00";
+
+    extra = "%Z5f5f87%k%z5f5f87%9 $X  $Y  $O  $E  $F %z5f5f87";
+
+    prompt_right = "%Z5f5fd7%N%k%9%z5f5fd7 $,%N%k%z5f5fd7%N%Z5f5faf $Q  $W %N%Z5f5f87%k%z5f5f87%9 $J";
+    server_info = "%k%z005f87%9 Server:$tag %w%kChatnet:$chatnet%w%k$R%w%k$S %n%Z005f87";
   };
 
   # there's two type of statusbars. root statusbars are either at the top
@@ -539,7 +586,21 @@ statusbar = {
         barend = { alignment = "right"; };
       };
     };
-    dccstat = { items = { dccstat = { }; }; };
+    dccstat = {
+      items = {
+        dccstat = { };
+        extra = { alignment = "right";};
+      };
+    };
+    server_info = {
+      items = {
+        barstart = { };
+        server_info = { };
+        prompt_right = { alignment = "right"; };
+        barend = { alignment = "right"; };
+      };
+      position = "50";
+    };
     prompt = {
       items = {
         uberprompt = { priority = "-1"; };
@@ -597,13 +658,14 @@ settings = {
     real_name = "john doe";
     user_name = "devi";
     nick = "terminaldweller";
+    recode_transliterate = "yes";
+    settings_autosave = "no";
     # use_proxy = "no";
     # proxy_address = "127.0.0.1";
     # proxy_port = "9050";
     # proxy_string = "CONNECT %s:%d HTTP/1.0\012\012";
     # proxy_string_after = "conn %s %d";
-    # proxy_password = "";
-    # recode_transliterate = "no";
+    # proxy_password = ""; #pragma: allowlist secret
   };
   "fe-common/core" = {
     theme = "solarized-powerline";
@@ -615,9 +677,9 @@ settings = {
   };
   "fe-text" = {
     actlist_sort = "refnum";
-    # scrollback_lines = "1000";
-    # scrollback_time = "3days";
-    # scrollback_max_age = "0";
+    scrollback_lines = "1000";
+    scrollback_time = "3days";
+    scrollback_max_age = "0";
   };
   "perl/core/scripts" = {
     # adv_windowlist.pl
@@ -639,12 +701,12 @@ settings = {
     usercount_show_zero = "ON";
     # timezones
     timezones_divider = " %Zeeeeee%Z008080 ";
-    timezones = "GMT:GMT EST:EST CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris";
+    timezones = "GMT:GMT EST:EST EEST:Europe/Riga CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris Moscow:Europe/Moscow";
     # hilite_url
     url_color = "32";
     hilite_url = "32";
     # rotator
-    rotator_chars = "%Z005f5f%z005f5f%k..%N  %Z005f5f%z005f5f%koo%N  %Z005f5f%z005f5f%k00%N  %Z005f5f%z005f5f%kOO%N  %Z005f5f%z005f5f%k00%N  %Z005f5f%z005f5f%koo%N";
+    rotator_chars = "%Z005f5f%z005f5f%k...%N  %Z005f5f%z005f5f%kooo%N  %Z005f5f%z005f5f%k000%N  %Z005f5f%z005f5f%kOOO%N  %Z005f5f%z005f5f%k000%N  %Z005f5f%z005f5f%kooo%N %Z005f5f%z005f5f%k...%N";
     rotator_speed = "1000";
     rotator_bounce = "yes";
     rotator_seperator = " ";
@@ -652,8 +714,10 @@ settings = {
     dccstat_hide_sbar_when_inactive = "no";
     dccstat_cycle_through_transfers = "yes";
     # uberprmpt
-    uberprompt_format = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
-    uberprompt_format_empty = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$N%w%k$T %N%Z005f87%Z005f5f$uber";
+    # uberprompt_format = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%Z005f5f$uber";
+    # uberprompt_format_empty = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%Z005f5f$uber";
+    uberprompt_format = "%Zff5f5f$T >>>$uber";
+    uberprompt_format_empty = "%Zff5f5f$T >>>$uber";
     # irssi_logger
     il_dbname = "irc";
     il_dbuser = "postgres";
@@ -712,6 +776,8 @@ keyboard = (
   { key = "meta-,"; id = "change_window"; data = "38"; },
   { key = "meta-."; id = "change_window"; data = "39"; },
   { key = "meta-/"; id = "change_window"; data = "40"; },
+  { key = "meta2-1"; id = "change_window"; data = "41"; },
+  { key = "meta2-2"; id = "change_window"; data = "42"; },
 );
 ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#docker" ); },
@@ -740,7 +806,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#git" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#debian-next" );
   },
@@ -751,7 +817,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#shadow" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#CataclysmDDA" );
   },
@@ -759,6 +825,8 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#busybox" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#bookz" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qubes" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#wayland" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gopher" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gnupg" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#supersonic" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#news" ); },
@@ -773,7 +841,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crxn" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#meta" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#python" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#qutebrowser" );
   },
@@ -782,7 +850,7 @@ ignores = (
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gemini" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#llvm" ); },
   { level = "JOINS PARTS QUITS NICKS"; channels = ( "#opennic" ); },
-  { 
+  {
     level = "JOINS PARTS QUITS NICKS";
     channels = ( "#selfhosting" );
   },
@@ -797,7 +865,7 @@ windows = {
   2 = {
     immortal = "yes";
     name = "(notices)";
-    level = "MSGS NOTICES SNOTES WALLOPS INVITES";
+    level = "MSGS NOTICES SNOTES WALLOPS INVITES CLIENTNOTICE CLIENTCRAP CLIENTERROR CTCPS ACTIONS MODES TOPICS DCC DCCMSGS";
   };
   3 = {
     items = (
@@ -812,16 +880,6 @@ windows = {
   4 = {
     items = (
       {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#general";
-        tag = "BonoboNET_LOKI";
-      }
-    );
-  };
-  5 = {
-    items = (
-      {
         type = "QUERY";
         chat_type = "IRC";
         name = "*status";
@@ -829,9 +887,39 @@ windows = {
       }
     );
   };
+  5 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#sopelbot";
+        tag = "devinet";
+      }
+    );
+  };
+  6 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#rss";
+        tag = "devinet";
+      }
+    );
+  };
+  7 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#general";
+        tag = "Bonobonet_ZNC";
+      }
+    );
+  };
 };
 mainwindows = {
-  3 = { 
+  3 = {
     first_line = "1";
     lines = "47";
     first_column = "0";

@@ -1291,6 +1291,11 @@ augroup YCMDocJava
     \ 'syntax': 'java'
     \ }
 augroup END
+" add : as a keyword only for lua files
+augroup filetype_lua
+    autocmd!
+    autocmd FileType lua setlocal iskeyword+=:
+augroup END
 
 let g:ycm_language_server = [
       \ {'name': 'vim',

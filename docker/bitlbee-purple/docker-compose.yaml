@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 services:
   bitlbee:
     image: ezkrg_bitlbee_libpurple
@@ -6,7 +6,7 @@ services:
       - bitlbeenet
     ports:
       - "8667:6667"
-    user: 1000:1000
+    # user: 1000:1000
     restart: unless-stopped
     user: "bitlbee:bitlbee"
     command: ["/usr/sbin/bitlbee", "-F","-n","-u","bitlbee","-c","/var/lib/bitlbee/bitlbee.conf", "-d","/var/lib/bitlbee"]
@@ -23,10 +23,10 @@ services:
   #     - /home/devi/.cache/docker-bitlbee/signald/run:/signald
   #     - ./net.properties:/conf/net.properties:ro
   #   environment:
-  #     - ALL_PROXY=socks5h://192.168.1.214:9995
-  #     - FTP_PROXY=socks5h://192.168.1.214:9995
-  #     - HTTP_PROXY=socks5h://192.168.1.214:9995
-  #     - HTTPS_PROXY=socks5h://192.168.1.214:9995
+  #     - ALL_PROXY=http://192.168.1.214:8118
+  #     - FTP_PROXY=http://192.168.1.214:8118
+  #     - HTTP_PROXY=http://192.168.1.214:8118
+  #     - HTTPS_PROXY=http://192.168.1.214:8118
   #     - NOPROXY=localhost,127.0.0.0/8,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16
   # matterircd:
   #   image: 42wim/matterircd:0.26
@@ -37,9 +37,9 @@ services:
   #   restart: unless-stopped
   #   environment:
   #     - ALL_PROXY=socks5h://192.168.1.214:9995
-  #     - FTP_PROXY=socks5h://192.168.1.214:9995
-  #     - HTTP_PROXY=socks5h://192.168.1.214:9995
-  #     - HTTPS_PROXY=socks5h://192.168.1.214:9995
+  #     - FTP_PROXY=http://192.168.1.214:8118
+  #     - HTTP_PROXY=http://192.168.1.214:8118
+  #     - HTTPS_PROXY=http://192.168.1.214:8118
   #     - NOPROXY=localhost,127.0.0.0/8,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16
   #   command: ["--conf", "/matterircd.conf"]
   #   volumes:
@@ -47,6 +47,6 @@ services:
 networks:
   bitlbeenet:
   signalnet:
-  # matterircdnet:
+  matterircdnet:
 volumes:
   userdata:

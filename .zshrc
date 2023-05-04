@@ -115,6 +115,7 @@ alias vpn9="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -i ~/.ssh/
 alias vms="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt 185.126.202.69 -l ubuntu -p 1022"
 alias vpnvv="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.244.29.79"
 alias vpn10="proxychains4 -q -f ~/proxies/swe/proxychains.conf ssh -tt -p 3333  root@89.147.110.30"
+alias vpnj="proxychains4 -q -f ~/proxies/ice/proxychains.conf ssh -tt -p 3333 ubuntu@185.130.46.113"
 alias -g DOCKER_HOST_VPS="ssh://ubuntu@87.236.209.206:1022"
 alias -g DOCKER_HOST_VPN="ssh://rooot@192.99.102.52:1022"
 alias -g DOCKER_HOST_VPN2="ssh://rooot@145.239.165.137:22"
@@ -153,7 +154,7 @@ alias jupyterlab="jupyter lab --no-browser --port 9989"
 alias iredisrc="vim ~/scripts/.iredisrc"
 alias fixiredisrc="cp ~/scripts/.iredisrc ~/.iredisrc"
 # alias irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro devi_irssi"
-alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi:/home/user/.irssi:ro -v /etc/localtime:/etc/localtime:ro  devi_irssi"
+alias irssi="TERM=screen-256color COLORTERM=truecolor docker run --runtime=runsc -it -e COLORTERM -e TERM -u $(id -u):$(id -g) --log-driver=none -v $HOME/.irssi-home:/home/user:ro -v /etc/localtime:/etc/localtime:ro -v $HOME/.irssi-home/.irssi/otr:/home/user/.irssi/otr devi_irssi"
 alias tor_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u 1001:1001 --log-driver=none -v tor_irssi_mount:/home/user/.irssi -v ~/devi/abbatoir/hole16:/home/user/.irssi/certs tor_irssi"
 alias i2p_irssi="TERM=screen-256color docker run --runtime=runsc -it -e TERM -u $(id -u):$(id -g) --log-driver=none -v i2p_irssi_mount:/home/user/.irssi irssi:1.2.3"
 alias openbb="TERM=screen-256color \
@@ -185,9 +186,9 @@ alias fixrainbowrc="cp ~/scripts/.rainbow_config.json ~/.rainbow_config.json"
 alias irssiconfig="vim ~/scripts/irssi/config"
 alias irssitheme="vim ~/scripts/irssi/solarized-powerline.theme"
 alias irssistartup="vim ~/scripts/irssi/startup"
-alias fixirssiconfig="cp ~/scripts/irssi/config ~/.irssi/config"
-alias fixirssitheme="cp ~/scripts/irssi/solarized-powerline.theme ~/.irssi/solarized-powerline.theme"
-alias fixirssistartup="cp ~/scripts/irssi/startup ~/.irssi/startup"
+alias fixirssiconfig="cp ~/scripts/irssi/config ~/.irssi-home/.irssi/config"
+alias fixirssitheme="cp ~/scripts/irssi/solarized-powerline.theme ~/.irssi-home/.irssi/solarized-powerline.theme"
+alias fixirssistartup="cp ~/scripts/irssi/startup ~/.irssi-home/.irssi/startup"
 alias w3mlastsession="~/.w3m/bin/w3mlastsession"
 alias lsdrc="vim ~/scripts/.config/lsd/config.yaml"
 alias fixlsdrc="cp ~/scripts/.config/lsd/config.yaml ~/.config/lsd/config.yaml"
@@ -370,6 +371,8 @@ alias gw="git worktree"
 alias redshiftrc="vim ~/scripts/.config/redshift.conf"
 alias fixredshiftrc="cp ~/scripts/.config/redshift.conf ~/.config/redshift.conf"
 alias waydroid_ssh="ssh -p 8022 u0_a411@192.168.240.112"
+alias pn="pnpm"
+alias magni="docker run -p 8086:8086 -e HTTPS_PROXY=socks5h://192.168.1.214:9995 -e MAGNI_MODEL_PATH=/opt/magni_models -e MAGNI_IMAGE_PATH=/opt/magni_images -v /tmp/models:/opts/magni_models magni:latest"
 
 gwta() {
   git worktree add ./"$1" $(git rev-parse "$1")
@@ -492,7 +495,7 @@ export MYSQL_PS1="\U@\N:\p [\d] - \R:\m:\s - \v\n>>>"
 
 # TZ=Asia/Tehran
 # export TZ
-# export GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 
 export PS_FORMAT=pid,start,etime,%cpu,%mem,lxc,cgroup,tty,wchan,exe,cmd
 
@@ -801,6 +804,10 @@ dff() {
   grc df --output -h
 }
 
+stone_backup() {
+  proxychains4 -q -f ~/proxies/66/proxychains.conf scp -P 3333 -i /home/devi/.ssh/id_rsa_lv2 "$@" ubuntu@[2a07:e01:3:1c4::1]:/home/ubuntu/backup
+}
+
 jcurl() {
   curl --socks5 socks5h://127.0.0.1:9054 -s --connect-timeout 10 "$@" | json_pp -json_opt pretty,canonical | pygmentize -l json -P style=$PYGMENTIZE_STYLE | $PAGER
 }
@@ -947,12 +954,18 @@ eval "$(luarocks-5.3 path)"
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # deno
 export DENO_INSTALL="/home/devi/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export DVM_DIR="/home/devi/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 export PATH=/home/devi/.bun/bin:$PATH
+export XBPS_DISTDIR=/home/devi/void-packages.git/master
 
 #plan9
 # PLAN9=/home/devi/devi/plan9port.git/master export PLAN9
@@ -960,3 +973,5 @@ export PATH=/home/devi/.bun/bin:$PATH
 
 [[ -s "/home/devi/.gvm/scripts/gvm" ]] && source "/home/devi/.gvm/scripts/gvm"
 # [[ -s "/usr/share/grc/grc.zsh" ]] && source /usr/share/grc/grc.zsh
+export HISTSIZE=50000
+export SAVEHIST=50000

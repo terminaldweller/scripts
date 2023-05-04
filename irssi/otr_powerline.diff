@@ -1,0 +1,21 @@
+diff --git a/src/otr/otr-formats.c b/src/otr/otr-formats.c
+index d4d273d1..195011d5 100644
+--- a/src/otr/otr-formats.c
++++ b/src/otr/otr-formats.c
+@@ -28,11 +28,11 @@ FORMAT_REC fe_otr_formats[] = {
+ 	/* Status bar format. */
+ 	{ NULL, "OTR Statusbar", 0 },
+ 
+-	{ "otr_stb_plaintext", "{sb plaintext}", 0},
+-	{ "otr_stb_finished", "{sb %yfinished%n}", 0},
+-	{ "otr_stb_unknown", "{sb {hilight state unknown (BUG!)}}", 0},
+-	{ "otr_stb_untrusted", "{sb %GOTR%n (%runverified%n)}", 0},
+-	{ "otr_stb_trust", "{sb %GOTR%n}", 0},
++	{ "otr_stb_plaintext", "{sb %0%Zff8700%zff8700%k plaintext $0 %Zff8700%0%N}", 0},
++	{ "otr_stb_finished", "{sb %0%Z5f8700%z5f8700%k finished $0 %Z5f8700%0%N}", 0},
++	{ "otr_stb_unknown", "{sb %0%Zff005f%zff005f%k OTR:unknown_state(bug) $0 %Zff005f%0%N}", 0},
++	{ "otr_stb_untrusted", "{sb %0%Zff8700%zff8700%k OTR:unverified $0 %Zff8700%0%N}", 0},
++	{ "otr_stb_trust", "{sb %0%Z5f875f%z5f875f%k OTR $0 %Z5f875f%0%N}", 0},
+ 
+ 	/* OTR format. */
+ 	{ NULL, "OTR", 0 },

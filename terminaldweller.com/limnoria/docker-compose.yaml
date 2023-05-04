@@ -1,0 +1,18 @@
+version: "3"
+services:
+  limnoria:
+    image: lscr.io/linuxserver/limnoria:latest
+    container_name: limnoria
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config:/config
+    ports:
+      - 127.0.0.1:8080:8080
+    restart: unless-stopped
+    networks:
+      - limnorianet
+networks:
+  limnorianet:

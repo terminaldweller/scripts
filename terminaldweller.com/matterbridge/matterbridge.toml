@@ -1,0 +1,35 @@
+[general]
+RemoteNickFormat="[{PROTOCOL}/{BRIDGE}] <{NICK}> "
+
+[matrix.matrix]
+Server="https://matrix.org"
+Login="termibot"
+Password="" #pragma: allowlist secret
+NoHomeServerSuffix=true
+
+[matrix.terminaldweller]
+Server="https://matrix.terminaldweller.com"
+Login="devi"
+Password="" #pragma: allowlist secret
+NoHomeServerSuffix=true
+
+[irc.devinet]
+Nick=""
+NickServNick=""
+NickServPassword="" #pragma: allowlist secret
+Server="irc.terminaldweller.com:6697"
+UseTLS=true
+UseSASL=true
+SkipTLSVerify=false
+
+[[gateway]]
+  name="gate_one"
+  enable=true
+
+  [[gateway.in]]
+  account="matrix.matrix"
+  channel="#doipver:matrix.org"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#matterbridge"

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "identicon"
+version = "0.1.0"
+description = "blockie identicon generator"
+authors = ["terminaldweller <devi@terminaldweller.com>"]
+license = "GPL3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+blockies = "^0.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

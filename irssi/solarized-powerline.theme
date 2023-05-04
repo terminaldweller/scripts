@@ -144,7 +144,7 @@ abstracts = {
   ##
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%z005f87%Zeeeeee $0%Zeeeeee{nick $1-} %Z005f5f";
+  msgnick = "%m%Zeeeeee$0{nick $1-}%N%m%0%Z005f5f";
 
   # message from you is printed. "msgownnick" specifies the styling of the
   # nick ($0 part in msgnick) and "ownmsgnick" specifies the styling of the
@@ -173,7 +173,7 @@ abstracts = {
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
   # %5 = magenta
-  pubmsgmenick = "%K%m%5%k%Z0087ff{msgnick $0$1-}%N%m %Z005f5f";
+  pubmsgmenick = "%m%5%k{msgnick $0$1-}%N%m %Z005f5f";
   menick = "%Zeeeeee$* %Z005f5f";
 
   # public highlighted message in channel
@@ -395,7 +395,7 @@ abstracts = {
   # $4 = to/from
   # $5 = nick
   sb_ds_normal_waiting = "$0 $1: '$2' $3 $4 $5 waiting";
-  sb_ds_separator = ", ";
+  sb_ds_separator = "  ";
 };
 
 formats = {
@@ -438,10 +438,10 @@ formats = {
     end_of_who = "%z00d700%kWHO %Z00d700%0%N END";
     end_of_whois = "%z00d700%kWHOIS %Z00d700%0%N END";
     end_of_whowas = "%z00d700%kWHOWAS %Z00d700%0%N END";
-    netsplit = "%0%Z8787ff%z8787ff%k NETSPLIT %z8787ff%Z00d700%z00d700%k {iserver $0}  {iserver $1} %Z00d700%0%Z8787ff Quits: $2";
+    netsplit = "%0%Z8787ff%z8787ff%k NETSPLIT %z8787ff%Z00af00%z00af00%k {iserver $0}  {iserver $1} %Z00af00%0%Z8787ff Quits: $2";
     netsplit_join = "%k%z8787ff NETSPLIT %k%8%N Joins: $0";
     netsplit_join_more = "%k%z8787ff NETSPLIT %k%8%N Joins: $0 (+$1 more)";
-    netsplit_more = "%k%z8787ff%8%8 NETSPLIT %0%w%0%8 {iserver $0} %z00d700%8 {iserver $1}%8 %N%8%n%k%N Quits: $2 (+$3 more, use /NETSPLIT to show all of them)";
+    netsplit_more = "%0%Z8787ff%z8787ff%k NETSPLIT %z8787ff%Z00af00%z00af00%k {iserver $0}  {iserver $1} %Z00af00%0%Z8787ff Quits: $2 (+$3 more, use /NETSPLIT to show all of them)";
     no_topic = "%k%N No topic set for {channelhilight $0}";
     own_ctcp = "%k%z005f87 CTCP {hilight $2-}  {inick $0} %n%Z005f87%N";
     server_chanmode_change = "%k%z8787ff SERVERMODE %k%8 {channelhilight $0} {mode $1} by {nick $2}";
@@ -453,26 +453,26 @@ formats = {
     whois = "%z00d700%kWHOIS %Z00d700%z005f87 {nick $0} %Z005f87%0 {nickhost $1@$2}%:{whois ircname $3}";
     whowas = "%z00d700%kWHOWAS %Z00d700%z005f87 {nick $0} %Z005f87%0 {nickhost $1@$2}%:{whois was $3}";
     own_action = "$nickalign{ownaction $0$nicktrunc}$1";
-    action_private = "$nickalign{pvtaction $[.10]0$nicktrunc}$2";
-    action_private_query = "$nickalign{pvtaction_query $[.10]0$nicktrunc}$2";
-    action_public = "$nickalign{pubaction $[.10]0$nicktrunc}$1";
+    action_private = "$nickalign{pvtaction $[.15]0$nicktrunc}$2";
+    action_private_query = "$nickalign{pvtaction_query $[.15]0$nicktrunc}$2";
+    action_public = "$nickalign{pubaction $[.15]0$nicktrunc}$1";
   };
   "Irssi::Script::adv_windowlist" = {
     awl_display_header = "";
-    awl_display_key = "  %0$N  $H$C$S  %n";
-    awl_display_key_active = "%9%W%Z005f00%0%8 %0$N  $H$C$S%8 %0%8%8%n";
-    awl_display_key_visible = "%Z005fff %m$N %k $H$C$S %8%8%n";
-    awl_display_nokey = "  %0$N  %U$C%U  %n";
-    awl_display_nokey_active = "%k%z005f87 %k$N %k %U$C%U %8%8%n";
-    awl_display_nokey_visible = "%k%z5f5fff %m$N %k %U$C%U %8%8%n";
+    awl_display_key = "%0%Z005fff$N  $H[$Q]$C$S %N";
+    awl_display_key_active = "%9%k%z005f00 $N $H[$Q]$C$S %N%Z005f00%N";
+    awl_display_key_visible = "%k%z005fff $N  $H[$Q]$C$S %N%Z005fff%N";
+    awl_display_nokey = "%0%Z005faf$N  $H[$Q]$C$S %N";
+    awl_display_nokey_active = "%9%k%z005f87 $N $H[$Q]$C$S %N%Z005f87%N";
+    awl_display_nokey_visible ="%k%z005fff $N  $H[$Q]$C$S %N%Z005fff%N";
     awl_separator = "";
   };
   "Irssi::Script::usercount" = {
-    sb_usercount = "%z00af5f{sb $0 nicks ($1-)}";
-    sb_uc_ircops = "%z00d787*$*";
-    sb_uc_ops = "%z00d787@$*";
-    sb_uc_halfops = "%z00d787%%$*";
-    sb_uc_voices = "%z00af5f+$*";
+    sb_usercount = "%9%z00af5f{sb $0 nicks ($1-)}";
+    sb_uc_ircops = "%9%z00d787*$*";
+    sb_uc_ops = "%9%z00d787@$*";
+    sb_uc_halfops = "%9%z00d787%%$*";
+    sb_uc_voices = "%9%z00af5f+$*";
     sb_uc_normal = "$*";
     sb_uc_space = " ";
   };
@@ -487,5 +487,13 @@ formats = {
     mh_sbsplitmode_info = "%Zaf5f87{server $0} $1 {hilight splitmode}";
     mh_sbsplitmode_info_details = "%Zaf5f87{server $0} $1 {hilight splitmode} {comment $2}";
     mh_sbsplitmode_error = "%Zaf5f87{error $0}";
-  }
+  };
+  "otr/core" = {
+    otr_stb_plaintext = "{sb %yplaintext%N}";
+    otr_stb_finished = "{sb %yfinished%n}";
+    otr_stb_unknown = "{sb {hilight state unknown (BUG!)}}";
+    otr_stb_untrusted = "{sb %pOTR%n (%runverified%n)}";
+    otr_stb_trust = "{sb %GOTR%n}";
+
+  };
 };

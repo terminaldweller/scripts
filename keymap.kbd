@@ -18,9 +18,10 @@
 -------------------------------------------------------------------------- |#
 (defcfg
   input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-if01-event-kbd")
-  output (uinput-sink "KMonad output")
+  output (uinput-sink "KMonad output"
+          "sleep 1 && setxkbmap -option compose:ralt")
 
-  cmp-seq lalt
+  cmp-seq ralt
   fallthrough true
   allow-cmd false
 )
@@ -35,6 +36,7 @@
 )
 
 (defalias
+  meta_layer_toggle (layer-toggle meta_layer)
   crs (tap-next } rsft)
   cls (tap-next { lsft)
   crc (tap-next ] rctl)
@@ -42,12 +44,27 @@
   cra (tap-next \) ralt)
   cla (tap-next \( lalt)
   ccp (tap-next esc lctl)
+  ll1 (layer-delay 500 meta_layer)
+  ll2 (around-next @meta_layer_toggle)
+  aa1 (tap-macro (around alt [) 1)
+  aa2 (tap-macro (around alt [) 2)
+  aaq (tap-macro (around alt [) q)
+  aaw (tap-macro (around alt [) w)
 )
 
-(deflayer devi
+(deflayer devi_layer
+  @ll2 _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  @ccp _    _    _    _    _    _    _    _    _    _    _    _                          _    _    _
+  @cls _    _    _    _    _    _    _    _    _    _    @crs                 _          _    _    _    _
+  @clc _    @cla           _              @cra _    _    @crc            _    _    _     _    _
+)
+
+(deflayer meta_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    @aa1 @aa2 _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    @aaq @aaw _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
   @ccp _    _    _    _    _    _    _    _    _    _    _    _                          _    _    _
   @cls _    _    _    _    _    _    _    _    _    _    @crs                 _          _    _    _    _
   @clc _    @cla           _              @cra _    _    @crc            _    _    _     _    _

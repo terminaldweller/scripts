@@ -1,8 +1,10 @@
 sanitize tridactyllocal tridactylsync
 guiset_quiet hoverlink right
 " autocmd DocStart mail.google.com mode ignore
-colourscheme dark
-completionfuzziness 1
+set theme dark
+set completionfuzziness 1
+set keyboardlayoutforce true
+set allowautofocus false
 
 " bind tp tabmove -1
 " bind tn tabmove +1
@@ -14,3 +16,8 @@ seturl localhost:8889 superignore true
 blacklistadd mail.google.com/mail
 blacklistadd mail.terminaldweller.com
 blacklistadd mail.terminaldweller.com
+
+command hint_focus hint -;
+bind ;C composite hint_focus; !s xdotool key Menu
+
+" vim: set filetype=tridactyl
