@@ -23,7 +23,8 @@ services:
       # - /etc/hosts:/etc/hosts:ro
       # - /etc/localtime:/etc/localtime:ro
       - ./cgit.conf:/etc/lighttpd/cgit.conf:ro
-      - /etc/letsencrypt/archive/git.terminaldweller.com/:/etc/certs/:ro
+      - /etc/letsencrypt/archive/git.terminaldweller.com/fullchain.pem:/etc/letsencrypt/archive/git.terminaldweller.com/fullchain.pem:ro
+      - /etc/letsencrypt/archive/git.terminaldweller.com/privkey.pem:/etc/letsencrypt/archive/git.terminaldweller.com/privkey.pem:ro
       - cache:/cgit_cache
       - ./authorized_keys:/home/git/.ssh/authorized_keys
   bootstrap:

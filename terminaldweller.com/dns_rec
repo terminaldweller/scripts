@@ -1,0 +1,103 @@
+terminaldweller.com.    900     IN      A       87.236.209.206
+doh.terminaldweller.com. 10800  IN      A       185.130.47.81
+gemini.terminaldweller.com. 900 IN      A       185.130.47.208
+gopher.terminaldweller.com. 900 IN      A       185.130.47.81
+icanhazallips.terminaldweller.com. 900 IN A    185.130.47.208
+irc.terminaldweller.com. 10800  IN      A       89.147.110.30
+jabber.terminaldweller.com. 900 IN      A       185.130.47.208
+jump3.terminaldweller.com. 10800 IN     A       185.112.147.110
+jump6.terminaldweller.com. 10800 IN     A       185.130.45.46
+jump7.terminaldweller.com. 10800 IN     A       185.130.47.81
+jump8.terminaldweller.com. 10800 IN     A       185.130.47.208
+jumpvv.terminaldweller.com. 10800 IN    A       185.244.29.79
+lounge.terminaldweller.com. 900 IN      A       145.239.165.137
+mail.terminaldweller.com. 900   IN      A       185.126.202.69
+matrix.terminaldweller.com. 10800 IN    A       89.147.110.30
+pleroma.terminaldweller.com. 10800 IN   A       89.147.110.30
+traefik.terminaldweller.com. 10800 IN   A       145.239.165.137
+icanhazallips.terminaldweller.com. 10800 IN AAAA 2a07:e03:3:bd::1
+jabber.terminaldweller.com. 10800 IN    AAAA    2a07:e03:3:bd::1
+jump6.terminaldweller.com. 10800 IN     AAAA    2a07:e01:3:204::1
+jump7.terminaldweller.com. 10800 IN     AAAA    2a07:e03:3:26::1
+jump8.terminaldweller.com. 10800 IN     AAAA    2a07:e03:3:bd::1
+jump9.terminaldweller.com. 10800 IN     AAAA    2a07:e01:3:1c4::1
+jumpvv.terminaldweller.com. 10800 IN    AAAA    2a07:e01:3:30c::1
+terminaldweller.com.    10800   IN      CAA     0 issue "letsencrypt.org"
+terminaldweller.com.    10800   IN      CAA     0 issuewild ";"
+terminaldweller.com.    10800   IN      CAA     0 iodef "mailto:devi@terminaldweller.com"
+*.im.terminaldweller.com. 900   IN      CNAME   mail.terminaldweller.com.
+api.terminaldweller.com. 900    IN      CNAME   terminaldweller.com.
+autoconfig.terminaldweller.com. 900 IN  CNAME   mail.terminaldweller.com.
+autodiscover.terminaldweller.com. 900 IN CNAME  mail.terminaldweller.com.
+blog.terminaldweller.com. 900   IN      CNAME   terminaldweller.com.
+browsh.terminaldweller.com. 900 IN      CNAME   terminaldweller.com.
+cargo.terminaldweller.com. 900  IN      CNAME   terminaldweller.com.
+chat.terminaldweller.com. 900   IN      CNAME   terminaldweller.com.
+conference.jabber.terminaldweller.com. 900 IN CNAME jabber.terminaldweller.com.
+discord.terminaldweller.com. 900 IN     CNAME   terminaldweller.com.
+doh2.terminaldweller.com. 10800 IN      CNAME   terminaldweller.com.
+editor.terminaldweller.com. 900 IN      CNAME   terminaldweller.com.
+editorsave.terminaldweller.com. 900 IN  CNAME   terminaldweller.com.
+git.terminaldweller.com. 900    IN      CNAME   terminaldweller.com.
+im.terminaldweller.com. 900     IN      CNAME   mail.terminaldweller.com.
+jericho.terminaldweller.com. 900 IN     CNAME   terminaldweller.com.
+mila.terminaldweller.com. 900   IN      CNAME   terminaldweller.com.
+openpgpkey.terminaldweller.com. 10800 IN CNAME  wkd.keys.openpgp.org.
+pastebin.terminaldweller.com. 10799 IN  CNAME   terminaldweller.com.
+proxy.chat.terminaldweller.com. 900 IN  CNAME   terminaldweller.com.
+pubsub.jabber.terminaldweller.com. 900 IN CNAME jabber.terminaldweller.com.
+rssgen.terminaldweller.com. 900 IN      CNAME   terminaldweller.com.
+searx.terminaldweller.com. 900  IN      CNAME   terminaldweller.com.
+upload.chat.terminaldweller.com. 900 IN CNAME   terminaldweller.com.
+www.terminaldweller.com. 900    IN      CNAME   terminaldweller.com.
+terminaldweller.com.    900     IN      MX      10 mail.terminaldweller.com.
+_autodiscover._tcp.terminaldweller.com. 900 IN SRV 0 1 443 mail.terminaldweller.com.
+_caldavs._tcp.terminaldweller.com. 900 IN SRV   0 1 443 mail.terminaldweller.com.
+_carddavs._tcp.terminaldweller.com. 900 IN SRV  0 1 443 mail.terminaldweller.com.
+_imap._tcp.terminaldweller.com. 900 IN  SRV     0 1 143 mail.terminaldweller.com.
+_imaps._tcp.terminaldweller.com. 900 IN SRV     0 1 993 mail.terminaldweller.com.
+_pop3._tcp.terminaldweller.com. 900 IN  SRV     0 1 110 mail.terminaldweller.com.
+_pop3s._tcp.terminaldweller.com. 900 IN SRV     0 1 995 mail.terminaldweller.com.
+_sieve._tcp.terminaldweller.com. 900 IN SRV     0 1 4190 mail.terminaldweller.com.
+_smtps._tcp.terminaldweller.com. 900 IN SRV     0 1 465 mail.terminaldweller.com.
+_stun._udp.jabber.terminaldweller.com. 10800 IN SRV 10 10 3478 jabber.terminaldweller.com.
+_stuns._tcp.jabber.terminaldweller.com. 10800 IN SRV 10 10 5349 jabber.terminaldweller.com.
+_submission._tcp.terminaldweller.com. 900 IN SRV 0 1 587 mail.terminaldweller.com.
+_turn._udp.jabber.terminaldweller.com. 10800 IN SRV 10 10 3478 jabber.terminaldweller.com.
+_turns._tcp.jabber.terminaldweller.com. 10800 IN SRV 10 10 5270 jabber.terminaldweller.com.
+_xmpp-client._tcp.jabber.terminaldweller.com. 900 IN SRV 0 5 5222 jabber.terminaldweller.com.
+_xmpp-server._tcp.jabber.terminaldweller.com. 900 IN SRV 0 5 5269 jabber.terminaldweller.com.
+_xmpps-server._tcp.jabber.terminaldweller.com. 900 IN SRV 0 5 5270 jabber.terminaldweller.com.
+_xmpps-client._tcp.jabber.terminaldweller.com. 900 IN SRV 0 5 5223 jabber.terminaldweller.com.
+jump3.terminaldweller.com. 10800 IN     SSHFP   3 2 E3218034A3BD9C9092E08F6B3B1955D3ED259DA84ECC517669421506388D7F81
+jump3.terminaldweller.com. 10800 IN     SSHFP   1 2 6075A2E7CF0C7DA8AF5BAC914E01C5440F2E596B1726BDA018A11C97B449F8EF
+jump3.terminaldweller.com. 10800 IN     SSHFP   4 2 761D34D78EFB955DFE5DBA0358537DDADEE06978A5AAE4E499BD6568B13BB83A
+jump6.terminaldweller.com. 10800 IN     SSHFP   1 2 C2A4E60096F6B14E633238758C8AAD1BA86D5E4EE8E6927B6D5A8E817418E54A
+jump6.terminaldweller.com. 10800 IN     SSHFP   4 2 28ECBC2D3ABC4183F6FD4F2B30E2139DA29B2CCFF21D8E12C17E0F76ACE7FD49
+jump6.terminaldweller.com. 10800 IN     SSHFP   3 2 17AD791F8188A551F5BE5EF75069D444F7E14EBDA0FAE99ED0DA9848F7EEBB15
+jump7.terminaldweller.com. 10800 IN     SSHFP   1 2 264A5CD48385B1B975A935F14676DA6673CAC40E683411847169D42166EF10FB
+jump7.terminaldweller.com. 10800 IN     SSHFP   3 2 30F441AB61DAC57CF2A69ED0711DD66479D4D876DD9D5DDA6552F4F4C972237A
+jump7.terminaldweller.com. 10800 IN     SSHFP   4 2 CCEBF9175AB9BE274C38377EA41E05003A92B797FAAF411054A1CC4B34940213
+jump8.terminaldweller.com. 10800 IN     SSHFP   4 2 1FCE3D2587AAEA7C55CBF3E58314AA2ADBD1124FBC878E8AC160334BFA125B13
+jump8.terminaldweller.com. 10800 IN     SSHFP   1 2 7FC176489DC74681B7264FEB553DC15B0A57032F10A1F2E61255D7D0F72E5B3A
+jump8.terminaldweller.com. 10800 IN     SSHFP   3 2 BA5484DCF89345E4A2D5D9F4DA0452AA48C53F6535A9EA9F06C098DB34A9202D
+jumpvv.terminaldweller.com. 10800 IN    SSHFP   3 2 85FC96F1885ECB8D3D3C2889D62AD6EBD3027EAB06BE66F9C3CA5B7E6238FD81
+jumpvv.terminaldweller.com. 10800 IN    SSHFP   1 2 CF596A87D69BA846F818ECB4EEBDEEAA673F921D22D76FE113A7A886E40F285C
+jumpvv.terminaldweller.com. 10800 IN    SSHFP   4 2 90CCB7066C7FFEA5CE613BDEBCE602D5EE68AD41F583B1779844BC9F1903936F
+_110._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_143._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_25._tcp.mail.terminaldweller.com. 900 IN TLSA  3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_4190._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_443._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_465._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_587._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_993._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+_995._tcp.mail.terminaldweller.com. 900 IN TLSA 3 1 1 C2D92FD4A0A285488625E3DD54BF71FE2C88D63512F51416CF08DD31B220D47C
+terminaldweller.com.    900     IN      TXT     "oa1:xmr recipient_address=8AnrQWUSSJL3TCNnqj2sxeJHowmjGL9ip4bazLsM1uxFDk3ybpLpYYBfkaGkZZuYD149SmGceZ4sh539nMXYfqLZ6WeEy8D; recipient_name=terminaldweller.com;"
+terminaldweller.com.    900     IN      TXT     "openpgp4fpr:9E20464F1CCF3B103249FA93A6A0F5158B3881DF"
+terminaldweller.com.    900     IN      TXT     "oa1:btc recipient_address=bc1qrpyfxpt0pkvx9sa99e34v9pdxw9dvnvg6gq5qt; recipient_name=terminaldweller.com;"
+terminaldweller.com.    900     IN      TXT     "v=spf1 mx a -all"
+_caldavs._tcp.terminaldweller.com. 900 IN TXT   "path=/SOGo/dav/"
+_carddavs._tcp.terminaldweller.com. 900 IN TXT  "path=/SOGo/dav/"
+_dmarc.terminaldweller.com. 900 IN      TXT     "v=DMARC1 ; p=reject"
+dkim._domainkey.terminaldweller.com. 900 IN TXT "v=DKIM1;k=rsa;t=s;s=email;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8QCTeBwXEUnxhFsFHfa2QtWbSqj9BsNjVPwZJRu5VO3qwvfgJtCZ4SMegjANY+gJKWtUq9Q5+ciaAq898gYe8RrZ+s7rL0K3odjNkIQt0ExIMFtkSt4HjxyWBf1T2/nIiRsxgufz75j9fCCxrEcarW798xQy90cj6eFzHpfQB0IpDWfufVhk8" "3+TJDebkFGxwwASUahwvOqvqniWNM+IxkP1uUOz32GyKXAP500Cu04wbto+fB1uZh+1RZc7gDx5pDKsr9S3uSimUjA2rv31ZWYyb7mkFSRO3Es4pWE21DFtJZhXSjGxSngsBWtsu3+7Zb9wrZfqopeQbqyUuGVazQIDAQAB" # pragma: allowlist secret

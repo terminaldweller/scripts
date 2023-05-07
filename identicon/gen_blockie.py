@@ -17,6 +17,13 @@ class Argparser:  # pylint: disable=too-few-public-methods
             default="",
         )
         self.parser.add_argument(
+            "--input",
+            "-i",
+            type=str,
+            help="path to the input file",
+            default="./identicon.png",
+        )
+        self.parser.add_argument(
             "--out",
             "-o",
             type=str,
@@ -63,27 +70,27 @@ class Argparser:  # pylint: disable=too-few-public-methods
 
 def main() -> None:
     argparser = Argparser()
-    if argparser.args.seed == "":
+    seed = str()
+    if argparser.args.input != "":
         with open(
-            "../terminaldweller.com/main/srv/.well-known/openpgpkey/hu/gpg_pubkey.asc",
+            argparser.args.input,
             mode="rb",
         ) as gpg_pubkey:
             key_content = gpg_pubkey.read()
+            seed = str(key_content)
 
-            data = blockies.create(str(key_content), size=10, scale=100)
-            with open("identicon.png", "wb") as png:
-                png.write(data)
     else:
-        data = blockies.create(
-            argparser.args.seed,
-            size=argparser.args.size,
-            scale=argparser.args.scale,
-            color=argparser.args.fgcolor,
-            bgcolor=argparser.args.bgcolor,
-            spotcolor=argparser.args.spotcolor,
-        )
-        with open(argparser.args.out, "wb") as png:
-            png.write(data)
+        seed = argparser.args.seed
+    data = blockies.create(
+        argparser.args.seed,
+        size=argparser.args.size,
+        scale=argparser.args.scale,
+        color=argparser.args.fgcolor,
+        bgcolor=argparser.args.bgcolor,
+        spotcolor=argparser.args.spotcolor,
+    )
+    with open(argparser.args.out, "wb") as png:
+        png.write(data)
 
 
 if __name__ == "__main__":

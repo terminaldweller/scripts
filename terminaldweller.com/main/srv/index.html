@@ -46,13 +46,25 @@
       .pseudolink {
         user-select: all;
       }
+      img {
+        width: 100%;
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+        gap: 1%;
+        width:50%;
+      }
+      img:hover {
+        filter: opacity(0.2) blur(.5rem);
+      }
     </style>
   </head>
   <body style="color:#005f87;background:#000000;text-align:center;padding:0px;border:0px;margin:0px;font-family:mono;border:solid;">
     <h2>LIST OF LINKS</h2>
     <p class="line">
       <div style="color: #005f00;font-weight: bold;">
-        Timestamp: Tue Apr 18 03:55:01 PM UTC 2023
+        Timestamp: Sat May  6 04:51:26 PM +0330 2023
       </div>
     </p>
     <p class="line">
@@ -178,6 +190,25 @@
     <p class="line">
       <h3>Linkedin</h3>
       <div><a href="https://www.linkedin.com/in/farzad-sadeghi/">Linkedin</a> - <span class="pseudolink">https://www.linkedin.com/in/farzad-sadeghi</span></div>
+    </p>
+    <p class="line">
+      <h3>Blockie Canaries</h3>
+        <div style="display: flex;align-items: center;justify-content: center;">
+        <div class="row">
+          <div>
+            <img src="./identicon.png" title="GPG devi@terminaldweller.com"/>
+          </div>
+          <div>
+            <img src="./ssh_pub.png" title="ssh"/>
+          </div>
+          <div>
+            <img src="./gmail.png" title="GPG thabogre@gmail.com"/>
+          </div>
+          <div>
+            <img src="./zoho.png" title="GPG bloodstalker@zoho.com"/>
+          </div>
+        </div>
+        </div>
     </p>
     <p class="line">
       <h3>Services</h3>
