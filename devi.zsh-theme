@@ -1,27 +1,3 @@
-# vcs_info modifications from Bart Trojanowski's zsh prompt:
-# http://www.jukie.net/bart/blog/pimping-out-zsh-prompt
-#
-# git untracked files modification from Brian Carper:
-# http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
-
-virtualenv_info() {
-  # if [[ -a ./bin/activate ]]; then
-  #   source ./bin/activate > /dev/null
-  # fi
-  # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`')'
-  if [[ $VIRTUAL_ENV != "" ]];then
-    local result=$(basename $VIRTUAL_ENV)
-    echo " ($result)"
-  else
-    ;
-  fi
-}
-# add-zsh-hook chpwd virtualenv_info
-
-PR_GIT_UPDATE=1
-
-setopt prompt_subst
-
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
@@ -75,95 +51,24 @@ else
   batred="%fg[red]"
 fi
 
-# enable VCS systems you use
-zstyle ':vcs_info:*' enable git svn
-
-# check-for-changes can be really slow.
-# you should disable it, if you work with large repositories
-zstyle ':vcs_info:*:prompt:*' check-for-changes true
-
-# set formats
-# %b - branchname
-# %u - unstagedstr (see below)
-# %c - stagedstr (see below)
-# %a - action (e.g. rebase-i)
-# %R - repository path
-# %S - path in the repository
-PR_RST="%{${reset_color}%}"
-FMT_BRANCH=" on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
-FMT_ACTION=" performing a %{$limegreen%}%a${PR_RST}"
-FMT_UNSTAGED="%{$orange%} ●"
-FMT_STAGED="%{$limegreen%} ●"
-
-zstyle ':vcs_info:*:prompt:*' unstagedstr "${FMT_UNSTAGED}"
-zstyle ':vcs_info:*:prompt:*' stagedstr "${FMT_STAGED}"
-zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
-zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
-zstyle ':vcs_info:*:prompt:*' nvcsformats ""
-
-is_in_git_repo() {
-  git rev-parse HEAD > /dev/null 2>&1
+virtualenv_info() {
+  # if [[ -a ./bin/activate ]]; then
+  #   source ./bin/activate > /dev/null
+  # fi
+  # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`')'
+  if [[ $VIRTUAL_ENV != "" ]];then
+    local result=$(basename $VIRTUAL_ENV)
+    echo " ($result)"
+  else
+    ;
+  fi
 }
-
-# steeef_preexec() {
-#   case "$2" in
-#     *git*)
-#       PR_GIT_UPDATE=1
-#       ;;
-#     *svn*)
-#       PR_GIT_UPDATE=1
-#       ;;
-#   esac
-# }
-# add-zsh-hook preexec steeef_preexec
-
-# steeef_chpwd() {
-#   local result=$(git rev-parse --is-bare-repository 2> /dev/null)
-#   if [[ $? == 0 ]]; then
-#     if [[ $result == true ]]; then
-#       PR_GIT_UPDATE=
-#     else
-#       PR_GIT_UPDATE=1
-#     fi
-#   else
-#     PR_GIT_UPDATE=1
-#   fi
-# }
-# add-zsh-hook chpwd steeef_chpwd
-
-# steeef_precmd() {
-#   if [[ -n "$PR_GIT_UPDATE" ]] ; then
-#     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-#       PR_GIT_UPDATE=1
-#       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a%{$hotpink%} ●${PR_RST}"
-#     else
-#       FMT_BRANCH="${PM_RST} on %{$turquoise%}%s>%r>%b%u%c%a${PR_RST} "
-#     fi
-#     zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
-
-#     vcs_info 'prompt'
-#     PR_GIT_UPDATE=
-#   fi
-# }
-# add-zsh-hook precmd steeef_precmd
-
-# function guess_who {
-#   upower -e > /dev/null 2>&1
-
-#   if [ $? -eq 0 ]; then
-#     os="lin"
-#   else
-#     os="win"
-#   fi
-# }
-# add-zsh-hook precmd guess_who
 
 tsocks_on() {
   if echo $LD_PRELOAD | grep libtsocks > /dev/null 2>&1; then
-    # echo -ne "\x1b[38;5;0m\x1b[48;5;22m$reset_color\x1b[38;5;22m"
     echo "%K{22}%F{0}%K{0}%F{22}"
   else
-    echo "$reset_color"
+    echo ""
     ;
   fi
 }
@@ -172,13 +77,12 @@ sudo_query() {
   if sudo -nv > /dev/null 2>&1; then
     echo "%K{33}%F{0}%K{0}%F{33}"
   else
-    echo "$reset_color"
+    echo ""
   fi
 }
 
-
 time_function() {
-  date | gawk '{print $2" "$3" "$4}'
+  date +"%b-%d-%R:%S"
 }
 
 node_version() {
@@ -193,7 +97,7 @@ ruby_version() {
 
 dir_writeable() {
   if [ -w $(pwd) ]; then
-    echo "$reset_color"
+    echo ""
   else
     echo " %K{196}%F{0}%K{0}%F{196}"
   fi
@@ -215,30 +119,10 @@ bg_job_count() {
   fi
 }
 
-gitadditions() {
-  # is_in_git_repo || return
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
-    local insertions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum1+=$1}END{print sum1}')
-    if [[ $insertions == "" ]]; then
-      ;
-    else
-      echo " "$insertions:
-    fi
-  fi
-}
-
-gitdeletions() {
-  # is_in_git_repo || return
-  git rev-parse --git-dir > /dev/null 2>&1
-  if [[ $? == 0 ]]; then
-    local deletions=$(git --no-pager diff --numstat 2> /dev/null | awk '{sum2+=$2}END{print sum2}')
-    if [[ $deletions == "" ]]; then
-      ;
-    else
-      echo $deletions
-    fi
-  fi
+_async_gittrivia() {
+  cd -q $1
+  vcs_info
+  print ${vcs_info_msg_0_}
 }
 
 goversion() {
@@ -274,9 +158,9 @@ pwd_shortened() {
 
 zstyle ':zsh-kubectl-prompt:' separator ':'
 getkubernetesinfo() {
-  local SUB_PROMPT="%{$somegreen%}<<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>>%{$reset_color%}"
-  if [[ "$ZSH_KUBECTL_USER" =~ "admin" ]];then
-    SUB_PROMPT="%{$someblue%}<$ZSH_KUBECTL_PROMPT>%{$reset_color%}"
+  local SUB_PROMPT="%{$somegreen%}<<$ZSH_KUBECTL_USER:$ZSH_KUBECTL_PROMPT>>"
+  if [[ "$ZSH_KUBECTL_USER" =~ "admin@" ]];then
+    SUB_PROMPT="%{$someblue%}<$ZSH_KUBECTL_PROMPT>"
   fi
   echo $SUB_PROMPT
 }
@@ -286,6 +170,7 @@ getterminal() {
 }
 
 rbq_info_msg=""
+kube_info_msg=""
 
 meson_env() {
   if [[ -n "${MESON_PROJECT_NAME-}" ]];then
@@ -298,70 +183,30 @@ meson_env() {
 pyenv_version() {
   local version=$(pyenv version | awk '{print $1}')
   echo " <${version}>"
+  # echo " <$CONDA_DEFAULT_ENV>"
 }
 
-PS1=$'$(dir_writeable)$(tsocks_on)$(sudo_query)%{$reset_color%} %{$yablue%}%n@%M:$(getterminal)%{$reset_color%} %{$yagreen%}$(pwd_shortened)%{$reset_color%} %{$muckgreen%}$(time_function)%{$reset_color%}$vcs_info_msg_0_%{$limblue%}%{$gnew%}$(gitadditions)%{$gnew2%}$(gitdeletions)%{$reset_color%}%{$deeppink%}$(virtualenv_info)%{$reset_color%}%{$greeniegreen%}$(meson_env)%{$reset_color%}%{$yablue%}$(pyenv_version)%{$reset_color%}%{$teal%}$(node_version)%{$reset_color%}%{$gover%}$(goversion)%{$reset_color%}%{$rust%}$(rustversion)%{$reset_color%}%{$babyblue%}$(ruby_version)%{$reset_color%}%{$sneakyc%}$(sneaky)%{$reset_color%}%{$new%}$rbq_info_msg%{$reset_color%} $(getkubernetesinfo)%{$reset_color%}'
-PS2=$''
-PS3=$'\n%{$randomblue%}--➜%K{0}%F{15}'
-get_prompt_len() {
-  local zero='%([BSUbfksu]|([FK]|){*})'
-  local FOOLENGTH=${#${(S%%)PS1//$~zero/}}
-  echo $FOOLENGTH
-}
-get_prompt_len_2() {
-  local zero='%([BSUbfksu]|([FK]|){*})'
-  local FOOLENGTH=${#${(S%%)PS2//$~zero/}}
-  echo $FOOLENGTH
-}
-
-get_enough_spaces(){
-  ps1_len=$(get_prompt_len)
-  ps2_len=$(get_prompt_len_2)
-  term_len=$(tput cols)
-  diff_len=$(($term_len - $ps1_len - $ps2_len))
-  echo $diff_len
-  for ((i=0;i<$diff_len;i++));do
-    echo -n " "
-    if [[ $i > $(tpul cols) ]];then break;fi
-  done
-}
-# PROMPT="$PS1$(get_enough_spaces)$PS2$PS3"
+NEWLINE=$'\n'
+PS1='$(dir_writeable)\
+$(tsocks_on)\
+$(sudo_query) \
+%{$yagreen%}$(pwd_shortened) \
+%{$muckgreen%}$(time_function)\
+%{$viinsert%}${vcs_info_msg_0_}\
+%{$deeppink%}$(virtualenv_info)\
+%{$greeniegreen%}$(meson_env)\
+%{$yablue%}$(pyenv_version)\
+%{$teal%}$(node_version)\
+%{$gover%}$(goversion)\
+%{$rust%}$(rustversion)\
+%{$babyblue%}$(ruby_version)\
+%{$sneakyc%}$(sneaky)\
+%{$new%}$rbq_info_msg \
+$(getkubernetesinfo)'
+PS2=""
+PS3="$NEWLINE%{$randomblue%}--➜%K{0}%F{15}"
+PS4=""
 PROMPT="$PS1$PS2$PS3"
-
-# PROMPT="$PS1$PS3"
-
-# function battery_charge {
-#   upower -e > /dev/null 2>&1
-
-#   if [ $? -eq 0 ]; then
-#     batpath=$(upower -e | grep BAT0)
-#     batcharge=$(upower -i $batpath | grep percentage | gawk '{print $2}')
-#   else
-#     batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS=" \n"}{print$3}')
-#   fi
-
-#   batfull=100
-#   batgood=66
-#   batbad=33
-
-#   batcolor=$batgreen
-
-#   if [[ ($batcharge > $batgood) || ($batcharge == $batgood) || ("$batcharge"=="$batfull") ]]; then
-#     batcolor=$batgreen
-#   elif [[ ($batcharge < $batgood) && ($batcharge > $batbad) || ($batcharge == $batbad) ]]; then
-#     batcolor=$batyellow
-#   elif [[ ($batcharge < $batbad) ]]; then
-#     batcolor=$batred
-#   else
-#     batcolor=$purple
-#   fi
-# }
-# add-zsh-hook precmd battery_charge
-
-# function batcharge_printer {
-#   $battery_charge
-#   echo  $(if [ $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | gawk 'BEGIN{FS ~ ":"}{print $2}') = "charging" ]; then echo ++;else :;fi)$batcharge
-# }
 
 inranger() {
   local ranger_prompt=$(if [ -n "$RANGER_LEVEL" ];then echo " <ranger>";else echo "";fi)
@@ -386,14 +231,7 @@ timer_precmd() {
 }
 add-zsh-hook precmd timer_precmd
 
-# async jobs
-# https://github.com/vincentbernat/zshrc/blob/d66fd6b6ea5b3c899efb7f36141e3c8eb7ce348b/rc/vcs.zsh
-_async_rbq_start() {
-  async_start_worker rbq_info
-  async_register_callback rbq_info _async_rbq_info_done
-}
-
-_async_rbq_info() {
+rbq() {
   make -C $1 -q > /dev/null 2>&1
   if [[ $? == 1 ]]; then
     echo " ::rebuild::"
@@ -402,69 +240,79 @@ _async_rbq_info() {
   fi
 }
 
-_async_rbq_info_done() {
-  local stdout=$3
-  rbq_info_msg=$stdout
-  zle reset-prompt
-}
-
-_async_vcs_start() {
-  async_start_worker vcs_info
-  async_register_callback vcs_info _async_vcs_info_done
-}
-
-_async_vcs_info() {
-  cd -q $1
-  vcs_info
-  print ${vcs_info_msg_0}
-}
-
-_async_vcs_info_done() {
-  local studout=$3
-  vcs_info_msg_0=$stdout
-  zle reset-prompt
-}
-
 # zsh-async https://github.com/mafredri/zsh-async
 source /home/devi/zsh-async.git/v1.8.5/async.zsh
+
+# async jobs
+# https://github.com/vincentbernat/zshrc/blob/d66fd6b6ea5b3c899efb7f36141e3c8eb7ce348b/rc/vcs.zsh
+_async_rbq_start() {
+  async_start_worker rbq_info
+  async_register_callback rbq_info _async_rbq_info_done
+}
+
+_async_rbq_info_done() {
+  local job=$1
+  local return_code=$2
+  local stdout=$3
+  local more=$6
+  if [[  $job == '[async]' ]]; then
+    if [[ $return_code -eq 2 ]]; then
+        _async_rbq_start
+      return
+    fi
+  fi
+  rbq_info_msg=$stdout
+  [[ $more == 1 ]] || zle reset-prompt
+}
+
+_async_gittrivia_start() {
+  async_start_worker gittrivia_info
+  async_register_callback gittrivia_info _async_gittrivia_done
+}
+
+_async_gittrivia_done() {
+  local job=$1
+  local return_code=$2
+  local stdout=$3
+  local more=$6
+  if [[  $job == '[async]' ]]; then
+    if [[ $return_code -eq 2 ]]; then
+      _async_gittrivia_start
+      return
+    fi
+  fi
+  vcs_info_msg_0_=$stdout
+  [[ $more == 1 ]] || zle reset-prompt
+}
+
 async_init
 _async_rbq_start
-_async_vcs_start
+_async_gittrivia_start
 
-add-zsh-hook precmd() {
-  async_job vcs_info _async_vcs_info $PWD > /dev/null 2>&1
-}
-ass-zsh-hook chpwd() {
-  vcs_info_msg_0=
+add-zsh-hook precmd (){
+  async_job rbq_info rbq $PWD
+  async_job gittrivia_info _async_gittrivia $PWD
 }
 
-add-zsh-hook precmd() {
-  async_job rbq_info _async_rbq_info $PWD > /dev/null 2>&1
+export PERIOD=3
+add-zsh-hook periodic (){
 }
 
-add-zsh-hook chpwd() {
+add-zsh-hook chpwd (){
   rbq_info_msg=
+  vcs_info_msg_0_=
 }
-
-#function vi-replacee {
-#  RPS1="$VIM_PROMPT_REPLACE %{$lorange%}%?↵%{$reset_color%} %{$batcolor%}$(batcharge_printer)%%{$reset_color%}"
-#  zle vi-replace
-#}
-#zle -N vi-replace-mode-widget vi-replacee
-# bind R only in vicmd keymapping
-#bindkey -M vicmd 'R' vi-replace-mode-widget
 
 #https://raw.githubusercontent.com/alfredodeza/zsh-plugins/master/vi/zle_vi_visual.zsh
 #this gives us vivis and vivli
 source ~/.oh-my-zsh/plugins/zle-vi-visual/zle_vi_visual.zsh
 
 function zle-line-init zle-keymap-select {
-RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} \
-%{$lorange%}%?↵%{$reset_color%}\
-%{$yaorange%} L$SHLVL%{$reset_color%}\
-%{$veryorange%}$(bg_job_count)%{$reset_color%}\
-%{$bluesomething%}$(inranger)%{$reset_color%}"
-# %{$purple4%}$(get_prompt_len)%{$reset_color%}"
+RIGHT_PROMPT="%{$teal%}$timer_final \
+%{$lorange%}%?↵\
+%{$yaorange%} L$SHLVL\
+%{$veryorange%}$(bg_job_count)\
+%{$bluesomething%}$(inranger)"
 
   VIM_PROMPT_INSERT="%{$fg_bold[cyan]%}% [% INS]% %{$reset_color%}"
   VIM_PROMPT_MAIN="%{$fg_bold[blue]%}% [% INSERT]% %{$reset_color%}"
@@ -489,6 +337,5 @@ RIGHT_PROMPT="%{$teal%}$timer_final%{$reset_color%} \
 
 zle -N zle-line-init
 zle -N zle-keymap-select
-#bindkey "^[[3~" delete-char
-#bindkey "^[3;5~" delete-char
+
 export KEYTIMEOUT=1

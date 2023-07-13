@@ -1,7 +1,7 @@
 version: "3.4" 
 services:
   ejabberd:
-    image: ejabberd/ecs:23.01
+    image: ejabberd/ecs:23.04
     networks:
       - ejabberdnet
     ports:
@@ -13,6 +13,7 @@ services:
       - "5443:5443"
       #- "1883:1883"
       #- "127.0.0.1:5080:5080"
+      - "443:443"
     restart: unless-stopped
     volumes:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml

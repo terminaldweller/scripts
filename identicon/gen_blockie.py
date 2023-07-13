@@ -21,7 +21,7 @@ class Argparser:  # pylint: disable=too-few-public-methods
             "-i",
             type=str,
             help="path to the input file",
-            default="./identicon.png",
+            default="",
         )
         self.parser.add_argument(
             "--out",

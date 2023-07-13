@@ -6,6 +6,7 @@ set -o vi
 HISTFILE="$HOME/.ksh_history"
 HISTSIZE=10000
 
+alias py="python"
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"

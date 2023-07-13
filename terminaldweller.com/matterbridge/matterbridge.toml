@@ -1,26 +1,40 @@
 [general]
-RemoteNickFormat="[{PROTOCOL}/{BRIDGE}] <{NICK}> "
+RemoteNickFormat="[{PROTOCOL}/{BRIDGE}] <{CHANNEL}/{NICK}> "
+ShowJoinPart=true
 
 [matrix.matrix]
 Server="https://matrix.org"
 Login="termibot"
-Password="" #pragma: allowlist secret
+Password="p@ssw0rd" # pragma: allowlist secret
 NoHomeServerSuffix=true
 
-[matrix.terminaldweller]
+[matrix.devimatrix]
 Server="https://matrix.terminaldweller.com"
-Login="devi"
-Password="" #pragma: allowlist secret
+Login="matterbridge_bot"
+Password="p@ssw0rd" # pragma: allowlist secret
 NoHomeServerSuffix=true
 
 [irc.devinet]
-Nick=""
-NickServNick=""
-NickServPassword="" #pragma: allowlist secret
+Nick="termi"
+NickServNick="termi"
+NickServPassword="p@ssw0rd" # pragma: allowlist secret
 Server="irc.terminaldweller.com:6697"
 UseTLS=true
 UseSASL=true
 SkipTLSVerify=false
+
+[slack]
+[slack.magmacore]
+Token="xoxb-token" # pragma: allowlist secret
+PreserveThreading=true
+
+# [xmpp.jabber.terminaldweller.com]
+# Server="jabber.terminaldweller.com:5222"
+# Jid="matterbot@jabber.terminaldweller.com"
+# Password=""
+# Muc="conference.jabber.example.com"
+# Nick="xmppbot"
+# RemoteNickFormat="[{PROTOCOL}] <{NICK}> "
 
 [[gateway]]
   name="gate_one"
@@ -28,8 +42,68 @@ SkipTLSVerify=false
 
   [[gateway.in]]
   account="matrix.matrix"
-  channel="#doipver:matrix.org"
+  channel="#ipfs-chatter:ipfs.io"
 
   [[gateway.inout]]
   account="irc.devinet"
-  channel="#matterbridge"
+  channel="#matrix-ipfs"
+
+[[gateway]]
+  name="gate_two"
+  enable=false
+
+  [[gateway.in]]
+  account="matrix.matrix"
+  channel="#privacy-security-anonymity:matrix.org"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#priv-sec-anon"
+
+[[gateway]]
+  name="gate_three"
+  enable=false
+
+  [[gateway.in]]
+  account="matrix.matrix"
+  channel="#librewolf:matrix.org"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#matrix-librewolf"
+
+[[gateway]]
+  name="gate_four"
+  enable=true
+
+  [[gateway.in]]
+  account="matrix.matrix"
+  channel="#xmrmine:matrix.org"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#matrix-monero-mining"
+
+[[gateway]]
+  name="gate_five"
+  enable=true
+
+  [[gateway.in]]
+  account="slack.magmacore"
+  channel="general"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#slack-magmacore-general"
+
+[[gateway]]
+  name="gate_six"
+  enable=true
+
+  [[gateway.in]]
+  account="matrix.devimatrix"
+  channel="!QwGIJxYlkXfHdrkdot:terminaldweller.com"
+
+  [[gateway.inout]]
+  account="irc.devinet"
+  channel="#matrix_devi_netdata_notifs"

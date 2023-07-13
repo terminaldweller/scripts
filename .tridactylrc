@@ -12,6 +12,7 @@ bind <C-k> tabnext
 bind <C-j> tabprev
 seturl duolingo.com  superignore true
 seturl localhost:8889 superignore true
+autocmd DocStart localhost:8889 mode ignore
 
 blacklistadd mail.google.com/mail
 blacklistadd mail.terminaldweller.com

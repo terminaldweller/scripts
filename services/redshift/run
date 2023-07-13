@@ -1,0 +1,7 @@
+#!/bin/sh
+exec \
+  env \
+  XDG_RUNTIME_DIR="/run/user/1000" \
+  XAUTHORITY="/home/devi/.Xauthority" \
+  DISPLAY=":0" \
+  prime-run /usr/bin/redshift 2>&1

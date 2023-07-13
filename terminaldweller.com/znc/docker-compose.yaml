@@ -1,0 +1,17 @@
+version: "3"
+services:
+  znc:
+    image: znc:1.8.2
+    # in my case, this is a  user named znc and we are using this user's home dir
+    #user: 1001:1001
+    networks:
+      - zncnet
+    ports:
+      - "1025:1025"
+    restart: unless-stopped
+    volumes:
+      - /home/znc/.znc:/znc-data
+      - /etc/letsencrypt/live/znc.terminaldweller.com/fullchain.pem:/etc/letsencrypt/live/znc.terminaldweller.com/fullchain.pem:ro
+      - /etc/letsencrypt/live/znc.terminaldweller.com/privkey.pem:/etc/letsencrypt/live/znc.terminaldweller.com/privkey.pem:ro
+networks:
+  zncnet:

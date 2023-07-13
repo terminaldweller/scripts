@@ -1,0 +1,3 @@
+map <C-N> :bnext
+map <C-P> :bprev
+map <C-R> /tongueworm

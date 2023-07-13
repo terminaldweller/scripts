@@ -91,7 +91,7 @@ ${SEPARATOR_LEFT_BOLD}#[fg=colour0 bg=colour24]${HEADSET_BATTERY}\
 ${CPU_SECTION}#[fg=colour32 bg=colour36]\
 ${SEPARATOR_LEFT_BOLD}${WEATHER}#[fg=colour29 bg=colour32]\
 ${SEPARATOR_LEFT_BOLD}${JDATE} #[fg=colour31 bg=colour29]\
-${SEPARATOR_LEFT_BOLD}${DAY} ${SEPARATOR_LEFT_THIN} ${DATE} ${SEPARATOR_LEFT_THIN} ${TIME} #[fg=colour214 bg=colour31]\
+${SEPARATOR_LEFT_BOLD}${DAY}#[fg=colour16]${SEPARATOR_LEFT_THIN}#[fg=colour255]${DATE}#[fg=colour16]${SEPARATOR_LEFT_THIN}#[fg=colour255]${TIME}#[fg=colour214 bg=colour31]\
 ${SEPARATOR_LEFT_BOLD}#[fg=colour0 bg=colour214]${BATTERY} #[fg=colour25 bg=colour214]\
 ${SEPARATOR_LEFT_BOLD}${UTC_TIME}\
 $(ping_4_status)$(ping_6_status)"

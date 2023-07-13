@@ -2,3 +2,7 @@ __pycache__
 *.gpg
 tags
 .depend
+dnscrypt/public-resolvers.md
+dnscrypt/public-resolvers.md.minisig
+dnscrypt/relays.md
+dnscrypt/relays.md.minisig

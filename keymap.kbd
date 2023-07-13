@@ -17,7 +17,7 @@
 )
 -------------------------------------------------------------------------- |#
 (defcfg
-  input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-if01-event-kbd")
+  input  (device-file "/dev/input/by-id/usb-Razer_Razer_Huntsman_Tournament_Edition_00000000001A-event-kbd")
   output (uinput-sink "KMonad output"
           "sleep 1 && setxkbmap -option compose:ralt")
 
@@ -46,10 +46,54 @@
   ccp (tap-next esc lctl)
   ll1 (layer-delay 500 meta_layer)
   ll2 (around-next @meta_layer_toggle)
-  aa1 (tap-macro (around alt [) 1)
-  aa2 (tap-macro (around alt [) 2)
-  aaq (tap-macro (around alt [) q)
-  aaw (tap-macro (around alt [) w)
+
+  af1 (tap-macro (around ctl a) w)
+  af2 (tap-macro (around ctl 6))
+  af3 (tap-macro (around ctl a) (pause 10) (around ctl 6))
+
+  aa1 (tap-macro (around alt [)(around alt [)(around alt [) 1)
+  aa2 (tap-macro (around alt [)(around alt [)(around alt [) 2)
+  aa3 (tap-macro (around alt [)(around alt [)(around alt [) 3)
+  aa4 (tap-macro (around alt [)(around alt [)(around alt [) 4)
+  aa5 (tap-macro (around alt [)(around alt [)(around alt [) 5)
+  aa6 (tap-macro (around alt [)(around alt [)(around alt [) 6)
+  aa7 (tap-macro (around alt [)(around alt [)(around alt [) 7)
+  aa8 (tap-macro (around alt [)(around alt [)(around alt [) 8)
+  aa9 (tap-macro (around alt [)(around alt [)(around alt [) 9)
+  aa0 (tap-macro (around alt [)(around alt [)(around alt [) 0)
+
+  aaq (tap-macro (around alt [)(around alt [)(around alt [) q)
+  aaw (tap-macro (around alt [)(around alt [)(around alt [) w)
+  aae (tap-macro (around alt [)(around alt [)(around alt [) e)
+  aar (tap-macro (around alt [)(around alt [)(around alt [) r)
+  aat (tap-macro (around alt [)(around alt [)(around alt [) t)
+  aay (tap-macro (around alt [)(around alt [)(around alt [) y)
+  aau (tap-macro (around alt [)(around alt [)(around alt [) u)
+  aai (tap-macro (around alt [)(around alt [)(around alt [) i)
+  aao (tap-macro (around alt [)(around alt [)(around alt [) o)
+  aap (tap-macro (around alt [)(around alt [)(around alt [) p)
+
+  aaa (tap-macro (around alt [)(around alt [)(around alt [) a)
+  aas (tap-macro (around alt [)(around alt [)(around alt [) s)
+  aad (tap-macro (around alt [)(around alt [)(around alt [) d)
+  aaf (tap-macro (around alt [)(around alt [)(around alt [) f)
+  aag (tap-macro (around alt [)(around alt [)(around alt [) g)
+  aah (tap-macro (around alt [)(around alt [)(around alt [) h)
+  aaj (tap-macro (around alt [)(around alt [)(around alt [) j)
+  aak (tap-macro (around alt [)(around alt [)(around alt [) k)
+  aal (tap-macro (around alt [)(around alt [)(around alt [) l)
+  aa; (tap-macro (around alt [)(around alt [)(around alt [) ;)
+
+  aaz (tap-macro (around alt [)(around alt [)(around alt [) z)
+  aax (tap-macro (around alt [)(around alt [)(around alt [) x)
+  aac (tap-macro (around alt [)(around alt [)(around alt [) c)
+  aav (tap-macro (around alt [)(around alt [)(around alt [) v)
+  aab (tap-macro (around alt [)(around alt [)(around alt [) b)
+  aan (tap-macro (around alt [)(around alt [)(around alt [) n)
+  aam (tap-macro (around alt [)(around alt [)(around alt [) m)
+  aa, (tap-macro (around alt [)(around alt [)(around alt [) ,)
+  aa. (tap-macro (around alt [)(around alt [)(around alt [) .)
+  aa/ (tap-macro (around alt [)(around alt [)(around alt [) /)
 )
 
 (deflayer devi_layer
@@ -62,10 +106,10 @@
 )
 
 (deflayer meta_layer
-  _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
-  _    @aa1 @aa2 _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
-  _    @aaq @aaw _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
-  @ccp _    _    _    _    _    _    _    _    _    _    _    _                          _    _    _
-  @cls _    _    _    _    _    _    _    _    _    _    @crs                 _          _    _    _    _
+  _    @af1 @af2 @af3 _    _    _    _    _    _    _    _    _          _    _    _
+  _    @aa1 @aa2 @aa3 @aa4 @aa5 @aa6 @aa7 @aa8 @aa9 @aa0 _    _    _     _    _    _     _    _    _    _
+  _    @aaq @aaw @aae @aar @aat @aay @aau @aai @aao @aap _    _    _     _    _    _     _    _    _    _
+  @ccp @aaa @aas @aad @aaf @aag @aah @aaj @aak @aal @aa; _    _                          _    _    _
+  @cls @aaz @aax @aac @aav @aab @aan @aam @aa, @aa. @aa/ @crs                 _          _    _    _    _
   @clc _    @cla           _              @cra _    _    @crc            _    _    _     _    _
 )

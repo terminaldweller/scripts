@@ -99,7 +99,7 @@ RUN cd /; \
   )"; \
   apk add --virtual .irssi-rundeps $runDeps; \
   echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update; \
-  apk add --no-cache perl-regexp-common-net-cidr perl-regexp-common perl-xml-rss perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection perl-mojolicious libnotify; \
+  apk add --no-cache gnu-libiconv perl-regexp-common-net-cidr perl-regexp-common perl-xml-rss perl-glib perl-datetime perl-dbi perl-dbd-pg perl-lwp-protocol-https proxychains-ng perl-glib-object-introspection perl-mojolicious libnotify; \
   # apk add dbus; \
   # dbus-uuidgen > /var/lib/dbus/machine-id; \
   # mkdir -p /var/run/dbus; \

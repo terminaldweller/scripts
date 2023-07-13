@@ -101,5 +101,5 @@ env -i \
   --hostname RESTRICTED \
   mednafen \
   "$@"
-  # --seccomp 9 \
-  # 9<"/tmp/seccomp_logging_filter.bpf"
+# --seccomp 9 \
+# 9<"/tmp/seccomp_logging_filter.bpf" \

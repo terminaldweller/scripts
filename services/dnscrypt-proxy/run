@@ -1,0 +1,4 @@
+#!/bin/sh
+exec \
+  env \
+  /usr/bin/dnscrypt-proxy -config /home/devi/scripts/dnscrypt/dnscrypt-proxy.toml 2>&1

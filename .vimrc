@@ -5,6 +5,7 @@ set nocompatible
 set completeopt-=preview
 set completeopt+=menuone
 set completeopt+=noselect
+set completeopt+=popup
 set showmatch
 set list
 set title
@@ -19,7 +20,7 @@ set expandtab
 set smarttab
 set autoindent
 set autochdir
-set history=1000
+set history=10000
 set cindent
 set complete=.,w,b,u,t,i
 set foldmethod=manual
@@ -80,13 +81,13 @@ if !has('nvim')
 endif
 
 let $GOPROXY="https://goproxy.io"
-let $HTTP_PROXY="socks5://127.0.0.1:9995"
-let $HTTPS_PROXY="socks5://127.0.0.1:9995"
-let $ALL_PROXY="socks5://127.0.0.1:9995"
+let $HTTP_PROXY="http://127.0.0.1:8118"
+let $HTTPS_PROXY="http://127.0.0.1:8118"
+let $ALL_PROXY="socks5h://127.0.0.1:9995"
 let $NO_PROXY="localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24"
-let $http_proxy="socks5://127.0.0.1:9995"
-let $https_proxy="socks5://127.0.0.1:9995"
-let $all_proxy="socks5://127.0.0.1:9995"
+let $http_proxy="http://127.0.0.1:8118"
+let $https_proxy="http://127.0.0.1:8118"
+let $all_proxy="socks5h://127.0.0.1:9995"
 let $no_proxy="localhost,127.0.0.0/8,192.168.1.0/24,10.0.0.0/8,172.17.0.0/24"
 " let $GOROOT="/home/devi/.gvm/gos/go1.19"
 " let $GOPATH="/home/devi/.gvm/pkgsets/go1.19/global"
@@ -99,7 +100,7 @@ let g:is_posix = 1
 set rtp+=/usr/bin/fzf
 " set rtp+=/home/bloodstalker/extra/llvm-clang-4/build/bin/clangd
 " set rtp+=/usr/local/bin/pyls
-let g:polyglot_disabled = ['sensible', 'go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin', 'python', 'c.plugin', 'cpp.plugin']
+let g:polyglot_disabled = ['sensible', 'go.plugin', 'markdown.plugin', 'terraform.plugin', 'haproxy.plugin', 'c.plugin', 'cpp.plugin', 'javascript.plugin']
 
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/bundle')
@@ -136,7 +137,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'majutsushi/tagbar'
 Plug 'szw/vim-maximizer'
 Plug 'chrisbra/csv.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'proxychains4 -q -f ~/proxies/swe/proxychains.conf ./install.py --all' }
 Plug 'elzr/vim-json'
 Plug 'wellle/context.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -214,12 +215,12 @@ Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 Plug 'liuchengxu/vista.vim'
 Plug 'uiiaoo/java-syntax.vim'
 Plug 'tpope/vim-dispatch'
-Plug 'kh3phr3n/python-syntax'
+" Plug 'kh3phr3n/python-syntax'
 Plug 'zaid/vim-rec'
 Plug 'calincru/flex-bison-syntax'
 Plug 'tridactyl/vim-tridactyl'
 Plug 'hrother/offlineimaprc.vim'
-Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
+" Plug 'lifepillar/pgsql.vim', {'for': ['sql','pqsl', 'pgsql']}
 Plug 'HiPhish/info.vim'
 Plug 'kmonad/kmonad-vim'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -231,6 +232,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'goerz/jupytext.vim'
 Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
 Plug 'mattn/vim-chatgpt'
+Plug 'puremourning/vimspector'
+" Plug 'pangloss/vim-javascript'
 " Plug 'jelera/vim-javascript-syntax'
 " Plug 'kana/vim-operator-user'
 " Plug 'terryma/vim-multiple-cursors'
@@ -246,7 +249,6 @@ Plug 'mattn/vim-chatgpt'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'skammer/vim-css-color'
 " Plug 'szymonmaszke/vimpyter'
-" Plug 'puremourning/vimspector'
 " Plug 'kana/vim-submode'
 " Plug 'tpope/vim-capslock'
 " Plug 'nanotech/jellybeans.vim'
@@ -404,25 +406,25 @@ au FileType *.uml setlocal syntax=plantuml
 
 "python configs
 "PEP-8
-au FileType *.py setlocal tabstop=4
-au FileType *.py setlocal softtabstop=4
-au FileType *.py setlocal shiftwidth=4
+" au FileType *.py setlocal tabstop=4
+" au FileType *.py setlocal softtabstop=4
+" au FileType *.py setlocal shiftwidth=4
 " au BufNewFile,BufEnter *.py set textwidth=79
-au FileType *.py setlocal expandtab
-au FileType *.py setlocal autoindent
-au FileType *.py setlocal fileformat=unix
+" au FileType *.py setlocal expandtab
+" au FileType *.py setlocal autoindent
+" au FileType *.py setlocal fileformat=unix
 
 "python syntax highlighting
 "let g:python_slow_sync = 0
-let python_highlight_all = 1
-hi link pythonBuiltin Define
-hi link pythonInclude PreCondit
-hi link pythonClassParameters Constant
-hi link pythonFunctionParameters Constant
-hi link pythonExtraOperator Keyword
-hi link pythonDoctest Tag
-hi link pythonRawString Tag
-hi link pythonTripleQuotes SpecialComment
+" let python_highlight_all = 1
+" hi link pythonBuiltin Define
+" hi link pythonInclude PreCondit
+" hi link pythonClassParameters Constant
+" hi link pythonFunctionParameters Constant
+" hi link pythonExtraOperator Keyword
+" hi link pythonDoctest Tag
+" hi link pythonRawString Tag
+" hi link pythonTripleQuotes SpecialComment
 
 nmap <leader>sp :call <SID>SynStack()<CR>
 function! <SID>SynStack()
@@ -609,11 +611,11 @@ let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 0
 let g:tmux_navigator_save_on_switch = 1
 let g:tmux_navigator_preserve_zoom = 0
-nnoremap <silent> <C-a>h :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-a>j :TmuxNavigateDown<cr>
-nnoremap <silent> <C-a>k :TmuxNavigateUp<cr>
-nnoremap <silent> <C-a>l :TmuxNavigateRight<cr>
-nnoremap <silent> <C-w><C-w> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <S-Left> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <silent> <S-Down> :<C-U>TmuxNavigateDown<cr>
+nnoremap <silent> <S-Up> :<C-U>TmuxNavigateUp<cr>
+nnoremap <silent> <S-Right> :<C-U>TmuxNavigateRight<cr>
+nnoremap <silent> <C-w><C-w> :<C-U>TmuxNavigatePrevious<cr>
 
 "vim.session options
 let g:session_directory = "~/.vim/session"
@@ -1145,13 +1147,13 @@ let g:netrw_sort_by = 'name'
 let g:netrw_sort_direction = 'normal'
 
 "vimcompletesme
-let g:vcm_default_maps = 0
-autocmd FileType c,cpp let b:vcm_tab_complete = 'omni'
-autocmd FileType lua let b:vcm_tab_complete = 'omni'
-autocmd FileType go let b:vcm_tab_complete = 'omni'
-autocmd FileType rust let b:vcm_tab_complete = 'omni'
-autocmd FileType python let b:vcm_tab_complete = 'omni'
-autocmd FileType javasript let b:vcm_tab_complete = 'omni'
+" let g:vcm_default_maps = 0
+" autocmd FileType c,cpp let b:vcm_tab_complete = 'omni'
+" autocmd FileType lua let b:vcm_tab_complete = 'omni'
+" autocmd FileType go let b:vcm_tab_complete = 'omni'
+" autocmd FileType rust let b:vcm_tab_complete = 'omni'
+" autocmd FileType python let b:vcm_tab_complete = 'omni'
+" autocmd FileType javasript let b:vcm_tab_complete = 'omni'
 
 "sets the dictionary for autocompletion with <C-n> and <C-p> for the
 "filetypes
@@ -1253,42 +1255,78 @@ augroup YCMDocCFam
   autocmd!
   autocmd FileType c,cpp let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
+    \ 'syntax': &filetype,
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 augroup YCMDocJS
   autocmd!
   autocmd FileType javascript let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
+    \ 'syntax': 'markdown',
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 augroup YCMDocPy
   autocmd!
   autocmd FileType python let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
+    \ 'syntax': 'markdown',
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 augroup YCMDocGo
   autocmd!
   autocmd FileType go let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
+    \ 'syntax': 'markdown',
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 augroup YCMDocRust
   autocmd!
   autocmd FileType rust let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': 'rust'
+    \ 'syntax': 'markdown',
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 augroup YCMDocJava
   autocmd!
   autocmd FileType java let b:ycm_hover = {
     \ 'command': 'GetDoc',
-    \ 'syntax': 'java'
+    \ 'syntax': 'markdown',
+    \ 'popup_params': {
+    \     'border': [],
+    \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \     'borderhighlight': ['PopupBorderColor'],
+    \     'scrollbarhighlight': 'PopupScrollbarColor',
+    \   },
     \ }
 augroup END
 " add : as a keyword only for lua files
@@ -1305,9 +1343,16 @@ let g:ycm_language_server = [
       \ {
       \     'name': 'bash',
       \     'cmdline': [ 'bash-language-server' , 'start' ],
-      \     'filetypes': [ 'sh', 'bash' ],
-      \   },
+      \     'filetypes': [ 'sh', 'bash' ]
+      \   }
       \]
+" \ {
+" \     'name': 'remote_jedi-language-server',
+" \     'port': '4401',
+" \     'filetypes': [ 'python' ],
+" \     'project_root_files':['requirements.txt', 'pyproject.toml']
+" \   }
+" \     'cmdline': [ 'nc' , '10.167.131.24', '1024' ],
 
 let g:qs_highlight_on_keys = ["f", "F", "t", "T"]
 
@@ -1560,6 +1605,17 @@ augroup ALESOL
   autocmd FileType solidity let b:ale_linters = {'solidity': ['solhint', 'ethlint', 'solc']}
   " autocmd FileType solidity let b:ale_fixers = {'solidity': ['solc']}
 augroup END
+let b:ale_sql_sqlfluff_options="--dialect postgres"
+let b:ale_sql_sqlint_executable="/home/devi/.gem/ruby/3.2.0/bin/sqlint"
+augroup ALESQL
+  autocmd!
+  autocmd FileType sql let b:ale_linters = {'sql': ['sqlfluff', 'sqlint']}
+  autocmd FileType sql let b:ale_fixers = {'sql': ['sqlfluff']}
+augroup END
+augroup ALEVIM
+  autocmd!
+  autocmd FileType vim let b:ale_linters = {'vim': ['vimls']}
+augroup END
 
 " we can edit gzip files because of this
 augroup gzip
@@ -1626,12 +1682,12 @@ vnoremap <silent><leader>z :MaximizerToggle!<CR>gv
 inoremap <silent><leader>z <C-o>:MaximizerToggle!<CR>
 
 "pgsql
-let g:sql_type_default = 'pgsql'
-augroup PGSQL
-  autocmd!
-  autocmd FileType sql let b:sql_type_override='pgsql' | set ft=sql
-augroup END
-let g:pgsql_pl = ['python']
+" let g:sql_type_default = 'pgsql'
+" augroup PGSQL
+"   autocmd!
+"   autocmd FileType sql let b:sql_type_override='pgsql' | set ft=sql
+" augroup END
+" let g:pgsql_pl = ['python']
 
 " uses " register to keep last cursor position in buffers
 autocmd BufReadPost *
@@ -1680,7 +1736,7 @@ endif
 "vimwiki
 let wiki = {}
 let wiki.path = '~/wikis/'
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'sh':'sh', 'yaml':'yaml', 'Dockerfile':'Dockerfile'}
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c':'c', 'go':'go', 'javascript':'javascript', 'js':'javascript', 'sh':'sh', 'yaml':'yaml', 'Dockerfile':'Dockerfile', 'rust':'rust'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_global_ext = 0
 " let g:vimwiki_list = [{'path': '~/devi/devi/work/vimwiki.git/master', 'syntax': 'markdown', 'ext': '.wiki'}]
@@ -1781,6 +1837,47 @@ function! g:BMBufferFileLocation(file)
     endif
 endfunction
 
+"https://fortime.ws/blog/2020/03/14/20200312-01/
+"https://vi.stackexchange.com/questions/37717/is-it-possible-to-scroll-a-popup-via-keyboard
+function! ScrollPopup(nlines)
+    let winids = popup_list()
+    if len(winids) == 0
+        return
+    endif
+
+    " Ignore hidden popups
+    let prop = popup_getpos(winids[0])
+    if prop.visible != 1
+        return
+    endif
+
+    let firstline = prop.firstline + a:nlines
+    let buf_lastline = str2nr(trim(win_execute(winids[0], "echo line('$')")))
+    if firstline < 1
+        let firstline = 1
+    elseif prop.lastline + a:nlines > buf_lastline
+        let firstline = buf_lastline + prop.firstline - prop.lastline
+    endif
+
+    call popup_setoptions(winids[0], {'firstline': firstline})
+endfunction
+
+nnoremap <C-Down> :call ScrollPopup(3)<CR>
+nnoremap <C-Up> :call ScrollPopup(-3)<CR>
+" inoremap <C-Down> <ESC>:call ScrollPopup(3)<CR>i
+" inoremap <C-Up> <ESC>:call ScrollPopup(-3)<CR>i
+
+" vimspector
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>de :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
+
 "this should be here at the end so nothing else could override it
 hi SpecialKey ctermbg=16
 hi Pmenu ctermbg=233
@@ -1795,3 +1892,24 @@ hi ALEVirtualTextInfo ctermbg=97 ctermfg=0 cterm=bold
 hi ALEVirtualTextStyleError ctermbg=1 ctermfg=0 cterm=bold
 hi ALEVirtualTextStyleWarning ctermbg=203 ctermfg=0 cterm=bold
 hi ALEVirtualTextWarning ctermbg=203 ctermfg=0 cterm=bold
+hi PopupBorderColor ctermfg=29
+hi PopupScrollbarColor ctermbg=31
+
+" let s:ycm_hover_popup = -1
+" function s:Hover()
+"   let response = youcompleteme#GetCommandResponse( 'GetDoc' )
+"   if response == ''
+"     return
+"   endif
+"   let md_cmd = "mdcat -P - <<- 'EOF'\n"
+"   let rendered_response = system(md_cmd.response."\n"."EOF\n")
+"   if rendered_response == ''
+"     return
+"   endif
+
+"   call popup_hide( s:ycm_hover_popup )
+"   let s:ycm_hover_popup = popup_atcursor( balloon_split( rendered_response ), {} )
+" endfunction
+
+" autocmd CursorHold * call s:Hover()
+" nnoremap <silent> <leader>D :call <SID>Hover()<CR>

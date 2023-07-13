@@ -11,6 +11,10 @@ set ssl_starttls=yes
 set ssl_force_tls=yes
 
 # crypto options for autosigning and autoencrypting
+set crypt_use_gpgme=yes
+set pgp_self_encrypt=yes
+set postpone_encrypt=yes
+set postpone_encrypt_as="9E20464F1CCF3B103249FA93A6A0F5158B3881DF" # pragma: allowlist secret
 set crypt_autopgp=yes
 set crypt_autosign=yes
 

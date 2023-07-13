@@ -1,0 +1,3 @@
+listen irc+insecure://0.0.0.0:6697
+db sqlite3 /data/soju_sq3.db
+listen unix+admin:///run/soju_admin

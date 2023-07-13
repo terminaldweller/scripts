@@ -108,13 +108,13 @@ http3 = false
 ## Uncomment the following line to route all TCP connections to a local Tor node
 ## Tor doesn't support UDP, so set `force_tcp` to `true` as well.
 
-proxy = 'socks5h://127.0.0.1:9054'
+proxy = 'socks5h://127.0.0.1:9053'
 
 
 ## HTTP/HTTPS proxy
 ## Only for DoH servers
 
-# http_proxy = 'http://127.0.0.1:8118'
+http_proxy = 'http://127.0.0.1:8118'
 
 
 ## How long a DNS query will wait for a response, in milliseconds.
@@ -222,7 +222,7 @@ cert_refresh_delay = 240
 ## Keep tls_cipher_suite empty if you have issues fetching sources or
 ## connecting to some DoH servers. Google and Cloudflare are fine with it.
 
-# tls_cipher_suite = [52392, 49199]
+tls_cipher_suite = [52392, 49199]
 
 
 ## Bootstrap resolvers
@@ -441,7 +441,7 @@ cache_neg_max_ttl = 600
 
 ## Addresses that the local DoH server should listen to
 
-# listen_addresses = ['127.0.0.1:3033']
+listen_addresses = ['127.0.0.1:3033']
 
 
 ## Path of the DoH URL. This is not a file, but the part after the hostname
@@ -449,14 +449,14 @@ cache_neg_max_ttl = 600
 ## For each `listen_address` the complete URL to access the server will be:
 ## `https://<listen_address><path>` (ex: `https://127.0.0.1/dns-query`)
 
-# path = '/dns-query'
+path = '/dns-query'
 
 
 ## Certificate file and key - Note that the certificate has to be trusted.
 ## See the documentation (wiki) for more information.
 
-# cert_file = 'localhost.pem'
-# cert_key_file = 'localhost.pem'
+cert_file = '/home/devi/dnscrypt-cert/localhost.pem'
+cert_key_file = '/home/devi/dnscrypt-cert/localhost.pem'
 
 
 

@@ -2,12 +2,12 @@
 # https://libera.chat/guides/certfp
 # https://www.oftc.net/NickServ/CertFP/
 servers = (
-  {
-    address = "irc.probably.loki";
-    chatnet = "PROBABLY_LOKI";
-    port = "6667";
-    autoconnect = "yes";
-  },
+  # {
+  #   address = "irc.probably.loki";
+  #   chatnet = "PROBABLY_LOKI";
+  #   port = "6667";
+  #   autoconnect = "yes";
+  # },
   # {
   #   address = "rany.irc.bnet.eu.org";
   #   chatnet = "BonoboNET_LOKI";
@@ -84,28 +84,78 @@ servers = (
     port = "6697";
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "yes";
+    # FIXME
+    tls_verify = "no";
     autoconnect = "yes";
   },
   {
-    address = "185.130.45.46";
+    address = "65.109.235.54";
+    chatnet = "TOR_OFTC";
+    port = "1025";
+    password = "ericrot/oftc_tor:gigi"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/tor/user.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "65.109.235.54";
+    chatnet = "TOR_terrachat";
+    port = "1025";
+    password = "ericrot/terrachat_tor:gege"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs/tor/user.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "65.109.235.54";
+    chatnet = "TOR_ircnet";
+    port = "1025";
+    password = "ericrot/TOR_ircnet:gugu"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs//tor/user.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "65.109.235.54";
+    chatnet = "TOR_p2pnet";
+    port = "1025";
+    password = "ericrot/tor_p2pnet:girou"; #pragma: allowlist secret
+    use_tls = "yes";
+    tls_cert = "~/.irssi/certs//tor/user.pem";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  # {
+  #   address = "znc.terminaldweller.com";
+  #   chatnet = "ZNC";
+  #   port = "1025";
+  #   password = "terminaldweller"; #pragma: allowlist secret
+  #   use_tls = "yes";
+  #   tls_cert = "~/.irssi/certs/nick.pem";
+  #   tls_verify = "yes";
+  #   autoconnect = "yes";
+  # },
+  {
+    address = "znc.terminaldweller.com";
     chatnet = "Bonobonet_ZNC";
     port = "1025";
     password = "terminaldweller/Bonobonet:babun"; #pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
-    autoconnect = "yes";
+    tls_verify = "yes";
+    autoconnect = "no";
   },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "IRCNet_ZNC";
     port = "1025";
     password = "terminaldweller/IRCNET:network"; #pragma: allowlist secret
-    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   # {
@@ -119,47 +169,43 @@ servers = (
   #   autoconnect = "yes";
   # },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "Libera-ZNC";
     port = "1025";
     password = "terminaldweller/Liberachat:lama"; #pragma: allowlist secret
-    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "OFTC-ZNC";
     port = "1025";
     password = "terminaldweller/OFTC:network"; #pragma: allowlist secret
-    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "Rizon-ZNC";
     port = "1025";
     password = "terminaldweller/Rizon:network"; #pragma: allowlist secret
-    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "Undernet-ZNC";
     port = "1025";
     password = "terminaldweller/undernet:network"; #pragma: allowlist secret
-    # pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   # {
@@ -171,13 +217,13 @@ servers = (
   #   autoconnect = "yes";
   # },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "EFnet_ZNC";
     port = "1025";
     password = "terminaldweller/EFNET:locolobo"; #pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   # {
@@ -189,24 +235,43 @@ servers = (
   #   autoconnect = "yes";
   # },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "DALnet_ZNC";
     port = "1025";
     password = "terminaldweller/DALNET:netwqkkk"; #pragma: allowlist secret
     use_tls = "yes";
     tls_cert = "~/.irssi/certs/nick.pem";
-    tls_verify = "no";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   {
-    address = "185.130.45.46";
+    address = "znc.terminaldweller.com";
     chatnet = "TildeChat_ZNC";
     port = "1025";
     password = "terminaldweller/Tilde_Chat:network"; #pragma: allowlist secret
-    # pragma: allowlist secret
     tls_cert = "~/.irssi/certs/nick.pem";
     use_tls = "yes";
-    tls_verify = "no";
+    tls_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "znc.terminaldweller.com";
+    chatnet = "ergochat-ZNC";
+    port = "1025";
+    password = "terminaldweller/ergochat:network"; #pragma: allowlist secret
+    tls_cert = "~/.irssi/certs/nick.pem";
+    use_tls = "yes";
+    tls_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "znc.terminaldweller.com";
+    chatnet = "linknet_ZNC";
+    port = "1025";
+    password = "terminaldweller/Linknet:netzwerk"; #pragma: allowlist secret
+    tls_cert = "~/.irssi/certs/nick.pem";
+    use_tls = "yes";
+    tls_verify = "yes";
     autoconnect = "yes";
   },
   {
@@ -224,13 +289,80 @@ servers = (
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "no";
+  },
+  {
+    address = "192.168.1.214";
+    chatnet = "I2P_NERDS";
+    port = "9070";
+    use_tls = "no";
+    tls_verify = "no";
+    autoconnect = "no";
+  },
+  {
+    # address = "192.168.1.214";
+    address = "65.109.235.54";
+    chatnet = "torbnc";
+    # chatnet = "terrachat_torbnc";
+    # port = "9788";
+    port = "1026";
+    password = "password"; #pragma: allowlist secret
+    use_tls = "no";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "65.109.235.54";
+    chatnet = "torbnc_oftc";
+    port = "1026";
+    password = "password"; #pragma: allowlist secret
+    use_tls = "no";
+    tls_verify = "no";
+    autoconnect = "no";
   }
 );
 
 chatnets = {
-  I2P_ILITIA = { type = "IRC"; nick = "useruseR"; };
-  I2P_POSTMAN = { type = "IRC"; nick = "useruseR"; };
-  PROBABLY_LOKI = { type = "IRC"; nick = "terminaldweller"; };
+  I2P_ILITIA = { type = "IRC"; nick = "termi"; };
+  I2P_POSTMAN = { type = "IRC"; nick = "termi"; };
+  I2P_NERDS = { type = "IRC"; nick = "termi"; };
+  TOR_OFTC = {
+    type = "IRC";
+    nick = "ericrot";
+    autosendcmd = "/^msg *status listallusernetworks;wait 3000";
+  };
+  TOR_terrachat = { type = "IRC"; nick = "ericrot"; };
+  TOR_ircnet = {
+    type = "IRC";
+    nick = "juniperjumper";
+  };
+  TOR_p2pnet = {
+    type = "IRC";
+    nick = "xjambix";
+    autosendcmd = "/^mode xjambix +wRp;wait 3000";
+  };
+  # ZNC = {
+  #   type = "IRC";
+  #   autosendcmd = "/^msg *status listallusernetworks;wait 3000";
+  #   nick = "terminaldweller";
+  # };
+  # terrachat_torbnc = {
+  torbnc = {
+    type = "IRC";
+    nick = "terminaldweller";
+    # nick = "terminaldweller/irc.terrachat.cl";
+    autosendcmd = "/^msg BouncerServ help;wait 3000";
+  };
+  torbnc_oftc = {
+    type = "IRC";
+    nick = "nickjack/irc.oftc.net";
+  };
+  "ergochat-ZNC" = { type = "IRC"; nick = "terminaldweller"; };
+  linknet_ZNC = {
+    type = "IRC";
+    nick = "termi";
+    autosendcmd = "/^mode termi +ghi;wait 3000";
+  };
+  # PROBABLY_LOKI = { type = "IRC"; nick = "terminaldweller"; };
   Bonobonet_ZNC = { type = "IRC"; nick = "terminaldweller"; };
   # OFTC = {
   #   type = "IRC";
@@ -243,7 +375,7 @@ chatnets = {
   "OFTC-ZNC" = {
     type = "IRC";
     nick = "terminaldweller";
-    autosendcmd = "/^msg nickserv set cloak on;mode terminaldweller j;wait 3000";
+    autosendcmd = "/^msg nickserv set cloak on;mode terminaldweller +wg;wait 3000";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -265,7 +397,7 @@ chatnets = {
   # LiberaChat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
   "Libera-ZNC" = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +g;wait 3000";
+    autosendcmd = "/^mode terminaldweller +QRgw;^msg *status listallusernetworks;wait 3000";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -276,7 +408,7 @@ chatnets = {
   # };
   "Rizon-ZNC" = {
     type = "IRC";
-    autosendcmd = "/^mode terminaldweller +RCGpx;msg hostserv on;wait 3000";
+    autosendcmd = "/^mode terminaldweller +RCgpx;msg hostserv on;wait 3000";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -289,8 +421,8 @@ chatnets = {
   };
   "Undernet-ZNC" = {
     type = "IRC";
-    nick = "terminaldwel";
-    autosendcmd = "/^mode terminaldwel +ix;msg *status listallusernetworks;wait 3000";
+    nick = "termi";
+    autosendcmd = "/^mode termi +ixw;wait 3000";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -298,6 +430,7 @@ chatnets = {
   EFnet_ZNC = {
     type = "IRC";
     nick = "termi";
+    autosendcmd = "/^mode termi +g;wait 3000";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -305,7 +438,8 @@ chatnets = {
   DALnet_ZNC = {
     type = "IRC";
     nick = "terminaldweller";
-    autosendcmd = "/^msg nickserv@services.dal.net identify @@@@@@@@@@@@;mode terminaldweller HRCi;wait 3000";
+    # autosendcmd = "/^msg nickserv@services.dal.net identify p@ssw0rd;mode terminaldweller PHRCiw;wait 3000";
+    autosendcmd = "/^mode terminaldweller PHRCiw;wait 3000";
     max_kicks = "4";
     max_msgs = "20";
     max_whois = "30";
@@ -324,14 +458,36 @@ channels = (
   # { name = "#dpdk"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#fdio-vpp"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#openssl"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#tor-relays"; chatnet = "TOR_OFTC"; autojoin = "no"; },
   { name = "#sopelbot"; chatnet = "devinet"; autojoin = "yes"; },
-  { name = "#matterbridge"; chatnet = "devinet"; autojoin = "yes"; },
-  { name = "#rss"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#matrix-ipfs"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#limnoriabot"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#mangas"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#ergo"; chatnet = "ergochat-ZNC"; autojoin = "yes"; },
+  { name = "#rss_security"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#soulhack"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#matrix-monero-mining"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#slack-magmacore-general"; chatnet = "devinet"; autojoin = "yes"; },
+  { name = "#chaturbate"; chatnet = "TOR_terrachat"; autojoin = "yes"; },
+  { name = "#matrix_devi_netdata_notifs"; chatnet = "devinet"; autojoin = "yes"; },
   { name = "#netbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   # { name = "#netplan"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#ubuntu"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#techrss"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#bitcoin-blocks"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#newsbin"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#securityfeed"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#matrix"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#soju"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#securitynews"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#us-market-news"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "##machinelearning"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "##news"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#hd-torrents.announce"; chatnet = "TOR_p2pnet"; autojoin = "yes"; },
   # { name = "#qemu"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#debian"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#s6"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#alpine-linux"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   # { name = "#virt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#openwrt"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   {
@@ -340,8 +496,10 @@ channels = (
     autojoin = "yes";
   },
   { name = "#tor"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#suckless"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#llvm"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   { name = "#bitlbee"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
+  { name = "#mednafen"; chatnet = "OFTC-ZNC"; autojoin = "yes"; },
   {
     name = "##terminaldweller";
     chatnet = "OFTC-ZNC";
@@ -352,15 +510,16 @@ channels = (
   { name = "#openbsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#lobsters"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#gnupg"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#stocks"; chatnet = "EFnet_ZNC"; autojoin = "yes"; },
   { name = "#znc"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#qutebrowser"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
-  { name = "#lokinet"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
-  { name = "#general"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
-  { name = "#crxn"; chatnet = "Bonobonet_ZNC"; autojoin = "yes"; },
+  # { name = "#lokinet"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
+  # { name = "#general"; chatnet = "PROBABLY_LOKI"; autojoin = "yes"; },
+  { name = "#crxn"; chatnet = "Bonobonet_ZNC"; autojoin = "no"; },
   {
     name = "#networking";
     chatnet = "Bonobonet_ZNC";
-    autojoin = "yes";
+    autojoin = "no";
   },
   {
     name = "#general";
@@ -389,10 +548,16 @@ channels = (
   # { name = "#shadow"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#freebsd"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#linux"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
+  { name = "#opsec"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#irssi"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#bookz"; chatnet = "Undernet-ZNC"; autojoin = "yes"; },
+  { name = "#allnitecafe"; chatnet = "Undernet-ZNC"; autojoin = "yes"; },
+  { name = "#toronto"; chatnet = "Undernet-ZNC"; autojoin = "yes"; },
   { name = "#postgresql"; chatnet = "Libera-ZNC"; autojoin = "yes"; },
   { name = "#news"; chatnet = "Rizon-ZNC"; autojoin = "yes"; },
+  { name = "#rice"; chatnet = "Rizon-ZNC"; autojoin = "yes"; },
+  { name = "#subsplease"; chatnet = "Rizon-ZNC"; autojoin = "yes"; },
+  { name = "#batcave"; chatnet = "Rizon-ZNC"; autojoin = "yes"; },
   {
     name = "##terminaldweller";
     chatnet = "Rizon-ZNC";
@@ -474,64 +639,89 @@ statusbar = {
     topicbarend = "{topicsbend}";
 
     # treated "normally", you could change the time/user name to whatever
-    time = "{sb $Z}";
-    user = "%9%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00{sbaway $A}}%N";
+    # time = "{sb $Z}";
+    user = "%Z5fafff%z005fff%N%9%z005fff{sb {sbnickmode $[-2]cumode}%k$N %Zeeeeee {sbumode %k$usermode} %Z005fff%0%z005f00}%N";
 
     # treated specially .. window is printed with non-empty windows,
     # window_empty is printed with empty windows
-    window = " %Z00af00{sb $tag/{channel $itemname} %C {sbmode $M}} %C%n ";
-    window_empty = "{sb {sbservertag $tag}}";
+    window = " %Z00af00%9{sb $tag/{channel $itemname} %C %9{sbmode $M}} %C%N ";
+    # window_empty = "{sb {sbservertag $tag}}";
+    window_empty = "%k%zffd75f%k%zffd75f EMPTY %zffd75f%N";
     # prompt = "please%z005f87{%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87}%n";
     # prompt_empty = "you%z005f87%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%n";
 
-    topic = "%Z005f00%k%z005f00%N%Z005f00%N %Z5f5faf%9 $topic%N %Z005f00%N%z005f00%k%N";
-    topic_empty = " Irssi v$J - https://www.irssi.org";
+    topic = "%Z005f00%k%z005f00%N%Z005f00%N %Z00afff%9$topic%N %Z005f00%N%z005f00%k%N";
+    topic_empty = "%Z005f00%k%z005f00%N%Z005f00%N %k%zffd75f%k%zffd75f EMPTY %zffd75f%N %N %Z005f00%N%z005f00%k%N";
 
     # all of these treated specially, they're only displayed when needed
     # Powerline
     lag = "{sb %0%Zff8700%zff8700%k ⌚ $0 %Zff8700%0%N}";
-    act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %N}";
-    more = "%c%0%n%6 more ⬇ %c%0%N";
+    # act = "{sb %Zeeeeee%0%n%z005fff %F$0%F %N}";
+    more = "%c%0%n%6%9 ... ⬇ %C%k%N";
 
     # vim_mode
     vim_mode_1 = "%z005f5f%Zffffff%z005f5f%k%9 $vim_cmd_mode%N";
     vim_windows_1 = "%Z005f5f%0%z005f5f%k%9 $vim_wins%z005f5f";
 
-    itime = "%Z005f00%k%z005f00%9 $0 %z005f00";
+    itime = "%Z005f00%k%z005f00%9 $0 %z005f00%N%Z005f00";
 
-    extra = "%Z5f5f87%k%z5f5f87%9 $X  $Y  $O  $E  $F %z5f5f87";
+    extra = "%Z5f5f87%k%z5f5f87%9 $H  $X  $Y  $O  $E  $F %w%k $D %z5f5f87";
 
-    prompt_right = "%Z5f5fd7%N%k%9%z5f5fd7 $,%N%k%z5f5fd7%N%Z5f5faf $Q  $W %N%Z5f5f87%k%z5f5f87%9 $J";
+    prompt_right = "%Z5f5fd7%N%k%9%z5f5fd7 zZzZ:$A %Z5f5fd7%N%w%9%z5f5fd7$,%N%k%z5f5fd7%N%Z5f5faf $Q  $W %N%Z5f5f87%k%z5f5f87%9 $J";
     server_info = "%k%z005f87%9 Server:$tag %w%kChatnet:$chatnet%w%k$R%w%k$S %n%Z005f87";
+
+    uptime = "{sb %Z00af5f%9%k%z00af5f$winname %N}";
+    server_numeric = "%N%z5fafff%k%9 $H%Z5fafff%N";
+
+    act = "%Z005f00%z005f00%k%N{sb $0- }%Z005f00%z005f00%k%N";
+    current_ip = "%z00af87%k{sb $whereami}%Z00af87%0";
+
+    invitatiions = "{sb %Z00d7d7%0%n%z00d7d7%9 $I %z00d7d7%k%N}";
+
+    window_immortal = "{sb %Z87d75f%0%n%z87d75f%9%k $window_immortal %z87d75f%k%N}";
+
+    window_number = "%z00af87%9 $winref %Z00af87%z5fafff%N";
+
+    empty_empty = " ";
   };
 
   # there's two type of statusbars. root statusbars are either at the top
   # of the screen or at the bottom of the screen. window statusbars are at
   # the top/bottom of each split window in screen.
   default = {
+    empty = {
+      type = "window";
+      position = "1";
+      visible = "always";
+      items = {
+        empty_empty = { };
+      };
+    };
     # the "default statusbar" to be displayed at the bottom of the window.
     # contains all the normal items.
     window = {
       disabled = "no";
-
       # window, root
       type = "window";
       # top, bottom
       placement = "bottom";
       # number
-      position = "1";
+      position = "2";
       # active, inactive, always
       visible = "active";
-
       # list of items in statusbar in the display order
       items = {
         barstart = { priority = "100"; };
-
+        window_number = { };
+        server_numeric = { };
         user = { };
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
+        invitatiions = { priority = "-1"; alignment = "right"; };
+        # window_immortal = { alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
+        uptime = { priority = "100"; alignment = "right"; };
         otr = { priority = "100"; alignment = "right"; };
         usercount = { };
         inputlength = { alignment = "right"; };
@@ -545,12 +735,10 @@ statusbar = {
 
     # statusbar to use in inactive split windows
     window_inact = {
-
       type = "window";
       placement = "bottom";
       position = "1";
       visible = "inactive";
-
       items = {
         barstart = { priority = "100"; };
         window = { };
@@ -565,7 +753,6 @@ statusbar = {
 
     # topicbar
     topic = {
-
       type = "root";
       placement = "top";
       position = "1";
@@ -583,7 +770,15 @@ statusbar = {
         barstart = { };
         timezones = { };
         itime = { priority = "1"; alignment = "right"; };
+        position = {alignment = "right";}
         barend = { alignment = "right"; };
+      };
+    };
+    activities = {
+      items = {
+        act = { alignment = "right"; };
+        vim_prompt = { };
+        mh_sbsplitmode = { };
       };
     };
     dccstat = {
@@ -596,6 +791,8 @@ statusbar = {
       items = {
         barstart = { };
         server_info = { };
+        current_ip = { };
+        moodbar = { };
         prompt_right = { alignment = "right"; };
         barend = { alignment = "right"; };
       };
@@ -656,10 +853,12 @@ settings = {
   misc = { split_line_end = "↪"; };
   core = {
     real_name = "john doe";
-    user_name = "devi";
+    # we need to keep this since soju checks this
+    user_name = "terminaldweller";
     nick = "terminaldweller";
     recode_transliterate = "yes";
     settings_autosave = "no";
+    timestamp_format = "%z-%e%H:%M:%S%p";
     # use_proxy = "no";
     # proxy_address = "127.0.0.1";
     # proxy_port = "9050";
@@ -670,16 +869,24 @@ settings = {
   "fe-common/core" = {
     theme = "solarized-powerline";
     hilight_color = "%Zd75f5f";
+    emphasis = "yes";
     emphasis_italics = "yes";
     emphasis_multiword = "yes";
-    emphasis_replace = "no";
+    emphasis_replace = "yes";
     show_names_on_join = "no";
+    window_default_level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    window_check_level_first = "yes";
+    completion_empty_line = "no";
+    max_command_history = 1000;
+    autofocus_new_items = "no";
   };
   "fe-text" = {
     actlist_sort = "refnum";
     scrollback_lines = "1000";
     scrollback_time = "3days";
     scrollback_max_age = "0";
+    colors_ansi_24bit = "yes";
+    show_server_time = "no";
   };
   "perl/core/scripts" = {
     # adv_windowlist.pl
@@ -689,24 +896,28 @@ settings = {
     awl_mouse = "no";
     awl_viewer = "no";
     awl_maxlines = "0";
+    awl_shared_sbar = "OFF";
+    awl_hide_data = 1;
+    awl_sort = "-data_level";
     #fancy_abbrev = "head";
-
     # trackbar.pl
     trackbar_style = "%B";
     title_screen_window = "yes";
-    awl_shared_sbar = "OFF";
+    # trackbar_print_timestamp = "ON";
+    # trackbar_string = "━";
     # usercount.pl
     usercount_show_halfops = "ON";
     usercount_show_ircops = "ON";
     usercount_show_zero = "ON";
     # timezones
+    timezones_clock_format = "%H:%M";
     timezones_divider = " %Zeeeeee%Z008080 ";
-    timezones = "GMT:GMT EST:EST EEST:Europe/Riga CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Montreal:America/Montreal Pacific:America/Los_Angeles Paris:Europe/Paris Moscow:Europe/Moscow";
+    timezones = "GMT:GMT EST:EST EEST:Europe/Riga CET:CET Tehran:Asia/Tehran Tokyo:Asia/Tokyo Toronto:America/Toronto Pacific:America/Los_Angeles Paris:Europe/Paris Moscow:Europe/Moscow";
     # hilite_url
     url_color = "32";
     hilite_url = "32";
     # rotator
-    rotator_chars = "%Z005f5f%z005f5f%k...%N  %Z005f5f%z005f5f%kooo%N  %Z005f5f%z005f5f%k000%N  %Z005f5f%z005f5f%kOOO%N  %Z005f5f%z005f5f%k000%N  %Z005f5f%z005f5f%kooo%N %Z005f5f%z005f5f%k...%N";
+    rotator_chars = "%9%Z005f5f%z005f5f%k...%N  %9%Z005f5f%z005f5f%kooo%N  %9%Z005f5f%z005f5f%k000%N  %9%Z005f5f%z005f5f%kOOO%N  %9%Z005f5f%z005f5f%k000%N  %9%Z005f5f%z005f5f%kooo%N %9%Z005f5f%z005f5f%k...%N";
     rotator_speed = "1000";
     rotator_bounce = "yes";
     rotator_seperator = " ";
@@ -716,17 +927,20 @@ settings = {
     # uberprmpt
     # uberprompt_format = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%Z005f5f$uber";
     # uberprompt_format_empty = "%k%z005f87%9$c $*%w%k$R%w%k$S%w%k$T %N%Z005f87%Z005f5f$uber";
-    uberprompt_format = "%Zff5f5f$T >>>$uber";
-    uberprompt_format_empty = "%Zff5f5f$T >>>$uber";
+    uberprompt_format = "%Zff5f5f$chatnet/$T >>>$uber";
+    uberprompt_format_empty = "%Zff5f5f$chatnet/$T >>>$uber";
     # irssi_logger
     il_dbname = "irc";
     il_dbuser = "postgres";
     il_dbpass = "devi";
     # nm2
-    neat_shrink = "yes";
-    neat_staircase_shrink = "yes";
-    neat_custom_modes = "no";
-    neat_dynamic = "yes";
+    neat_shrink = "on";
+    neat_staircase_shrink = "on";
+    neat_custom_modes = "off";
+    neat_dynamic = "on";
+    neat_truncate_nick = "on";
+    neat_maxlength = 15;
+    neat_history = 100;
     # vim_mode
     start_cmd = "yes";
     vim_mode_start_cmd = "yes";
@@ -742,8 +956,24 @@ settings = {
     leodict_paste_max_translations = "2";
     leodict_paste_beautify = "1";
     leodict_http_proxy_address = "192.168.1.214";
-    leodict_http_proxy_port = "9054";
-    leodict_http_proxy_type = "socks";
+    leodict_http_proxy_port = "8118";
+    leodict_http_proxy_type = "http";
+    #shorturl
+    shorturl_chans = "#matrix_devi_netdata_notifs";
+    shorturl_send_to_channel = "off";
+    shorturl_debug = "off";
+    shorturl_min_url_length = 50;
+    #highlightwin
+    hilightwin_showprivmsg = 0;
+    hilightwin_show_network = 0;
+    hilightwin_ignore_targets = '';
+    #mh_mbsplitmode
+    mh_sbsplitmode_networks = "IRCNet_ZNC,TOR_ircnet";
+    #tongueworm
+    wormtongue_openai_api_key = "";
+    #aidle
+    aidle_max_idle_time = 300;
+    aidle_ircnets = "";
   };
   "irc/dcc" = {
     dcc_download_path = "~/.irssi/downloads/";
@@ -751,6 +981,10 @@ settings = {
     dcc_timeout = "10min";
     dcc_upload_path = "~/.irssi/uploads/";
     dcc_autorename = "yes";
+  };
+  "irc/core" = {
+    ctcp_userinfo_reply = "$Y-https://terminaldweller.com";
+    ctcp_version_reply = "IRC";
   };
 };
 keyboard = (
@@ -776,98 +1010,166 @@ keyboard = (
   { key = "meta-,"; id = "change_window"; data = "38"; },
   { key = "meta-."; id = "change_window"; data = "39"; },
   { key = "meta-/"; id = "change_window"; data = "40"; },
-  { key = "meta2-1"; id = "change_window"; data = "41"; },
-  { key = "meta2-2"; id = "change_window"; data = "42"; },
+  { key = "^[[^[[^[[1"; id = "change_window"; data = "41"; },
+  { key = "^[[^[[^[[2"; id = "change_window"; data = "42"; },
+  { key = "^[[^[[^[[3"; id = "change_window"; data = "43"; },
+  { key = "^[[^[[^[[4"; id = "change_window"; data = "44"; },
+  { key = "^[[^[[^[[5"; id = "change_window"; data = "45"; },
+  { key = "^[[^[[^[[6"; id = "change_window"; data = "46"; },
+  { key = "^[[^[[^[[7"; id = "change_window"; data = "47"; },
+  { key = "^[[^[[^[[8"; id = "change_window"; data = "48"; },
+  { key = "^[[^[[^[[9"; id = "change_window"; data = "49"; },
+  { key = "^[[^[[^[[0"; id = "change_window"; data = "50"; },
+  { key = "^[[^[[^[[q"; id = "change_window"; data = "51"; },
+  { key = "^[[^[[^[[w"; id = "change_window"; data = "52"; },
+  { key = "^[[^[[^[[e"; id = "change_window"; data = "53"; },
+  { key = "^[[^[[^[[r"; id = "change_window"; data = "54"; },
+  { key = "^[[^[[^[[t"; id = "change_window"; data = "55"; },
+  { key = "^[[^[[^[[y"; id = "change_window"; data = "56"; },
+  { key = "^[[^[[^[[u"; id = "change_window"; data = "57"; },
+  { key = "^[[^[[^[[i"; id = "change_window"; data = "58"; },
+  { key = "^[[^[[^[[o"; id = "change_window"; data = "59"; },
+  { key = "^[[^[[^[[p"; id = "change_window"; data = "60"; },
+  { key = "^[[^[[^[[a"; id = "change_window"; data = "61"; },
+  { key = "^[[^[[^[[s"; id = "change_window"; data = "62"; },
+  { key = "^[[^[[^[[d"; id = "change_window"; data = "63"; },
+  { key = "^[[^[[^[[f"; id = "change_window"; data = "64"; },
+  { key = "^[[^[[^[[g"; id = "change_window"; data = "65"; },
+  { key = "^[[^[[^[[h"; id = "change_window"; data = "66"; },
+  { key = "^[[^[[^[[j"; id = "change_window"; data = "67"; },
+  { key = "^[[^[[^[[k"; id = "change_window"; data = "68"; },
+  { key = "^[[^[[^[[l"; id = "change_window"; data = "69"; },
+  { key = "^[[^[[^[[;"; id = "change_window"; data = "70"; },
+  { key = "^[[^[[^[[z"; id = "change_window"; data = "71"; },
+  { key = "^[[^[[^[[x"; id = "change_window"; data = "72"; },
+  { key = "^[[^[[^[[c"; id = "change_window"; data = "73"; },
+  { key = "^[[^[[^[[v"; id = "change_window"; data = "74"; },
+  { key = "^[[^[[^[[b"; id = "change_window"; data = "75"; },
+  { key = "^[[^[[^[[n"; id = "change_window"; data = "76"; },
+  { key = "^[[^[[^[[m"; id = "change_window"; data = "77"; },
+  { key = "^[[^[[^[[,"; id = "change_window"; data = "78"; },
+  { key = "^[[^[[^[[."; id = "change_window"; data = "79"; },
+  { key = "^[[^[[^[[/"; id = "change_window"; data = "80"; },
+  { key = "^R"; id = "command"; data = "tongueworm"; },
 );
 ignores = (
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#docker" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#node.js" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ansible" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#dpdk" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#fdio-vpp" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#alacritty" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#go-nuts" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#neomutt" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#kvm" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#znc" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netbsd" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#ubuntu" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#netplan" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vagrant" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssl" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crypto" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tmux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vim" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#virt" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#debian" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openbsd" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#freebsd" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#git" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#voidlinux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openwrt" ); },
   {
     level = "JOINS PARTS QUITS NICKS";
-    channels = ( "#debian-next" );
+    channels = (
+      "#qutebrowser",
+      "#alacritty",
+      "#vim",
+      "#virt",
+      "#openbsd",
+      "#freebsd",
+      "#git",
+      "#openwrt",
+      "#debian",
+      "#tmux",
+      "#crypto",
+      "#crypto-new",
+      "#openssl",
+      "#vagrant",
+      "#netplan",
+      "#ubuntu",
+      "#netbsd",
+      "#znc",
+      "#hd-torrents.announce",
+      "#neomutt",
+      "#soju",
+      "#matrix",
+      "#opsec",
+      "#kvm",
+      "#opesec",
+      "#techrss",
+      "#bitcoin-blocks",
+      "#lobsters-feed",
+      "#go-nuts",
+      "#docker",
+      "#voidlinux",
+      "#node.js",
+      "#ansible",
+      "#dpdk",
+      "#fdio-vpp",
+      "#tor",
+      "#shadow",
+      "#debian-next",
+      "#linux",
+      "#qemu",
+      "#gdb",
+      "#irssi",
+      "#openssh",
+      "#CataclysmDDA",
+      "#python",
+      "#ergo",
+      "#news",
+      "#mednafen",
+      "#forgefed",
+      "#tor-relays",
+      "#supersonic",
+      "#gnupg",
+      "#gopher",
+      "#wayland",
+      "#qubes",
+      "#bookz",
+      "#security",
+      "#busybox",
+      "#lobsters",
+      "#s6",
+      "#chaturbate",
+      "#lua",
+      "#nibl",
+      "#mp3download",
+      "#meta",
+      "#networking",
+      "#lokinet",
+      "#allnitecafe",
+      "#bitlbee",
+      "#ai",
+      "#alpine-linux",
+      "##sqlite",
+      "##math",
+      "#crxn",
+      "#gemini",
+      "#llvm",
+      "#zsh",
+      "#us-market-news",
+      "#selfhosting",
+      "##posix",
+      "##machinelearning",
+      "##science",
+      "##weather",
+      "##news",
+      "#postgresql",
+      "#securityfeed",
+      "#securitynews",
+      "#toronto",
+      "#rice",
+      "#batcave",
+      "#subsplease",
+      "#suckless",
+      "#stocks",
+      "#newsbin",
+      "#opennic",
+      "#irc"
+    );
   },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#openssh" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irssi" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gdb" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qemu" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#linux" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#shadow" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#tor" ); },
-  {
-    level = "JOINS PARTS QUITS NICKS";
-    channels = ( "#CataclysmDDA" );
-  },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#security" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#busybox" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#bookz" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#qubes" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#wayland" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gopher" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gnupg" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#supersonic" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#news" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#mednafen" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#forgefed" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#lobsters" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#s6" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#lua" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#networking" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "##posix" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#postgresql" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#crxn" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#meta" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#python" ); },
-  {
-    level = "JOINS PARTS QUITS NICKS";
-    channels = ( "#qutebrowser" );
-  },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#lokinet" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#bitlbee" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#gemini" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#llvm" ); },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#opennic" ); },
-  {
-    level = "JOINS PARTS QUITS NICKS";
-    channels = ( "#selfhosting" );
-  },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#irc" ); },
-  { level = "CTCPS"; },
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#zsh" ); }
 );
 Mogs = { };
 logs = { };
 windows = {
-  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  1 = {
+    immortal = "yes";
+    name = "(status)";
+    level = "+ALL -MSGS -NOTICES -SNOTES -WALLOPS -INVITES -CLIENTCRAP -CLIENTNOTICE -CLIENTERROR -CTCPS -ACTIONS -MODES -DCC -DCCMSGS -TOPICS -HILIGHT";
+  };
   2 = {
     immortal = "yes";
-    name = "(notices)";
-    level = "MSGS NOTICES SNOTES WALLOPS INVITES CLIENTNOTICE CLIENTCRAP CLIENTERROR CTCPS ACTIONS MODES TOPICS DCC DCCMSGS";
+    name = "(client)";
+    level = "-ALL +CLIENTCRAP +CLIENTNOTICE +CLIENTERROR";
   };
   3 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS SNOTES";
     items = (
       {
         type = "CHANNEL";
@@ -878,16 +1180,18 @@ windows = {
     );
   };
   4 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
     items = (
       {
         type = "QUERY";
         chat_type = "IRC";
         name = "*status";
-        tag = "Undernet-ZNC";
+        tag = "Libera-ZNC";
       }
     );
   };
   5 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
     items = (
       {
         type = "CHANNEL";
@@ -898,31 +1202,392 @@ windows = {
     );
   };
   6 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
     items = (
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#rss";
+        name = "#limnoriabot";
         tag = "devinet";
       }
     );
   };
   7 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
     items = (
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#general";
-        tag = "Bonobonet_ZNC";
+        name = "#crypto-news";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  8 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#matrix-ipfs";
+        tag = "devinet";
+      }
+    );
+  };
+  9 = {
+    immortal = "yes";
+    name = "(notice)";
+    level = "-ALL +TOPICS +MODES +NOTICES +WALLOPS +INVITES +SNOTES";
+  };
+  10 = {
+    immortal = "yes";
+    name = "(dcc)";
+    level = "-ALL +DCC +DCCMSGS";
+  };
+  11 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#rss_security";
+        tag = "devinet";
+      }
+    );
+  };
+  12 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#matrix-monero-mining";
+        tag = "devinet";
+      }
+    );
+  };
+  13 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#slack-magmacore-general";
+        tag = "devinet";
+      }
+    );
+  };
+  14 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS NOTICES";
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "wHWnpSTG5dmT";
+        tag = "OFTC-ZNC";
+      }
+    );
+  };
+  15 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#soulhack";
+        tag = "devinet";
+      }
+    );
+  };
+  16 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#matrix_devi_netdata_notifs";
+        tag = "devinet";
+      }
+    );
+  };
+  17 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#supersonic";
+        tag = "DALnet_ZNC";
+      }
+    );
+  };
+  18 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "##news";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  19 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#us-market-news";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  20 = {
+    immortal = "yes";
+    name = "(hilight)";
+    level = "-ALL +HILIGHT";
+  };
+  21 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "##machinelearning";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  22 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#newsbin";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  23 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#securityfeed";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  24 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#securitynews";
+        tag = "Libera-ZNC";
+      }
+    );
+  };
+  25 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#security";
+        tag = "linknet_ZNC";
+      }
+    );
+  };
+  26 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS NOTICES";
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "scrapper";
+        tag = "Rizon-ZNC";
+      }
+    );
+  };
+  27 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#mangas";
+        tag = "devinet";
+      }
+    );
+  };
+  28 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "BouncerServ";
+        tag = "torbnc";
+      }
+    );
+  };
+  29 = {
+    level = "MSGS PUBLICS CTCPS ACTIONS JOINS PARTS QUITS KICKS NICKS";
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "*status";
+        tag = "TOR_OFTC";
       }
     );
   };
 };
 mainwindows = {
-  3 = {
+  15 = {
     first_line = "1";
     lines = "47";
     first_column = "0";
     columns = "212";
   };
 };
+hilights = (
+  {
+    text = "([Nn]vidia|\\s+[Ii]ntel\\s+|[Ll]inux|Dell|\\s+ergo\\s+|nginx|\\s+[dD]ocker\\s+|[oO]penssh|sshguard|[uU]buntu|i2pd|\\s+[tT]or\\s+|dnscrypt|privoxy|[Oo]penwrt)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    act_color = "%Zd70087";
+    nick = "no";
+    word = "yes";
+    channels = (
+      "#rss_security",
+      "#securityfeed",
+      "#securitynews",
+    );
+  },
+  {
+    text = "([Nn]vidia|\\s+[Ii]ntel\\s+|[Ll]inux|Dell|\\s+ergo\\s+|nginx|\\s+[dD]ocker\\s+|[oO]penssh|sshguard|[uU]buntu|i2pd|\\s+[tT]or\\s+|dnscrypt|privoxy|[Oo]penwrt)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    act_color = "%Zd70087";
+    servertag = "linknet_ZNC";
+    nick = "no";
+    word = "yes";
+    channels = (
+      "#security"
+    );
+  },
+  {
+    text = "\\s+terminaldweller\\s+";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    act_color = "%Zff8787%9";
+    nick = "no";
+    word = "yes";
+  },
+  {
+    text = "(ice2|vpsfp6skd4|johndoe|jumpj|ned2)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    act_color = "%Zd70087%9";
+    nick = "no";
+    word = "yes";
+    servertag = "devinet";
+    channels = ("#matrix_devi_netdata_notifs");
+  },
+  {
+    text = "([pP]epe|[eE]thereum|[mM]onero|\\s+[Ss]ui\\s+|[zZ]cash|ETF|[bB]lackrock|\\s+CBDC\\s+|\\s+IMF\\s+|\\s+WEF\\s+|\\s+ECB\\s+|\\s+BIS\\s+)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    nick = "no";
+    word = "yes";
+    servertag = "Libera-ZNC";
+    channels = ("#crypto-news");
+  },
+  {
+    text = "(\\s+[cC]crypto|\\s+[cC]ryptocurrency|debt\s+ceiling|\\s+IMF\\s+|\\s+WEF\\s+|\\s+BIS\\s+)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    nick = "no";
+    word = "yes";
+    servertag = "DALnet_ZNC";
+    channels = ("#supersonic");
+  },
+  {
+    text = "(\\s+[cC]crypto|\\s+[cC]ryptocurrency|debt\s+ceiling|\\s+IMF\\s+|\\s+WEF\\s+|\\s+ECB\\s+|\\s+BIS\\s+)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    nick = "no";
+    word = "yes";
+    servertag = "Libera-ZNC";
+    channels = ("##news");
+  },
+  {
+    text = "(\\s+SEC\\s+|\\s+ETF\\s+|\\s+FED\\s+|\\s+OFAC\\s+|\\s+CBDC\\s+|\\s+IMF\\s+|\\s+WEF\\s+|\\s+ECB\\s+|\\s+BIS\\s+)";
+    regexp = "yes";
+    color = "%Z005f00%9";
+    nick = "no";
+    word = "yes";
+    servertag = "Libera-ZNC";
+    channels = ("#us-market-news");
+  },
+  {
+    text = "(\\s+[uU]ndead\s[mM]urder\s[fF]arce\\s+|\\s+[jJ]ujutsu\s[kK]aisen\\s+|\\s+[vV]ending\s[mM]achine\\s+|\\s+maou\sto\sone\sroom\syuusha\\s+|\\s+zom\s100\szombie)";
+    regexp = "yes";
+    color = "%Zaf005f%9";
+    act_color = "%Zffd75f%9";
+    nick = "no";
+    word = "yes";
+    servertag = "Rizon-ZNC";
+    channels = (
+      "#news",
+      "#subsplease",
+      "#nibl"
+    );
+  },
+  {
+    text = "(\\s+[bB]oris\\s+|\\s+[Cc]ryochamber\\s+)";
+    regexp = "yes";
+    color = "%Zaf005f%9";
+    act_color = "%Zffd75f%9";
+    nick = "no";
+    word = "yes";
+    servertag = "Undernet-ZNC";
+    channels = ("#mp3download");
+  },
+  {
+    text = "(\\s+[fF]arzad\\s+|\\s+terminaldweller\\s+)";
+    regexp = "yes";
+    color = "%Zaf005f%9";
+    act_color = "%Z5f0000%9";
+    nick = "no";
+    word = "yes";
+    servertag = "bitlbee_local";
+    channels = ("#helijustsendpussy");
+  },
+  {
+    text = "(\\s+[Hh]iganjima\\s+|\\s+[hH]er\s[mM]ajesty's\s[sS]warm\\s+|\\s+[dD]ai\s[dD]ark\\s+|\\s+[kK]engan\s[oO]mega\\s+|\\s+[bB]rutal:\s[sS]atsujin\s[kK]ansatsukan\s[nN]o\s[kK]okuhaku\\s+|\\s+[hH]elck\\s+)";
+    regexp = "yes";
+    color = "%Zffd75f%9";
+    act_color = "%Zffd75f%9";
+    nick = "no";
+    word = "yes";
+    servertag = "devinet";
+    channels = ("#mangas");
+  },
+  {
+    text = "(\\s+[Mm]argery28\\s+|\\s+[vV][oO0]id\\s+|\\s+[Ll]isa2018)";
+    regexp = "yes";
+    color = "%Zd75faf%9";
+    act_color = "%Zd75faf%9";
+    nick = "no";
+    word = "yes";
+    servertag = "TOR_terrachat";
+    channels = ("#chaturbate");
+  }
+);

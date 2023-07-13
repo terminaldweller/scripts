@@ -1,0 +1,6 @@
+#!/bin/sh
+exec \
+  env GOENV_ROOT=/home/devi/.goenv \
+  GOROOT=/home/devi/.gvm/gos/go1.19 \
+  GOPATH=/home/devi/.gvm/pkgsets/go1.19/global \
+  /home/devi/.gvm/pkgsets/go1.19/global/bin/godoc -http=127.0.0.1:6060 2>&1

@@ -54,11 +54,31 @@ test_interval = 300
 test_timeout = 10
 auto_start = true
 
+[tunnel.socks5_v]
+address = "0.0.0.0"
+port = 9985
+command = "autossh -M 0 -N -D 0.0.0.0:9985 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.244.29.79"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9985 https://icanhazallips.terminaldweller.com:9380'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
 [tunnel.socks5_8]
 address = "0.0.0.0"
 port = 9989
 command = "autossh -M 0 -N -D 0.0.0.0:9989 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.47.208"
 test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9989 https://icanhazallips.terminaldweller.com:9380'
+test_command_result = "200"
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
+[tunnel.socks5_10]
+address = "0.0.0.0"
+port = 9984
+command = "autossh -M 0 -N -D 0.0.0.0:9984 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 89.147.110.30"
+test_command = 'curl -s -o /dev/null -s -w "%{http_code}" -k -I -4 --socks5 socks5h://127.0.0.1:9984 https://icanhazallips.terminaldweller.com:9380'
 test_command_result = "200"
 test_interval = 300
 test_timeout = 10
@@ -118,6 +138,16 @@ auto_start = true
 address = "0.0.0.0"
 port = 9069
 command = "autossh -M 0 -N -L 0.0.0.0:9069:127.0.0.1:6669 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
+test_command = ""
+test_command_result = "200"
+test_interval = 300
+test_timeout = 30
+auto_start = true
+
+[tunnel.i2pmapped6irssinerds]
+address = "0.0.0.0"
+port = 9070
+command = "autossh -M 0 -N -L 0.0.0.0:9070:127.0.0.1:6670 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 test_command = ""
 test_command_result = "200"
 test_interval = 300
@@ -254,6 +284,16 @@ test_interval = 300
 test_timeout = 20
 auto_start = true
 
+[tunnel.bnc_tor_g]
+address = "0.0.0.0"
+port = 9788
+command = "autossh -M 0 -N -L 0.0.0.0:9788:127.0.0.1:1026 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 3333 65.109.235.54"
+test_command = ''
+test_command_result = "200"
+test_interval = 300
+test_timeout = 20
+auto_start = true
+
 [tunnel.haproxy_prom_mapped]
 address = "0.0.0.0"
 port = 9099
@@ -285,9 +325,9 @@ test_timeout = 10
 auto_start = false
 
 [tunnel.upnp_2234]
-address = "0.0.0.0"
-port = 2234
-command = "autossh -M 0 -N -R 0.0.0.0:2234:185.112.147.110:2234 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l root -p 2022 185.112.147.110"
+address = "127.0.0.1"
+port = 2235
+command = "autossh -M 0 -N -L 127.0.0.1:2235:*:2234 -o ServerAliveInterval=180 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -l ubuntu -p 3333 185.130.45.46"
 test_command = ""
 test_command_result = ""
 test_interval = 300
@@ -413,3 +453,53 @@ test_command_result = "400"
 test_interval = 300
 test_timeout = 10
 auto_start = true
+
+[tunnel.generic_v4_l_6]
+address = "127.0.0.1"
+port = 6006
+command = "autossh -M 0 -N -L 127.0.0.1:6006:127.0.0.1:6006 -l ubuntu -p 3333 185.130.45.46"
+test_command = ''
+test_command_result = ""
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
+[tunnel.generic_v4_l_8]
+address = "127.0.0.1"
+port = 6008
+command = "autossh -M 0 -N -L 127.0.0.1:6008:127.0.0.1:6006 -l ubuntu -p 3333 185.130.47.208"
+test_command = ''
+test_command_result = ""
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
+[tunnel.generic_v4_l_10]
+address = "127.0.0.1"
+port = 6010
+command = "autossh -M 0 -N -L 127.0.0.1:6010:127.0.0.1:6006 -l ubuntu -p 3333 89.147.110.30"
+test_command = ''
+test_command_result = ""
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
+[tunnel.generic_v4_l_j]
+address = "127.0.0.1"
+port = 6011
+command = "autossh -M 0 -N -L 127.0.0.1:6011:127.0.0.1:6006 -l ubuntu -p 3333 185.130.46.113"
+test_command = ''
+test_command_result = ""
+test_interval = 300
+test_timeout = 10
+auto_start = true
+
+[tunnel.lxc_python_lsp_jedi]
+address = "127.0.0.1"
+port = 4401
+command = "autossh -M 0 -N -L 127.0.0.1:4401:127.0.0.1:4401 -l ubuntu 10.167.131.24"
+test_command = ''
+test_command_result = ""
+test_interval = 300
+test_timeout = 10
+auto_start = false

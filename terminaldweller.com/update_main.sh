@@ -1,20 +1,32 @@
 #!/usr/bin/env sh
 set -ex
 
-# PROXY="proxychains4 -q -f ~/proxies/ice/proxychains.conf"
-PROXY=""
+(cd ./main/srv/keys && \
+  gpg2 --export --armor devi@terminaldweller.com > gpg_pubkey && \
+  gpg2 --export --armor thabogre@gmail.com > gmail_gpg_pubkey && \
+  gpg2 --export --armor bloodstalker@zoho.com > zoho_gpg_pubkey)
 
-# GPG
-gpg2 --export --armor devi@terminaldweller.com > gpg_pubkey
-gpg2 --export devi@terminaldweller.com > gpg_pubkey.asc
-mv ./gpg_pubkey ./main/srv/keys/
-mv ./gpg_pubkey.asc ./main/srv/.well-known/openpgpkey/hu/
+(cd ./main/srv/.well-known/openpgpkey/hu/ && \
+  gpg2 --export devi@terminaldweller.com > gpg_pubkey.asc && \
+  gpg2 --export thabogre@gmail.com > gpg_gmail.asc && \
+  gpg2 --export bloodstalker@zoho.com > gpg_zoho.asc)
 
-gpg2 --export --armor thabogre@gmail.com > gmail_gpg_pubkey
-mv ./gmail_gpg_pubkey ./main/srv/keys/
-
-gpg2 --export --armor bloodstalker@zoho.com > zoho_gpg_pubkey
-mv ./zoho_gpg_pubkey ./main/srv/keys/
+(cd ~/scripts/identicon && \
+  poetry run ~/scripts/identicon/gen_blockie.py \
+  --input ./main/srv/.well-known/openpgpkey/hu/gpg_pubkey.asc \
+  --out ../terminaldweller.com/main/srv/identicon.png)
+(cd ~/scripts/identicon && \
+  poetry run ~/scripts/identicon/gen_blockie.py \
+  --input ./main/srv/.well-known/openpgpkey/hu/gpg_gmail.asc \
+  --out ../terminaldweller.com/main/srv/gmail.png)
+(cd ~/scripts/identicon && \
+  poetry run ~/scripts/identicon/gen_blockie.py \
+  --input ./main/srv/.well-known/openpgpkey/hu/gpg_zoho.asc \
+  --out ../terminaldweller.com/main/srv/zoho.png)
+(cd ~/scripts/identicon && \
+  poetry run ~/scripts/identicon/gen_blockie.py \
+  --input ~/.ssh/id_rsa.pub \
+  --out ../terminaldweller.com/main/srv/ssh_pub.png)
 
 # main
 #lokinet
@@ -31,3 +43,8 @@ rm ./index.txt
 ~/devi/html2gmi.git/master/html2gmi -m -t -l 1000 -i ~/scripts/terminaldweller.com/main/srv/index.html > index.gmi
 ${PROXY} scp -4 -P 3333 ./index.gmi ubuntu@jump8.terminaldweller.com:/home/ubuntu/gemini/srv/
 rm ./index.gmi
+
+#ipfs
+${PROXY} scp -4 -r -P 3333 ./main/srv/ ubuntu@89.147.110.30:/home/ubuntu/terminaldweller.com-ipfs/
+${PROXY} ssh -p 3333 ubuntu@89.147.110.30 ipfs add -r ~/terminaldweller.com-ipfs/srv/
+${PROXY} ssh -p 3333 ubuntu@89.147.110.30 ipfs pin add -r ${IPFS_ROOT_HASH}

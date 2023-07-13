@@ -13,6 +13,8 @@ https://blog.qutebrowser.org/feeds/all.rss.xml "~Qutebrowser"
 https://sfconservancy.org/feeds/omnibus/ "~SFC"
 https://www.fsf.org/static/fsforg/rss/blogs.xml "~FSF"
 https://www.eff.org/rss/updates.xml "~EFF"
+https://www.zerodayinitiative.com/rss/published/ "~ZDI_Published"
+https://www.zerodayinitiative.com/rss/upcoming/ "~ZDI_Upcoming"
 
 "exec:gemget gemini://mozz.us/journal/atom.xml --output -" "~MOZZ"GEMINI
 "exec:gemget gemini://midnight.pub/feed.xml --output -" "~Midnight_Pub"GEMINI
@@ -30,19 +32,18 @@ https://rssgen.terminaldweller.com/?action=display&bridge=RedditBridge&context=s
 https://rssgen.terminaldweller.com/?action=display&bridge=RedditBridge&context=single&r=tor&f=&score=&d=hot&search=&format=Atom "~Tor_Reddit"Reddit
 
 # (Twitter)
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=_margery28_&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Marg"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PancakeSwap&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Pancakeswap"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=OrchidProtocol&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~OrchidProtocol"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=ethereum&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Ethereum"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=torproject&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~TorProject"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=HiveBlockchain&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Hive"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=PrivexInc&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~Privex"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=binance&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~binance"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=igor_chubin&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~igor_chubin"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=TheBlock__&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~the_block"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=whale_alert&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~whatle_alert"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=nobitexmarket&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~nobitex"Twitter
-https://rssgen.terminaldweller.com/?action=display&bridge=TwitterBridge&context=By+username&u=CVEnew&norep=on&noretweet=on&nopinned=on&nopic=on&noimg=on&noimgscaling=on&format=Atom "~CVEnew"Twitter
+#https://nitter.net/_margery28_/rss "~Marg"Twitter
+#https://nitter.net/PancakeSwap/rss "~Pancakeswap"Twitter
+#https://nitter.net/OrchidProtocol/rss "~OrchidProtocol"Twitter
+#https://nitter.net/ethereum/rss "~Ethereum"Twitter
+#https://nitter.net/torproject/rss "~TorProject"Twitter
+#https://nitter.net/privexinc/rss "~Privex"Twitter
+#https://nitter.net/binance/rss "~binance"Twitter
+#https://nitter.net/igor_chubin/rss "~igor_chubin"Twitter
+#https://nitter.net/theblock__/rss "~the_block"Twitter
+#https://nitter.net/whale_alert/rss "~whale_alert"Twitter
+#https://nitter.net/nobitexmarket/rss "~nobitex"Twitter
+#https://nitter.net/CVEnew/rss "~CVE_New"
 
 # Google Alerts
 https://www.google.com/alerts/feeds/12093321976767190558/264763670533121619 "~Monero"Google_Alerts
@@ -76,6 +77,7 @@ https://www.youtube.com/feeds/videos.xml?user=WeArEraW11 "~ScaryJUJU"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCuoMasRkMhlj1VNVAOJdw5w "~Local58TV"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9YXCCz-A28lxhMA-ArfBaA "~Gemini_Home_Entertainment"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCxMZO9A4Jixjr9lbgeBiQ6w "~Vormithrax"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCF4cAwaYlXAt2LcnqUOgtMA "~A_Vox_In_The_Void"youtube
 
 # Tech
 https://www.youtube.com/feeds/videos.xml?channel_id=UC05XpvbHZUQOfA6xk4dlmcw "~DJ_Ware"youtube
@@ -129,7 +131,8 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCdSnjmLUUe_NT4ml9OkUi1A "~N
 https://www.youtube.com/feeds/videos.xml?channel_id=UCpFFItkfZz1qz5PpHpqzYBw "~Nexpo"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9PIn6-XuRKZ5HmYeu46AIw "~Barely_Sociable"youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew "~Yannic_Kilcher"youtube
-https://www.youtube.com/feeds/videos.xml?channel_id=UCa4GzOwXZbQPQyPHhQmpKCQ "~Ants_Are_Everywhere"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgKJPhVzv8w0VaZFnS_VmaA "~Philion"youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCMIqrmh2lMdzhlCPK5ahsAg "~Jack_Rhysider"youtube
 
 https://www.youtube.com/feeds/videos.xml?user=g297125009 "~Gavin_Freeborn"youtube
 https://www.youtube.com/feeds/videos.xml?user=Hak5Darren "~Hak_5"youtube

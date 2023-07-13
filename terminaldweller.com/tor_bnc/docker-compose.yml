@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  soju:
+    #build: .
+    image: mpldr/soju:latest
+    entrypoint: ["proxychains4","-q","soju", "-config","/data/config"]
+      #entrypoint: ["proxychains4","-q","soju","-listen", "irc+insecure://0.0.0.0:6697", "-config","/data/config"]
+    command:
+      - -debug
+    ports:
+      - "1026:6697"
+        #- "127.0.0.1:1026:6697"
+    volumes:
+      - ./soju-data:/data
+      - /etc/hostname:/etc/hostname
+      - ./proxychains.conf:/etc/proxychains.conf

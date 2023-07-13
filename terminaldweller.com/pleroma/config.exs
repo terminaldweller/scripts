@@ -26,6 +26,8 @@ config :pleroma, Pleroma.Repo,
   hostname: System.get_env("DB_HOST", "db"),
   pool_size: 10
 
+config :pleroma, Pleroma.Web.WebFinger, domain: "terminaldweller.com"
+
 # Configure web push notifications
 config :web_push_encryption, :vapid_details, subject: "mailto:#{System.get_env("NOTIFY_EMAIL")}"
 
